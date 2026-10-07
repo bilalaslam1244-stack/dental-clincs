@@ -92,10 +92,23 @@
       .cta b { font: 500 36px var(--sans); letter-spacing: .08em; }
       .cta span { display: block; font: 300 italic 32px var(--serif); color: var(--gold-deep); margin-top: 4px; }
 
+      /* hook: a near-empty appointment book */
+      .hook-cap { position: absolute; left: 76px; right: 76px; top: 150px; font: 300 112px/1.0 var(--serif); letter-spacing: -.025em; }
+      .book { position: absolute; left: 76px; right: 76px; top: 450px; height: 640px; background: #fbfaf6; box-shadow: 0 40px 90px rgba(70,52,24,.18); padding: 34px 36px; }
+      .book::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(138,106,56,.28); pointer-events: none; }
+      .book-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+      .book-head b { font: 300 46px var(--serif); }
+      .book-head span { color: #8a6a38; }
+      .book-grid { display: grid; grid-template-columns: 70px repeat(6, 1fr); gap: 8px; }
+      .book-grid div { height: calc((640px - 170px) / 6 - 8px); border-top: 1px solid rgba(26,23,20,.12); font: 400 18px var(--sans); color: #635c52; padding-top: 6px; letter-spacing: .08em; }
+      .book-grid .slot-booked { background: #1a1714; color: #e9e1d3; border-top: 0; padding: 8px 10px; font: 400 17px var(--sans); }
+      .book-grid .empty { background: rgba(138,106,56,.05); }
+      .book-tally { position: absolute; right: 36px; bottom: 26px; font: 300 italic 34px var(--serif); color: #8a6a38; }
+
       /* before / after labels on the phone window */
       .ba { position: absolute; left: 76px; top: 18px; height: 52px; padding: 0 22px; display: flex; align-items: center; clip-path: var(--chamfer); font: 500 22px var(--sans); letter-spacing: .3em; }
       .ba.before { background: #a8443a; color: #fff; }
-      .ba.after { background: var(--gold); color: var(--ink); }
+      .ba.after { background: #1a1714; color: #e9d9b8; }
       #old { position: absolute; inset: 0; background: #fff; overflow: hidden; }
       .old-page { position: absolute; left: 0; top: 0; width: 1000px; height: 1960px; font-family: 'Times New Roman', 'Liberation Serif', serif; color: #000; background: #fff; transform-origin: 0 0; }
       .old-head { background: linear-gradient(#3b6bd6, #1c3f96); color: #ff0; text-align: center; padding: 22px; font-size: 46px; font-weight: bold; text-shadow: 2px 2px #000; }
@@ -108,39 +121,70 @@
       .broken { border: 2px inset #aaa; display: flex; align-items: center; justify-content: center; color: #555; font: 14px Arial, sans-serif; margin: 12px 0; }
       .stamp { position: absolute; left: 90px; top: 560px; padding: 18px 30px; border: 6px solid #c8574a; color: #c8574a; font: 500 54px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; background: rgba(255,255,255,.92); }
 
-      /* reach: map */
-      .map { position: absolute; left: 70px; right: 70px; top: 320px; height: 720px; clip-path: var(--chamfer); background: #161c19; overflow: hidden; }
+      /* reach: a light map */
+      .map { position: absolute; left: 70px; right: 70px; top: 320px; height: 720px; background: #ece6da; overflow: hidden; box-shadow: 0 40px 90px rgba(70,52,24,.18); }
+      .map::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(138,106,56,.3); z-index: 2; pointer-events: none; }
       .map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-      .map-tag { position: absolute; left: 30px; top: 26px; color: var(--gold); }
-      .toasts { position: absolute; left: 30px; right: 30px; bottom: 26px; }
-      .ltoast { position: relative; height: 86px; margin-top: 10px; border-radius: 24px; background: rgba(244,243,239,.96); color: var(--ink); display: flex; align-items: center; gap: 20px; padding: 0 24px; }
-      .ltoast i { width: 54px; height: 54px; border-radius: 14px; background: #2f8a57; flex: none; display: flex; align-items: center; justify-content: center; }
+      .map-tag { position: absolute; left: 34px; top: 30px; color: #8a6a38; }
+      .toasts { position: absolute; left: 30px; right: 30px; bottom: 30px; }
+      .ltoast { position: relative; height: 86px; margin-top: 10px; border-radius: 24px; background: #fffdf8; color: #1a1714; display: flex; align-items: center; gap: 20px; padding: 0 24px; box-shadow: 0 14px 30px rgba(70,52,24,.16); }
+      .ltoast i { width: 54px; height: 54px; border-radius: 14px; background: #2f8a57; flex: none; }
       .ltoast b { display: block; font: 500 26px var(--sans); }
       .ltoast span { display: block; font: 300 23px var(--sans); color: #4b4a45; }
 
-      /* offer (light) */
-      .o-label { position: absolute; left: 80px; top: 250px; color: var(--gold-deep); }
+      /* offer (sand) */
+      .o-label { position: absolute; left: 80px; top: 250px; color: #8a6a38; }
       .o-head { position: absolute; left: 76px; right: 76px; top: 300px; font: 300 128px/0.98 var(--serif); letter-spacing: -.03em; }
-      .free { position: absolute; left: 80px; top: 620px; height: 120px; padding: 0 46px; display: flex; align-items: center; background: var(--ink); color: var(--gold); clip-path: var(--chamfer); font: 300 italic 92px/1 var(--serif); }
+      .free { position: absolute; left: 80px; top: 620px; height: 120px; padding: 0 46px; display: flex; align-items: center; background: #1a1714; color: #d9c7a3; clip-path: var(--chamfer); font: 300 italic 92px/1 var(--serif); }
       .o-line { position: absolute; left: 80px; right: 80px; font: 300 64px/1.1 var(--serif); }
-      .o-line em { color: var(--gold-deep); }
+      .o-line em { color: #8a6a38; }
+
+      html, body, #bg, #end { background: #f3f0e9; }
+      #root { color: #1a1714; }
+      .grid { background-image: linear-gradient(rgba(26,23,20,.04) 2px, transparent 2px), linear-gradient(90deg, rgba(26,23,20,.04) 2px, transparent 2px); }
+      .grain { position: absolute; inset: 0; opacity: .5; mix-blend-mode: multiply; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .42  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+      .frame { position: absolute; inset: 34px; border: 1px solid rgba(138,106,56,.35); }
+      .frame::after { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(138,106,56,.18); }
+      .it { color: #8a6a38; }
+      .hud span { color: #6d665c; }
+      .ghost { opacity: .045; }
+      .wipe { background: #d9c7a3; }
+      #phone { box-shadow: 0 0 0 1px rgba(138,106,56,.45), 0 50px 110px rgba(70,52,24,.28); }
+      .end-rule { background: rgba(138,106,56,.45); }
+      .end-cities { color: #6d665c; }
+      .cta { background: #1a1714; color: #f3f0e9; }
+      .cta span { color: #d9c7a3; }
+      .round-arrow { background: #c9a96e; }
+      .light { background: #e9e1d3; color: #1a1714; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="14.0" data-width="1080" data-height="1350">
-      <section id="bg" class="clip" data-start="0" data-duration="14.0" data-track-index="0">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.5" data-width="1080" data-height="1350">
+      <section id="bg" class="clip" data-start="0" data-duration="16.5" data-track-index="0">
         <div class="grid" id="grid"></div>
-        <img class="ghost" id="ghost" src="assets/4skales-logo-ivory.svg" alt="" aria-hidden="true" data-layout-allow-occlusion data-layout-allow-overflow>
-        <div class="hud" id="hud"><img src="assets/4skales-logo-ivory.svg" alt="4Skales"><span class="label">JB · KL</span></div>
+        <div class="grain"></div>
+        <div class="frame"></div>
+        <img class="ghost" id="ghost" src="assets/4skales-logo-ink.svg" alt="" aria-hidden="true" data-layout-allow-occlusion data-layout-allow-overflow>
+        <div class="hud" id="hud"><img src="assets/4skales-logo-ink.svg" alt="4Skales"><span class="label">JB · KL</span></div>
       </section>
 
-      <section id="cBefore" class="clip" data-start="0" data-duration="2.3" data-track-index="2"><div class="cap"><span id="cBt">Your clinic's website, <span class="it">today.</span></span></div></section>
-      <section id="cAfter" class="clip" data-start="2.25" data-duration="3.05" data-track-index="2"><div class="cap"><span id="cAt">After: patients book <span class="it">in three taps.</span></span></div></section>
-      <section id="cReach" class="clip" data-start="5.25" data-duration="3.05" data-track-index="2"><div class="cap"><span id="cRt">Then we put it in front of <span class="it">patients nearby.</span></span></div></section>
+      <section id="hook" class="clip" data-start="0" data-duration="2.3" data-track-index="1">
+        <div id="hookCam" class="clip">
+          <div class="hook-cap"><span id="hookT">Struggling to get <span class="it">bookings?</span></span></div>
+          <div class="book" id="book">
+            <div class="book-head"><b>This week</b><span class="label">Appointments</span></div>
+            <div class="book-grid" id="bookGrid"><div></div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>9AM</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div>10AM</div><div class="empty"></div><div class="slot-booked">Scaling</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div>11AM</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div>2PM</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div>3PM</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="slot-booked">Filling</div><div class="empty"></div><div class="empty"></div></div>
+            <div class="book-tally" id="tally">2 of 30 slots filled</div>
+          </div>
+        </div>
+      </section>
+      <section id="cBefore" class="clip" data-start="2.25" data-duration="2.3" data-track-index="2"><div class="cap"><span id="cBt">Still running an <span class="it">outdated website?</span></span></div></section>
+      <section id="cAfter" class="clip" data-start="4.5" data-duration="3.05" data-track-index="2"><div class="cap"><span id="cAt">After: patients book <span class="it">in three taps.</span></span></div></section>
+      <section id="cReach" class="clip" data-start="7.5" data-duration="3.05" data-track-index="2"><div class="cap"><span id="cRt">Then we put it in front of <span class="it">patients nearby.</span></span></div></section>
 
       <div class="phone-window" id="phoneWindow"><div class="phone-wrap"><div id="phone">
         <div class="screen">
-          <video id="screen-video" src="assets/screen-80.mp4" data-start="2.25" data-duration="3.1" data-media-start="1.875" data-track-index="3" muted playsinline></video>
+          <video id="screen-video" src="assets/screen-80.mp4" data-start="4.5" data-duration="3.1" data-media-start="1.875" data-track-index="3" muted playsinline></video>
           <div id="old" data-layout-allow-overlap data-layout-allow-occlusion>
             <div class="old-page" id="oldPage">
               <div class="old-head">★ Welcome To Our Dental Clinic Homepage ★</div>
@@ -167,9 +211,9 @@
         <div class="ba after" id="baAfter">AFTER</div>
       </div>
 
-      <section id="reach" class="clip" data-start="5.25" data-duration="3.05" data-track-index="4">
+      <section id="reach" class="clip" data-start="7.5" data-duration="3.05" data-track-index="4">
         <div class="map" id="map">
-          <div id="mapCam" class="clip"><svg viewBox="0 0 940 720" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 576 C 220 533, 520 619, 940 547 L 940 720 L 0 720 Z" fill="#1b2a2c"/><line x1="-315" y1="0" x2="-195" y2="720" stroke="#222a26" stroke-width="2"/><line x1="-266" y1="0" x2="-146" y2="720" stroke="#222a26" stroke-width="2"/><line x1="-206" y1="0" x2="-86" y2="720" stroke="#222a26" stroke-width="2"/><line x1="-163" y1="0" x2="-43" y2="720" stroke="#222a26" stroke-width="2"/><line x1="-103" y1="0" x2="17" y2="720" stroke="#222a26" stroke-width="2"/><line x1="-54" y1="0" x2="66" y2="720" stroke="#222a26" stroke-width="2"/><line x1="-7" y1="0" x2="113" y2="720" stroke="#222a26" stroke-width="2"/><line x1="52" y1="0" x2="172" y2="720" stroke="#222a26" stroke-width="2"/><line x1="97" y1="0" x2="217" y2="720" stroke="#222a26" stroke-width="2"/><line x1="155" y1="0" x2="275" y2="720" stroke="#222a26" stroke-width="2"/><line x1="201" y1="0" x2="321" y2="720" stroke="#222a26" stroke-width="2"/><line x1="253" y1="0" x2="373" y2="720" stroke="#222a26" stroke-width="2"/><line x1="311" y1="0" x2="431" y2="720" stroke="#222a26" stroke-width="2"/><line x1="369" y1="0" x2="489" y2="720" stroke="#222a26" stroke-width="2"/><line x1="410" y1="0" x2="530" y2="720" stroke="#222a26" stroke-width="2"/><line x1="464" y1="0" x2="584" y2="720" stroke="#222a26" stroke-width="2"/><line x1="522" y1="0" x2="642" y2="720" stroke="#222a26" stroke-width="2"/><line x1="579" y1="0" x2="699" y2="720" stroke="#222a26" stroke-width="2"/><line x1="625" y1="0" x2="745" y2="720" stroke="#222a26" stroke-width="2"/><line x1="674" y1="0" x2="794" y2="720" stroke="#222a26" stroke-width="2"/><line x1="736" y1="0" x2="856" y2="720" stroke="#222a26" stroke-width="2"/><line x1="773" y1="0" x2="893" y2="720" stroke="#222a26" stroke-width="2"/><line x1="838" y1="0" x2="958" y2="720" stroke="#222a26" stroke-width="2"/><line x1="881" y1="0" x2="1001" y2="720" stroke="#222a26" stroke-width="2"/><line x1="930" y1="0" x2="1050" y2="720" stroke="#222a26" stroke-width="2"/><line x1="982" y1="0" x2="1102" y2="720" stroke="#222a26" stroke-width="2"/><line x1="1037" y1="0" x2="1157" y2="720" stroke="#222a26" stroke-width="2"/><line x1="1097" y1="0" x2="1217" y2="720" stroke="#222a26" stroke-width="2"/><line x1="0" y1="-4" x2="940" y2="-94" stroke="#222a26" stroke-width="2"/><line x1="0" y1="49" x2="940" y2="-41" stroke="#222a26" stroke-width="2"/><line x1="0" y1="98" x2="940" y2="8" stroke="#222a26" stroke-width="2"/><line x1="0" y1="142" x2="940" y2="52" stroke="#222a26" stroke-width="2"/><line x1="0" y1="193" x2="940" y2="103" stroke="#222a26" stroke-width="2"/><line x1="0" y1="235" x2="940" y2="145" stroke="#222a26" stroke-width="2"/><line x1="0" y1="283" x2="940" y2="193" stroke="#222a26" stroke-width="2"/><line x1="0" y1="332" x2="940" y2="242" stroke="#222a26" stroke-width="2"/><line x1="0" y1="386" x2="940" y2="296" stroke="#222a26" stroke-width="2"/><line x1="0" y1="431" x2="940" y2="341" stroke="#222a26" stroke-width="2"/><line x1="0" y1="478" x2="940" y2="388" stroke="#222a26" stroke-width="2"/><line x1="0" y1="529" x2="940" y2="439" stroke="#222a26" stroke-width="2"/><line x1="0" y1="575" x2="940" y2="485" stroke="#222a26" stroke-width="2"/><line x1="0" y1="622" x2="940" y2="532" stroke="#222a26" stroke-width="2"/><line x1="0" y1="676" x2="940" y2="586" stroke="#222a26" stroke-width="2"/><line x1="0" y1="722" x2="940" y2="632" stroke="#222a26" stroke-width="2"/><path d="M-20 216 C 260 259, 520 158, 980 216" stroke="#3a4640" stroke-width="7" fill="none"/><path d="M282 -20 C 395 216, 517 396, 583 740" stroke="#3a4640" stroke-width="7" fill="none"/><path d="M-20 446 C 300 418, 640 504, 980 432" stroke="#333e38" stroke-width="5" fill="none"/><text x="90" y="144" fill="#a3ada6" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">SKUDAI</text><text x="510" y="136" fill="#a3ada6" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">MOUNT AUSTIN</text><text x="560" y="504" fill="#a3ada6" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">JOHOR BAHRU</text><text x="40" y="670" fill="#a3ada6" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">STRAITS OF JOHOR</text><circle id="ring0" cx="470" cy="216" r="120" fill="rgba(201,169,110,.06)" stroke="#c9a96e" stroke-width="2" stroke-dasharray="none"/><circle id="ring1" cx="470" cy="216" r="190" fill="rgba(201,169,110,.06)" stroke="#c9a96e" stroke-width="2" stroke-dasharray="8 10"/><circle class="dot" cx="475" cy="346" r="6" fill="#c9a96e"/><circle class="dot" cx="294" cy="191" r="6" fill="#c9a96e"/><circle class="dot" cx="457" cy="125" r="6" fill="#c9a96e"/><circle class="dot" cx="535" cy="209" r="6" fill="#c9a96e"/><circle class="dot" cx="326" cy="289" r="6" fill="#c9a96e"/><circle class="dot" cx="547" cy="314" r="6" fill="#c9a96e"/><circle class="dot" cx="621" cy="250" r="6" fill="#c9a96e"/><circle class="dot" cx="483" cy="87" r="6" fill="#c9a96e"/><circle class="dot" cx="545" cy="148" r="6" fill="#c9a96e"/><circle class="dot" cx="421" cy="92" r="6" fill="#c9a96e"/><circle class="dot" cx="358" cy="160" r="6" fill="#c9a96e"/><circle class="dot" cx="569" cy="76" r="6" fill="#c9a96e"/><circle class="dot" cx="317" cy="239" r="6" fill="#c9a96e"/><circle class="dot" cx="618" cy="269" r="6" fill="#c9a96e"/><circle class="dot" cx="356" cy="80" r="6" fill="#c9a96e"/><circle class="dot" cx="514" cy="134" r="6" fill="#c9a96e"/><circle class="dot" cx="353" cy="308" r="6" fill="#c9a96e"/><circle class="dot" cx="598" cy="232" r="6" fill="#c9a96e"/><circle class="dot" cx="502" cy="267" r="6" fill="#c9a96e"/><circle class="dot" cx="625" cy="270" r="6" fill="#c9a96e"/><circle class="dot" cx="535" cy="278" r="6" fill="#c9a96e"/><circle class="dot" cx="333" cy="317" r="6" fill="#c9a96e"/><circle class="dot" cx="581" cy="272" r="6" fill="#c9a96e"/><circle class="dot" cx="300" cy="167" r="6" fill="#c9a96e"/><circle class="dot" cx="544" cy="72" r="6" fill="#c9a96e"/><circle class="dot" cx="448" cy="324" r="6" fill="#c9a96e"/><circle class="dot" cx="357" cy="341" r="6" fill="#c9a96e"/><circle class="dot" cx="541" cy="199" r="6" fill="#c9a96e"/><circle class="dot" cx="511" cy="290" r="6" fill="#c9a96e"/><circle class="dot" cx="484" cy="334" r="6" fill="#c9a96e"/><circle class="dot" cx="387" cy="169" r="6" fill="#c9a96e"/><circle class="dot" cx="593" cy="219" r="6" fill="#c9a96e"/><circle class="dot" cx="373" cy="310" r="6" fill="#c9a96e"/><circle class="dot" cx="621" cy="175" r="6" fill="#c9a96e"/><g id="pin"><circle cx="470" cy="216" r="16" fill="#f4f3ef"/><circle cx="470" cy="216" r="7" fill="#121413"/><text x="498" y="224" fill="#f4f3ef" font-family="Newsreader" font-style="italic" font-size="30">Your clinic</text></g></svg></div>
+          <div id="mapCam" class="clip"><svg viewBox="0 0 940 720" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 576 C 220 533, 520 619, 940 547 L 940 720 L 0 720 Z" fill="#d5ddd9"/><line x1="-315" y1="0" x2="-195" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="-266" y1="0" x2="-146" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="-206" y1="0" x2="-86" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="-163" y1="0" x2="-43" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="-103" y1="0" x2="17" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="-54" y1="0" x2="66" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="-7" y1="0" x2="113" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="52" y1="0" x2="172" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="97" y1="0" x2="217" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="155" y1="0" x2="275" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="201" y1="0" x2="321" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="253" y1="0" x2="373" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="311" y1="0" x2="431" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="369" y1="0" x2="489" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="410" y1="0" x2="530" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="464" y1="0" x2="584" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="522" y1="0" x2="642" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="579" y1="0" x2="699" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="625" y1="0" x2="745" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="674" y1="0" x2="794" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="736" y1="0" x2="856" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="773" y1="0" x2="893" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="838" y1="0" x2="958" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="881" y1="0" x2="1001" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="930" y1="0" x2="1050" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="982" y1="0" x2="1102" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="1037" y1="0" x2="1157" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="1097" y1="0" x2="1217" y2="720" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="-4" x2="940" y2="-94" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="49" x2="940" y2="-41" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="98" x2="940" y2="8" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="142" x2="940" y2="52" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="193" x2="940" y2="103" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="235" x2="940" y2="145" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="283" x2="940" y2="193" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="332" x2="940" y2="242" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="386" x2="940" y2="296" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="431" x2="940" y2="341" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="478" x2="940" y2="388" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="529" x2="940" y2="439" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="575" x2="940" y2="485" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="622" x2="940" y2="532" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="676" x2="940" y2="586" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="722" x2="940" y2="632" stroke="#e1d9ca" stroke-width="2"/><path d="M-20 216 C 260 259, 520 158, 980 216" stroke="#fffdf8" stroke-width="10" fill="none"/><path d="M282 -20 C 395 216, 517 396, 583 740" stroke="#fffdf8" stroke-width="10" fill="none"/><path d="M-20 446 C 300 418, 640 504, 980 432" stroke="#f7f3ea" stroke-width="7" fill="none"/><text x="90" y="144" fill="#6d665c" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">SKUDAI</text><text x="510" y="136" fill="#6d665c" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">MOUNT AUSTIN</text><text x="560" y="504" fill="#6d665c" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">JOHOR BAHRU</text><text x="40" y="670" fill="#6d665c" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">STRAITS OF JOHOR</text><circle id="ring0" cx="470" cy="216" r="120" fill="rgba(138,106,56,.07)" stroke="#8a6a38" stroke-width="2" stroke-dasharray="none"/><circle id="ring1" cx="470" cy="216" r="190" fill="rgba(138,106,56,.07)" stroke="#8a6a38" stroke-width="2" stroke-dasharray="8 10"/><circle class="dot" cx="475" cy="346" r="6" fill="#8a6a38"/><circle class="dot" cx="294" cy="191" r="6" fill="#8a6a38"/><circle class="dot" cx="457" cy="125" r="6" fill="#8a6a38"/><circle class="dot" cx="535" cy="209" r="6" fill="#8a6a38"/><circle class="dot" cx="326" cy="289" r="6" fill="#8a6a38"/><circle class="dot" cx="547" cy="314" r="6" fill="#8a6a38"/><circle class="dot" cx="621" cy="250" r="6" fill="#8a6a38"/><circle class="dot" cx="483" cy="87" r="6" fill="#8a6a38"/><circle class="dot" cx="545" cy="148" r="6" fill="#8a6a38"/><circle class="dot" cx="421" cy="92" r="6" fill="#8a6a38"/><circle class="dot" cx="358" cy="160" r="6" fill="#8a6a38"/><circle class="dot" cx="569" cy="76" r="6" fill="#8a6a38"/><circle class="dot" cx="317" cy="239" r="6" fill="#8a6a38"/><circle class="dot" cx="618" cy="269" r="6" fill="#8a6a38"/><circle class="dot" cx="356" cy="80" r="6" fill="#8a6a38"/><circle class="dot" cx="514" cy="134" r="6" fill="#8a6a38"/><circle class="dot" cx="353" cy="308" r="6" fill="#8a6a38"/><circle class="dot" cx="598" cy="232" r="6" fill="#8a6a38"/><circle class="dot" cx="502" cy="267" r="6" fill="#8a6a38"/><circle class="dot" cx="625" cy="270" r="6" fill="#8a6a38"/><circle class="dot" cx="535" cy="278" r="6" fill="#8a6a38"/><circle class="dot" cx="333" cy="317" r="6" fill="#8a6a38"/><circle class="dot" cx="581" cy="272" r="6" fill="#8a6a38"/><circle class="dot" cx="300" cy="167" r="6" fill="#8a6a38"/><circle class="dot" cx="544" cy="72" r="6" fill="#8a6a38"/><circle class="dot" cx="448" cy="324" r="6" fill="#8a6a38"/><circle class="dot" cx="357" cy="341" r="6" fill="#8a6a38"/><circle class="dot" cx="541" cy="199" r="6" fill="#8a6a38"/><circle class="dot" cx="511" cy="290" r="6" fill="#8a6a38"/><circle class="dot" cx="484" cy="334" r="6" fill="#8a6a38"/><circle class="dot" cx="387" cy="169" r="6" fill="#8a6a38"/><circle class="dot" cx="593" cy="219" r="6" fill="#8a6a38"/><circle class="dot" cx="373" cy="310" r="6" fill="#8a6a38"/><circle class="dot" cx="621" cy="175" r="6" fill="#8a6a38"/><g id="pin"><circle cx="470" cy="216" r="16" fill="#1a1714"/><circle cx="470" cy="216" r="6" fill="#d9c7a3"/><text x="498" y="224" fill="#1a1714" font-family="Newsreader" font-style="italic" font-size="30">Your clinic</text></g></svg></div>
           <div class="map-tag label">Targeting · 5 km</div>
           <div class="toasts" data-layout-allow-overlap>
             <div class="ltoast" id="t1"><i></i><div><b>New booking · Mei Ling</b><span>Check-up &amp; scaling · Saturday</span></div></div>
@@ -179,7 +223,7 @@
         </div>
       </section>
 
-      <section id="offer" class="clip light" data-start="8.25" data-duration="3.05" data-track-index="5">
+      <section id="offer" class="clip light" data-start="10.5" data-duration="3.05" data-track-index="5">
         <div id="offerCam" class="clip">
           <div class="o-label label" id="oLabel">The offer</div>
           <div class="o-head" id="oHead">30 days of patient leads.</div>
@@ -189,21 +233,21 @@
         </div>
       </section>
 
-      <section id="end" class="clip" data-start="11.25" data-duration="2.75" data-track-index="7">
+      <section id="end" class="clip" data-start="13.5" data-duration="3.0" data-track-index="7">
         <div id="endCam" class="clip">
-          <div class="end-logo" id="endLogo"><img src="assets/4skales-logo-ivory.svg" alt="4Skales"></div>
+          <div class="end-logo" id="endLogo"><img src="assets/4skales-logo-ink.svg" alt="4Skales"></div>
           <div class="end-rule" id="endRule"></div>
           <div class="end-tag" id="endTag">Redesigned to <span class="it">get you booked.</span></div>
           <div class="end-cities label" id="endCities">Johor Bahru · Kuala Lumpur</div>
           <div class="cta" id="cta"><div><b>CLAIM 30 FREE DAYS</b><span>Tap Send Message</span></div>
-            <div class="round-arrow" style="position:static" id="ctaArrow"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#f4f3ef" stroke-width="1.8"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div></div>
+            <div class="round-arrow" style="position:static" id="ctaArrow"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#1a1714" stroke-width="1.8"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div></div>
         </div>
       </section>
       <div class="wipe" id="wipe"></div>
-      <audio id="music" src="assets/music-main.mp3" data-start="0" data-duration="14.0" data-volume="1" data-track-index="8"></audio>
+      <audio id="music" src="assets/music-main.mp3" data-start="0" data-duration="16.5" data-volume="1" data-track-index="8"></audio>
     </div>
     <script>
-      const B = 60 / 80, DUR = 14.0;
+      const B = 60 / 80, DUR = 16.5;
       const tl = gsap.timeline({ paused: true });
       tl.fromTo('#grid', { y: 0 }, { y: -120, duration: DUR, ease: 'none' }, 0);
       tl.fromTo('#ghost', { x: 0 }, { x: -220, duration: DUR, ease: 'none' }, 0);
@@ -212,46 +256,55 @@
         tl.fromTo('#wipe', { x: 1500, skewX: -10 }, { x: -1900, skewX: -10, duration: dur, ease: 'power3.inOut', immediateRender: false }, at);
       }
 
-      // ---- BEFORE (0 - 3B): old site, slow push toward "phone call only", stamp on the beat
-      tl.fromTo('#cBt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0);
-      tl.fromTo('#baBefore', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 0.2);
-      tl.fromTo('#oldPage', { scale: 0.702, x: 0, y: 0 }, { scale: 1.25, x: -170, y: -250, duration: 2.2, ease: 'power1.inOut' }, 0);
-      tl.fromTo('#stamp', { scale: 2.2, opacity: 0, rotation: -14 }, { scale: 1, opacity: 1, rotation: -8, duration: 0.3, ease: 'back.out(2.2)' }, B * 2);
-      tl.to(['#cBt', '#baBefore'], { opacity: 0, duration: 0.2 }, B * 3 - 0.2);
+      // ---- HOOK (0 - 3B): question lands, the appointment book rises, empty slots breathe
+      tl.fromTo('#hookT', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0);
+      tl.fromTo('#book', { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out' }, 0.25);
+      tl.fromTo('#hookCam', { scale: 1 }, { scale: 1.05, duration: B * 3, ease: 'none', transformOrigin: '50% 60%' }, 0);
+      tl.fromTo('#bookGrid .empty', { opacity: 0 }, { opacity: 1, duration: 0.25, stagger: { each: 0.02, from: 'random' } }, 0.6);
+      tl.fromTo('#tally', { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, B * 2);
+      tl.to(['#hookT', '#book'], { opacity: 0, y: -24, duration: 0.25, ease: 'power2.in', stagger: 0.04 }, B * 3 - 0.3);
 
-      // ---- AFTER (3B - 7B): wipe the old site away, zoom into the booking card for the taps
-      tl.fromTo('#old', { y: 0, opacity: 1 }, { y: -1400, duration: 0.5, ease: 'expo.inOut' }, B * 3 - 0.25);
-      tl.to('#old', { opacity: 0, duration: 0.01 }, B * 3 + 0.3);
-      tl.fromTo('#baAfter', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, B * 3);
-      tl.fromTo('#cAt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 3 + 0.05);
-      tl.fromTo('#phone', { scale: 1, transformOrigin: '45% 40%' }, { scale: 1.36, duration: 0.7, ease: 'power2.inOut' }, B * 3.3);
-      tl.to('#phone', { scale: 1, duration: 0.6, ease: 'power2.inOut' }, B * 6.3);
-      tl.to(['#cAt', '#baAfter'], { opacity: 0, duration: 0.2 }, B * 7 - 0.25);
-      wipe(B * 7 - 0.4, 0.65);
-      tl.to('#phoneWindow', { opacity: 0, duration: 0.01 }, B * 7);
+      // ---- BEFORE (3B - 6B): phone rises, push toward "phone call only", stamp on the beat
+      tl.fromTo('#phone', { y: 1500 }, { y: 0, duration: 0.7, ease: 'expo.out' }, B * 3 - 0.1);
+      tl.fromTo('#cBt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 3);
+      tl.fromTo('#baBefore', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, B * 3 + 0.2);
+      tl.fromTo('#oldPage', { scale: 0.702, x: 0, y: 0 }, { scale: 1.25, x: -170, y: -250, duration: 2.2, ease: 'power1.inOut' }, B * 3);
+      tl.fromTo('#stamp', { scale: 2.2, opacity: 0, rotation: -14 }, { scale: 1, opacity: 1, rotation: -8, duration: 0.3, ease: 'back.out(2.2)' }, B * 5);
+      tl.to(['#cBt', '#baBefore'], { opacity: 0, duration: 0.2 }, B * 6 - 0.2);
 
-      // ---- REACH (7B - 11B): pull back over the map, radius pulses, dots fill in, bookings ping in on the beat
-      tl.fromTo('#cRt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 7 + 0.05);
-      tl.fromTo('#mapCam', { scale: 1.5, transformOrigin: '50% 40%' }, { scale: 1, duration: 1.4, ease: 'expo.out' }, B * 7);
-      tl.fromTo('#ring0', { scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { scale: 1, duration: 0.8, ease: 'expo.out' }, B * 7.3);
-      tl.fromTo('#ring1', { scale: 0, opacity: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { scale: 1, opacity: 1, duration: 1.0, ease: 'expo.out' }, B * 7.6);
-      tl.fromTo('#ring1', { scale: 1 }, { scale: 1.06, duration: B, repeat: 3, yoyo: true, ease: 'sine.inOut', immediateRender: false }, B * 9);
-      tl.fromTo('.dot', { opacity: 0, scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { opacity: 0.85, scale: 1, duration: 0.3, ease: 'back.out(2)', stagger: 0.035 }, B * 7.8);
-      ['#t1', '#t2', '#t3'].forEach((t, i) => tl.fromTo(t, { y: 60, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, B * (8 + i)));
-      tl.fromTo('#mapCam', { scale: 1 }, { scale: 1.06, duration: B * 3, ease: 'none', immediateRender: false }, B * 8.6);
-      tl.to('#cRt', { opacity: 0, duration: 0.2 }, B * 11 - 0.25);
+      // ---- AFTER (6B - 10B): the old site wipes away, zoom into the booking card for the taps
+      tl.fromTo('#old', { y: 0, opacity: 1 }, { y: -1400, duration: 0.5, ease: 'expo.inOut' }, B * 6 - 0.25);
+      tl.to('#old', { opacity: 0, duration: 0.01 }, B * 6 + 0.3);
+      tl.fromTo('#baAfter', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, B * 6);
+      tl.fromTo('#cAt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 6 + 0.05);
+      tl.fromTo('#phone', { scale: 1, transformOrigin: '45% 40%' }, { scale: 1.36, duration: 0.7, ease: 'power2.inOut', immediateRender: false }, B * 6.3);
+      tl.to('#phone', { scale: 1, duration: 0.6, ease: 'power2.inOut' }, B * 9.3);
+      tl.to(['#cAt', '#baAfter'], { opacity: 0, duration: 0.2 }, B * 10 - 0.25);
+      wipe(B * 10 - 0.4, 0.65);
+      tl.to('#phoneWindow', { opacity: 0, duration: 0.01 }, B * 10);
 
-      // ---- OFFER (11B - 15B): headline pulls back from a close-up, "Free." lands on the beat
-      tl.fromTo('#oHead', { scale: 1.7, opacity: 0, transformOrigin: '0% 30%' }, { scale: 1, opacity: 1, duration: 1.0, ease: 'expo.out' }, B * 11);
-      tl.fromTo('#oLabel', { opacity: 0 }, { opacity: 1, duration: 0.4 }, B * 11 + 0.2);
-      tl.fromTo('#free', { scale: 0.6, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, B * 12);
-      tl.fromTo('#ol1', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, B * 13);
-      tl.fromTo('#ol2', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, B * 14);
-      tl.fromTo('#offerCam', { scale: 1 }, { scale: 1.04, duration: B * 4, ease: 'none', transformOrigin: '30% 40%' }, B * 11);
-      tl.to('#hud', { opacity: 0, duration: 0.01 }, B * 11);
-      wipe(B * 15 - 0.4, 0.65);
+      // ---- REACH (10B - 14B): pull back over the map, radius pulses, bookings arrive on the beat
+      tl.fromTo('#cRt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 10 + 0.05);
+      tl.fromTo('#mapCam', { scale: 1.5, transformOrigin: '50% 30%' }, { scale: 1, duration: 1.4, ease: 'expo.out' }, B * 10);
+      tl.fromTo('#ring0', { scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { scale: 1, duration: 0.8, ease: 'expo.out' }, B * 10.3);
+      tl.fromTo('#ring1', { scale: 0, opacity: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { scale: 1, opacity: 1, duration: 1.0, ease: 'expo.out' }, B * 10.6);
+      tl.fromTo('#ring1', { scale: 1 }, { scale: 1.06, duration: B, repeat: 3, yoyo: true, ease: 'sine.inOut', immediateRender: false }, B * 12);
+      tl.fromTo('.dot', { opacity: 0, scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { opacity: 0.9, scale: 1, duration: 0.3, ease: 'back.out(2)', stagger: 0.035 }, B * 10.8);
+      ['#t1', '#t2', '#t3'].forEach((t, i) => tl.fromTo(t, { y: 60, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, B * (11 + i)));
+      tl.fromTo('#mapCam', { scale: 1 }, { scale: 1.06, duration: B * 3, ease: 'none', immediateRender: false }, B * 11.6);
+      tl.to('#cRt', { opacity: 0, duration: 0.2 }, B * 14 - 0.25);
 
-      const E = B * 15;
+      // ---- OFFER (14B - 18B): headline pulls back from a close-up, "Free." lands on the beat
+      tl.fromTo('#oHead', { scale: 1.7, opacity: 0, transformOrigin: '0% 30%' }, { scale: 1, opacity: 1, duration: 1.0, ease: 'expo.out' }, B * 14);
+      tl.fromTo('#oLabel', { opacity: 0 }, { opacity: 1, duration: 0.4 }, B * 14 + 0.2);
+      tl.fromTo('#free', { scale: 0.6, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, B * 15);
+      tl.fromTo('#ol1', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, B * 16);
+      tl.fromTo('#ol2', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, B * 17);
+      tl.fromTo('#offerCam', { scale: 1 }, { scale: 1.04, duration: B * 4, ease: 'none', transformOrigin: '30% 40%' }, B * 14);
+      tl.to('#hud', { opacity: 0, duration: 0.01 }, B * 14);
+      wipe(B * 18 - 0.4, 0.65);
+
+      const E = B * 18;
 
       // ---- end card: logo pull-back, slow push-in, pointer to Meta's Send Message button
       tl.fromTo('#endLogo', { scale: 1.45, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.7, ease: 'expo.out' }, E);

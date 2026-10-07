@@ -1,4 +1,4 @@
-"""Calm, beat-synced soundtrack for the 14 s main ad (before/after + free 30 days).
+"""Calm, beat-synced soundtrack for the 16.5 s main ad (hook, before/after, free 30 days).
 
 80 BPM. Keys and a warm pad carry it; a soft kick and rim enter on the
 "after" cut and step back for the end card. Every hit sits on a cut
@@ -18,10 +18,10 @@ SR, tax, env, filt, hz, place = cm.SR, cm.tax, cm.env, cm.filt, cm.hz, cm.place
 BPM = 80
 B = 60 / BPM               # 0.75 s
 BAR = B * 4
-DUR = 14.0
-CUES = dict(after=3, taps=[4, 5, 6], targeting=7, pings=[8, 9, 10], offer=11, lines=[13, 14], end=15)
-PROG = [(41, [53, 57, 60, 64]), (40, [52, 55, 59, 62]), (38, [50, 53, 57, 60]),
-        (36, [48, 52, 55, 59]), (41, [53, 57, 60, 64, 67])]
+DUR = 16.5
+CUES = dict(stamp=5, after=6, taps=[7, 8, 9], targeting=10, pings=[11, 12, 13], offer=14, lines=[16, 17], end=18)
+PROG = [(38, [50, 53, 57, 60]), (40, [52, 55, 59, 62]), (41, [53, 57, 60, 64]),
+        (40, [52, 55, 59, 62]), (38, [50, 53, 57, 60]), (36, [48, 52, 55, 59, 64])]
 
 
 def pad(notes, length, rng):
@@ -46,7 +46,7 @@ def main():
 
     for bar, (root, notes) in enumerate(PROG):
         t0 = bar * BAR
-        length = BAR if bar < 4 else DUR - t0
+        length = BAR if bar < len(PROG) - 1 else DUR - t0
         place(keys, cm.chord(notes, min(length, BAR) * 0.98, rng, strum=0.03), t0, 0.85)
         place(keys, cm.chord([notes[2] + 12], B * 1.2, rng), t0 + B * 2.5, 0.35)
         place(pads, pad(notes, length + 0.4, rng), t0)
@@ -67,6 +67,10 @@ def main():
         sw = cm.swell(rng, 1.4)
         place(fx, sw, beat * B - len(sw) / SR, g)
 
+    # the waiting room: a soft clock under the hook and the old site
+    for beat in range(0, CUES["after"]):
+        place(fx, cm.tick(rng), beat * B, 0.55 if beat % 2 else 0.8)
+    place(fx, cm.kick(rng), CUES["stamp"] * B, 0.45)
     swell_into(CUES["after"])
     for b in CUES["taps"]:
         place(fx, cm.soft_tap(rng), b * B, 0.9)
