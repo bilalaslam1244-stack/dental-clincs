@@ -1,4 +1,4 @@
-"""Calm, beat-synced soundtrack for the 18.4 s main ad (problem, three steps, free 30 days).
+"""Calm, beat-synced soundtrack for the 19.9 s main ad (problem, three steps, free 30 days).
 
 80 BPM. Keys and a warm pad carry it; a soft kick and rim enter on the
 "after" cut and step back for the end card. Every hit sits on a cut
@@ -18,8 +18,8 @@ SR, tax, env, filt, hz, place = cm.SR, cm.tax, cm.env, cm.filt, cm.hz, cm.place
 BPM = 80
 B = 60 / BPM               # 0.75 s
 BAR = B * 4
-DUR = 18.4
-CUES = dict(stamp=4, after=5, steps=[7, 11, 15], book_now=10, taps=[12, 13, 14], pings=[16], offer=18, lines=[19.67, 20.33], end=21)
+DUR = 19.9
+CUES = dict(stamp=4, after=5, steps=[7, 11, 15], book_now=10, taps=[12, 13, 14], pings=[16], offer=18, lines=[20, 21], end=23)
 PROG = [(38, [50, 53, 57, 60]), (40, [52, 55, 59, 62]), (41, [53, 57, 60, 64]), (43, [55, 59, 62, 65]),
         (41, [53, 57, 60, 64]), (40, [52, 55, 59, 62]), (36, [48, 52, 55, 59, 64])]
 

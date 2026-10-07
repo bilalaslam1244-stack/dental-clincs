@@ -128,36 +128,51 @@
       .step-cap span.t { display: block; font: 300 72px/1.04 var(--serif); letter-spacing: -.02em; }
       .chip2 { position: absolute; top: 18px; height: 52px; padding: 0 22px; display: flex; align-items: center; clip-path: var(--chamfer); font: 500 22px var(--sans); letter-spacing: .26em; }
 
-      /* step 1: a social feed with the clinic's sponsored post */
-      #feed { position: absolute; inset: 0; background: #faf9f6; overflow: hidden; }
+      /* step 1: an Instagram-style feed with the clinic's sponsored post (no Meta logos or wordmarks) */
+      #feed { position: absolute; inset: 0; background: #ffffff; overflow: hidden; font-family: -apple-system, 'Jost', sans-serif; color: #0f0f0f; }
       #feedScroll { position: absolute; left: 0; right: 0; top: 0; }
-      .f-top { height: 150px; padding: 80px 34px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ebe7df; background: #faf9f6; position: relative; z-index: 2; }
-      .f-top b { font: 500 34px var(--sans); letter-spacing: .02em; }
-      .f-top span { width: 120px; height: 18px; border-radius: 9px; background: #e7e2d8; }
-      .f-ghost { height: 280px; margin: 22px 26px; border-radius: 22px; background: linear-gradient(135deg, #e9e4da, #ddd6c9); }
-      .f-head { height: 104px; display: flex; align-items: center; gap: 18px; padding: 0 30px; }
-      .f-head i { width: 64px; height: 64px; border-radius: 50%; border: 1px solid #c9a96e; display: flex; align-items: center; justify-content: center; font: 300 italic 30px var(--serif); color: #8a6a38; background: #fff; }
-      .f-head b { display: block; font: 500 28px var(--sans); }
-      .f-head span { display: block; font: 300 22px var(--sans); color: #6d665c; }
-      .f-img { height: 420px; margin: 0 0; background: #f1ece2; position: relative; padding: 52px 56px; border-top: 1px solid #ebe7df; border-bottom: 1px solid #ebe7df; }
-      .f-img::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(138,106,56,.35); }
-      .f-brand { font: 300 64px var(--serif); }
-      .f-brand em { color: #8a6a38; }
-      .f-line { font: 300 80px/1.0 var(--serif); margin-top: 34px; letter-spacing: -.02em; }
-      .f-sub { font: 400 24px var(--sans); color: #5f584e; letter-spacing: .14em; text-transform: uppercase; margin-top: 22px; }
-      .f-badge { display: inline-block; margin-top: 22px; padding: 14px 24px; background: #1a1714; color: #e9d9b8; font: 300 italic 32px var(--serif); }
-      .f-cta { height: 96px; margin: 0; padding: 0 30px; display: flex; align-items: center; justify-content: space-between; background: #1a1714; color: #f3f0e9; font: 500 28px var(--sans); letter-spacing: .12em; text-transform: uppercase; }
-      .f-copy { padding: 22px 30px; font: 300 26px/1.4 var(--sans); color: #3c3832; }
-      .f-copy b { font-weight: 500; }
-      .finger { position: absolute; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 50%; background: rgba(255,255,255,.6); border: 3px solid rgba(26,23,20,.55); box-shadow: 0 8px 20px rgba(0,0,0,.2); }
+      .ig-status { position: absolute; left: 0; right: 0; top: 0; height: 74px; padding: 26px 44px 0 54px; display: flex; justify-content: space-between; font: 500 26px var(--sans); background: #fff; z-index: 3; }
+      .ig-status i { display: inline-block; width: 30px; height: 16px; margin-left: 8px; border-radius: 4px; border: 2px solid #0f0f0f; }
+      .ig-bar { position: absolute; left: 0; right: 0; top: 74px; height: 86px; padding: 0 30px; display: flex; align-items: center; justify-content: space-between; background: #fff; z-index: 3; border-bottom: 1px solid #efefef; }
+      .ig-bar b { font: 500 34px var(--sans); }
+      .ig-bar span { display: flex; gap: 30px; }
+      .ig-stories { display: flex; gap: 22px; padding: 22px 26px 18px; border-bottom: 1px solid #efefef; }
+      .ig-story { width: 112px; text-align: center; font: 400 18px var(--sans); color: #262626; }
+      .ig-ring { width: 112px; height: 112px; border-radius: 50%; padding: 4px; background: conic-gradient(#c9a96e, #b5694e, #8a6a38, #d9c7a3, #c9a96e); margin-bottom: 8px; }
+      .ig-ring > div { width: 100%; height: 100%; border-radius: 50%; border: 4px solid #fff; background: #ece6da; }
+      .ig-head { height: 96px; display: flex; align-items: center; gap: 18px; padding: 0 26px; }
+      .ig-av { width: 64px; height: 64px; border-radius: 50%; padding: 3px; background: conic-gradient(#c9a96e, #b5694e, #8a6a38, #d9c7a3, #c9a96e); }
+      .ig-av div { width: 100%; height: 100%; border-radius: 50%; border: 3px solid #fff; background: #1a1714; color: #d9c7a3; display: flex; align-items: center; justify-content: center; font: 300 italic 28px var(--serif); }
+      .ig-head b { display: block; font: 600 26px var(--sans); }
+      .ig-head span { display: block; font: 400 21px var(--sans); color: #737373; }
+      .ig-head em { margin-left: auto; font-style: normal; font: 600 30px var(--sans); letter-spacing: 2px; }
+      .ig-img { height: 702px; position: relative; background: radial-gradient(120% 90% at 70% 20%, #f6f1e7, #e7dccb); overflow: hidden; }
+      .ig-img .frame-in { position: absolute; inset: 30px; border: 1px solid rgba(138,106,56,.45); }
+      .ig-img .kicker { position: absolute; left: 64px; top: 66px; font: 500 20px var(--sans); letter-spacing: .32em; color: #74572a; }
+      .ig-img .big { position: absolute; left: 60px; right: 60px; top: 120px; font: 300 96px/0.98 var(--serif); letter-spacing: -.03em; color: #1a1714; }
+      .ig-img .big em { color: #8a6a38; }
+      .ig-img .tooth { position: absolute; right: 64px; bottom: 66px; width: 170px; height: 190px; }
+      .ig-img .foot { position: absolute; left: 64px; bottom: 70px; font: 300 30px/1.4 var(--sans); color: #3c3832; }
+      .ig-img .foot b { display: block; font: 500 22px var(--sans); letter-spacing: .26em; color: #74572a; margin-bottom: 6px; }
+      .ig-cta { height: 76px; padding: 0 26px; display: flex; align-items: center; justify-content: space-between; background: #f2f2f2; font: 600 26px var(--sans); color: #0f0f0f; }
+      .ig-actions { height: 82px; padding: 0 22px; display: flex; align-items: center; gap: 26px; }
+      .ig-actions .save { margin-left: auto; }
+      .ig-dots { position: absolute; left: 0; right: 0; margin-top: -54px; display: flex; justify-content: center; gap: 8px; }
+      .ig-dots i { width: 10px; height: 10px; border-radius: 50%; background: #c7c7c7; }
+      .ig-dots i:first-child { background: #3897f0; }
+      .ig-copy { padding: 0 26px; font: 400 25px/1.42 var(--sans); color: #0f0f0f; }
+      .ig-copy b { font-weight: 600; }
+      .ig-copy span { color: #737373; }
+      .ig-nav { position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: #fff; border-top: 1px solid #efefef; display: flex; justify-content: space-around; align-items: center; z-index: 3; }
+      .finger { position: absolute; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 50%; background: rgba(255,255,255,.6); border: 3px solid rgba(26,23,20,.55); box-shadow: 0 8px 20px rgba(0,0,0,.2); z-index: 4; }
 
       /* step 3: WhatsApp */
       .chat-top { background: #1f2a25; }
 
       /* offer (sand) */
-      .o-label { position: absolute; left: 80px; top: 400px; color: #8a6a38; }
-      .o-head { position: absolute; left: 76px; right: 76px; top: 450px; font: 300 128px/0.98 var(--serif); letter-spacing: -.03em; }
-      .free { position: absolute; left: 80px; top: 770px; height: 120px; padding: 0 46px; display: flex; align-items: center; background: #1a1714; color: #d9c7a3; clip-path: var(--chamfer); font: 300 italic 92px/1 var(--serif); }
+      .o-label { position: absolute; left: 80px; top: 430px; color: #6e5226; }
+      .o-head { position: absolute; left: 76px; right: 76px; top: 480px; font: 300 128px/0.98 var(--serif); letter-spacing: -.03em; }
+      .free { position: absolute; left: 80px; top: 650px; height: 120px; padding: 0 46px; display: flex; align-items: center; background: #1a1714; color: #d9c7a3; clip-path: var(--chamfer); font: 300 italic 92px/1 var(--serif); }
       .o-line { position: absolute; left: 80px; right: 80px; font: 300 64px/1.1 var(--serif); }
       .o-line em { color: #8a6a38; }
 
@@ -181,8 +196,8 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="18.4" data-width="1080" data-height="1920">
-      <section id="bg" class="clip" data-start="0" data-duration="18.4" data-track-index="0">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="19.9" data-width="1080" data-height="1920">
+      <section id="bg" class="clip" data-start="0" data-duration="19.9" data-track-index="0">
         <div class="grid" id="grid"></div>
         <div class="grain"></div>
         <div class="frame"></div>
@@ -210,16 +225,18 @@
         <div class="screen">
           <video id="screen-video" src="assets/screen-80.mp4" data-start="8.25" data-duration="3.05" data-media-start="1.875" data-track-index="3" muted playsinline></video>
           <div id="feed" data-layout-allow-overlap data-layout-allow-occlusion>
-            <div class="f-top"><span></span><b>Feed</b></div>
+            <div class="ig-status"><span>9:41</span><span><i></i></span></div>
+            <div class="ig-bar" data-layout-allow-overlap><b>Home</b><span><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z"/></svg></span></div>
             <div id="feedScroll">
-              <div style="height:150px"></div>
-              <div class="f-ghost"></div>
-              <div class="f-head"><i>L</i><div><b>Lumen Dental</b><span>Sponsored · Mount Austin</span></div></div>
-              <div class="f-img"><div class="f-brand">Lumen <em>Dental</em></div><div class="f-line">Check-up &amp; scaling</div><div class="f-sub">Mount Austin · Open weekends</div></div>
-              <div class="f-cta" id="bookNow"><span>Book now</span><span>›</span></div>
-              <div class="f-copy"><b>Lumen Dental</b> Unhurried dental care, five minutes from you.</div>
-              <div class="f-ghost"></div>
+              <div style="height:160px"></div>
+              <div class="ig-stories"><div class="ig-story"><div class="ig-ring"><div></div></div>your story</div><div class="ig-story"><div class="ig-ring"><div></div></div>aina.smiles</div><div class="ig-story"><div class="ig-ring"><div></div></div>mtaustin.eats</div><div class="ig-story"><div class="ig-ring"><div></div></div>kids.jb</div><div class="ig-story"><div class="ig-ring"><div></div></div>jb.fitness</div></div>
+              <div class="ig-head"><div class="ig-av"><div>L</div></div><div><b>lumendental.jb</b><span>Sponsored</span></div><em>···</em></div>
+              <div class="ig-img"><div class="frame-in"></div><div class="kicker">LUMEN DENTAL · MOUNT AUSTIN</div><div class="big" data-layout-allow-overlap>Check-up &amp; scaling, <em>booked in three taps.</em></div><svg class="tooth" viewBox="0 0 24 27" fill="none" stroke="#8a6a38" stroke-width=".7"><path d="M7 2.5c-2.6 0-4.2 2-4.2 4.8 0 2.4.9 3.8 1.6 5.9.6 2.1.8 8.3 2.9 8.3 1.8 0 1.7-4.9 2.7-6.6.4-.7 1.9-.7 2.3 0 1 1.7.9 6.6 2.7 6.6 2.1 0 2.3-6.2 2.9-8.3.6-2.1 1.6-3.5 1.6-5.9C21.5 4.5 19.9 2.5 17.3 2.5c-2.1 0-3.4 1.3-5.2 1.3S9.1 2.5 7 2.5Z"/></svg><div class="foot"><b>OPEN WEEKENDS</b>Reserve on WhatsApp</div></div>
+              <div class="ig-cta" id="bookNow"><span>Book now</span><span>›</span></div>
+              <div class="ig-actions"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-3.2-6.4A8 8 0 0 1 20 12Zm0 0v8l-3-2"/></svg><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z"/></svg><span class="save"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4V3Z"/></svg></span></div>
+              <div class="ig-copy"><b>lumendental.jb</b> Unhurried dental care in Mount Austin. Pick a treatment and a time, and it goes straight to our WhatsApp. <span>more</span></div>
             </div>
+            <div class="ig-nav"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3v-9Z"/></svg><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M3 9h18M9 3l3 6M15 3l3 6M10 13v5l4-2.5-4-2.5Z"/></svg><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#0f0f0f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div>
             <div class="finger" id="adFinger"></div>
           </div>
           <div id="old" data-layout-allow-overlap data-layout-allow-occlusion>
@@ -255,31 +272,31 @@
         <div class="ba before" id="baBefore">BEFORE</div>
       </div>
 
-      <section id="offer" class="clip light" data-start="13.5" data-duration="2.3" data-track-index="5">
+      <section id="offer" class="clip light" data-start="13.5" data-duration="3.8" data-track-index="5">
         <div id="offerCam" class="clip">
           <div class="o-label label" id="oLabel">Try it</div>
-          <div class="o-head" id="oHead">30 days of leads.</div>
+          <div class="o-head" id="oHead">2 weeks of leads.</div>
           <div class="free" id="free">Free.</div>
-          <div class="o-line" id="ol1" style="top:930px">Like the results? <em>Keep going.</em></div>
-          <div class="o-line" id="ol2" style="top:1040px">Not for you? <em>Walk away.</em></div>
+          <div class="o-line" id="ol1" style="top:830px">Like the results? <em>Keep going.</em></div>
+          <div class="o-line" id="ol2" style="top:940px">Not for you? <em>Walk away.</em></div>
         </div>
       </section>
 
-      <section id="end" class="clip" data-start="15.75" data-duration="2.65" data-track-index="7">
+      <section id="end" class="clip" data-start="17.25" data-duration="2.65" data-track-index="7">
         <div id="endCam" class="clip">
           <div class="end-logo" id="endLogo"><img src="assets/4skales-logo-ink.svg" alt="4Skales"></div>
           <div class="end-rule" id="endRule"></div>
           <div class="end-tag" id="endTag">Redesigned to <span class="it">get you booked.</span></div>
           <div class="end-cities label" id="endCities">Johor Bahru · Kuala Lumpur</div>
-          <div class="cta" id="cta"><div><b>CLAIM 30 FREE DAYS</b><span>Tap Send Message</span></div>
+          <div class="cta" id="cta"><div><b>CLAIM 2 FREE WEEKS</b><span>Tap Send Message</span></div>
             <div class="round-arrow" style="position:static" id="ctaArrow"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#1a1714" stroke-width="1.8"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div></div>
         </div>
       </section>
       <div class="wipe" id="wipe"></div>
-      <audio id="music" src="assets/music-main.mp3" data-start="0" data-duration="18.4" data-volume="1" data-track-index="8"></audio>
+      <audio id="music" src="assets/music-main.mp3" data-start="0" data-duration="19.9" data-volume="1" data-track-index="8"></audio>
     </div>
     <script>
-      const B = 60 / 80, DUR = 18.4;
+      const B = 60 / 80, DUR = 19.9;
       const tl = gsap.timeline({ paused: true });
       tl.fromTo('#grid', { y: 0 }, { y: -120, duration: DUR, ease: 'none' }, 0);
       tl.fromTo('#ghost', { x: 0 }, { x: -220, duration: DUR, ease: 'none' }, 0);
@@ -305,6 +322,7 @@
       tl.to(['#cOt', '#baBefore'], { opacity: 0, duration: 0.2 }, B * 5 - 0.2);
 
       // ---- THE TURN (5B - 7B): the old site wipes away
+      tl.fromTo('#feed', { opacity: 0 }, { opacity: 1, duration: 0.01 }, B * 5 - 0.2);
       tl.fromTo('#old', { x: 0, opacity: 1 }, { x: -720, duration: 0.55, ease: 'expo.inOut' }, B * 5 - 0.2);
       tl.to('#old', { opacity: 0, duration: 0.01 }, B * 5 + 0.4);
       tl.fromTo('#cFt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 5);
@@ -312,12 +330,12 @@
 
       // ---- STEP 1 (7B - 11B): the clinic's ad appears in the feed, tap Book now on the beat
       tl.fromTo('#s1t', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 7);
-      tl.fromTo('#feedScroll', { y: 0 }, { y: -320, duration: 1.0, ease: 'power3.inOut' }, B * 7.4);
-      tl.to('#phone', { y: -150, duration: 1.0, ease: 'power3.inOut' }, B * 7.6);
-      tl.fromTo('#phone', { scale: 1, transformOrigin: '50% 60%' }, { scale: 1.08, duration: 1.2, ease: 'power2.inOut', immediateRender: false }, B * 8.3);
-      tl.fromTo('#adFinger', { x: 520, y: 1000, opacity: 0 }, { x: 351, y: 576, opacity: 1, duration: 0.6, ease: 'power2.out' }, B * 9.1);
+      tl.fromTo('#feedScroll', { y: 0 }, { y: -330, duration: 1.0, ease: 'power3.inOut' }, B * 7.4);
+      tl.to('#phone', { y: -230, duration: 1.0, ease: 'power3.inOut' }, B * 7.6);
+      tl.fromTo('#phone', { scale: 1, transformOrigin: '50% 60%' }, { scale: 1.03, duration: 1.4, ease: 'power2.inOut', immediateRender: false }, B * 8.3);
+      tl.fromTo('#adFinger', { x: 520, y: 1000, opacity: 0 }, { x: 351, y: 866, opacity: 1, duration: 0.6, ease: 'power2.out' }, B * 9.1);
       tl.fromTo('#adFinger', { scale: 1 }, { scale: 0.75, duration: 0.1, yoyo: true, repeat: 1, ease: 'power1.inOut', immediateRender: false }, B * 10);
-      tl.fromTo('#bookNow', { backgroundColor: '#1a1714' }, { backgroundColor: '#8a6a38', duration: 0.12, ease: 'none' }, B * 10);
+      tl.fromTo('#bookNow', { backgroundColor: '#f2f2f2' }, { backgroundColor: '#d6d6d6', duration: 0.12, ease: 'none' }, B * 10);
       tl.to('#s1t', { opacity: 0, duration: 0.2 }, B * 11 - 0.2);
 
       // ---- STEP 2 (11B - 15B): the tap opens the clinic's new site; zoom into the booking card for the taps
@@ -342,13 +360,13 @@
       tl.fromTo('#oHead', { scale: 1.6, opacity: 0, transformOrigin: '0% 30%' }, { scale: 1, opacity: 1, duration: 0.9, ease: 'expo.out' }, B * 18);
       tl.fromTo('#oLabel', { opacity: 0 }, { opacity: 1, duration: 0.4 }, B * 18 + 0.2);
       tl.fromTo('#free', { scale: 0.6, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)' }, B * 19);
-      tl.fromTo('#ol1', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, B * 19.67);
-      tl.fromTo('#ol2', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, B * 20.33);
-      tl.fromTo('#offerCam', { scale: 1 }, { scale: 1.04, duration: B * 3, ease: 'none', transformOrigin: '30% 40%' }, B * 18);
+      tl.fromTo('#ol1', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 20);
+      tl.fromTo('#ol2', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 21);
+      tl.fromTo('#offerCam', { scale: 1 }, { scale: 1.05, duration: B * 5, ease: 'none', transformOrigin: '30% 40%' }, B * 18);
       tl.to('#hud', { opacity: 0, duration: 0.01 }, B * 18);
-      wipe(B * 21 - 0.4, 0.65);
+      wipe(B * 23 - 0.4, 0.65);
 
-      const E = B * 21;
+      const E = B * 23;
 
       // ---- end card: logo pull-back, slow push-in, pointer to Meta's Send Message button
       tl.fromTo('#endLogo', { scale: 1.45, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.7, ease: 'expo.out' }, E);
