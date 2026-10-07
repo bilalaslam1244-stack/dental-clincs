@@ -313,7 +313,7 @@ def build():
         html = (head + BODY + end + '      <div class="wipe" id="wipe"></div>\n'
                 f'      <audio id="music" src="assets/music-main.mp3" data-start="0" data-duration="{DUR}" data-volume="1" data-track-index="8"></audio>'
                 + js_head + JS + ba.END_JS + ba.JS_TAIL)
-        vals = dict(f, **m, TITLE="Redesign + free 30 days", TAG='Redesigned to <span class="it">get you booked.</span>',
+        vals = dict(f, **m, TITLE="Redesign + 2 free weeks", TAG='Redesigned to <span class="it">get you booked.</span>',
                     vMedia=round(B * 2.5, 4), endStart=round(B * 23, 4), endDur=round(DUR - B * 23, 4),
                     phoneTw=f["phoneT"] - f["winT"], BOOK=appointment_book(), CHAT=ba.CHAT)
         for k, v in vals.items():

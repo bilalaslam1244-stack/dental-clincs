@@ -7,6 +7,7 @@ Fixed-price clinic websites with WhatsApp booking, for Johor Bahru and Kuala Lum
 - `brand/`: 4Skales logo, traced to SVG (`4skales-logo.svg` uses currentColor) plus ink/ivory SVG and transparent PNG versions.
 - `video/`: Meta ads built with HyperFrames, each in 9:16 (Reels/Stories) and 4:5 (Feed). Finished files are in `video/renders/`; ad copy is in `video/share-copy.txt`.
   - Main ad (19.9s, 80 BPM, light theme): problem (empty appointment book, outdated site) / "here's how we fix it" / step 1 Instagram-style sponsored post for the clinic / step 2 book on the new site in three taps / step 3 booking lands in WhatsApp / 2 weeks of leads free / CTA. Built by `tools/build-main.py`, music by `tools/compose-music-main.py`, site demo `assets/screen-80.mp4` (`BPM=80 OUT=assets/screen-80.mp4 node tools/record-site.mjs ...`).
+  - Bahasa Malaysia and Chinese versions of the main ad: `tools/build-main-i18n.py` (run after `build-main.py`) writes `main-916-ms.html`, `main-45-ms.html`, `main-916-zh.html`, `main-45-zh.html`; Chinese uses Noto Serif SC / Noto Sans SC subsets downloaded for exactly the characters used. The recorded demo site in step 2 stays in English.
   - Short cuts (7.5s, 92 BPM) for retargeting: ad1 Missed calls, ad2 Three-tap booking, ad3 The offer. Built by `tools/build-ads.py`.
 
 ## Rebuilding the ads
