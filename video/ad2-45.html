@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1080, height=1920" />
-    <title>4Skales · Missed calls</title>
+    <meta name="viewport" content="width=1080, height=1350" />
+    <title>4Skales · Three-tap booking</title>
     <script src="assets/gsap.min.js"></script>
     <style>
       @font-face { font-family: 'Jost'; font-weight: 300; font-style: normal; src: url('assets/fonts/Jost-300-normal.woff2') format('woff2'); }
@@ -18,24 +18,24 @@
         --chamfer: polygon(26px 0, 100% 0, 100% calc(100% - 26px), calc(100% - 26px) 100%, 0 100%, 0 26px);
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+      html, body { width: 1080px; height: 1350px; overflow: hidden; background: var(--ink); }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; color: var(--white); font-family: var(--sans); }
       .clip { position: absolute; inset: 0; }
       .it { font-style: italic; color: var(--gold); }
       .label { font: 500 22px/1 var(--sans); letter-spacing: .32em; text-transform: uppercase; }
       #bg, #end { background: var(--ink); }
       .grid { position: absolute; inset: -120px; background-image: linear-gradient(rgba(244,243,239,.045) 2px, transparent 2px), linear-gradient(90deg, rgba(244,243,239,.045) 2px, transparent 2px); background-size: 120px 120px; }
-      .ghost { position: absolute; left: -40px; top: 1380px; width: 1500px; height: auto; opacity: .06; }
-      .hud { position: absolute; top: 300px; left: 76px; right: 76px; display: flex; align-items: center; justify-content: space-between; }
+      .ghost { position: absolute; left: -40px; top: 2400px; width: 1500px; height: auto; opacity: .06; }
+      .hud { position: absolute; top: 64px; left: 76px; right: 76px; display: flex; align-items: center; justify-content: space-between; }
       .hud img { height: 32px; width: auto; display: block; }
       .hud span { color: var(--dim); }
-      .cap { position: absolute; left: 76px; right: 76px; top: 380px; font: 300 82px/1.04 var(--serif); letter-spacing: -.02em; }
+      .cap { position: absolute; left: 76px; right: 76px; top: 140px; font: 300 74px/1.04 var(--serif); letter-spacing: -.02em; }
       .cap span { display: block; }
       .wipe { position: absolute; top: -300px; height: 2520px; width: 1700px; left: -310px; background: var(--white); }
 
       /* phone: the wrapper sets the per-format size; the timeline moves #phone */
-      .phone-window { position: absolute; left: 0; right: 0; top: 590px; bottom: 0; overflow: hidden; }
-      .phone-wrap { position: absolute; left: 180px; top: 50px; width: 720px; height: 1360px; transform: scale(1.0); transform-origin: 0 0; }
+      .phone-window { position: absolute; left: 0; right: 0; top: 330px; bottom: 0; overflow: hidden; }
+      .phone-wrap { position: absolute; left: 295px; top: 40px; width: 720px; height: 1360px; transform: scale(0.68); transform-origin: 0 0; }
       #phone { position: absolute; inset: 0; border-radius: 84px; background: #070908; padding: 9px; box-shadow: 0 0 0 1px rgba(201,169,110,.5), 0 60px 140px rgba(0,0,0,.6); }
       .screen { position: relative; width: 702px; height: 1342px; border-radius: 76px; overflow: hidden; background: var(--white); }
       .screen video { position: absolute; left: 0; top: 0; width: 702px; height: 1368px; object-fit: cover; }
@@ -55,85 +55,81 @@
       .toast span { display: block; font: 300 24px var(--sans); color: #c9c6be; }
 
       /* hook */
-      .notifs { position: absolute; left: 520px; right: 76px; top: 400px; height: 330px; }
+      .notifs { position: absolute; left: 520px; right: 76px; top: 210px; height: 330px; }
       .notif { position: absolute; left: 0; right: 0; top: 0; height: 92px; background: var(--ink-2); border: 1px solid rgba(244,243,239,.12); clip-path: var(--chamfer); display: flex; align-items: center; gap: 22px; padding: 0 30px; }
       .notif i { width: 12px; height: 12px; border-radius: 50%; background: var(--red); flex: none; }
       .notif b { font: 400 29px var(--sans); flex: 1; }
       .notif span { font: 300 italic 27px var(--serif); color: var(--dim); }
-      .count { position: absolute; left: 60px; top: 640px; font: 300 430px/0.8 var(--serif); letter-spacing: -.05em; }
-      .count-label { position: absolute; left: 80px; top: 1010px; color: var(--red); }
-      .hook-line { position: absolute; left: 76px; right: 76px; top: 1060px; font: 300 76px/1.04 var(--serif); }
+      .count { position: absolute; left: 60px; top: 420px; font: 300 400px/0.8 var(--serif); letter-spacing: -.05em; }
+      .count-label { position: absolute; left: 80px; top: 770px; color: var(--red); }
+      .hook-line { position: absolute; left: 76px; right: 76px; top: 820px; font: 300 76px/1.04 var(--serif); }
 
       /* price (light) */
       .light { background: var(--white); color: var(--ink); }
-      .p-label { position: absolute; left: 80px; top: 420px; color: var(--gold-deep); }
-      .price { position: absolute; left: 60px; top: 480px; font: 300 290px/0.9 var(--serif); letter-spacing: -.05em; white-space: nowrap; }
+      .p-label { position: absolute; left: 80px; top: 270px; color: var(--gold-deep); }
+      .price { position: absolute; left: 60px; top: 330px; font: 300 290px/0.9 var(--serif); letter-spacing: -.05em; white-space: nowrap; }
       .price small { font-size: 116px; letter-spacing: -.02em; margin-right: 18px; }
-      .p-rule { position: absolute; left: 80px; right: 80px; top: 800px; height: 3px; background: var(--ink); transform-origin: left center; }
+      .p-rule { position: absolute; left: 80px; right: 80px; top: 640px; height: 3px; background: var(--ink); transform-origin: left center; }
       .p-line { position: absolute; left: 80px; right: 80px; font: 300 96px/1 var(--serif); letter-spacing: -.02em; }
       .p-line em { color: var(--gold-deep); }
 
       /* proof */
-      .proof-head { position: absolute; left: 76px; right: 76px; top: 430px; font: 300 120px/0.98 var(--serif); letter-spacing: -.03em; }
-      .proof-sub { position: absolute; left: 80px; right: 120px; top: 720px; font: 300 46px/1.3 var(--sans); color: #d6d3cb; }
-      .case { position: absolute; left: 76px; right: 76px; top: 900px; height: 250px; background: var(--white); color: var(--ink); clip-path: var(--chamfer); padding: 46px 52px; }
+      .proof-head { position: absolute; left: 76px; right: 76px; top: 290px; font: 300 120px/0.98 var(--serif); letter-spacing: -.03em; }
+      .proof-sub { position: absolute; left: 80px; right: 120px; top: 580px; font: 300 46px/1.3 var(--sans); color: #d6d3cb; }
+      .case { position: absolute; left: 76px; right: 76px; top: 770px; height: 250px; background: var(--white); color: var(--ink); clip-path: var(--chamfer); padding: 46px 52px; }
       .case .label { color: var(--gold-deep); }
       .case b { display: block; font: 300 64px/1.05 var(--serif); margin-top: 22px; }
       .case b em { color: var(--gold-deep); }
       .round-arrow { position: absolute; right: 52px; bottom: 46px; width: 88px; height: 88px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; }
 
       /* end card */
-      .end-logo { position: absolute; left: 110px; top: 470px; width: 860px; }
+      .end-logo { position: absolute; left: 110px; top: 330px; width: 860px; }
       .end-logo img { width: 860px; height: auto; display: block; }
-      .end-rule { position: absolute; left: 110px; width: 860px; top: 690px; height: 2px; background: var(--hair); transform-origin: left center; }
-      .end-tag { position: absolute; left: 110px; right: 80px; top: 730px; font: 300 86px/1.02 var(--serif); letter-spacing: -.02em; }
-      .end-cities { position: absolute; left: 112px; top: 960px; color: var(--dim); }
-      .cta { position: absolute; left: 110px; right: 110px; top: 1030px; height: 150px; background: var(--white); color: var(--ink); clip-path: var(--chamfer); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; }
+      .end-rule { position: absolute; left: 110px; width: 860px; top: 540px; height: 2px; background: var(--hair); transform-origin: left center; }
+      .end-tag { position: absolute; left: 110px; right: 80px; top: 580px; font: 300 86px/1.02 var(--serif); letter-spacing: -.02em; }
+      .end-cities { position: absolute; left: 112px; top: 810px; color: var(--dim); }
+      .cta { position: absolute; left: 110px; right: 110px; top: 890px; height: 150px; background: var(--white); color: var(--ink); clip-path: var(--chamfer); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; }
       .cta b { font: 500 36px var(--sans); letter-spacing: .08em; }
       .cta span { display: block; font: 300 italic 32px var(--serif); color: var(--gold-deep); margin-top: 4px; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="7.5" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="7.5" data-width="1080" data-height="1350">
       <section id="bg" class="clip" data-start="0" data-duration="7.5" data-track-index="0">
         <div class="grid" id="grid"></div>
         <img class="ghost" id="ghost" src="assets/4skales-logo-ivory.svg" alt="" aria-hidden="true" data-layout-allow-occlusion data-layout-allow-overflow>
         <div class="hud" id="hud"><img src="assets/4skales-logo-ivory.svg" alt="4Skales"><span class="label">JB · KL</span></div>
       </section>
 
-      <section id="hook" class="clip" data-start="0" data-duration="2.15" data-track-index="1">
-        <div id="hookCam" class="clip">
-          <div class="notifs" id="notifs" data-layout-allow-overlap>
-            <div class="notif"><i></i><b>Missed call</b><span>9:02</span></div>
-            <div class="notif"><i></i><b>Missed call</b><span>11:57</span></div>
-            <div class="notif"><i></i><b>Missed call</b><span>2:31</span></div>
-          </div>
-          <div class="count" id="count">0</div>
-          <div class="count-label label" id="countLabel">Missed calls today</div>
-          <div class="hook-line" id="hookLine">17 patients, <span class="it">gone to the next clinic.</span></div>
-        </div>
-      </section>
-      <section id="c1" class="clip" data-start="2.05" data-duration="3.2" data-track-index="2"><div class="cap"><span id="c1t">The fix: patients book <span class="it">in three taps.</span></span></div></section>
+      <section id="c1" class="clip" data-start="0" data-duration="4.65" data-track-index="2"><div class="cap"><span id="c1t">Book a dentist <span class="it">in three taps.</span></span></div></section>
+      <section id="c2" class="clip" data-start="4.6" data-duration="1.3" data-track-index="2"><div class="cap"><span id="c2t">Straight into <span class="it">your WhatsApp.</span></span></div></section>
 
       <div class="phone-window"><div class="phone-wrap"><div id="phone">
         <div class="screen">
-          <video id="screen-video" src="assets/screen.mp4" data-start="2.05" data-duration="3.2" data-media-start="1.7239" data-track-index="3" muted playsinline></video>
-          
+          <video id="screen-video" src="assets/screen.mp4" data-start="0" data-duration="5.0217" data-media-start="1.6304" data-track-index="3" muted playsinline></video>
+          <div id="chat" data-layout-allow-overlap data-layout-allow-occlusion>
+            <div class="chat-top" data-layout-allow-overlap><div class="chat-av">L</div><div><b>Lumen Dental</b><span>online</span></div></div>
+            <div class="chat-body">
+              <div class="bub out">Hi Lumen Dental, I'm Mei Ling. I'd like to reserve: Check-up &amp; scaling. Preferred: Saturday, morning.<small>10:42 ✓✓</small></div>
+              <div class="bub in" id="bubIn">Hello Mei Ling, Saturday at 10:00am is available. Shall we confirm?<small>10:44</small></div>
+            </div>
+            <div class="toast" id="toast" data-layout-allow-overlap><i></i><div><b>New booking · Mei Ling</b><span>Check-up &amp; scaling · Sat morning</span></div></div>
+          </div>
         </div>
       </div></div></div>
 
-      <section id="end" class="clip" data-start="5.2174" data-duration="2.2826" data-track-index="7">
+      <section id="end" class="clip" data-start="5.8696" data-duration="1.6304" data-track-index="7">
         <div id="endCam" class="clip">
           <div class="end-logo" id="endLogo"><img src="assets/4skales-logo-ivory.svg" alt="4Skales"></div>
           <div class="end-rule" id="endRule"></div>
-          <div class="end-tag" id="endTag">Clinic websites that <span class="it">take bookings.</span></div>
+          <div class="end-tag" id="endTag">RM 6,800. <span class="it">No retainer.</span></div>
           <div class="end-cities label" id="endCities">Johor Bahru · Kuala Lumpur</div>
           <div class="cta" id="cta"><div><b>FREE SITE REVIEW</b><span>Tap Send Message</span></div>
             <div class="round-arrow" style="position:static" id="ctaArrow"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#f4f3ef" stroke-width="1.8"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div></div>
         </div>
       </section>
       <div class="wipe" id="wipe"></div>
-      <audio id="music" src="assets/music-ad1.mp3" data-start="0" data-duration="7.5" data-volume="1" data-track-index="8"></audio>
+      <audio id="music" src="assets/music-ad2.mp3" data-start="0" data-duration="7.5" data-volume="1" data-track-index="8"></audio>
     </div>
     <script>
       const B = 60 / 92, DUR = 7.5;
@@ -145,28 +141,21 @@
         tl.fromTo('#wipe', { x: 1500, skewX: -10 }, { x: -1900, skewX: -10, duration: dur, ease: 'power3.inOut', immediateRender: false }, at);
       }
 
-      // ---- hook: notifications buzz in, count to 17, slow push-in
-      tl.fromTo('#hookCam', { scale: 1 }, { scale: 1.07, duration: 2.15, ease: 'none', transformOrigin: '30% 60%' }, 0);
-      document.querySelectorAll('#notifs .notif').forEach((n, i) => {
-        tl.fromTo(n, { y: -70, opacity: 0 }, { y: (2 - i) * 106, opacity: 1 - (2 - i) * 0.2, duration: 0.4, ease: 'back.out(1.8)' }, i * 0.42);
-        tl.fromTo(n, { x: -7 }, { x: 7, duration: 0.04, repeat: 5, yoyo: true, ease: 'none', immediateRender: false }, i * 0.42);
-      });
-      const counter = { v: 0 };
-      tl.fromTo(counter, { v: 0 }, { v: 17, duration: 1.3, ease: 'power2.out', onUpdate: () => { document.getElementById('count').textContent = Math.round(counter.v); } }, 0);
-      tl.fromTo('#count', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 0);
-      tl.fromTo('#countLabel', { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 0.3);
-      tl.fromTo('#hookLine', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, 0.85);
+      // ---- opens already zoomed into the booking card; taps on the beat
+      tl.fromTo('#phone', { scale: 1.42, transformOrigin: '45% 40%' }, { scale: 1.38, duration: B * 3.6, ease: 'none' }, 0);
+      tl.fromTo('#c1t', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 0);
+      tl.to('#phone', { scale: 1, duration: 0.7, ease: 'power3.inOut' }, B * 3.7);
+      tl.to('#c1t', { opacity: 0, y: -16, duration: 0.25 }, 4.35);
 
-      // ---- the fix: phone in, zoom into the booking card for the taps, zoom back out
-      wipe(1.85);
-      tl.fromTo('#phone', { y: 1500 }, { y: 0, duration: 0.55, ease: 'expo.out' }, 2.05);
-      tl.fromTo('#c1t', { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, 2.15);
-      tl.fromTo('#phone', { scale: 1, transformOrigin: '45% 40%' }, { scale: 1.4, duration: 0.6, ease: 'power3.inOut', immediateRender: false }, B * 3.4);
-      tl.to('#phone', { scale: 1.05, duration: 0.6, ease: 'power3.inOut' }, B * 6.4);
-      tl.to('#c1t', { opacity: 0, y: -16, duration: 0.25 }, 5.0);
-      wipe(B * 8 - 0.3);
+      // ---- WhatsApp: chat slides up, push in on the new-booking notification
+      tl.fromTo('#chat', { y: 1400, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 4.62);
+      tl.fromTo('#c2t', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 4.65);
+      tl.fromTo('#toast', { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'back.out(1.8)' }, B * 8);
+      tl.fromTo('#phone', { scale: 1, transformOrigin: '50% 18%' }, { scale: 1.3, duration: 0.6, ease: 'power3.inOut', immediateRender: false }, B * 8);
+      tl.to('#c2t', { opacity: 0, y: -16, duration: 0.2 }, B * 9 - 0.2);
+      wipe(B * 9 - 0.3);
 
-      const E = B * 8;
+      const E = B * 9;
       tl.to('#phone', { opacity: 0, duration: 0.01 }, E);
 
       // ---- end card: logo pull-back, slow push-in, pointer to Meta's Send Message button

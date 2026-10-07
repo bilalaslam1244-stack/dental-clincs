@@ -7,7 +7,8 @@ const require = createRequire('/opt/node22/lib/node_modules/');
 const { chromium } = require('playwright');
 
 const [url, out] = process.argv.slice(2);
-const FPS = 30, DUR = 4.0;   // taps land on the soundtrack's beats (128 BPM)
+const B = 60 / 92;            // taps land on the soundtrack's beats (92 BPM)
+const FPS = 30, DUR = B * 10.2;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const prog = (t, a, b) => clamp((t - a) / (b - a));
 const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
@@ -32,28 +33,27 @@ const pos = await page.evaluate(() => {
 const S1 = Math.round(pos.tr.top - 70 - 22);          // card top under the sticky header
 const S2 = Math.round(pos.send.bottom - (760 - 92));    // send button clear of the dock
 // [time, target, scroll at that moment]
-const B = 60 / 128;
-const TAPS = [[B * 2, pos.t1, S1], [B * 3, pos.t2, S1], [B * 4, pos.t3, S1], [B * 5, pos.name, S1], [B * 8, pos.send, S2]];
+const TAPS = [[B * 3.5, pos.t1, S1], [B * 4.5, pos.t2, S1], [B * 5.5, pos.t3, S1], [B * 6.5, pos.name, S1], [B * 9.5, pos.send, S2]];
 
 fs.mkdirSync(out, { recursive: true });
 const n = Math.round(DUR * FPS);
 for (let i = 0; i < n; i++) {
   const t = i / FPS;
-  let scroll = lerp(0, S1, ease(prog(t, 0.4, 0.82)));
-  scroll = lerp(scroll, S2, ease(prog(t, 2.9, 3.3)));
+  let scroll = lerp(0, S1, ease(prog(t, 0.9, 1.6)));
+  scroll = lerp(scroll, S2, ease(prog(t, B * 7.7, B * 8.6)));
   const st = {
     treatment: t >= TAPS[0][0] ? 'Check-up & scaling' : 'Filling',
     day: t >= TAPS[1][0] ? 'Saturday' : 'today',
     time: t >= TAPS[2][0] ? 'morning' : 'evening',
-    name: 'Mei Ling'.slice(0, Math.floor(clamp((t - (B * 5 + 0.06)) / 0.045, 0, 8))),
+    name: 'Mei Ling'.slice(0, Math.floor(clamp((t - (B * 6.5 + 0.1)) / 0.065, 0, 8))),
   };
   // finger: glide between targets, press on each tap
-  let fx = 300, fy = 640, press = 0, fo = Math.min(prog(t, 0.5, 0.65), 1 - prog(t, 3.85, 3.98));
+  let fx = 300, fy = 640, press = 0, fo = Math.min(prog(t, 1.2, 1.4), 1 - prog(t, DUR - 0.3, DUR - 0.12));
   let prev = { x: 320, y: 600 };
   for (const [tt, tg, sc] of TAPS) {
     const target = { x: tg.x + (tg === pos.name ? -100 : 0), y: tg.y - sc };
-    const mv = ease(prog(t, tt - 0.3, tt - 0.05));
-    if (t >= tt - 0.3) { fx = lerp(prev.x, target.x, mv); fy = lerp(prev.y, target.y, mv); }
+    const mv = ease(prog(t, tt - 0.4, tt - 0.06));
+    if (t >= tt - 0.4) { fx = lerp(prev.x, target.x, mv); fy = lerp(prev.y, target.y, mv); }
     prev = target;
     const d = t - tt; if (d > -0.08 && d < 0.2) press = Math.sin(clamp((d + 0.08) / 0.28) * Math.PI);
   }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
-    <title>4Skales · Missed calls</title>
+    <title>4Skales · Three-tap booking</title>
     <script src="assets/gsap.min.js"></script>
     <style>
       @font-face { font-family: 'Jost'; font-weight: 300; font-style: normal; src: url('assets/fonts/Jost-300-normal.woff2') format('woff2'); }
@@ -101,39 +101,35 @@
         <div class="hud" id="hud"><img src="assets/4skales-logo-ivory.svg" alt="4Skales"><span class="label">JB · KL</span></div>
       </section>
 
-      <section id="hook" class="clip" data-start="0" data-duration="2.15" data-track-index="1">
-        <div id="hookCam" class="clip">
-          <div class="notifs" id="notifs" data-layout-allow-overlap>
-            <div class="notif"><i></i><b>Missed call</b><span>9:02</span></div>
-            <div class="notif"><i></i><b>Missed call</b><span>11:57</span></div>
-            <div class="notif"><i></i><b>Missed call</b><span>2:31</span></div>
-          </div>
-          <div class="count" id="count">0</div>
-          <div class="count-label label" id="countLabel">Missed calls today</div>
-          <div class="hook-line" id="hookLine">17 patients, <span class="it">gone to the next clinic.</span></div>
-        </div>
-      </section>
-      <section id="c1" class="clip" data-start="2.05" data-duration="3.2" data-track-index="2"><div class="cap"><span id="c1t">The fix: patients book <span class="it">in three taps.</span></span></div></section>
+      <section id="c1" class="clip" data-start="0" data-duration="4.65" data-track-index="2"><div class="cap"><span id="c1t">Book a dentist <span class="it">in three taps.</span></span></div></section>
+      <section id="c2" class="clip" data-start="4.6" data-duration="1.3" data-track-index="2"><div class="cap"><span id="c2t">Straight into <span class="it">your WhatsApp.</span></span></div></section>
 
       <div class="phone-window"><div class="phone-wrap"><div id="phone">
         <div class="screen">
-          <video id="screen-video" src="assets/screen.mp4" data-start="2.05" data-duration="3.2" data-media-start="1.7239" data-track-index="3" muted playsinline></video>
-          
+          <video id="screen-video" src="assets/screen.mp4" data-start="0" data-duration="5.0217" data-media-start="1.6304" data-track-index="3" muted playsinline></video>
+          <div id="chat" data-layout-allow-overlap data-layout-allow-occlusion>
+            <div class="chat-top" data-layout-allow-overlap><div class="chat-av">L</div><div><b>Lumen Dental</b><span>online</span></div></div>
+            <div class="chat-body">
+              <div class="bub out">Hi Lumen Dental, I'm Mei Ling. I'd like to reserve: Check-up &amp; scaling. Preferred: Saturday, morning.<small>10:42 ✓✓</small></div>
+              <div class="bub in" id="bubIn">Hello Mei Ling, Saturday at 10:00am is available. Shall we confirm?<small>10:44</small></div>
+            </div>
+            <div class="toast" id="toast" data-layout-allow-overlap><i></i><div><b>New booking · Mei Ling</b><span>Check-up &amp; scaling · Sat morning</span></div></div>
+          </div>
         </div>
       </div></div></div>
 
-      <section id="end" class="clip" data-start="5.2174" data-duration="2.2826" data-track-index="7">
+      <section id="end" class="clip" data-start="5.8696" data-duration="1.6304" data-track-index="7">
         <div id="endCam" class="clip">
           <div class="end-logo" id="endLogo"><img src="assets/4skales-logo-ivory.svg" alt="4Skales"></div>
           <div class="end-rule" id="endRule"></div>
-          <div class="end-tag" id="endTag">Clinic websites that <span class="it">take bookings.</span></div>
+          <div class="end-tag" id="endTag">RM 6,800. <span class="it">No retainer.</span></div>
           <div class="end-cities label" id="endCities">Johor Bahru · Kuala Lumpur</div>
           <div class="cta" id="cta"><div><b>FREE SITE REVIEW</b><span>Tap Send Message</span></div>
             <div class="round-arrow" style="position:static" id="ctaArrow"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#f4f3ef" stroke-width="1.8"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div></div>
         </div>
       </section>
       <div class="wipe" id="wipe"></div>
-      <audio id="music" src="assets/music-ad1.mp3" data-start="0" data-duration="7.5" data-volume="1" data-track-index="8"></audio>
+      <audio id="music" src="assets/music-ad2.mp3" data-start="0" data-duration="7.5" data-volume="1" data-track-index="8"></audio>
     </div>
     <script>
       const B = 60 / 92, DUR = 7.5;
@@ -145,28 +141,21 @@
         tl.fromTo('#wipe', { x: 1500, skewX: -10 }, { x: -1900, skewX: -10, duration: dur, ease: 'power3.inOut', immediateRender: false }, at);
       }
 
-      // ---- hook: notifications buzz in, count to 17, slow push-in
-      tl.fromTo('#hookCam', { scale: 1 }, { scale: 1.07, duration: 2.15, ease: 'none', transformOrigin: '30% 60%' }, 0);
-      document.querySelectorAll('#notifs .notif').forEach((n, i) => {
-        tl.fromTo(n, { y: -70, opacity: 0 }, { y: (2 - i) * 106, opacity: 1 - (2 - i) * 0.2, duration: 0.4, ease: 'back.out(1.8)' }, i * 0.42);
-        tl.fromTo(n, { x: -7 }, { x: 7, duration: 0.04, repeat: 5, yoyo: true, ease: 'none', immediateRender: false }, i * 0.42);
-      });
-      const counter = { v: 0 };
-      tl.fromTo(counter, { v: 0 }, { v: 17, duration: 1.3, ease: 'power2.out', onUpdate: () => { document.getElementById('count').textContent = Math.round(counter.v); } }, 0);
-      tl.fromTo('#count', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 0);
-      tl.fromTo('#countLabel', { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 0.3);
-      tl.fromTo('#hookLine', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, 0.85);
+      // ---- opens already zoomed into the booking card; taps on the beat
+      tl.fromTo('#phone', { scale: 1.42, transformOrigin: '45% 40%' }, { scale: 1.38, duration: B * 3.6, ease: 'none' }, 0);
+      tl.fromTo('#c1t', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 0);
+      tl.to('#phone', { scale: 1, duration: 0.7, ease: 'power3.inOut' }, B * 3.7);
+      tl.to('#c1t', { opacity: 0, y: -16, duration: 0.25 }, 4.35);
 
-      // ---- the fix: phone in, zoom into the booking card for the taps, zoom back out
-      wipe(1.85);
-      tl.fromTo('#phone', { y: 1500 }, { y: 0, duration: 0.55, ease: 'expo.out' }, 2.05);
-      tl.fromTo('#c1t', { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, 2.15);
-      tl.fromTo('#phone', { scale: 1, transformOrigin: '45% 40%' }, { scale: 1.4, duration: 0.6, ease: 'power3.inOut', immediateRender: false }, B * 3.4);
-      tl.to('#phone', { scale: 1.05, duration: 0.6, ease: 'power3.inOut' }, B * 6.4);
-      tl.to('#c1t', { opacity: 0, y: -16, duration: 0.25 }, 5.0);
-      wipe(B * 8 - 0.3);
+      // ---- WhatsApp: chat slides up, push in on the new-booking notification
+      tl.fromTo('#chat', { y: 1400, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 4.62);
+      tl.fromTo('#c2t', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 4.65);
+      tl.fromTo('#toast', { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'back.out(1.8)' }, B * 8);
+      tl.fromTo('#phone', { scale: 1, transformOrigin: '50% 18%' }, { scale: 1.3, duration: 0.6, ease: 'power3.inOut', immediateRender: false }, B * 8);
+      tl.to('#c2t', { opacity: 0, y: -16, duration: 0.2 }, B * 9 - 0.2);
+      wipe(B * 9 - 0.3);
 
-      const E = B * 8;
+      const E = B * 9;
       tl.to('#phone', { opacity: 0, duration: 0.01 }, E);
 
       // ---- end card: logo pull-back, slow push-in, pointer to Meta's Send Message button

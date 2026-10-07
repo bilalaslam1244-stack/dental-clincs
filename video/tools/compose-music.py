@@ -1,280 +1,224 @@
-"""Original soundtrack for the 4Skales clinic ad.
+"""Original chill soundtracks for the three 4Skales Meta ads.
 
-128 BPM, A minor, 19.7 s. Every hit is placed on the video's cut points
-(see CUES below), so the music and the edit move together.
-Writes assets/soundtrack.wav and assets/soundtrack.mp3.
+92 BPM lo-fi: soft Rhodes-style chords (Fmaj7 Em7 Dm7 Cmaj7), round kick,
+brushed snare, shaker, warm sub and light vinyl crackle. Each ad gets its
+own sound effects on its cut points (CUES below; keep in sync with
+tools/build-ads.py).
 
-Usage: python3 tools/compose-music.py
+Usage: python3 tools/compose-music.py      -> assets/music-ad1.mp3 ... ad3
 """
 import subprocess
+import wave
 import numpy as np
 from scipy import signal
 
 SR = 44100
-BPM = 128
-BEAT = 60 / BPM            # 0.46875 s
-BAR = BEAT * 4             # 1.875 s
-DUR = 19.7
-N = int(DUR * SR)
-rng = np.random.default_rng(4)
+BPM = 92
+B = 60 / BPM                # 0.652 s
+BAR = B * 4
+DUR = 7.5
 
-# Cut points in the video (seconds); keep in sync with index.html.
 CUES = {
-    "old_site": BAR * 1,          # 1.875
-    "logo": BAR * 2,              # 3.75
-    "taps": [BEAT * 12, BEAT * 13, BEAT * 14, BEAT * 15],
-    "send": BEAT * 18,            # 8.4375
-    "ping": BEAT * 19.4,          # 9.09
-    "chips": [BEAT * 23 + i * BEAT for i in range(5)],
-    "price": BEAT * 28,           # 13.125
-    "proof": BEAT * 32,           # 15.0
-    "end": BEAT * 36,             # 16.875
+    "ad1": {"buzz": [0.0, 0.42, 0.84], "whoosh": [2.0], "taps": [B * 4, B * 5, B * 6, B * 7],
+            "swell": B * 8, "ping": [], "ticks": []},
+    "ad2": {"buzz": [], "whoosh": [B * 7.3], "taps": [B * 1, B * 2, B * 3, B * 4, B * 7],
+            "swell": B * 9, "ping": [B * 8], "ticks": []},
+    "ad3": {"buzz": [], "whoosh": [B * 7 - 0.15], "taps": [], "swell": B * 9, "ping": [],
+            "ticks": [B * 4, B * 5, B * 6], "open_hit": 0.0},
 }
 
 
-def t_axis(n):
+def tax(n):
     return np.arange(n) / SR
 
 
-def place(bus, sig, at, gain=1.0):
+def env(n, d):
+    return np.exp(-tax(n) / d)
+
+
+def filt(x, kind, fc, order=2):
+    w = np.array(fc) / (SR / 2)
+    b, a = signal.butter(order, w, kind)
+    return signal.lfilter(b, a, x)
+
+
+def hz(m):
+    return 440 * 2 ** ((m - 69) / 12)
+
+
+def place(bus, sig, at, g=1.0):
     i = int(at * SR)
-    if i >= len(bus):
-        return
-    j = min(len(bus), i + len(sig))
-    bus[i:j] += sig[: j - i] * gain
+    if 0 <= i < len(bus):
+        j = min(len(bus), i + len(sig))
+        bus[i:j] += sig[: j - i] * g
 
 
-def env_exp(n, decay):
-    return np.exp(-t_axis(n) / decay)
+def rhodes(freq, length, vel=1.0, rng=None):
+    """Electric-piano tone: sine body + soft FM bell, tremolo, slow decay."""
+    n = int(length * SR); t = tax(n)
+    mod = np.sin(2 * np.pi * freq * 14 * t) * 1.2 * env(n, 0.05)
+    body = np.sin(2 * np.pi * freq * t + mod) * env(n, 1.4)
+    body += 0.35 * np.sin(2 * np.pi * freq * 2 * t) * env(n, 0.5)
+    trem = 1 - 0.12 * (0.5 + 0.5 * np.sin(2 * np.pi * 4.2 * t))
+    att = np.minimum(1, t / 0.004)
+    rel = np.clip((length - t) / 0.25, 0, 1)
+    return body * trem * att * rel * 0.16 * vel
 
 
-def lp(x, fc, order=2):
-    b, a = signal.butter(order, min(fc, SR / 2 - 100) / (SR / 2), "low")
-    return signal.lfilter(b, a, x)
-
-
-def hp(x, fc, order=2):
-    b, a = signal.butter(order, fc / (SR / 2), "high")
-    return signal.lfilter(b, a, x)
-
-
-def bp(x, lo, hi, order=2):
-    b, a = signal.butter(order, [lo / (SR / 2), hi / (SR / 2)], "band")
-    return signal.lfilter(b, a, x)
-
-
-def note(n):
-    """MIDI note number to Hz."""
-    return 440 * 2 ** ((n - 69) / 12)
-
-
-# ---------- instruments ----------
-def kick():
-    n = int(0.42 * SR); t = t_axis(n)
-    f = 46 + 110 * np.exp(-t / 0.035)
-    ph = 2 * np.pi * np.cumsum(f) / SR
-    body = np.sin(ph) * env_exp(n, 0.16)
-    click = hp(rng.standard_normal(n), 3000) * env_exp(n, 0.004) * 0.35
-    return np.tanh((body + click) * 1.6) * 0.9
-
-
-def clap():
-    n = int(0.3 * SR); out = np.zeros(n)
-    for k, d in enumerate([0, 0.011, 0.022]):
-        burst = bp(rng.standard_normal(n), 900, 2600) * env_exp(n, 0.006 if k < 2 else 0.09)
-        out[int(d * SR):] += burst[: n - int(d * SR)]
-    return out * 0.5
-
-
-def hat(open_=False):
-    n = int((0.18 if open_ else 0.05) * SR)
-    return hp(rng.standard_normal(n), 7500, 3) * env_exp(n, 0.05 if open_ else 0.01) * 0.09
-
-
-def sub(freq, length):
-    n = int(length * SR); t = t_axis(n)
-    s = np.sin(2 * np.pi * freq * t) + 0.25 * np.sin(4 * np.pi * freq * t)
-    a = np.minimum(1, t / 0.006) * np.exp(-t / (length * 0.9))
-    return np.tanh(s * a * 1.4) * 0.55
-
-
-def saw(freq, n, detune=0.0):
-    t = t_axis(n)
-    return 2 * ((t * freq * (1 + detune)) % 1) - 1
-
-
-def pluck(freq, length=0.28, bright=3200):
-    n = int(length * SR)
-    s = (saw(freq, n) + saw(freq, n, 0.006) + saw(freq, n, -0.006)) / 3
-    s = lp(s, bright) * env_exp(n, 0.09)
-    return s * np.minimum(1, t_axis(n) / 0.003) * 0.32
-
-
-def pad(freqs, length):
-    n = int(length * SR); t = t_axis(n); s = np.zeros(n)
-    for f in freqs:
-        for d in (-0.004, 0, 0.004):
-            s += saw(f, n, d)
-    s = lp(s / (len(freqs) * 3), 1400, 2)
-    a = np.minimum(1, t / 0.25) * np.minimum(1, (length - t) / 0.6).clip(0, 1)
-    return s * a * 0.22
-
-
-def riser(length, peak=9000):
-    n = int(length * SR); out = np.zeros(n); noise = rng.standard_normal(n)
-    chunks = 40
-    for c in range(chunks):
-        a, b = c * n // chunks, (c + 1) * n // chunks
-        fc = 300 * (peak / 300) ** (c / chunks)
-        out[a:b] = bp(noise, fc * 0.7, min(fc * 1.4, SR / 2 - 200))[a:b]
-    t = t_axis(n)
-    return out * (t / length) ** 2 * 0.35
-
-
-def whoosh(length=0.32):
-    n = int(length * SR); t = t_axis(n); out = np.zeros(n); noise = rng.standard_normal(n)
-    for c in range(16):
-        a, b = c * n // 16, (c + 1) * n // 16
-        fc = 600 + 5000 * np.sin(np.pi * c / 16)
-        out[a:b] = bp(noise, fc * 0.6, fc * 1.5)[a:b]
-    return out * np.sin(np.pi * t / length) ** 2 * 0.3
-
-
-def impact():
-    n = int(1.4 * SR); t = t_axis(n)
-    boom = np.sin(2 * np.pi * (38 + 60 * np.exp(-t / 0.05)) * t) * env_exp(n, 0.45)
-    crack = lp(rng.standard_normal(n), 5000) * env_exp(n, 0.05) * 0.5
-    return np.tanh((boom + crack) * 1.3) * 0.8
-
-
-def tap_click():
-    n = int(0.03 * SR)
-    return bp(rng.standard_normal(n), 2500, 6000) * env_exp(n, 0.004) * 0.5
-
-
-def ping():
-    n = int(0.6 * SR); t = t_axis(n); out = np.zeros(n)
-    for f, d in ((1318.5, 0), (1975.5, 0.085)):
-        i = int(d * SR); m = n - i
-        out[i:] += np.sin(2 * np.pi * f * t[:m]) * env_exp(m, 0.16) * 0.28
+def chord(notes, length, rng, strum=0.018):
+    n = int(length * SR); out = np.zeros(n + int(0.2 * SR))
+    for k, m in enumerate(notes):
+        place(out, rhodes(hz(m), length, 0.85 + 0.15 * rng.random()), k * strum)
     return out
 
 
-def buzz(length=0.36):
-    n = int(length * SR); t = t_axis(n)
-    s = np.sign(np.sin(2 * np.pi * 170 * t)) * 0.5 + np.sin(2 * np.pi * 85 * t)
-    am = (np.sin(2 * np.pi * 24 * t) > -0.2).astype(float)
-    return lp(s * am, 900) * np.minimum(1, t / 0.01) * np.minimum(1, (length - t) / 0.02) * 0.32
+def kick(rng):
+    n = int(0.5 * SR); t = tax(n)
+    f = 44 + 70 * np.exp(-t / 0.04)
+    s = np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, 0.22)
+    return filt(np.tanh(s * 1.2), "low", 1800) * 0.7
 
 
-def tick():
-    n = int(0.02 * SR)
-    return hp(rng.standard_normal(n), 4000) * env_exp(n, 0.003) * 0.35
+def snare(rng):
+    n = int(0.35 * SR)
+    noise = filt(rng.standard_normal(n), "band", [700, 4200]) * env(n, 0.09)
+    tone = np.sin(2 * np.pi * 190 * tax(n)) * env(n, 0.04)
+    return (noise * 0.5 + tone * 0.3) * 0.5
 
 
-def reverb(x, length=1.1, mix=0.22):
+def shaker(rng):
+    n = int(0.07 * SR)
+    return filt(rng.standard_normal(n), "high", 6000) * env(n, 0.02) * np.minimum(1, tax(n) / 0.01) * 0.05
+
+
+def sub(freq, length):
+    n = int(length * SR); t = tax(n)
+    a = np.minimum(1, t / 0.02) * np.clip((length - t) / 0.1, 0, 1)
+    return np.sin(2 * np.pi * freq * t) * a * 0.38
+
+
+def crackle(n, rng):
+    out = filt(rng.standard_normal(n), "band", [800, 6000]) * 0.006
+    pops = (rng.random(n) > 0.99985).astype(float) * rng.standard_normal(n)
+    return out + filt(pops, "high", 1500) * 0.12
+
+
+def soft_tap(rng):
+    n = int(0.06 * SR)
+    wood = np.sin(2 * np.pi * 1700 * tax(n)) * env(n, 0.012)
+    return (wood + filt(rng.standard_normal(n), "band", [2000, 5000]) * env(n, 0.004) * 0.4) * 0.38
+
+
+def soft_ping():
+    n = int(1.0 * SR); out = np.zeros(n)
+    for f, d in ((1046.5, 0), (1568.0, 0.11)):
+        i = int(d * SR); m = n - i; t = tax(m)
+        out[i:] += np.sin(2 * np.pi * f * t + 0.6 * np.sin(2 * np.pi * f * 2 * t) * env(m, 0.05)) * env(m, 0.35) * 0.16
+    return out
+
+
+def buzz(rng):
+    n = int(0.26 * SR); t = tax(n)
+    s = np.sin(2 * np.pi * 150 * t) * (np.sin(2 * np.pi * 28 * t) > -0.3)
+    return filt(s, "low", 700) * np.minimum(1, t / 0.01) * np.clip((0.26 - t) / 0.03, 0, 1) * 0.2
+
+
+def whoosh(rng, length=0.55):
+    n = int(length * SR); t = tax(n); noise = rng.standard_normal(n); out = np.zeros(n)
+    for c in range(12):
+        a, b2 = c * n // 12, (c + 1) * n // 12
+        fc = 400 + 2600 * np.sin(np.pi * c / 12)
+        out[a:b2] = filt(noise, "band", [fc * 0.6, fc * 1.4])[a:b2]
+    return out * np.sin(np.pi * t / length) ** 2 * 0.12
+
+
+def swell(rng, length=1.3):
+    """Reverse-piano style swell that lands on `at` (placed at at - length)."""
+    n = int(length * SR); t = tax(n)
+    s = sum(np.sin(2 * np.pi * hz(m) * t) for m in (65, 69, 72, 76)) / 4
+    return s * (t / length) ** 3 * 0.18
+
+
+def tick(rng):
+    n = int(0.05 * SR)
+    return np.sin(2 * np.pi * 2400 * tax(n)) * env(n, 0.01) * 0.2
+
+
+def reverb(x, length, mix, rng):
     n = int(length * SR)
-    ir = rng.standard_normal(n) * np.exp(-t_axis(n) / (length / 5))
-    ir = lp(ir, 6000); ir /= np.sqrt(np.sum(ir ** 2))
-    wet = signal.fftconvolve(x, ir)[: len(x)]
-    return x + wet * mix
+    ir = filt(rng.standard_normal(n), "low", 5000) * np.exp(-tax(n) / (length / 4))
+    ir /= np.sqrt(np.sum(ir ** 2))
+    return x + signal.fftconvolve(x, ir)[: len(x)] * mix
 
 
-# ---------- arrangement ----------
-drums = np.zeros(N); bass = np.zeros(N); music = np.zeros(N); fx = np.zeros(N)
-duck = np.ones(N)
+PROG = [(41, [53, 57, 60, 64]),   # Fmaj7
+        (40, [52, 55, 59, 62]),   # Em7
+        (38, [50, 53, 57, 60]),   # Dm7
+        (36, [48, 52, 55, 59])]   # Cmaj7
 
-# chord roots per bar: Am  F  C  G
-PROG = [(57, [69, 72, 76]), (53, [65, 69, 72]), (48, [67, 72, 76]), (55, [67, 71, 74])]
 
-# Bar 1 (intro): phone buzzes + ticking clock + filtered arp
-place(fx, buzz(), 0.02); place(fx, buzz(), 0.55); place(fx, buzz(), 1.08)
-for i in range(16):
-    place(fx, tick(), i * BEAT / 4, 0.6 if i % 4 else 1.0)
-for i in range(8):
-    root, chord = PROG[0]
-    place(music, pluck(note(chord[i % 3] + 12), 0.2, 1400), i * BEAT / 2, 0.6)
-place(fx, riser(BAR * 0.9), BAR * 0.1, 0.8)
+def build(ad):
+    rng = np.random.default_rng({"ad1": 1, "ad2": 2, "ad3": 3}[ad])
+    cue = CUES[ad]
+    N = int(DUR * SR)
+    keys, drums, bass, fx = (np.zeros(N) for _ in range(4))
+    duck = np.ones(N)
 
-# Bars 2 onward: full groove, with breaks around the hits
-bars_total = int(np.ceil(DUR / BAR))
-for bar in range(1, bars_total):
-    t0 = bar * BAR
-    root, chord = PROG[bar % 4]
-    for b in range(4):
-        tb = t0 + b * BEAT
-        if tb >= CUES["end"] + BEAT * 4:
-            break
-        place(drums, kick(), tb)
-        k = int(tb * SR); m = min(N, k + int(0.22 * SR))
-        duck[k:m] = np.minimum(duck[k:m], 0.25 + 0.75 * (np.arange(m - k) / (m - k)) ** 0.7)
-        if b in (1, 3):
-            place(drums, clap(), tb, 0.85)
-        for s16 in range(4):
-            place(drums, hat(open_=(s16 == 2)), tb + s16 * BEAT / 4, 1.0 if s16 == 2 else 0.6)
-        # offbeat sub bass
-        place(bass, sub(note(root - 12), BEAT * 0.45), tb + BEAT / 2)
-    # 16th arp
-    for s in range(16):
-        ts = t0 + s * BEAT / 4
-        if ts >= CUES["end"] + BEAT * 4:
-            break
-        nt = chord[[0, 1, 2, 1][s % 4]] + (12 if s % 8 >= 4 else 0)
-        place(music, pluck(note(nt), 0.18, 2200 + 1600 * (bar % 2)), ts, 0.55)
+    bars = int(np.ceil(DUR / BAR))
+    for bar in range(bars):
+        t0 = bar * BAR
+        root, notes = PROG[bar % 4]
+        place(keys, chord(notes, BAR * 0.98, rng), t0)
+        place(keys, chord([notes[1] + 12, notes[3] + 12], BEAT_HALF, rng), t0 + B * 2.5, 0.5)
+        place(bass, sub(hz(root), B * 1.6), t0)
+        place(bass, sub(hz(root), B * 0.8), t0 + B * 2.5)
+        for b in range(4):
+            tb = t0 + b * B
+            if b in (0,) or (b == 2):
+                place(drums, kick(rng), tb + (0.0 if b == 0 else B * 0.5))
+                k = int((tb + (0.0 if b == 0 else B * 0.5)) * SR); m = min(N, k + int(0.3 * SR))
+                if k < N:
+                    duck[k:m] = np.minimum(duck[k:m], 0.6 + 0.4 * np.linspace(0, 1, m - k))
+            if b in (1, 3):
+                place(drums, snare(rng), tb + 0.012)
+            for e in range(2):
+                place(drums, shaker(rng), tb + e * B / 2 + 0.01 * rng.random(), 1.0 if e else 0.6)
 
-# stutter fill into the logo hit + reverse riser
-for i in range(6):
-    place(drums, clap(), CUES["logo"] - BEAT + i * BEAT / 6, 0.35 + i * 0.08)
-place(fx, riser(BEAT * 1.4, 12000), CUES["logo"] - BEAT * 1.4, 1.0)
-place(fx, impact(), CUES["logo"], 1.0)
-place(fx, whoosh(), CUES["old_site"] - 0.16, 0.9)
+    for at in cue["buzz"]:
+        place(fx, buzz(rng), at)
+    for at in cue["whoosh"]:
+        place(fx, whoosh(rng), at)
+    for at in cue["taps"]:
+        place(fx, soft_tap(rng), at)
+    for at in cue["ping"]:
+        place(fx, soft_ping(), at)
+    for at in cue["ticks"]:
+        place(fx, tick(rng), at)
+    sw = swell(rng)
+    place(fx, sw, cue["swell"] - len(sw) / SR)
+    if "open_hit" in cue:
+        place(fx, kick(rng), cue["open_hit"], 0.9)
 
-# taps, send, ping
-for tt in CUES["taps"]:
-    place(fx, tap_click(), tt, 1.0)
-place(fx, tap_click(), CUES["send"], 1.0)
-place(fx, whoosh(0.28), CUES["send"] + 0.05, 0.7)
-place(fx, ping(), CUES["ping"], 1.0)
+    keys = reverb(filt(keys, "low", 4200), 1.6, 0.35, rng) * duck
+    drums = reverb(filt(drums, "low", 9000), 0.8, 0.12, rng)
+    fx = reverb(fx, 1.2, 0.25, rng)
+    mix = keys * 1.0 + drums * 0.8 + bass * duck * 0.9 + fx * 1.0 + crackle(N, rng)
+    t = tax(N)
+    mix *= np.minimum(1, t / 0.03) * np.clip((DUR - t) / 0.7, 0, 1)
+    mix = np.tanh(mix * 1.6)
+    mix /= np.max(np.abs(mix)) / 0.89
+    right = np.roll(filt(mix, "low", 11000), 14)
+    pcm = (np.stack([mix, right], axis=1) * 32767).astype(np.int16)
+    wav = f"/tmp/music-{ad}.wav"
+    with wave.open(wav, "wb") as w:
+        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav, "-af", "loudnorm=I=-15:TP=-1.0:LRA=9",
+                    "-ar", "44100", "-c:a", "libmp3lame", "-b:a", "256k", f"assets/music-{ad}.mp3"], check=True)
+    print("wrote", f"assets/music-{ad}.mp3")
 
-# feature chips: rising stabs
-for i, tc in enumerate(CUES["chips"]):
-    place(music, pluck(note(72 + [0, 3, 7, 10, 12][i]), 0.25, 5000), tc, 0.9)
-    place(fx, whoosh(0.18), tc - 0.06, 0.4)
 
-# price drop: clap roll, riser, impact, pad
-for i in range(8):
-    place(drums, clap(), CUES["price"] - BEAT + i * BEAT / 8, 0.25 + i * 0.07)
-place(fx, riser(BEAT * 2, 11000), CUES["price"] - BEAT * 2, 0.9)
-place(fx, impact(), CUES["price"], 0.9)
-place(music, pad([note(57), note(60), note(64)], BAR), CUES["price"], 1.0)
+BEAT_HALF = B * 1.4
 
-place(fx, whoosh(), CUES["proof"] - 0.15, 0.8)
-
-# end: final impact, sustained chord, tail
-place(fx, riser(BEAT * 2, 12000), CUES["end"] - BEAT * 2, 0.9)
-place(fx, impact(), CUES["end"], 1.1)
-place(music, pad([note(57), note(64), note(69), note(72)], DUR - CUES["end"]), CUES["end"], 1.6)
-place(bass, sub(note(45), 2.4), CUES["end"], 1.2)
-
-# ---------- mix ----------
-music = reverb(lp(music, 9000), 1.2, 0.3) * duck
-bass = bass * duck
-drums = reverb(drums, 0.6, 0.08)
-fx = reverb(fx, 1.0, 0.18)
-mix = drums * 0.9 + bass * 0.95 + music * 0.75 + fx * 0.85
-
-fade_in = np.minimum(1, t_axis(N) / 0.01)
-fade_out = np.clip((DUR - t_axis(N)) / 0.9, 0, 1)
-mix *= fade_in * fade_out
-mix = np.tanh(mix * 1.25)
-mix /= np.max(np.abs(mix)) / 0.89
-stereo = np.stack([mix, np.roll(lp(mix, 12000), 12)], axis=1)
-
-pcm = (stereo * 32767).astype(np.int16)
-import wave
-with wave.open("assets/soundtrack.wav", "wb") as w:
-    w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
-subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", "assets/soundtrack.wav",
-                "-af", "loudnorm=I=-14:TP=-1.0:LRA=9", "-ar", "44100",
-                "-c:a", "libmp3lame", "-b:a", "256k", "assets/soundtrack.mp3"], check=True)
-print("wrote assets/soundtrack.mp3", DUR, "s")
+if __name__ == "__main__":
+    for ad in CUES:
+        build(ad)
