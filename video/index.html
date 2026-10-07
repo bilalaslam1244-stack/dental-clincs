@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
-    <title>Fourskales: clinic websites that take bookings</title>
+    <title>4Skales: clinic websites that take bookings</title>
     <script src="assets/gsap.min.js"></script>
     <style>
       @font-face { font-family: 'Jost'; font-weight: 300; font-style: normal; src: url('assets/fonts/Jost-300-normal.woff2') format('woff2'); }
@@ -13,55 +13,58 @@
       @font-face { font-family: 'Newsreader'; font-weight: 300; font-style: italic; src: url('assets/fonts/Newsreader-300-italic.woff2') format('woff2'); }
 
       :root {
-        --night: #111a17;
-        --ivory: #f2f2ef;
-        --paper: #fbfbf9;
-        --ink: #1a1714;
-        --dim: #a79f91;
-        --hair: rgba(201,169,110,.32);
-        --champagne: #c9a96e;
-        --bronze: #8a6a38;
+        --ink: #121413;
+        --ink-2: #1c1f1d;
+        --white: #f4f3ef;
+        --dim: #9a978f;
+        --hair: rgba(201,169,110,.34);
+        --gold: #c9a96e;
+        --gold-deep: #7d5f30;
+        --red: #c8574a;
         --serif: 'Newsreader', Georgia, serif;
         --sans: 'Jost', sans-serif;
+        /* chamfered corners, taken from the 4Skales letterforms */
+        --chamfer: polygon(28px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 28px);
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--night); }
-      #root { position: relative; width: 100%; height: 100%; overflow: hidden; color: var(--ivory); font-family: var(--sans); }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; color: var(--white); font-family: var(--sans); }
       .clip { position: absolute; inset: 0; }
-      .it { font-style: italic; color: var(--champagne); }
-      .label { font: 500 22px/1 var(--sans); letter-spacing: .34em; text-transform: uppercase; }
+      .it { font-style: italic; color: var(--gold); }
+      .label { font: 500 22px/1 var(--sans); letter-spacing: .32em; text-transform: uppercase; }
+      .cap { position: absolute; left: 76px; right: 76px; top: 190px; font: 300 92px/1.02 var(--serif); letter-spacing: -.02em; }
+      .cap > span { display: block; }
 
-      /* ---------- persistent background ---------- */
-      #bg { background: var(--night); }
-      .glow { position: absolute; left: -120px; top: 420px; width: 1320px; height: 1320px; border-radius: 50%; background: radial-gradient(circle, rgba(201,169,110,.16), rgba(201,169,110,0) 62%); }
-      .ghost { position: absolute; left: -40px; top: 1460px; font: 300 italic 420px/1 var(--serif); color: rgba(201,169,110,.07); white-space: nowrap; }
+      /* ---------- persistent frame ---------- */
+      #bg { background: var(--ink); }
+      .grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(244,243,239,.045) 2px, transparent 2px), linear-gradient(90deg, rgba(244,243,239,.045) 2px, transparent 2px); background-size: 120px 120px; }
       .frame-line { position: absolute; inset: 36px; border: 1px solid rgba(201,169,110,.22); }
-      .meta { position: absolute; top: 78px; left: 76px; right: 76px; display: flex; justify-content: space-between; color: var(--dim); }
-      .meta-rule { position: absolute; top: 122px; left: 76px; right: 76px; height: 2px; background: var(--hair); transform-origin: left center; }
-      .grain { position: absolute; inset: 0; opacity: .22; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.55'/></svg>"); }
+      #hud { position: absolute; top: 72px; left: 76px; right: 76px; height: 40px; display: flex; align-items: center; justify-content: space-between; }
+      #hud img { height: 34px; width: auto; }
+      #hud span { color: var(--dim); }
+      .hud-rule { position: absolute; top: 132px; left: 76px; right: 76px; height: 2px; background: var(--hair); transform-origin: left center; }
+      .progress-track { position: absolute; left: 76px; right: 76px; bottom: 64px; height: 4px; background: rgba(244,243,239,.12); }
+      #progress { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: var(--gold); transform-origin: left center; }
 
-      /* ---------- S1 missed calls ---------- */
-      .s1-num { position: absolute; left: 60px; top: 770px; font: 300 640px/0.82 var(--serif); letter-spacing: -.045em; color: var(--ivory); }
-      .s1-label { position: absolute; left: 82px; top: 1310px; color: var(--champagne); }
-      .s1-line { position: absolute; left: 80px; right: 80px; top: 1380px; font: 300 76px/1.08 var(--serif); letter-spacing: -.01em; }
-      .notif-stack { position: absolute; left: 540px; right: 76px; top: 176px; height: 520px; }
-      .notif { position: absolute; left: 0; right: 0; height: 104px; border-radius: 52px; background: rgba(243,238,230,.05); border: 1px solid var(--hair); display: flex; align-items: center; gap: 22px; padding: 0 34px; }
-      .notif i { width: 12px; height: 12px; border-radius: 50%; background: #c0604f; flex: none; box-shadow: 0 0 0 7px rgba(192,96,79,.16); }
-      .notif b { font: 400 30px var(--sans); color: var(--ivory); flex: 1; }
-      .notif span { font: 300 italic 28px var(--serif); color: var(--dim); }
+      /* slanted wipe panels (the logo's italic angle) */
+      .wipe { position: absolute; top: -200px; height: 2320px; width: 1700px; left: -310px; }
+      #wipeA { background: var(--white); }
+      #wipeB { background: var(--gold); }
 
-      /* ---------- captions ---------- */
-      .cap { position: absolute; left: 76px; right: 76px; top: 176px; font: 300 84px/1.04 var(--serif); letter-spacing: -.015em; }
-      .cap-inner { display: block; }
+      /* ---------- S1 hook ---------- */
+      .count { position: absolute; left: 56px; top: 840px; font: 300 600px/0.8 var(--serif); letter-spacing: -.05em; }
+      .count-label { position: absolute; left: 80px; top: 1360px; color: #d66a5c; }
+      .hook-line { position: absolute; left: 76px; right: 76px; top: 1430px; font: 300 84px/1.04 var(--serif); }
+      .notifs { position: absolute; left: 520px; right: 76px; top: 190px; height: 560px; }
+      .notif { position: absolute; left: 0; right: 0; top: 0; height: 92px; background: var(--ink-2); border: 1px solid rgba(244,243,239,.12); clip-path: var(--chamfer); display: flex; align-items: center; gap: 22px; padding: 0 30px; }
+      .notif i { width: 12px; height: 12px; border-radius: 50%; background: var(--red); flex: none; }
+      .notif b { font: 400 29px var(--sans); flex: 1; }
+      .notif span { font: 300 italic 27px var(--serif); color: var(--dim); }
 
       /* ---------- phone ---------- */
-      #phone { position: absolute; left: 180px; top: 450px; width: 720px; height: 1404px; border-radius: 86px; background: #0a0f0d; padding: 9px; box-shadow: 0 0 0 1px rgba(201,169,110,.55), 0 0 0 10px #0a0f0d, 0 0 0 11px rgba(201,169,110,.25), 0 80px 160px rgba(0,0,0,.6); }
-      .screen { position: relative; width: 702px; height: 1386px; border-radius: 78px; overflow: hidden; background: var(--ivory); }
+      #phone { position: absolute; left: 180px; top: 470px; width: 720px; height: 1360px; border-radius: 84px; background: #070908; padding: 9px; box-shadow: 0 0 0 1px rgba(201,169,110,.5), 0 80px 160px rgba(0,0,0,.6); }
+      .screen { position: relative; width: 702px; height: 1342px; border-radius: 76px; overflow: hidden; background: var(--white); }
       #screen-video { position: absolute; left: 0; top: 0; width: 702px; height: 1368px; object-fit: cover; }
-      .screen-bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 18px; background: var(--ivory); }
-      .tag { position: absolute; left: 0; right: 0; top: 1880px; text-align: center; font: 400 18px var(--sans); color: var(--dim); letter-spacing: .26em; text-transform: uppercase; }
-
-      /* old site, drawn at 1000px wide then scaled to fit the phone */
       #old { position: absolute; inset: 0; background: #fff; overflow: hidden; }
       .old-page { position: absolute; left: 0; top: 0; width: 1000px; height: 1960px; font-family: 'Times New Roman', 'Liberation Serif', serif; color: #000; background: #fff; transform-origin: 0 0; }
       .old-head { background: linear-gradient(#3b6bd6, #1c3f96); color: #ff0; text-align: center; padding: 22px; font-size: 46px; font-weight: bold; text-shadow: 2px 2px #000; }
@@ -71,235 +74,294 @@
       .old-side { width: 220px; background: #ffc; border: 2px dashed #f90; padding: 12px; font-size: 16px; }
       .old-main { flex: 1; font-size: 17px; line-height: 1.3; }
       .old-main h2 { color: #c00; font-size: 26px; margin: 6px 0 10px; }
-      .broken { border: 2px inset #aaa; display: flex; align-items: center; justify-content: center; color: #777; font: 14px Arial, sans-serif; margin: 12px 0; }
+      .broken { border: 2px inset #aaa; display: flex; align-items: center; justify-content: center; color: #555; font: 14px Arial, sans-serif; margin: 12px 0; }
       .old-foot { position: absolute; left: 0; right: 0; bottom: 0; background: #333; color: #ccc; text-align: center; padding: 14px; font: 14px Arial, sans-serif; }
+      .stamp { position: absolute; left: 90px; top: 520px; padding: 18px 30px; border: 6px solid var(--red); color: var(--red); font: 500 54px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; background: rgba(255,255,255,.9); }
 
-      /* WhatsApp-style chat (illustrative) */
       #chat { position: absolute; inset: 0; background: #e9e7e1; }
-      .chat-top { height: 200px; background: #1b2823; padding: 96px 34px 0; display: flex; align-items: center; gap: 22px; color: var(--ivory); }
-      .chat-av { width: 74px; height: 74px; border-radius: 50%; border: 1px solid var(--champagne); display: flex; align-items: center; justify-content: center; font: 300 italic 36px var(--serif); color: var(--champagne); }
+      .chat-top { height: 200px; background: #1b2420; padding: 96px 34px 0; display: flex; align-items: center; gap: 22px; color: var(--white); }
+      .chat-av { width: 74px; height: 74px; border-radius: 50%; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font: 300 italic 36px var(--serif); color: var(--gold); }
       .chat-top b { display: block; font: 400 32px var(--sans); }
-      .chat-top span { display: block; font: 300 22px var(--sans); color: var(--dim); letter-spacing: .04em; }
-      .chat-body { padding: 44px 28px; }
-      .bub { max-width: 560px; padding: 22px 26px 14px; border-radius: 28px; font: 400 30px/1.42 var(--sans); color: var(--ink); box-shadow: 0 2px 3px rgba(0,0,0,.07); margin-bottom: 26px; }
-      .bub small { display: block; text-align: right; font: 400 19px var(--sans); color: #4f5a54; margin-top: 6px; letter-spacing: .04em; }
+      .chat-top span { display: block; font: 300 22px var(--sans); color: #b5b2aa; }
+      .chat-body { padding: 180px 28px 44px; }
+      .bub { max-width: 560px; padding: 22px 26px 14px; border-radius: 28px; font: 400 30px/1.42 var(--sans); color: #1a1714; margin-bottom: 26px; }
+      .bub small { display: block; text-align: right; font: 400 19px var(--sans); color: #4f5a54; margin-top: 6px; }
       .bub.out { margin-left: auto; background: #dcf3d4; border-top-right-radius: 8px; }
       .bub.in { background: #fff; border-top-left-radius: 8px; }
-      .chat-input { position: absolute; left: 24px; right: 124px; bottom: 52px; height: 88px; border-radius: 44px; background: #fff; font: 300 30px var(--sans); color: #6f7a75; display: flex; align-items: center; padding: 0 34px; }
-      .chat-send { position: absolute; right: 24px; bottom: 52px; width: 88px; height: 88px; border-radius: 50%; background: #2f8a57; }
+      .toast { position: absolute; left: 24px; right: 24px; top: 224px; height: 120px; border-radius: 30px; background: rgba(28,31,29,.94); display: flex; align-items: center; gap: 22px; padding: 0 28px; color: var(--white); }
+      .toast i { width: 64px; height: 64px; border-radius: 16px; background: #2f8a57; flex: none; display: flex; align-items: center; justify-content: center; }
+      .toast b { display: block; font: 500 27px var(--sans); }
+      .toast span { display: block; font: 300 24px var(--sans); color: #c9c6be; }
+      .tapnum { position: absolute; right: 70px; top: 190px; font: 300 italic 250px/1 var(--serif); color: var(--gold); text-align: right; }
+      .tapnum small { display: block; font: 500 22px var(--sans); letter-spacing: .32em; text-transform: uppercase; color: var(--dim); margin-top: -10px; }
 
-      /* ---------- S5 price ---------- */
-      .receipt { position: absolute; left: 76px; right: 76px; top: 330px; background: var(--paper); color: var(--ink); border-radius: 6px; box-shadow: 0 60px 120px -40px rgba(0,0,0,.7); }
-      .receipt-frame { position: absolute; inset: 16px; border: 1px solid #ddd3c3; border-radius: 3px; }
-      .rc-head { position: relative; text-align: center; padding: 70px 60px 36px; }
-      .rc-head b { display: block; font: 300 76px/1 var(--serif); }
-      .rc-head b i { color: var(--bronze); }
-      .rc-head span { display: block; margin-top: 20px; color: #6d655b; font-size: 20px; }
-      .rc-rows { position: relative; padding: 0 64px 18px; }
-      .rc-row { display: flex; align-items: baseline; gap: 20px; padding: 26px 0; border-top: 1px solid #e3dacb; font: 400 36px var(--sans); }
-      .rc-row .lead { flex: 1; border-bottom: 2px dotted #cbbfab; transform: translateY(-10px); }
-      .rc-row .val { font: 300 italic 40px var(--serif); color: var(--bronze); white-space: nowrap; }
-      .rc-total { position: relative; text-align: center; padding: 30px 0 74px; border-top: 1px solid #e3dacb; margin: 0 64px; }
-      .rc-total span { display: block; color: #6d655b; font-size: 20px; }
-      .rc-total b { display: block; white-space: nowrap; font: 300 190px/1 var(--serif); letter-spacing: -.035em; margin: 18px 0 14px; }
-      .rc-total em { font: 300 italic 40px var(--serif); color: var(--bronze); }
-      .rc-after { position: absolute; left: 76px; right: 76px; top: 1530px; text-align: center; font: 300 66px/1.1 var(--serif); }
+      /* ---------- S6 features ---------- */
+      .feat-head { position: absolute; left: 76px; right: 76px; top: 200px; font: 300 96px/1.0 var(--serif); letter-spacing: -.02em; }
+      .chips { position: absolute; left: 76px; right: 76px; top: 640px; }
+      .chip { position: relative; height: 150px; margin-bottom: 26px; background: var(--ink-2); border: 1px solid rgba(244,243,239,.1); clip-path: var(--chamfer); display: flex; align-items: center; gap: 30px; padding: 0 40px; }
+      .chip b { font: 300 italic 44px var(--serif); color: var(--gold); width: 64px; }
+      .chip span { font: 400 46px var(--sans); }
+      .ticker { position: absolute; left: 0; top: 1560px; height: 120px; width: 1080px; overflow: hidden; background: var(--gold); display: flex; align-items: center; }
+      #tickerText { white-space: nowrap; font: 500 44px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
 
-      /* ---------- S6 outro ---------- */
-      .lockup { position: absolute; left: 0; right: 0; top: 560px; display: flex; flex-direction: column; align-items: center; }
-      .bars { position: relative; width: 120px; height: 104px; margin-bottom: 44px; }
-      .bar { position: absolute; bottom: 0; width: 12px; background: var(--champagne); transform-origin: 50% 100%; }
-      .word { font: 400 86px/1 var(--sans); letter-spacing: .36em; padding-left: .36em; }
-      .word-rule { width: 520px; height: 2px; background: var(--hair); margin: 44px 0 0; transform-origin: center; }
-      .tagline { position: absolute; left: 90px; right: 90px; top: 1000px; text-align: center; font: 300 86px/1.06 var(--serif); letter-spacing: -.01em; }
-      .cities { position: absolute; left: 0; right: 0; top: 1290px; text-align: center; color: var(--dim); }
-      .cta { position: absolute; left: 150px; right: 150px; top: 1440px; height: 128px; border-radius: 64px; background: var(--ivory); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 22px; font: 500 28px var(--sans); letter-spacing: .2em; text-transform: uppercase; }
-      .cta-ring { position: absolute; left: 136px; right: 136px; top: 1426px; height: 156px; border-radius: 78px; border: 1px solid var(--hair); }
-      .legal { position: absolute; left: 0; right: 0; top: 1700px; text-align: center; font: 400 18px var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--dim); }
+      /* ---------- S7 price (light) ---------- */
+      #s7 { background: var(--white); color: var(--ink); }
+      .p-label { position: absolute; left: 80px; top: 360px; color: var(--gold-deep); }
+      .price { position: absolute; left: 60px; top: 430px; font: 300 300px/0.9 var(--serif); letter-spacing: -.05em; white-space: nowrap; }
+      .price small { font-size: 120px; letter-spacing: -.02em; margin-right: 20px; }
+      .p-rule { position: absolute; left: 80px; right: 80px; top: 790px; height: 3px; background: var(--ink); transform-origin: left center; }
+      .p-line { position: absolute; left: 80px; right: 80px; font: 300 100px/1 var(--serif); letter-spacing: -.02em; }
+      .p-line em { color: var(--gold-deep); }
+
+      /* ---------- S8 proof ---------- */
+      .proof-head { position: absolute; left: 76px; right: 76px; top: 330px; font: 300 132px/0.98 var(--serif); letter-spacing: -.03em; }
+      .proof-sub { position: absolute; left: 80px; right: 120px; top: 780px; font: 300 52px/1.3 var(--sans); color: #d6d3cb; }
+      .case { position: absolute; left: 76px; right: 76px; top: 1090px; height: 330px; background: var(--white); color: var(--ink); clip-path: var(--chamfer); padding: 52px 56px; }
+      .case .label { color: var(--gold-deep); }
+      .case b { display: block; font: 300 72px/1.05 var(--serif); margin-top: 26px; }
+      .case b em { color: var(--gold-deep); }
+      .case-arrow { position: absolute; right: 56px; bottom: 50px; width: 96px; height: 96px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; }
+
+      /* ---------- S9 end card ---------- */
+      .end-logo { position: absolute; left: 110px; right: 110px; top: 500px; }
+      .end-logo img { width: 860px; height: auto; display: block; }
+      .end-rule { position: absolute; left: 110px; width: 860px; top: 760px; height: 2px; background: var(--hair); transform-origin: left center; }
+      .end-tag { position: absolute; left: 110px; right: 80px; top: 830px; font: 300 90px/1.02 var(--serif); letter-spacing: -.02em; }
+      .end-cities { position: absolute; left: 112px; top: 1180px; color: var(--dim); }
+      .cta { position: absolute; left: 110px; right: 110px; top: 1330px; height: 160px; background: var(--white); color: var(--ink); clip-path: var(--chamfer); display: flex; align-items: center; justify-content: space-between; padding: 0 56px; }
+      .cta b { font: 500 40px var(--sans); letter-spacing: .06em; }
+      .cta span { display: block; font: 300 italic 34px var(--serif); color: var(--gold-deep); margin-top: 4px; }
+      .cta-arrow { width: 84px; height: 84px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; }
+      .tap-hint { position: absolute; left: 0; right: 0; top: 1560px; text-align: center; color: var(--gold); }
+      .legal { position: absolute; left: 0; right: 0; top: 1760px; text-align: center; font: 400 18px var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--dim); }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="23.5" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="19.7" data-width="1080" data-height="1920">
 
-      <!-- persistent background -->
-      <section id="bg" class="clip" data-start="0" data-duration="23.5" data-track-index="0">
-        <div class="ghost" id="ghost" aria-hidden="true" data-decorative data-layout-allow-occlusion>reserved</div>
-        <div class="grain"></div>
-        <div class="frame-line" id="frameLine"></div>
-        <div class="meta label" id="meta"><span>Fourskales</span><span>Johor Bahru · KL</span></div>
-        <div class="meta-rule" id="metaRule"></div>
+      <!-- persistent frame -->
+      <section id="bg" class="clip" data-start="0" data-duration="19.7" data-track-index="0">
+        <div class="grid" id="grid"></div>
+        <div class="frame-line"></div>
+        <div id="hud"><img src="assets/4skales-logo-ivory.svg" alt="4Skales"><span class="label">JB · KL</span></div>
+        <div class="hud-rule" id="hudRule"></div>
+        <div class="progress-track"><div id="progress"></div></div>
       </section>
 
-      <!-- S1: missed calls -->
-      <section id="s1" class="clip" data-start="0" data-duration="3.2" data-track-index="1">
-        <div class="notif-stack" id="notifs" data-layout-allow-overlap>
-          <div class="notif"><i></i><b>Missed call</b><span>9:02 am</span></div>
-          <div class="notif"><i></i><b>Missed call</b><span>10:48 am</span></div>
-          <div class="notif"><i></i><b>Missed call</b><span>11:57 am</span></div>
-          <div class="notif"><i></i><b>Missed call</b><span>2:31 pm</span></div>
+      <!-- S1 hook: 0 - 1.875 -->
+      <section id="s1" class="clip" data-start="0" data-duration="1.95" data-track-index="1">
+        <div class="notifs" id="notifs" data-layout-allow-overlap>
+          <div class="notif"><i></i><b>Missed call</b><span>9:02</span></div>
+          <div class="notif"><i></i><b>Missed call</b><span>10:48</span></div>
+          <div class="notif"><i></i><b>Missed call</b><span>11:57</span></div>
+          <div class="notif"><i></i><b>Missed call</b><span>2:31</span></div>
+          <div class="notif"><i></i><b>Missed call</b><span>4:15</span></div>
         </div>
-        <div class="s1-num" id="count">17</div>
-        <div class="s1-label label" id="s1label">Missed calls · one Tuesday</div>
-        <div class="s1-line" id="s1line">Each one, a patient <span class="it">calling the next clinic.</span></div>
+        <div class="count" id="count">0</div>
+        <div class="count-label label" id="countLabel">Missed calls today</div>
+        <div class="hook-line" id="hookLine">That's 17 patients <span class="it">gone.</span></div>
       </section>
 
       <!-- captions -->
-      <section id="c2a" class="clip" data-start="3.2" data-duration="1.6" data-track-index="2"><div class="cap"><span class="cap-inner" id="c2a-t">Patients find your website…</span></div></section>
-      <section id="c2b" class="clip" data-start="4.8" data-duration="1.8" data-track-index="2"><div class="cap"><span class="cap-inner" id="c2b-t">…and <span class="it">can't book</span> on it.</span></div></section>
-      <section id="c3" class="clip" data-start="6.7" data-duration="2.9" data-track-index="2"><div class="cap"><span class="cap-inner" id="c3-t">We rebuild it to <span class="it">take bookings.</span></span></div></section>
-      <section id="c4" class="clip" data-start="9.6" data-duration="3.95" data-track-index="2"><div class="cap"><span class="cap-inner" id="c4-t">Patients reserve in <span class="it">three taps.</span></span></div></section>
-      <section id="c4b" class="clip" data-start="13.6" data-duration="2.5" data-track-index="2"><div class="cap"><span class="cap-inner" id="c4b-t">Straight into <span class="it">your WhatsApp.</span></span></div></section>
+      <section id="c2" class="clip" data-start="1.85" data-duration="1.9" data-track-index="2"><div class="cap"><span id="c2t">Your website <span class="it">can't take</span> a booking.</span></div></section>
+      <section id="c4" class="clip" data-start="4.6875" data-duration="3.9" data-track-index="2"><div class="cap" style="right:300px"><span id="c4t">Patients book in <span class="it">three taps.</span></span></div>
+        <div class="tapnum" id="tapnum"><span id="tapDigit">1</span><small>tap</small></div></section>
+      <section id="c5" class="clip" data-start="8.6" data-duration="2.2" data-track-index="2"><div class="cap"><span id="c5t">Straight into <span class="it">your WhatsApp.</span></span></div></section>
 
-      <!-- phone (untimed; moved in and out by the timeline) -->
+      <!-- phone (untimed; moved by the timeline) -->
       <div id="phone">
         <div class="screen">
-          <video id="screen-video" src="assets/screen.mp4" data-start="6.6" data-duration="7.2" data-track-index="3" muted playsinline></video>
-          <div class="screen-bottom"></div>
+          <video id="screen-video" src="assets/screen.mp4" data-start="4.6875" data-duration="4.0" data-track-index="3" muted playsinline></video>
           <div id="old" data-layout-allow-overlap data-layout-allow-occlusion>
             <div class="old-page" id="oldPage">
               <div class="old-head">★ Welcome To Our Dental Clinic Homepage ★</div>
               <div class="old-nav"><span>Home</span><span>About Us</span><span>Services</span><span>Gallery</span><span>Contact</span></div>
               <div class="old-body">
-                <div class="old-side"><b>NEWS!!!</b> We have moved to our new premises. Please call for details. <b>Visitor:</b> 000417. Best viewed in Internet Explorer at 1024x768.</div>
+                <div class="old-side"><b>NEWS!!!</b> We have moved to our new premises. Please call for details. <b>Visitor:</b> 000417.</div>
                 <div class="old-main">
                   <h2>Our Services</h2>
                   We provide many dental services for the whole family. Please call us to make appointment during office hours. Thank you.
                   <div class="broken" style="height:160px;width:300px">[ image not found ]</div>
                   <b>Operating Hours:</b> Mon - Sat 9am - 6pm (before renovation)
-                  <p style="font-size:13px;margin-top:6px">Tel: 07-xxx xxxx &nbsp; Fax: 07-xxx xxxx &nbsp; Email: clinic@hotmail.com</p>
                   <p style="margin-top:12px"><i>Appointment by phone call only.</i></p>
                   <h2 style="margin-top:24px">Location</h2>
-                  Please refer map below. Parking available nearby (subject to availability).
+                  Please refer map below.
                   <div class="broken" style="height:420px">[ Google Map could not be loaded ]</div>
-                  <h2>Promotion</h2>
-                  *** Scaling promotion valid until 31 December 2016 ***
-                  <div class="broken" style="height:300px">[ image not found ]</div>
                 </div>
               </div>
-              <div class="old-foot">Copyright © 2016 All Rights Reserved. | Facebook [x] | Last updated: 14/03/2016</div>
+              <div class="old-foot">Copyright © 2016 All Rights Reserved. | Last updated: 14/03/2016</div>
             </div>
+            <div class="stamp" id="stamp" data-layout-allow-overlap>Call only</div>
           </div>
           <div id="chat" data-layout-allow-overlap data-layout-allow-occlusion>
-            <div class="chat-top"><div class="chat-av">L</div><div><b>Lumen Dental</b><span>online</span></div></div>
+            <div class="chat-top" data-layout-allow-overlap><div class="chat-av">L</div><div><b>Lumen Dental</b><span>online</span></div></div>
             <div class="chat-body">
               <div class="bub out" id="bubOut">Hi Lumen Dental, I'm Mei Ling. I'd like to reserve: Check-up &amp; scaling. Preferred: Saturday, morning.<small>10:42 ✓✓</small></div>
-              <div class="bub in" id="bubIn">Hello Mei Ling, Saturday at 10:00am is available. Shall we confirm it for you?<small>10:44</small></div>
+              <div class="bub in" id="bubIn">Hello Mei Ling, Saturday at 10:00am is available. Shall we confirm?<small>10:44</small></div>
             </div>
-            <div class="chat-input">Message</div>
-            <div class="chat-send"></div>
+            <div class="toast" id="toast" data-layout-allow-overlap><i><svg width="38" height="38" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg></i><div><b>New booking · Mei Ling</b><span>Check-up &amp; scaling · Sat morning</span></div></div>
           </div>
         </div>
       </div>
-      <div class="tag" id="tag">Demo build · Lumen Dental is a fictional clinic</div>
 
-      <!-- S5: price -->
-      <section id="s5" class="clip" data-start="16.1" data-duration="3.8" data-track-index="4">
-        <div class="receipt" id="receipt">
-          <div class="receipt-frame"></div>
-          <div class="rc-head"><b>Your clinic <i>website</i></b><span class="label">Fourskales · fixed price</span></div>
-          <div class="rc-rows">
-            <div class="rc-row" id="r1">Design, copy &amp; build<span class="lead"></span><span class="val">included</span></div>
-            <div class="rc-row" id="r2">WhatsApp booking<span class="lead"></span><span class="val">included</span></div>
-            <div class="rc-row" id="r3">Monthly retainer<span class="lead"></span><span class="val">none</span></div>
-          </div>
-          <div class="rc-total" id="total"><span class="label">One payment</span><b>RM 6,800</b><em>and the site is yours</em></div>
+      <!-- S6 features: 10.78 - 13.125 -->
+      <section id="s6" class="clip" data-start="10.75" data-duration="2.4" data-track-index="4">
+        <div class="feat-head" id="featHead">Every question, <span class="it">answered on the page.</span></div>
+        <div class="chips" id="chips">
+          <div class="chip"><b>01</b><span>Built for phones</span></div>
+          <div class="chip"><b>02</b><span>Fees &amp; hours, always current</span></div>
+          <div class="chip"><b>03</b><span>Google Maps &amp; parking</span></div>
+          <div class="chip"><b>04</b><span>English · BM · 中文</span></div>
+          <div class="chip"><b>05</b><span>Set up for Google search</span></div>
         </div>
-        <div class="rc-after" id="after">Live in about <span class="it">three weeks.</span></div>
+        <div class="ticker"><div id="tickerText">Mobile-first · WhatsApp booking · Fees shown · Live hours · Maps · Parking · Panels · Mobile-first · WhatsApp booking · Fees shown · Live hours ·</div></div>
       </section>
 
-      <!-- S6: outro -->
-      <section id="s6" class="clip" data-start="19.9" data-duration="3.6" data-track-index="5">
-        <div class="lockup">
-          <div class="bars" id="bars">
-            <div class="bar" style="left:6px;height:40px"></div>
-            <div class="bar" style="left:38px;height:61px"></div>
-            <div class="bar" style="left:70px;height:82px"></div>
-            <div class="bar" style="left:102px;height:104px"></div>
-          </div>
-          <div class="word" id="word">FOURSKALES</div>
-          <div class="word-rule" id="wordRule"></div>
+      <!-- S7 price: 13.125 - 15.0 -->
+      <section id="s7" class="clip" data-start="13.125" data-duration="1.9" data-track-index="5">
+        <div class="p-label label" id="pLabel">One fixed price</div>
+        <div class="price" id="price"><small>RM</small>6,800</div>
+        <div class="p-rule" id="pRule"></div>
+        <div class="p-line" id="pl1" style="top:860px">No retainer.</div>
+        <div class="p-line" id="pl2" style="top:990px"><em>Yours</em> to keep.</div>
+        <div class="p-line" id="pl3" style="top:1120px">Live in <em>3 weeks.</em></div>
+      </section>
+
+      <!-- S8 proof: 15.0 - 16.875 -->
+      <section id="s8" class="clip" data-start="15.0" data-duration="1.9" data-track-index="6">
+        <div class="proof-head" id="proofHead">Not our <span class="it">first build.</span></div>
+        <div class="proof-sub" id="proofSub">Businesses in Johor Bahru already run on 4Skales websites.</div>
+        <div class="case" id="caseCard">
+          <span class="label">Live case study</span>
+          <b>See the results <em>on our page.</em></b>
+          <div class="case-arrow" id="caseArrow"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f4f3ef" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
-        <div class="tagline" id="tagline">Clinic websites that <span class="it">fill the appointment book.</span></div>
-        <div class="cities label" id="cities">Johor Bahru · Kuala Lumpur</div>
-        <div class="cta-ring" id="ctaRing"></div>
+      </section>
+
+      <!-- S9 end card: 16.875 - 19.7 -->
+      <section id="s9" class="clip" data-start="16.875" data-duration="2.825" data-track-index="7">
+        <div class="end-logo" id="endLogo"><img src="assets/4skales-logo-ivory.svg" alt="4Skales"></div>
+        <div class="end-rule" id="endRule"></div>
+        <div class="end-tag" id="endTag">Clinic websites that <span class="it">fill the appointment book.</span></div>
+        <div class="end-cities label" id="endCities">Johor Bahru · Kuala Lumpur</div>
         <div class="cta" id="cta">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="#2f8a57"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
-          Free site review
+          <div><b>FREE SITE REVIEW</b><span>Tap Send Message below</span></div>
+          <div class="cta-arrow" id="ctaArrow"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f4f3ef" stroke-width="1.8"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
         </div>
-        <div class="legal" id="legal">Fourskales Sdn. Bhd. · WhatsApp us</div>
+        <div class="tap-hint label" id="tapHint">↓ &nbsp; Tap below &nbsp; ↓</div>
+        <div class="legal">Fourskales Sdn. Bhd.</div>
       </section>
 
-      <!-- audio -->
-      <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="23.5" data-volume="0.8" data-track-index="6"></audio>
-      <audio id="tap1" src="assets/click_002.mp3" data-start="9.95" data-duration="0.05" data-volume="0.4" data-track-index="7"></audio>
-      <audio id="tap2" src="assets/click_002.mp3" data-start="10.55" data-duration="0.05" data-volume="0.4" data-track-index="7"></audio>
-      <audio id="tap3" src="assets/click_002.mp3" data-start="11.1" data-duration="0.05" data-volume="0.4" data-track-index="7"></audio>
-      <audio id="tap4" src="assets/click_002.mp3" data-start="11.55" data-duration="0.05" data-volume="0.35" data-track-index="7"></audio>
-      <audio id="tap5" src="assets/select_008.mp3" data-start="13.35" data-duration="0.1" data-volume="0.4" data-track-index="7"></audio>
-      <audio id="hit1" src="assets/impactSoft_medium_000.mp3" data-start="18.52" data-duration="0.15" data-volume="0.45" data-track-index="8"></audio>
+      <!-- S3 logo sting: 3.75 - 4.6875 (light) -->
+      <section id="sting" class="clip" data-start="3.73" data-duration="0.93" data-track-index="9" style="background:var(--white)">
+        <div style="position:absolute;left:110px;right:110px;top:760px"><img id="stingLogo" src="assets/4skales-logo-ink.svg" alt="4Skales" style="width:860px;height:auto;display:block"></div>
+        <div id="stingLine" style="position:absolute;left:110px;right:110px;top:1030px;font:300 italic 110px/1 var(--serif);color:var(--gold-deep)">fixes that.</div>
+      </section>
+
+      <!-- transition panels (untimed; swept by the timeline) -->
+      <div class="wipe" id="wipeB"></div>
+      <div class="wipe" id="wipeA"></div>
+
+      <audio id="soundtrack" src="assets/soundtrack.mp3" data-start="0" data-duration="19.7" data-volume="1" data-track-index="8"></audio>
     </div>
 
     <script>
+      const B = 60 / 128;                       // one beat at 128 BPM
       const tl = gsap.timeline({ paused: true });
 
-      // ---- background: slow ambient drift
-      tl.fromTo('#ghost', { x: 0 }, { x: -260, duration: 23.5, ease: 'none' }, 0);
-      tl.to('#ghost', { opacity: 0, duration: 0.6, ease: 'power1.out' }, 19.6);
-      tl.fromTo('#frameLine', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power1.out' }, 0);
-      tl.fromTo('#metaRule', { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: 'expo.out' }, 0.1);
-      tl.fromTo('#meta', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 0.2);
+      // ---- persistent frame
+      tl.fromTo('#progress', { scaleX: 0 }, { scaleX: 1, duration: 19.7, ease: 'none' }, 0);
+      tl.fromTo('#hudRule', { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'expo.out' }, 0);
+      tl.fromTo('#grid', { y: 0 }, { y: -120, duration: 19.7, ease: 'none' }, 0);
 
-      // ---- S1: count up the missed calls, notifications settle in
-      const counter = { v: 1 };
-      tl.fromTo(counter, { v: 1 }, { v: 17, duration: 1.3, ease: 'power2.out', onUpdate: () => { document.getElementById('count').textContent = Math.round(counter.v); } }, 0.05);
-      tl.fromTo('#count', { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0);
-      tl.fromTo('#s1label', { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.4);
-      tl.fromTo('#s1line', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 1.0);
-      document.querySelectorAll('#notifs .notif').forEach((n, i) => {
-        tl.fromTo(n, { y: -60, opacity: 0 }, { y: (3 - i) * 124, opacity: 1 - (3 - i) * 0.16, duration: 0.6, ease: 'expo.out' }, 0.1 + i * 0.28);
-      });
-      tl.to(['#count', '#s1label', '#s1line', '#notifs'], { opacity: 0, y: -30, duration: 0.35, ease: 'power2.in', stagger: 0.03 }, 2.8);
-
-      // ---- captions: soft rise in, soft lift out
-      function caption(id, at, out) {
-        tl.fromTo(id, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, at);
-        tl.to(id, { y: -18, opacity: 0, duration: 0.28, ease: 'power2.in' }, out);
+      // slanted wipe: sweeps across the frame on the logo's italic angle
+      function wipe(sel, at, dur = 0.42) {
+        tl.fromTo(sel, { x: 1500, skewX: -10 }, { x: -1900, skewX: -10, duration: dur, ease: 'power3.inOut', immediateRender: false }, at);
       }
-      caption('#c2a-t', 3.25, 4.52);
-      caption('#c2b-t', 4.85, 6.32);
-      caption('#c3-t', 6.75, 9.32);
-      caption('#c4-t', 9.65, 13.27);
-      caption('#c4b-t', 13.65, 15.78);
+      tl.set(['#wipeA', '#wipeB'], { x: 1500, skewX: -10 }, 0);
 
-      // ---- phone in, old site pinch-zoom, wipe to the real site, chat, phone out
-      tl.fromTo('#phone', { y: 1700, opacity: 1 }, { y: 0, duration: 0.9, ease: 'expo.out' }, 2.95);
-      tl.fromTo('#oldPage', { scale: 0.702, x: 0, y: 0 }, { scale: 0.702, x: 0, y: 0, duration: 0.01 }, 3.0);
-      tl.to('#oldPage', { scale: 1.9, x: -360, y: -560, duration: 1.1, ease: 'power2.inOut' }, 4.3);
-      tl.fromTo('#old', { y: 0, opacity: 1 }, { y: -1400, duration: 0.6, ease: 'expo.inOut' }, 6.4);
-      tl.to('#old', { opacity: 0, duration: 0.05 }, 7.0);
-      tl.fromTo('#tag', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 6.9);
-      tl.fromTo('#chat', { y: 1400, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: 'expo.out' }, 13.5);
-      tl.fromTo('#bubIn', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, 14.45);
-      tl.to('#tag', { opacity: 0, duration: 0.3 }, 15.7);
-      tl.to('#phone', { y: 1750, duration: 0.6, ease: 'expo.in' }, 15.75);
-      tl.to('#phone', { opacity: 0, duration: 0.05 }, 16.36);
+      // ---- S1 hook: buzzing notifications + count to 17
+      document.querySelectorAll('#notifs .notif').forEach((n, i) => {
+        const at = i * 0.27;
+        tl.fromTo(n, { y: -80, opacity: 0, scale: 1.06 }, { y: (4 - i) * 104, opacity: 1 - (4 - i) * 0.14, scale: 1, duration: 0.32, ease: 'back.out(2)' }, at);
+        tl.fromTo(n, { x: -8 }, { x: 8, duration: 0.04, repeat: 5, yoyo: true, ease: 'none', immediateRender: false }, at);
+      });
+      const counter = { v: 0 };
+      tl.fromTo(counter, { v: 0 }, { v: 17, duration: 1.1, ease: 'power2.out', onUpdate: () => { document.getElementById('count').textContent = Math.round(counter.v); } }, 0);
+      tl.fromTo('#count', { scale: 1.25, opacity: 0, transformOrigin: '0% 100%' }, { scale: 1, opacity: 1, duration: 0.5, ease: 'expo.out' }, 0);
+      tl.fromTo('#countLabel', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power3.out' }, 0.25);
+      tl.fromTo('#hookLine', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, 0.75);
 
-      // ---- S5: the price card, line by line on the beat
-      tl.fromTo('#receipt', { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 16.1);
-      ['#r1', '#r2', '#r3'].forEach((r, i) => tl.fromTo(r, { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, 17.02 + i * 0.5));
-      tl.fromTo('#total', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 18.52);
-      tl.fromTo('#after', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 18.95);
-      tl.to(['#receipt', '#after'], { opacity: 0, y: -40, duration: 0.32, ease: 'power2.in', stagger: 0.04 }, 19.58);
+      // ---- S2 old site (1.875 - 3.75)
+      wipe('#wipeA', 1.62, 0.5);
+      tl.fromTo('#phone', { y: 1600, opacity: 1 }, { y: 0, duration: 0.45, ease: 'expo.out' }, 1.85);
+      tl.fromTo('#c2t', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, 1.9);
+      tl.fromTo('#oldPage', { scale: 0.702 }, { scale: 0.702, duration: 0.01 }, 1.85);
+      tl.to('#oldPage', { scale: 1.6, x: -260, y: -380, duration: 0.5, ease: 'power3.inOut' }, 2.55);
+      tl.fromTo('#stamp', { scale: 2.2, opacity: 0, rotation: -14 }, { scale: 1, opacity: 1, rotation: -8, duration: 0.22, ease: 'back.out(2.5)' }, 2.8125);
+      tl.fromTo('#phone', { x: -14 }, { x: 14, duration: 0.035, repeat: 5, yoyo: true, ease: 'none', immediateRender: false }, 2.8125);
+      tl.to('#c2t', { opacity: 0, y: -20, duration: 0.18 }, 3.5);
 
-      // ---- S6: lockup, promise, call to action
-      document.querySelectorAll('#bars .bar').forEach((b, i) => tl.fromTo(b, { scaleY: 0 }, { scaleY: 1, duration: 0.6, ease: 'expo.out' }, 19.95 + i * 0.08));
-      tl.fromTo('#word', { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 1.1, ease: 'expo.out' }, 20.02);
-      tl.fromTo('#wordRule', { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'expo.out' }, 20.25);
-      tl.fromTo('#tagline', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 20.45);
-      tl.fromTo('#cities', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 20.85);
-      tl.fromTo('#cta', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 21.01);
-      tl.fromTo('#ctaRing', { scale: 0.96, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: 'expo.out' }, 21.2);
-      tl.fromTo('#legal', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 21.4);
+      // ---- S3 logo sting (3.75 - 4.69): gold then ivory wipe, logo inverted on light
+      wipe('#wipeB', 3.42, 0.6);
+      tl.fromTo('#phone', { opacity: 1 }, { opacity: 0, duration: 0.01, immediateRender: false }, 3.72);
+      tl.fromTo('#old', { opacity: 1 }, { opacity: 0, duration: 0.01 }, 3.75);
+      tl.fromTo('#stingLogo', { scale: 1.45, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'expo.out' }, 3.75);
+      tl.fromTo('#stingLine', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: 'expo.out' }, 3.98);
+
+      // ---- S4 the real site in use (4.6875 - 8.6875)
+      tl.fromTo('#phone', { y: 260, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: 'expo.out', immediateRender: false }, 4.62);
+      tl.fromTo('#c4t', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, 4.7);
+      tl.fromTo('#tapnum', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 5.55);
+      const taps = { v: 1 };
+      tl.fromTo(taps, { v: 1 }, { v: 3, duration: B * 2, ease: 'steps(2)', onUpdate: () => { document.getElementById('tapDigit').textContent = Math.round(taps.v); } }, B * 12);
+      [B * 12, B * 13, B * 14].forEach(at => tl.fromTo('#tapnum', { scale: 1.35 }, { scale: 1, duration: 0.3, ease: 'back.out(2.5)', immediateRender: false }, at));
+      tl.to(['#c4t', '#tapnum'], { opacity: 0, y: -20, duration: 0.2 }, 8.4);
+
+      // ---- S5 WhatsApp (8.6 - 10.78)
+      tl.fromTo('#chat', { y: 1400, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, 8.55);
+      tl.fromTo('#toast', { y: -180, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'back.out(1.8)' }, B * 19.4);
+      tl.fromTo('#bubIn', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: 'expo.out' }, 9.7);
+      tl.fromTo('#c5t', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, 8.65);
+      tl.to('#c5t', { opacity: 0, y: -20, duration: 0.18 }, 10.55);
+      wipe('#wipeA', 10.5, 0.48);
+      tl.to('#phone', { opacity: 0, duration: 0.01 }, 10.74);
+
+      tl.to('#hud', { opacity: 0, duration: 0.05 }, 3.72);
+      tl.to('#hud', { opacity: 1, duration: 0.05 }, 4.66);
+      tl.to('#hud', { opacity: 0, duration: 0.05 }, 13.1);
+      tl.to('#hud', { opacity: 1, duration: 0.05 }, 15.0);
+
+      // ---- S6 features (10.78 - 13.125): one chip per beat + ticker
+      tl.fromTo('#featHead', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, 10.78);
+      document.querySelectorAll('#chips .chip').forEach((c, i) => {
+        tl.fromTo(c, { x: 1100, skewX: -10 }, { x: 0, skewX: 0, duration: 0.36, ease: 'expo.out' }, B * 23 + i * B - 0.06);
+      });
+      tl.fromTo('#tickerText', { x: 0 }, { x: -1400, duration: 2.4, ease: 'none' }, 10.75);
+
+      // ---- S7 price (13.125 - 15.0), light inversion
+      tl.fromTo('#price', { scale: 1.4, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'expo.out' }, 13.125);
+      tl.fromTo('#pLabel', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 13.2);
+      tl.fromTo('#pRule', { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: 'expo.out' }, 13.3);
+      ['#pl1', '#pl2', '#pl3'].forEach((s, i) => tl.fromTo(s, { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.28, ease: 'expo.out' }, B * 29 + i * B));
+
+      // ---- S8 proof (15.0 - 16.875)
+      wipe('#wipeB', 14.78, 0.45);
+      tl.fromTo('#proofHead', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 15.0);
+      tl.fromTo('#proofSub', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, 15.3);
+      tl.fromTo('#caseCard', { x: 1100, skewX: -10 }, { x: 0, skewX: 0, duration: 0.45, ease: 'expo.out' }, 15.6);
+      tl.fromTo('#caseArrow', { x: 0 }, { x: 16, duration: 0.23, repeat: 3, yoyo: true, ease: 'sine.inOut' }, 16.0);
+
+      // ---- S9 end card (16.875 - 19.7)
+      wipe('#wipeA', 16.62, 0.5);
+      tl.fromTo('#endLogo', { scale: 1.3, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.5, ease: 'expo.out' }, 16.875);
+      tl.fromTo('#endRule', { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, 17.05);
+      tl.fromTo('#endTag', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 17.2);
+      tl.fromTo('#endCities', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 17.5);
+      tl.fromTo('#cta', { x: 1100, skewX: -10 }, { x: 0, skewX: 0, duration: 0.45, ease: 'expo.out' }, 17.6);
+      tl.fromTo('#ctaArrow', { y: -6 }, { y: 10, duration: 0.23, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 18.05);
+      tl.fromTo('#tapHint', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 18.0);
+      tl.fromTo('#tapHint', { opacity: 1 }, { opacity: 0.35, duration: 0.23, repeat: 5, yoyo: true, ease: 'sine.inOut', immediateRender: false }, 18.35);
 
       window.__timelines["main"] = tl;
     </script>
