@@ -93,14 +93,15 @@
       .cta span { display: block; font: 300 italic 32px var(--serif); color: var(--gold-deep); margin-top: 4px; }
 
       /* hook: a near-empty appointment book */
-      .hook-cap { position: absolute; left: 76px; right: 76px; top: 380px; font: 300 112px/1.0 var(--serif); letter-spacing: -.025em; }
-      .book { position: absolute; left: 76px; right: 76px; top: 640px; height: 560px; background: #fbfaf6; box-shadow: 0 40px 90px rgba(70,52,24,.18); padding: 34px 36px; }
+      .hook-lead { display: block; font: 300 66px/1.1 var(--serif); color: #4a443c; margin-bottom: 10px; }
+      .hook-cap { position: absolute; left: 76px; right: 60px; top: 385px; font: 300 112px/1.0 var(--serif); letter-spacing: -.025em; }
+      .book { position: absolute; left: 76px; right: 76px; top: 750px; height: 500px; background: #fbfaf6; box-shadow: 0 40px 90px rgba(70,52,24,.18); padding: 34px 36px; }
       .book::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(138,106,56,.28); pointer-events: none; }
       .book-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
       .book-head b { font: 300 46px var(--serif); }
       .book-head span { color: #8a6a38; }
       .book-grid { display: grid; grid-template-columns: 70px repeat(6, 1fr); gap: 8px; }
-      .book-grid div { height: calc((560px - 170px) / 6 - 8px); border-top: 1px solid rgba(26,23,20,.12); font: 400 18px var(--sans); color: #635c52; padding-top: 6px; letter-spacing: .08em; }
+      .book-grid div { height: calc((500px - 170px) / 6 - 8px); border-top: 1px solid rgba(26,23,20,.12); font: 400 18px var(--sans); color: #635c52; padding-top: 6px; letter-spacing: .08em; }
       .book-grid .slot-booked { background: #1a1714; color: #e9e1d3; border-top: 0; padding: 8px 10px; font: 400 17px var(--sans); }
       .book-grid .empty { background: rgba(138,106,56,.05); }
       .book-tally { position: absolute; right: 36px; bottom: 26px; font: 300 italic 34px var(--serif); color: #8a6a38; }
@@ -207,7 +208,7 @@
 
       <section id="hook" class="clip" data-start="0" data-duration="2.3" data-track-index="1">
         <div id="hookCam" class="clip">
-          <div class="hook-cap"><span id="hookT">Struggling to get <span class="it">bookings?</span></span></div>
+          <div class="hook-cap"><span id="hookT"><span class="hook-lead">Is your clinic</span>struggling to get <span class="it">dental bookings?</span></span></div>
           <div class="book" id="book">
             <div class="book-head"><b>This week</b><span class="label">Appointments</span></div>
             <div class="book-grid" id="bookGrid"><div></div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>9AM</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div>10AM</div><div class="empty"></div><div class="slot-booked">Scaling</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div>11AM</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div>2PM</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div>3PM</div><div class="empty"></div><div class="empty"></div><div class="empty"></div><div class="slot-booked">Filling</div><div class="empty"></div><div class="empty"></div></div>

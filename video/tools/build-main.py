@@ -6,7 +6,7 @@ layout and end card with tools/build-ads.py, restyled light here. Timing is on
 an 80 BPM grid (B = 0.75 s); tools/compose-music-main.py places its hits on the
 same beats.
 
-  0   - 3B   Problem  "Struggling to get bookings?" near-empty appointment book
+  0   - 3B   Problem  "Is your clinic struggling to get dental bookings?" near-empty appointment book
   3B  - 5B   Problem  "Your website isn't bringing in leads." old site, CALL ONLY
   5B  - 7B   Turn     old site wipes away: "Here's how we fix it. Three steps."
   7B  - 11B  Step 1   we run ads to patients nearby: Instagram-style sponsored post, tap Book now
@@ -28,9 +28,9 @@ B = 60 / BPM
 DUR = 19.9
 
 FMT = {
-    "916": dict(hookCap=380, calT=640, calH=560, stepCap=372,
+    "916": dict(hookCap=385, calT=750, calH=500, stepCap=372,
                 offerLabel=430, offerHead=480, freeT=650, oline1=830, oline2=940),
-    "45": dict(hookCap=150, calT=450, calH=640, stepCap=118,
+    "45": dict(hookCap=145, calT=505, calH=590, stepCap=118,
                offerLabel=330, offerHead=380, freeT=550, oline1=730, oline2=840),
 }
 
@@ -58,7 +58,8 @@ LIGHT_CSS = r"""
 
 EXTRA_CSS = r"""
       /* hook: a near-empty appointment book */
-      .hook-cap { position: absolute; left: 76px; right: 76px; top: [[hookCap]]px; font: 300 112px/1.0 var(--serif); letter-spacing: -.025em; }
+      .hook-lead { display: block; font: 300 66px/1.1 var(--serif); color: #4a443c; margin-bottom: 10px; }
+      .hook-cap { position: absolute; left: 76px; right: 60px; top: [[hookCap]]px; font: 300 112px/1.0 var(--serif); letter-spacing: -.025em; }
       .book { position: absolute; left: 76px; right: 76px; top: [[calT]]px; height: [[calH]]px; background: #fbfaf6; box-shadow: 0 40px 90px rgba(70,52,24,.18); padding: 34px 36px; }
       .book::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(138,106,56,.28); pointer-events: none; }
       .book-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
@@ -161,7 +162,7 @@ def appointment_book():
 BODY = r"""
       <section id="hook" class="clip" data-start="0" data-duration="2.3" data-track-index="1">
         <div id="hookCam" class="clip">
-          <div class="hook-cap"><span id="hookT">Struggling to get <span class="it">bookings?</span></span></div>
+          <div class="hook-cap"><span id="hookT"><span class="hook-lead">Is your clinic</span>struggling to get <span class="it">dental bookings?</span></span></div>
           <div class="book" id="book">
             <div class="book-head"><b>This week</b><span class="label">Appointments</span></div>
             <div class="book-grid" id="bookGrid">[[BOOK]]</div>
