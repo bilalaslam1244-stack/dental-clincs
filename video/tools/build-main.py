@@ -9,7 +9,7 @@ same beats.
   0   - 3B   Problem  "Is your clinic struggling to get dental bookings?" near-empty appointment book
   3B  - 5B   Problem  "Your website isn't bringing in leads." old site, CALL ONLY
   5B  - 7B   Turn     old site wipes away: "Here's how we fix it. Three steps."
-  7B  - 11B  Step 1   we run ads to patients nearby: Instagram-style sponsored post, tap Book now
+  7B  - 11B  Step 1   ads to patients nearby: Instagram-style sponsored post, tap Book now
   11B - 15B  Step 2   they book on the new website in three taps
   15B - 18B  Step 3   the booking lands in the clinic's WhatsApp
   18B - 23B  Offer    2 weeks of leads, free; keep going or walk away
@@ -164,7 +164,7 @@ BODY = r"""
         <div id="hookCam" class="clip">
           <div class="hook-cap"><span id="hookT"><span class="hook-lead">Is your clinic</span>struggling to get <span class="it">dental bookings?</span></span></div>
           <div class="book" id="book">
-            <div class="book-head"><b>This week</b><span class="label">Appointments</span></div>
+            <div class="book-head"><b>This week</b></div>
             <div class="book-grid" id="bookGrid">[[BOOK]]</div>
             <div class="book-tally" id="tally">2 of 30 slots filled</div>
           </div>
@@ -172,9 +172,9 @@ BODY = r"""
       </section>
       <section id="cOld" class="clip" data-start="2.25" data-duration="1.55" data-track-index="2"><div class="cap"><span id="cOt">Your website isn't <span class="it">bringing in leads.</span></span></div></section>
       <section id="cFix" class="clip" data-start="3.75" data-duration="1.55" data-track-index="2"><div class="cap"><span id="cFt">Here's how we fix it. <span class="it">Three steps.</span></span></div></section>
-      <section id="s1" class="clip" data-start="5.25" data-duration="3.05" data-track-index="2"><div class="step-cap" id="s1t"><span class="label"><b>Step 1</b> of 3 · Meta &amp; Google ads · within 5 km</span><span class="t">We run ads to patients <span class="it">near your clinic.</span></span></div></section>
-      <section id="s2" class="clip" data-start="8.25" data-duration="3.05" data-track-index="2"><div class="step-cap" id="s2t"><span class="label"><b>Step 2</b> of 3 · Website</span><span class="t">They book on your new site <span class="it">in three taps.</span></span></div></section>
-      <section id="s3" class="clip" data-start="11.25" data-duration="2.3" data-track-index="2"><div class="step-cap" id="s3t"><span class="label"><b>Step 3</b> of 3 · WhatsApp</span><span class="t">The booking lands in <span class="it">your WhatsApp.</span></span></div></section>
+      <section id="s1" class="clip" data-start="5.25" data-duration="3.05" data-track-index="2"><div class="step-cap" id="s1t"><span class="label"><b>Step 1</b> of 3</span><span class="t">We run ads to patients <span class="it">near your clinic.</span></span></div></section>
+      <section id="s2" class="clip" data-start="8.25" data-duration="3.05" data-track-index="2"><div class="step-cap" id="s2t"><span class="label"><b>Step 2</b> of 3</span><span class="t">They book on your new site <span class="it">in three taps.</span></span></div></section>
+      <section id="s3" class="clip" data-start="11.25" data-duration="2.3" data-track-index="2"><div class="step-cap" id="s3t"><span class="label"><b>Step 3</b> of 3</span><span class="t">The booking lands in <span class="it">your WhatsApp.</span></span></div></section>
 
       <div class="phone-window" id="phoneWindow"><div class="phone-wrap"><div id="phone">
         <div class="screen">
@@ -233,6 +233,8 @@ BODY = r"""
 
 JS = r"""
       // ---- PROBLEM (0 - 3B): the question, a near-empty appointment book
+      tl.fromTo('#hud', { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.to('#hud', { opacity: 1, duration: 0.5 }, B * 3);
       tl.fromTo('#hookT', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0);
       tl.fromTo('#book', { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out' }, 0.25);
       tl.fromTo('#hookCam', { scale: 1 }, { scale: 1.05, duration: B * 3, ease: 'none', transformOrigin: '50% 60%' }, 0);
