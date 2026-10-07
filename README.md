@@ -5,8 +5,9 @@ Fixed-price clinic websites with WhatsApp booking, for Johor Bahru and Kuala Lum
 - `docs/copy-deck.md`: ad scripts (EN/Manglish, Mandarin), agency site outline, deployment notes.
 - `demo-clinic/index.html`: demo clinic site (Lumen Dental, a fictional clinic) showing the package: three-tap WhatsApp reservation, fee ranges, live opening hours, parking, panels. Static, no build step.
 - `brand/`: 4Skales logo, traced to SVG (`4skales-logo.svg` uses currentColor) plus ink/ivory SVG and transparent PNG versions.
-- `video/`: three 7.5s Meta ads, each in 9:16 (Reels/Stories) and 4:5 (Feed), built with HyperFrames. Finished files are in `video/renders/`; ad copy is in `video/share-copy.txt`.
-  - ad1 Missed calls, ad2 Three-tap booking, ad3 The offer.
+- `video/`: Meta ads built with HyperFrames, each in 9:16 (Reels/Stories) and 4:5 (Feed). Finished files are in `video/renders/`; ad copy is in `video/share-copy.txt`.
+  - Main ad (14s, 80 BPM): before / after / targeting / free 30 days of patient leads / CTA. Built by `tools/build-main.py`, music by `tools/compose-music-main.py`, site demo `assets/screen-80.mp4` (`BPM=80 OUT=assets/screen-80.mp4 node tools/record-site.mjs ...`).
+  - Short cuts (7.5s, 92 BPM) for retargeting: ad1 Missed calls, ad2 Three-tap booking, ad3 The offer. Built by `tools/build-ads.py`.
 
 ## Rebuilding the ads
 

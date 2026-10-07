@@ -7,7 +7,9 @@ const require = createRequire('/opt/node22/lib/node_modules/');
 const { chromium } = require('playwright');
 
 const [url, out] = process.argv.slice(2);
-const B = 60 / 92;            // taps land on the soundtrack's beats (92 BPM)
+const BPM = Number(process.env.BPM || 92);   // taps land on the soundtrack's beats
+const OUT = process.env.OUT || 'assets/screen.mp4';
+const B = 60 / BPM;
 const FPS = 30, DUR = B * 10.2;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const prog = (t, a, b) => clamp((t - a) / (b - a));
@@ -66,5 +68,5 @@ for (let i = 0; i < n; i++) {
   await page.screenshot({ path: `${out}/${String(i).padStart(4, '0')}.png` });
 }
 await browser.close();
-execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', `${out}/%04d.png`, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '15', '-preset', 'slow', 'assets/screen.mp4']);
-console.log('wrote assets/screen.mp4', n, 'frames; S1', S1, 'S2', S2);
+execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', `${out}/%04d.png`, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '15', '-preset', 'slow', OUT]);
+console.log('wrote', OUT, n, 'frames; S1', S1, 'S2', S2);
