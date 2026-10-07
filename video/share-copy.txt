@@ -1,7 +1,11 @@
 Meta ad copy (primary text / headline). CTA button: Send Message (WhatsApp).
 
-MAIN AD · Redesign + free 30 days (16.5s)
-Primary: Struggling to get bookings? Still running a "call to book" website? We redesign it so patients book in three taps on WhatsApp, then put it in front of patients near your clinic. Try it with 30 days of patient leads, free. Like the results? Keep going. Not for you? Walk away.
+MAIN AD · How it works, 3 steps + free 30 days (18.4s)
+Primary: Struggling to get bookings? Your website should be doing the work. Here's how 4Skales fixes it:
+1. We run Meta & Google ads to patients near your clinic.
+2. They book on your redesigned website in three taps.
+3. The booking lands straight in your WhatsApp.
+Try it with 30 days of leads, free. Like the results? Keep going. Not for you? Walk away.
 Headline: 30 days of patient leads, free
 
 Short cuts (retargeting people who watched the main ad):

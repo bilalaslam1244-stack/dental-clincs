@@ -121,16 +121,38 @@
       .broken { border: 2px inset #aaa; display: flex; align-items: center; justify-content: center; color: #555; font: 14px Arial, sans-serif; margin: 12px 0; }
       .stamp { position: absolute; left: 90px; top: 560px; padding: 18px 30px; border: 6px solid #c8574a; color: #c8574a; font: 500 54px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; background: rgba(255,255,255,.92); }
 
-      /* reach: a light map */
-      .map { position: absolute; left: 70px; right: 70px; top: 600px; height: 640px; background: #ece6da; overflow: hidden; box-shadow: 0 40px 90px rgba(70,52,24,.18); }
-      .map::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(138,106,56,.3); z-index: 2; pointer-events: none; }
-      .map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-      .map-tag { position: absolute; left: 34px; top: 30px; color: #8a6a38; }
-      .toasts { position: absolute; left: 30px; right: 30px; bottom: 30px; }
-      .ltoast { position: relative; height: 86px; margin-top: 10px; border-radius: 24px; background: #fffdf8; color: #1a1714; display: flex; align-items: center; gap: 20px; padding: 0 24px; box-shadow: 0 14px 30px rgba(70,52,24,.16); }
-      .ltoast i { width: 54px; height: 54px; border-radius: 14px; background: #2f8a57; flex: none; }
-      .ltoast b { display: block; font: 500 26px var(--sans); }
-      .ltoast span { display: block; font: 300 23px var(--sans); color: #4b4a45; }
+      /* steps */
+      .step-cap { position: absolute; left: 76px; right: 76px; top: 372px; }
+      .step-cap .label { display: block; color: #74572a; margin-bottom: 14px; }
+      .step-cap .label b { font-weight: 500; color: #1a1714; }
+      .step-cap span.t { display: block; font: 300 72px/1.04 var(--serif); letter-spacing: -.02em; }
+      .chip2 { position: absolute; top: 18px; height: 52px; padding: 0 22px; display: flex; align-items: center; clip-path: var(--chamfer); font: 500 22px var(--sans); letter-spacing: .26em; }
+
+      /* step 1: a social feed with the clinic's sponsored post */
+      #feed { position: absolute; inset: 0; background: #faf9f6; overflow: hidden; }
+      #feedScroll { position: absolute; left: 0; right: 0; top: 0; }
+      .f-top { height: 150px; padding: 80px 34px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ebe7df; background: #faf9f6; position: relative; z-index: 2; }
+      .f-top b { font: 500 34px var(--sans); letter-spacing: .02em; }
+      .f-top span { width: 120px; height: 18px; border-radius: 9px; background: #e7e2d8; }
+      .f-ghost { height: 280px; margin: 22px 26px; border-radius: 22px; background: linear-gradient(135deg, #e9e4da, #ddd6c9); }
+      .f-head { height: 104px; display: flex; align-items: center; gap: 18px; padding: 0 30px; }
+      .f-head i { width: 64px; height: 64px; border-radius: 50%; border: 1px solid #c9a96e; display: flex; align-items: center; justify-content: center; font: 300 italic 30px var(--serif); color: #8a6a38; background: #fff; }
+      .f-head b { display: block; font: 500 28px var(--sans); }
+      .f-head span { display: block; font: 300 22px var(--sans); color: #6d665c; }
+      .f-img { height: 420px; margin: 0 0; background: #f1ece2; position: relative; padding: 52px 56px; border-top: 1px solid #ebe7df; border-bottom: 1px solid #ebe7df; }
+      .f-img::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(138,106,56,.35); }
+      .f-brand { font: 300 64px var(--serif); }
+      .f-brand em { color: #8a6a38; }
+      .f-line { font: 300 80px/1.0 var(--serif); margin-top: 34px; letter-spacing: -.02em; }
+      .f-sub { font: 400 24px var(--sans); color: #5f584e; letter-spacing: .14em; text-transform: uppercase; margin-top: 22px; }
+      .f-badge { display: inline-block; margin-top: 22px; padding: 14px 24px; background: #1a1714; color: #e9d9b8; font: 300 italic 32px var(--serif); }
+      .f-cta { height: 96px; margin: 0; padding: 0 30px; display: flex; align-items: center; justify-content: space-between; background: #1a1714; color: #f3f0e9; font: 500 28px var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+      .f-copy { padding: 22px 30px; font: 300 26px/1.4 var(--sans); color: #3c3832; }
+      .f-copy b { font-weight: 500; }
+      .finger { position: absolute; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 50%; background: rgba(255,255,255,.6); border: 3px solid rgba(26,23,20,.55); box-shadow: 0 8px 20px rgba(0,0,0,.2); }
+
+      /* step 3: WhatsApp */
+      .chat-top { background: #1f2a25; }
 
       /* offer (sand) */
       .o-label { position: absolute; left: 80px; top: 400px; color: #8a6a38; }
@@ -159,8 +181,8 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="16.5" data-width="1080" data-height="1920">
-      <section id="bg" class="clip" data-start="0" data-duration="16.5" data-track-index="0">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="18.4" data-width="1080" data-height="1920">
+      <section id="bg" class="clip" data-start="0" data-duration="18.4" data-track-index="0">
         <div class="grid" id="grid"></div>
         <div class="grain"></div>
         <div class="frame"></div>
@@ -178,13 +200,28 @@
           </div>
         </div>
       </section>
-      <section id="cBefore" class="clip" data-start="2.25" data-duration="2.3" data-track-index="2"><div class="cap"><span id="cBt">Still running an <span class="it">outdated website?</span></span></div></section>
-      <section id="cAfter" class="clip" data-start="4.5" data-duration="3.05" data-track-index="2"><div class="cap"><span id="cAt">After: patients book <span class="it">in three taps.</span></span></div></section>
-      <section id="cReach" class="clip" data-start="7.5" data-duration="3.05" data-track-index="2"><div class="cap"><span id="cRt">Then we put it in front of <span class="it">patients nearby.</span></span></div></section>
+      <section id="cOld" class="clip" data-start="2.25" data-duration="1.55" data-track-index="2"><div class="cap"><span id="cOt">Your website isn't <span class="it">bringing in leads.</span></span></div></section>
+      <section id="cFix" class="clip" data-start="3.75" data-duration="1.55" data-track-index="2"><div class="cap"><span id="cFt">Here's how we fix it. <span class="it">Three steps.</span></span></div></section>
+      <section id="s1" class="clip" data-start="5.25" data-duration="3.05" data-track-index="2"><div class="step-cap" id="s1t"><span class="label"><b>Step 1</b> of 3 · Meta &amp; Google ads · within 5 km</span><span class="t">We run ads to patients <span class="it">near your clinic.</span></span></div></section>
+      <section id="s2" class="clip" data-start="8.25" data-duration="3.05" data-track-index="2"><div class="step-cap" id="s2t"><span class="label"><b>Step 2</b> of 3 · Website</span><span class="t">They book on your new site <span class="it">in three taps.</span></span></div></section>
+      <section id="s3" class="clip" data-start="11.25" data-duration="2.3" data-track-index="2"><div class="step-cap" id="s3t"><span class="label"><b>Step 3</b> of 3 · WhatsApp</span><span class="t">The booking lands in <span class="it">your WhatsApp.</span></span></div></section>
 
       <div class="phone-window" id="phoneWindow"><div class="phone-wrap"><div id="phone">
         <div class="screen">
-          <video id="screen-video" src="assets/screen-80.mp4" data-start="4.5" data-duration="3.1" data-media-start="1.875" data-track-index="3" muted playsinline></video>
+          <video id="screen-video" src="assets/screen-80.mp4" data-start="8.25" data-duration="3.05" data-media-start="1.875" data-track-index="3" muted playsinline></video>
+          <div id="feed" data-layout-allow-overlap data-layout-allow-occlusion>
+            <div class="f-top"><span></span><b>Feed</b></div>
+            <div id="feedScroll">
+              <div style="height:150px"></div>
+              <div class="f-ghost"></div>
+              <div class="f-head"><i>L</i><div><b>Lumen Dental</b><span>Sponsored · Mount Austin</span></div></div>
+              <div class="f-img"><div class="f-brand">Lumen <em>Dental</em></div><div class="f-line">Check-up &amp; scaling</div><div class="f-sub">Mount Austin · Open weekends</div></div>
+              <div class="f-cta" id="bookNow"><span>Book now</span><span>›</span></div>
+              <div class="f-copy"><b>Lumen Dental</b> Unhurried dental care, five minutes from you.</div>
+              <div class="f-ghost"></div>
+            </div>
+            <div class="finger" id="adFinger"></div>
+          </div>
           <div id="old" data-layout-allow-overlap data-layout-allow-occlusion>
             <div class="old-page" id="oldPage">
               <div class="old-head">★ Welcome To Our Dental Clinic Homepage ★</div>
@@ -205,35 +242,30 @@
             </div>
             <div class="stamp" id="stamp" data-layout-allow-overlap>Call only</div>
           </div>
+          <div id="chat" data-layout-allow-overlap data-layout-allow-occlusion>
+            <div class="chat-top" data-layout-allow-overlap><div class="chat-av">L</div><div><b>Lumen Dental</b><span>online</span></div></div>
+            <div class="chat-body">
+              <div class="bub out">Hi Lumen Dental, I'm Mei Ling. I'd like to reserve: Check-up &amp; scaling. Preferred: Saturday, morning.<small>10:42 ✓✓</small></div>
+              <div class="bub in" id="bubIn">Hello Mei Ling, Saturday at 10:00am is available. Shall we confirm?<small>10:44</small></div>
+            </div>
+            <div class="toast" id="toast" data-layout-allow-overlap><i></i><div><b>New booking · Mei Ling</b><span>Check-up &amp; scaling · Sat morning</span></div></div>
+          </div>
         </div>
       </div></div>
         <div class="ba before" id="baBefore">BEFORE</div>
-        <div class="ba after" id="baAfter">AFTER</div>
       </div>
 
-      <section id="reach" class="clip" data-start="7.5" data-duration="3.05" data-track-index="4">
-        <div class="map" id="map">
-          <div id="mapCam" class="clip"><svg viewBox="0 0 940 640" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 512 C 220 474, 520 550, 940 486 L 940 640 L 0 640 Z" fill="#d5ddd9"/><line x1="-315" y1="0" x2="-195" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="-266" y1="0" x2="-146" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="-206" y1="0" x2="-86" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="-163" y1="0" x2="-43" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="-103" y1="0" x2="17" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="-54" y1="0" x2="66" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="-7" y1="0" x2="113" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="52" y1="0" x2="172" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="97" y1="0" x2="217" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="155" y1="0" x2="275" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="201" y1="0" x2="321" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="253" y1="0" x2="373" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="311" y1="0" x2="431" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="369" y1="0" x2="489" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="410" y1="0" x2="530" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="464" y1="0" x2="584" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="522" y1="0" x2="642" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="579" y1="0" x2="699" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="625" y1="0" x2="745" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="674" y1="0" x2="794" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="736" y1="0" x2="856" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="773" y1="0" x2="893" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="838" y1="0" x2="958" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="881" y1="0" x2="1001" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="930" y1="0" x2="1050" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="982" y1="0" x2="1102" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="1037" y1="0" x2="1157" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="1097" y1="0" x2="1217" y2="640" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="-4" x2="940" y2="-94" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="49" x2="940" y2="-41" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="98" x2="940" y2="8" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="142" x2="940" y2="52" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="193" x2="940" y2="103" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="235" x2="940" y2="145" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="283" x2="940" y2="193" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="332" x2="940" y2="242" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="386" x2="940" y2="296" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="431" x2="940" y2="341" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="478" x2="940" y2="388" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="529" x2="940" y2="439" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="575" x2="940" y2="485" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="622" x2="940" y2="532" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="676" x2="940" y2="586" stroke="#e1d9ca" stroke-width="2"/><line x1="0" y1="722" x2="940" y2="632" stroke="#e1d9ca" stroke-width="2"/><path d="M-20 192 C 260 230, 520 141, 980 192" stroke="#fffdf8" stroke-width="10" fill="none"/><path d="M282 -20 C 395 192, 517 352, 583 660" stroke="#fffdf8" stroke-width="10" fill="none"/><path d="M-20 397 C 300 371, 640 448, 980 384" stroke="#f7f3ea" stroke-width="7" fill="none"/><text x="90" y="128" fill="#6d665c" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">SKUDAI</text><text x="510" y="112" fill="#6d665c" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">MOUNT AUSTIN</text><text x="560" y="448" fill="#6d665c" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">JOHOR BAHRU</text><text x="40" y="595" fill="#6d665c" font-family="Jost" font-weight="500" font-size="18" letter-spacing="5">STRAITS OF JOHOR</text><circle id="ring0" cx="470" cy="192" r="120" fill="rgba(138,106,56,.07)" stroke="#8a6a38" stroke-width="2" stroke-dasharray="none"/><circle id="ring1" cx="470" cy="192" r="190" fill="rgba(138,106,56,.07)" stroke="#8a6a38" stroke-width="2" stroke-dasharray="8 10"/><circle class="dot" cx="475" cy="322" r="6" fill="#8a6a38"/><circle class="dot" cx="294" cy="167" r="6" fill="#8a6a38"/><circle class="dot" cx="457" cy="101" r="6" fill="#8a6a38"/><circle class="dot" cx="535" cy="185" r="6" fill="#8a6a38"/><circle class="dot" cx="326" cy="265" r="6" fill="#8a6a38"/><circle class="dot" cx="547" cy="290" r="6" fill="#8a6a38"/><circle class="dot" cx="621" cy="226" r="6" fill="#8a6a38"/><circle class="dot" cx="483" cy="63" r="6" fill="#8a6a38"/><circle class="dot" cx="545" cy="124" r="6" fill="#8a6a38"/><circle class="dot" cx="421" cy="68" r="6" fill="#8a6a38"/><circle class="dot" cx="358" cy="136" r="6" fill="#8a6a38"/><circle class="dot" cx="569" cy="52" r="6" fill="#8a6a38"/><circle class="dot" cx="317" cy="215" r="6" fill="#8a6a38"/><circle class="dot" cx="618" cy="245" r="6" fill="#8a6a38"/><circle class="dot" cx="356" cy="56" r="6" fill="#8a6a38"/><circle class="dot" cx="514" cy="110" r="6" fill="#8a6a38"/><circle class="dot" cx="353" cy="284" r="6" fill="#8a6a38"/><circle class="dot" cx="598" cy="208" r="6" fill="#8a6a38"/><circle class="dot" cx="502" cy="243" r="6" fill="#8a6a38"/><circle class="dot" cx="625" cy="246" r="6" fill="#8a6a38"/><circle class="dot" cx="535" cy="254" r="6" fill="#8a6a38"/><circle class="dot" cx="333" cy="293" r="6" fill="#8a6a38"/><circle class="dot" cx="581" cy="248" r="6" fill="#8a6a38"/><circle class="dot" cx="300" cy="143" r="6" fill="#8a6a38"/><circle class="dot" cx="544" cy="48" r="6" fill="#8a6a38"/><circle class="dot" cx="448" cy="300" r="6" fill="#8a6a38"/><circle class="dot" cx="357" cy="317" r="6" fill="#8a6a38"/><circle class="dot" cx="541" cy="175" r="6" fill="#8a6a38"/><circle class="dot" cx="511" cy="266" r="6" fill="#8a6a38"/><circle class="dot" cx="484" cy="310" r="6" fill="#8a6a38"/><circle class="dot" cx="387" cy="145" r="6" fill="#8a6a38"/><circle class="dot" cx="593" cy="195" r="6" fill="#8a6a38"/><circle class="dot" cx="373" cy="286" r="6" fill="#8a6a38"/><circle class="dot" cx="621" cy="151" r="6" fill="#8a6a38"/><g id="pin"><circle cx="470" cy="192" r="16" fill="#1a1714"/><circle cx="470" cy="192" r="6" fill="#d9c7a3"/><text x="498" y="200" fill="#1a1714" font-family="Newsreader" font-style="italic" font-size="30">Your clinic</text></g></svg></div>
-          <div class="map-tag label">Targeting · 5 km</div>
-          <div class="toasts" data-layout-allow-overlap>
-            <div class="ltoast" id="t1"><i></i><div><b>New booking · Mei Ling</b><span>Check-up &amp; scaling · Saturday</span></div></div>
-            <div class="ltoast" id="t2"><i></i><div><b>New booking · Arif</b><span>Tooth pain · today</span></div></div>
-            <div class="ltoast" id="t3"><i></i><div><b>New booking · Wei Jie</b><span>Braces consultation · Sunday</span></div></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="offer" class="clip light" data-start="10.5" data-duration="3.05" data-track-index="5">
+      <section id="offer" class="clip light" data-start="13.5" data-duration="2.3" data-track-index="5">
         <div id="offerCam" class="clip">
-          <div class="o-label label" id="oLabel">The offer</div>
-          <div class="o-head" id="oHead">30 days of patient leads.</div>
+          <div class="o-label label" id="oLabel">Try it</div>
+          <div class="o-head" id="oHead">30 days of leads.</div>
           <div class="free" id="free">Free.</div>
           <div class="o-line" id="ol1" style="top:930px">Like the results? <em>Keep going.</em></div>
           <div class="o-line" id="ol2" style="top:1040px">Not for you? <em>Walk away.</em></div>
         </div>
       </section>
 
-      <section id="end" class="clip" data-start="13.5" data-duration="3.0" data-track-index="7">
+      <section id="end" class="clip" data-start="15.75" data-duration="2.65" data-track-index="7">
         <div id="endCam" class="clip">
           <div class="end-logo" id="endLogo"><img src="assets/4skales-logo-ink.svg" alt="4Skales"></div>
           <div class="end-rule" id="endRule"></div>
@@ -244,10 +276,10 @@
         </div>
       </section>
       <div class="wipe" id="wipe"></div>
-      <audio id="music" src="assets/music-main.mp3" data-start="0" data-duration="16.5" data-volume="1" data-track-index="8"></audio>
+      <audio id="music" src="assets/music-main.mp3" data-start="0" data-duration="18.4" data-volume="1" data-track-index="8"></audio>
     </div>
     <script>
-      const B = 60 / 80, DUR = 16.5;
+      const B = 60 / 80, DUR = 18.4;
       const tl = gsap.timeline({ paused: true });
       tl.fromTo('#grid', { y: 0 }, { y: -120, duration: DUR, ease: 'none' }, 0);
       tl.fromTo('#ghost', { x: 0 }, { x: -220, duration: DUR, ease: 'none' }, 0);
@@ -256,7 +288,7 @@
         tl.fromTo('#wipe', { x: 1500, skewX: -10 }, { x: -1900, skewX: -10, duration: dur, ease: 'power3.inOut', immediateRender: false }, at);
       }
 
-      // ---- HOOK (0 - 3B): question lands, the appointment book rises, empty slots breathe
+      // ---- PROBLEM (0 - 3B): the question, a near-empty appointment book
       tl.fromTo('#hookT', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0);
       tl.fromTo('#book', { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out' }, 0.25);
       tl.fromTo('#hookCam', { scale: 1 }, { scale: 1.05, duration: B * 3, ease: 'none', transformOrigin: '50% 60%' }, 0);
@@ -264,47 +296,59 @@
       tl.fromTo('#tally', { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, B * 2);
       tl.to(['#hookT', '#book'], { opacity: 0, y: -24, duration: 0.25, ease: 'power2.in', stagger: 0.04 }, B * 3 - 0.3);
 
-      // ---- BEFORE (3B - 6B): phone rises, push toward "phone call only", stamp on the beat
+      // ---- PROBLEM (3B - 5B): the outdated site, CALL ONLY on the beat
       tl.fromTo('#phone', { y: 1500 }, { y: 0, duration: 0.7, ease: 'expo.out' }, B * 3 - 0.1);
-      tl.fromTo('#cBt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 3);
+      tl.fromTo('#cOt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 3);
       tl.fromTo('#baBefore', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, B * 3 + 0.2);
-      tl.fromTo('#oldPage', { scale: 0.702, x: 0, y: 0 }, { scale: 1.25, x: -170, y: -250, duration: 2.2, ease: 'power1.inOut' }, B * 3);
-      tl.fromTo('#stamp', { scale: 2.2, opacity: 0, rotation: -14 }, { scale: 1, opacity: 1, rotation: -8, duration: 0.3, ease: 'back.out(2.2)' }, B * 5);
-      tl.to(['#cBt', '#baBefore'], { opacity: 0, duration: 0.2 }, B * 6 - 0.2);
+      tl.fromTo('#oldPage', { scale: 0.702, x: 0, y: 0 }, { scale: 1.2, x: -150, y: -230, duration: 1.6, ease: 'power1.inOut' }, B * 3);
+      tl.fromTo('#stamp', { scale: 2.2, opacity: 0, rotation: -14 }, { scale: 1, opacity: 1, rotation: -8, duration: 0.3, ease: 'back.out(2.2)' }, B * 4);
+      tl.to(['#cOt', '#baBefore'], { opacity: 0, duration: 0.2 }, B * 5 - 0.2);
 
-      // ---- AFTER (6B - 10B): the old site wipes away, zoom into the booking card for the taps
-      tl.fromTo('#old', { y: 0, opacity: 1 }, { y: -1400, duration: 0.5, ease: 'expo.inOut' }, B * 6 - 0.25);
-      tl.to('#old', { opacity: 0, duration: 0.01 }, B * 6 + 0.3);
-      tl.fromTo('#baAfter', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, B * 6);
-      tl.fromTo('#cAt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 6 + 0.05);
-      tl.fromTo('#phone', { scale: 1, transformOrigin: '45% 40%' }, { scale: 1.36, duration: 0.7, ease: 'power2.inOut', immediateRender: false }, B * 6.3);
-      tl.to('#phone', { scale: 1, duration: 0.6, ease: 'power2.inOut' }, B * 9.3);
-      tl.to(['#cAt', '#baAfter'], { opacity: 0, duration: 0.2 }, B * 10 - 0.25);
-      wipe(B * 10 - 0.4, 0.65);
-      tl.to('#phoneWindow', { opacity: 0, duration: 0.01 }, B * 10);
+      // ---- THE TURN (5B - 7B): the old site wipes away
+      tl.fromTo('#old', { x: 0, opacity: 1 }, { x: -720, duration: 0.55, ease: 'expo.inOut' }, B * 5 - 0.2);
+      tl.to('#old', { opacity: 0, duration: 0.01 }, B * 5 + 0.4);
+      tl.fromTo('#cFt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 5);
+      tl.to('#cFt', { opacity: 0, duration: 0.2 }, B * 7 - 0.2);
 
-      // ---- REACH (10B - 14B): pull back over the map, radius pulses, bookings arrive on the beat
-      tl.fromTo('#cRt', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 10 + 0.05);
-      tl.fromTo('#mapCam', { scale: 1.5, transformOrigin: '50% 30%' }, { scale: 1, duration: 1.4, ease: 'expo.out' }, B * 10);
-      tl.fromTo('#ring0', { scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { scale: 1, duration: 0.8, ease: 'expo.out' }, B * 10.3);
-      tl.fromTo('#ring1', { scale: 0, opacity: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { scale: 1, opacity: 1, duration: 1.0, ease: 'expo.out' }, B * 10.6);
-      tl.fromTo('#ring1', { scale: 1 }, { scale: 1.06, duration: B, repeat: 3, yoyo: true, ease: 'sine.inOut', immediateRender: false }, B * 12);
-      tl.fromTo('.dot', { opacity: 0, scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box' }, { opacity: 0.9, scale: 1, duration: 0.3, ease: 'back.out(2)', stagger: 0.035 }, B * 10.8);
-      ['#t1', '#t2', '#t3'].forEach((t, i) => tl.fromTo(t, { y: 60, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, B * (11 + i)));
-      tl.fromTo('#mapCam', { scale: 1 }, { scale: 1.06, duration: B * 3, ease: 'none', immediateRender: false }, B * 11.6);
-      tl.to('#cRt', { opacity: 0, duration: 0.2 }, B * 14 - 0.25);
+      // ---- STEP 1 (7B - 11B): the clinic's ad appears in the feed, tap Book now on the beat
+      tl.fromTo('#s1t', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 7);
+      tl.fromTo('#feedScroll', { y: 0 }, { y: -320, duration: 1.0, ease: 'power3.inOut' }, B * 7.4);
+      tl.to('#phone', { y: -150, duration: 1.0, ease: 'power3.inOut' }, B * 7.6);
+      tl.fromTo('#phone', { scale: 1, transformOrigin: '50% 60%' }, { scale: 1.08, duration: 1.2, ease: 'power2.inOut', immediateRender: false }, B * 8.3);
+      tl.fromTo('#adFinger', { x: 520, y: 1000, opacity: 0 }, { x: 351, y: 576, opacity: 1, duration: 0.6, ease: 'power2.out' }, B * 9.1);
+      tl.fromTo('#adFinger', { scale: 1 }, { scale: 0.75, duration: 0.1, yoyo: true, repeat: 1, ease: 'power1.inOut', immediateRender: false }, B * 10);
+      tl.fromTo('#bookNow', { backgroundColor: '#1a1714' }, { backgroundColor: '#8a6a38', duration: 0.12, ease: 'none' }, B * 10);
+      tl.to('#s1t', { opacity: 0, duration: 0.2 }, B * 11 - 0.2);
 
-      // ---- OFFER (14B - 18B): headline pulls back from a close-up, "Free." lands on the beat
-      tl.fromTo('#oHead', { scale: 1.7, opacity: 0, transformOrigin: '0% 30%' }, { scale: 1, opacity: 1, duration: 1.0, ease: 'expo.out' }, B * 14);
-      tl.fromTo('#oLabel', { opacity: 0 }, { opacity: 1, duration: 0.4 }, B * 14 + 0.2);
-      tl.fromTo('#free', { scale: 0.6, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, B * 15);
-      tl.fromTo('#ol1', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, B * 16);
-      tl.fromTo('#ol2', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, B * 17);
-      tl.fromTo('#offerCam', { scale: 1 }, { scale: 1.04, duration: B * 4, ease: 'none', transformOrigin: '30% 40%' }, B * 14);
-      tl.to('#hud', { opacity: 0, duration: 0.01 }, B * 14);
+      // ---- STEP 2 (11B - 15B): the tap opens the clinic's new site; zoom into the booking card for the taps
+      tl.fromTo('#feed', { x: 0, opacity: 1 }, { x: -720, duration: 0.45, ease: 'expo.inOut' }, B * 11 - 0.15);
+      tl.to('#feed', { opacity: 0, duration: 0.01 }, B * 11 + 0.35);
+      tl.to('#phone', { y: 0, scale: 1.36, transformOrigin: '45% 40%', duration: 0.6, ease: 'power2.inOut' }, B * 11.1);
+      tl.fromTo('#s2t', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 11);
+      tl.to('#phone', { scale: 1, duration: 0.5, ease: 'power2.inOut' }, B * 14.3);
+      tl.to('#s2t', { opacity: 0, duration: 0.2 }, B * 15 - 0.2);
+
+      // ---- STEP 3 (15B - 18B): WhatsApp slides up, push in on the new-booking notification
+      tl.fromTo('#chat', { y: 1400, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, B * 15 - 0.1);
+      tl.fromTo('#s3t', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, B * 15);
+      tl.fromTo('#toast', { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'back.out(1.8)' }, B * 16);
+      tl.fromTo('#phone', { scale: 1, transformOrigin: '50% 18%' }, { scale: 1.28, duration: 0.7, ease: 'power2.inOut', immediateRender: false }, B * 16);
+      tl.fromTo('#bubIn', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, B * 17);
+      tl.to('#s3t', { opacity: 0, duration: 0.2 }, B * 18 - 0.25);
       wipe(B * 18 - 0.4, 0.65);
+      tl.to('#phoneWindow', { opacity: 0, duration: 0.01 }, B * 18);
 
-      const E = B * 18;
+      // ---- OFFER (18B - 21B): "30 days of leads. Free." on the beat
+      tl.fromTo('#oHead', { scale: 1.6, opacity: 0, transformOrigin: '0% 30%' }, { scale: 1, opacity: 1, duration: 0.9, ease: 'expo.out' }, B * 18);
+      tl.fromTo('#oLabel', { opacity: 0 }, { opacity: 1, duration: 0.4 }, B * 18 + 0.2);
+      tl.fromTo('#free', { scale: 0.6, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)' }, B * 19);
+      tl.fromTo('#ol1', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, B * 19.67);
+      tl.fromTo('#ol2', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, B * 20.33);
+      tl.fromTo('#offerCam', { scale: 1 }, { scale: 1.04, duration: B * 3, ease: 'none', transformOrigin: '30% 40%' }, B * 18);
+      tl.to('#hud', { opacity: 0, duration: 0.01 }, B * 18);
+      wipe(B * 21 - 0.4, 0.65);
+
+      const E = B * 21;
 
       // ---- end card: logo pull-back, slow push-in, pointer to Meta's Send Message button
       tl.fromTo('#endLogo', { scale: 1.45, opacity: 0, transformOrigin: '0% 50%' }, { scale: 1, opacity: 1, duration: 0.7, ease: 'expo.out' }, E);

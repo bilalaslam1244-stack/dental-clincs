@@ -1,4 +1,4 @@
-"""Calm, beat-synced soundtrack for the 16.5 s main ad (hook, before/after, free 30 days).
+"""Calm, beat-synced soundtrack for the 18.4 s main ad (problem, three steps, free 30 days).
 
 80 BPM. Keys and a warm pad carry it; a soft kick and rim enter on the
 "after" cut and step back for the end card. Every hit sits on a cut
@@ -18,10 +18,10 @@ SR, tax, env, filt, hz, place = cm.SR, cm.tax, cm.env, cm.filt, cm.hz, cm.place
 BPM = 80
 B = 60 / BPM               # 0.75 s
 BAR = B * 4
-DUR = 16.5
-CUES = dict(stamp=5, after=6, taps=[7, 8, 9], targeting=10, pings=[11, 12, 13], offer=14, lines=[16, 17], end=18)
-PROG = [(38, [50, 53, 57, 60]), (40, [52, 55, 59, 62]), (41, [53, 57, 60, 64]),
-        (40, [52, 55, 59, 62]), (38, [50, 53, 57, 60]), (36, [48, 52, 55, 59, 64])]
+DUR = 18.4
+CUES = dict(stamp=4, after=5, steps=[7, 11, 15], book_now=10, taps=[12, 13, 14], pings=[16], offer=18, lines=[19.67, 20.33], end=21)
+PROG = [(38, [50, 53, 57, 60]), (40, [52, 55, 59, 62]), (41, [53, 57, 60, 64]), (43, [55, 59, 62, 65]),
+        (41, [53, 57, 60, 64]), (40, [52, 55, 59, 62]), (36, [48, 52, 55, 59, 64])]
 
 
 def pad(notes, length, rng):
@@ -74,7 +74,9 @@ def main():
     swell_into(CUES["after"])
     for b in CUES["taps"]:
         place(fx, cm.soft_tap(rng), b * B, 0.9)
-    place(fx, cm.whoosh(rng, 0.7), CUES["targeting"] * B - 0.35, 0.8)
+    for b in CUES["steps"]:
+        place(fx, cm.whoosh(rng, 0.7), b * B - 0.35, 0.7)
+    place(fx, cm.soft_tap(rng), CUES["book_now"] * B, 1.0)
     for b in CUES["pings"]:
         place(fx, cm.soft_ping(), b * B, 0.85)
     swell_into(CUES["offer"], 1.2)
