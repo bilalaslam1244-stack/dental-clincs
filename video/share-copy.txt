@@ -37,3 +37,23 @@ Headline: Clinic websites that take bookings
 AD 3 · The offer
 Primary: One fixed price: RM 6,800. No monthly retainer, the site is yours, live in about three weeks. Johor Bahru and Kuala Lumpur.
 Headline: Free site review for your clinic
+
+STATICS + MOTION ADS (hook, week, lock, offer) · one ad set per language
+Pre-filled WhatsApp message (filters out non-owners): "Hi, I own/manage [clinic name] in [area]. I'd like the 2 free weeks."
+
+ENGLISH
+Primary: For dental clinic owners in KL & JB (not for patients or job applicants). We run ads to patients near your clinic and the enquiries land straight in your WhatsApp. Try it: 2 weeks of patient enquiries, free. We even pay the ad spend. No card, no contract.
+Headline: 2 weeks of patient enquiries, free
+Description: We pay the ad spend. Walk away anytime.
+
+BAHASA MALAYSIA
+Primary: Untuk pemilik klinik pergigian di KL & JB (bukan untuk pesakit atau pencari kerja). Kami jalankan iklan kepada pesakit berhampiran klinik anda, dan pertanyaan terus masuk ke WhatsApp anda. Cuba dulu: 2 minggu pertanyaan pesakit, percuma. Kos iklan pun kami tanggung. Tiada kad, tiada kontrak.
+Headline: 2 minggu pertanyaan pesakit, percuma
+Description: Kos iklan kami tanggung. Berhenti bila-bila masa.
+Pre-filled message: "Hi, saya pemilik/pengurus [nama klinik] di [kawasan]. Saya nak cuba 2 minggu percuma."
+
+中文
+Primary: 专为吉隆坡和新山的牙科诊所老板（非病人或求职者）。我们为你投放广告，触达诊所附近的病人，咨询直接发到你的 WhatsApp。先试试：两周病人咨询，完全免费，连广告费都由我们承担。不用信用卡，不签合约。
+Headline: 两周病人咨询，完全免费
+Description: 广告费我们出，随时可停止。
+Pre-filled message: "你好，我是[诊所名称]（[地区]）的老板/负责人，想领取两周免费试用。"
