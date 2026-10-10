@@ -5,7 +5,7 @@ import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import { existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const CONCEPTS = ['hook', 'week', 'lock', 'offer'];
+const CONCEPTS = ['hook', 'week', 'lock', 'offer', 'calls', 'site', 'steps', 'claim'];
 const FORMATS = { '916': [1080, 1920, '9x16'], '45': [1080, 1350, '4x5'] };
 const LANGS = { en: 'statics.html', ms: 'statics-ms.html', zh: 'statics-zh.html' };
 mkdirSync('renders/statics', { recursive: true });

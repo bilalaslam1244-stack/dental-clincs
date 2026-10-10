@@ -69,6 +69,39 @@ T = [
     ('<p id="yes"><b>Like the results?</b> Keep going.</p>', '<p id="yes"><b>Suka hasilnya?</b> Teruskan.</p>', '<p id="yes"><b>满意效果？</b>继续合作。</p>'),
     ('<p id="no"><b>Not for you?</b> Walk away.</p>', '<p id="no"><b>Tak sesuai?</b> Berhenti saja.</p>', '<p id="no"><b>不适合？</b>随时停止。</p>'),
     ("<p><b>No card. No contract.</b> Just message us.</p>", "<p><b>Tiada kad. Tiada kontrak.</b> WhatsApp sahaja.</p>", "<p><b>不用信用卡，不签合约。</b>直接 WhatsApp 我们。</p>"),
+    # calls
+    ("<h1>Every missed call is a patient <em>booking elsewhere.</em></h1>", "<h1>Setiap panggilan tak berjawab, pesakit <em>tempah di tempat lain.</em></h1>", "<h1>每一通未接来电，都是病人<em>去了别家。</em></h1>"),
+    ("<b>Recents</b>", "<b>Terkini</b>", "<b>最近通话</b>"),
+    ("<span>4 missed</span>", "<span>4 tak berjawab</span>", "<span>4 个未接</span>"),
+    ("<span>Missed call</span>", "<span>Panggilan tak berjawab</span>", "<span>未接来电</span>"),
+    ("<span>Missed call · lunch break</span>", "<span>Tak berjawab · waktu rehat</span>", "<span>未接 · 午休时间</span>"),
+    ("<span>Missed call · Sunday</span>", "<span>Tak berjawab · Ahad</span>", "<span>未接 · 星期日</span>"),
+    ("<time>10:42 PM</time>", "<time>10:42 mlm</time>", "<time>晚上 10:42</time>"),
+    ("<time>9:15 PM</time>", "<time>9:15 mlm</time>", "<time>晚上 9:15</time>"),
+    ("<time>1:08 PM</time>", "<time>1:08 ptg</time>", "<time>下午 1:08</time>"),
+    ("<time>9:12 AM</time>", "<time>9:12 pg</time>", "<time>上午 9:12</time>"),
+    # site
+    ("<h1>Your website might be <em>losing you patients.</em></h1>", "<h1>Laman web anda mungkin <em>buat anda hilang pesakit.</em></h1>", "<h1>你的网站，可能正在<em>流失病人。</em></h1>"),
+    (">No online booking</div>", ">Tiada tempahan online</div>", ">无法在线预约</div>"),
+    (">No prices shown</div>", ">Tiada harga</div>", ">没有价格</div>"),
+    (">Slow on mobile</div>", ">Lambat di telefon</div>", ">手机上很慢</div>"),
+    # steps
+    ("<h1>3 steps to a fuller <em>appointment book.</em></h1>", "<h1>3 langkah untuk <em>jadual yang lebih penuh.</em></h1>", "<h1>三步，让<em>预约排满。</em></h1>"),
+    ("<p>We run ads to patients near your clinic.<span>Under your clinic's name, on Instagram &amp; Facebook.</span></p>",
+     "<p>Kami iklankan kepada pesakit berhampiran klinik anda.<span>Atas nama klinik anda, di Instagram &amp; Facebook.</span></p>",
+     "<p>我们向诊所附近的病人投放广告。<span>以你诊所的名义，在 Instagram 和 Facebook 上。</span></p>"),
+    ("<p>They tap once to message you.<span>No forms, no phone queue.</span></p>",
+     "<p>Mereka tekan sekali untuk mesej anda.<span>Tiada borang, tiada giliran telefon.</span></p>",
+     "<p>他们点一下就能联系你。<span>不用填表，不用排队打电话。</span></p>"),
+    ("<p>Bookings land in your WhatsApp.<span>Your front desk replies and books.</span></p>",
+     "<p>Tempahan masuk ke WhatsApp anda.<span>Kaunter anda balas dan tempah.</span></p>",
+     "<p>预约直接发到你的 WhatsApp。<span>前台回复并安排预约。</span></p>"),
+    # claim
+    ('<div class="claim"><small>Claim your</small>2 free <br>weeks.</div>', '<div class="claim"><small>Tuntut</small>2 minggu <br>percuma.</div>', '<div class="claim"><small>立即领取</small>两周<br>免费。</div>'),
+    ('<div class="free">Patient enquiries for your clinic, straight to WhatsApp.</div>', '<div class="free">Pertanyaan pesakit untuk klinik anda, terus ke WhatsApp.</div>', '<div class="free">病人咨询，直接发到你诊所的 WhatsApp。</div>'),
+    ("<p>We run the ads</p><p>We pay the ad spend</p>", "<p>Kami urus iklan</p><p>Kami bayar kos iklan</p>", "<p>我们投放广告</p><p>广告费我们付</p>"),
+    ("<p>No card, no contract</p><p>Walk away anytime</p>", "<p>Tiada kad, tiada kontrak</p><p>Berhenti bila-bila masa</p>", "<p>不用信用卡，不签约</p><p>随时可以停止</p>"),
+    ('<div class="tapnote">Tap “Send WhatsApp message” below ↓</div>', '<div class="tapnote">Tekan “Hantar mesej WhatsApp” di bawah ↓</div>', '<div class="tapnote">点击下方「发送 WhatsApp 消息」↓</div>'),
 ]
 
 LANG_CSS = {
@@ -87,6 +120,13 @@ LANG_CSS = {
   .go-big { font-size: 24px; letter-spacing: .14em; padding: 28px 36px; }
   .free { font-size: 74px; }
   .f45 .free { font-size: 64px; }
+  .claim { font-size: 190px; }
+  .f45 .claim { font-size: 150px; }
+  .f45 .claim br { display: inline; }
+  #claim .free { font-size: 58px; }
+  .f45 #claim .free { font-size: 50px; }
+  .checks p { font-size: 28px; }
+  .f45 .checks p { font-size: 24px; }
   .f45 .go-big { font-size: 22px; }
 """,
     "zh": """
@@ -101,6 +141,8 @@ LANG_CSS = {
   .big { letter-spacing: -.02em; }
   .deal .go, .cta { letter-spacing: .1em; }
   .tag { letter-spacing: .2em; }
+  .claim { line-height: 1.08; }
+  .claim small { margin-bottom: 26px; }
 """,
 }
 

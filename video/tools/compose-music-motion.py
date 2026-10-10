@@ -1,4 +1,4 @@
-"""Calm 92 BPM beds for the three 7.5 s motion ads (lock, week, offer).
+"""Calm 92 BPM beds for the 7.5 s motion ads (lock, week, offer, calls, site, steps, claim).
 
 Same instruments as tools/compose-music.py, softer drums, and sound effects on
 the cues set in tools/build-motion.py (notification pings, calendar ticks, the
@@ -21,6 +21,10 @@ CUES = {
     "lock":  dict(seed=11, whoosh=[1.5, 6], pings=[3, 4, 5], ticks=[], swell=6),
     "week":  dict(seed=12, whoosh=[2, 3, 6.5], pings=[6], ticks=[3.5, 4, 4.5, 5, 5.5], swell=6.5),
     "offer": dict(seed=13, whoosh=[6], pings=[2], ticks=[3, 4, 5], swell=6, hit=0),
+    "calls": dict(seed=14, whoosh=[1.5, 6], pings=[], ticks=[2, 3, 4, 5], swell=6),
+    "site":  dict(seed=15, whoosh=[1.5, 6], pings=[], ticks=[], hits=[3, 4, 5], swell=6),
+    "steps": dict(seed=16, whoosh=[2, 3.25, 4.5, 6], pings=[], ticks=[], swell=6),
+    "claim": dict(seed=17, whoosh=[5.5], pings=[1.5], ticks=[2.5, 3, 3.5, 4], swell=5.5, hit=0),
 }
 
 
@@ -52,6 +56,8 @@ def build(name):
         place(fx, cm.tick(rng), b * B, 0.8)
     sw = cm.swell(rng)
     place(fx, sw, c["swell"] * B - len(sw) / SR, 0.9)
+    for b in c.get("hits", []):
+        place(fx, cm.kick(rng), b * B, 0.55)
     if "hit" in c:
         place(fx, cm.kick(rng), c["hit"] * B, 0.8)
 

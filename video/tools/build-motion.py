@@ -61,6 +61,29 @@ ADS = {
       tl.fromTo(S + ' .cta', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 6 * B - 0.1);
       tl.fromTo(S + ' .cta b', { x: 0 }, { x: 10, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 6 * B + 0.6);
 """),
+    "calls": dict(title="Every missed call is a patient booking elsewhere", deal=6, js=HEADLINE_JS + r"""
+      tl.fromTo(S + ' .recents', { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out' }, 1.5 * B - 0.25);
+      tl.fromTo(S + ' .call', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out', stagger: B }, 2 * B - 0.05);
+      tl.fromTo(S + ' .recents .rh span', { opacity: 0, scale: 1.4, transformOrigin: '100% 50%' }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2)' }, 5.5 * B);
+"""),
+    "site": dict(title="Your website might be losing you patients", deal=6, js=HEADLINE_JS + r"""
+      tl.fromTo(S + ' .browser', { opacity: 0, y: 80, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'expo.out' }, 1.5 * B - 0.3);
+      ['#f1', '#f2', '#f3'].forEach((id, i) => {
+        tl.fromTo(S + ' ' + id, { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2.2)' }, (3 + i) * B - 0.04);
+      });
+"""),
+    "steps": dict(title="3 steps to a fuller appointment book", deal=6, js=HEADLINE_JS + r"""
+      tl.fromTo(S + ' .step', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out', stagger: 1.25 * B }, 2 * B - 0.1);
+      tl.fromTo(S + ' .step b', { scale: 0.6, transformOrigin: '0% 80%' }, { scale: 1, duration: 0.6, ease: 'back.out(2)', stagger: 1.25 * B }, 2 * B - 0.1);
+"""),
+    "claim": dict(title="Claim your 2 free weeks", deal=6, js=r"""
+      tl.fromTo(S + ' .claim', { opacity: 0, scale: 1.35, transformOrigin: '0% 60%' }, { opacity: 1, scale: 1, duration: 1.0, ease: 'expo.out' }, 0.1);
+      tl.fromTo(S + ' .free', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 1.5 * B - 0.1);
+      tl.fromTo(S + ' .checks p', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out', stagger: B / 2 }, 2.5 * B - 0.05);
+      tl.fromTo(S + ' .cta', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 5.5 * B - 0.1);
+      tl.fromTo(S + ' .tapnote', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 6.2 * B);
+      tl.fromTo(S + ' .cta b', { x: 0 }, { x: 10, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 6 * B);
+"""),
 }
 
 
