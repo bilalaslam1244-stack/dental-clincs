@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
 <meta charset="utf-8">
-<title>4Skales static ads</title>
+<title>4Skales 静态广告</title>
 <!-- Static Meta ads for the 4Skales dentist campaign. Open with ?c=<concept>&f=<916|45>;
      tools/render-statics.mjs screenshots every concept in both formats. -->
 <style>
@@ -113,6 +113,20 @@
   .f45 .deal p { font-size: 22px; }
   .f45 .deal .go { font-size: 21px; padding: 15px 22px; }
   .go-big { font-size: 30px; padding: 30px 44px; }
+
+  /* Chinese: Noto Serif SC / Noto Sans SC behind the Latin faces, upright accents, tighter tracking */
+  @font-face { font-family: 'Noto Serif SC'; font-weight: 300; src: url(../assets/fonts/NotoSerifSC-300-statics-subset.woff2); }
+  @font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url(../assets/fonts/NotoSansSC-400-statics-subset.woff2); }
+  @font-face { font-family: 'Noto Sans SC'; font-weight: 500; src: url(../assets/fonts/NotoSansSC-500-statics-subset.woff2); }
+  :root { --serif: Newsreader, 'Noto Serif SC', serif; --sans: Jost, 'Noto Sans SC', sans-serif; }
+  em { font-style: normal; }
+  h1 { font-weight: 300; letter-spacing: 0; line-height: 1.12; font-size: 88px; }
+  .f45 h1 { font-size: 80px; }
+  .eyebrow { letter-spacing: .24em; }
+  .free { font-style: normal; }
+  .big { letter-spacing: -.02em; }
+  .deal .go, .cta { letter-spacing: .1em; }
+  .tag { letter-spacing: .2em; }
 </style>
 </head>
 <body>
@@ -122,22 +136,22 @@
   <div class="gridbg"></div><div class="slant"></div><div class="grain"></div><div class="frame"></div>
   <div class="box">
     <div class="head"><img src="../assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
-    <div class="eyebrow">For dental clinic owners</div>
-    <h1><span class="lead">Is your clinic</span>struggling to get <em>dental bookings?</em></h1>
+    <div class="eyebrow">专为牙科诊所老板</div>
+    <h1><span class="lead">你的牙科诊所</span>预约<em>总是不够？</em></h1>
     <div class="fill">
       <div class="book">
-        <div class="book-head"><b>This week</b><span>1 booking</span></div>
+        <div class="book-head"><b>本周</b><span>仅 1 个预约</span></div>
         <div class="cal">
-          <div class="d"></div><div class="d">MON</div><div class="d">TUE</div><div class="d">WED</div><div class="d">THU</div><div class="d">FRI</div><div class="d">SAT</div>
-          <div>9AM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>10AM</div><div class="x"></div><div class="x"></div><div class="k">Scaling</div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>11AM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>2PM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>4PM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
+          <div class="d"></div><div class="d">周一</div><div class="d">周二</div><div class="d">周三</div><div class="d">周四</div><div class="d">周五</div><div class="d">周六</div>
+          <div>9:00</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
+          <div>10:00</div><div class="x"></div><div class="x"></div><div class="k">洗牙</div><div class="x"></div><div class="x"></div><div class="x"></div>
+          <div>11:00</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
+          <div>14:00</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
+          <div>16:00</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
         </div>
       </div>
     </div>
-    <div class="deal"><h3>2 weeks of patient enquiries, <em>free.</em></h3><p>We even pay the ad spend. No card, no contract.</p><div class="go">Claim 2 free weeks on WhatsApp <b>→</b></div></div>
+    <div class="deal"><h3>两周病人咨询，<em>完全免费。</em></h3><p>连广告费都由我们承担。不用信用卡，不签合约。</p><div class="go">WhatsApp 领取两周免费 <b>→</b></div></div>
   </div>
 </section>
 
@@ -146,31 +160,31 @@
   <div class="gridbg"></div><div class="slant"></div><div class="grain"></div><div class="frame"></div>
   <div class="box">
     <div class="head"><img src="../assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
-    <div class="eyebrow">For dental clinic owners</div>
-    <h1>Turn empty slots into <em>booked ones.</em></h1>
+    <div class="eyebrow">专为牙科诊所老板</div>
+    <h1>把空档变成<em>满档。</em></h1>
     <div class="fill" style="gap:38px">
-      <div class="book small"><div class="tag before">BEFORE</div>
-        <div class="book-head"><b>This week</b><span>2 bookings</span></div>
+      <div class="book small"><div class="tag before">之前</div>
+        <div class="book-head"><b>本周</b><span>2 个预约</span></div>
         <div class="cal">
-          <div class="d"></div><div class="d">MON</div><div class="d">TUE</div><div class="d">WED</div><div class="d">THU</div><div class="d">FRI</div><div class="d">SAT</div>
-          <div>9AM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>11AM</div><div class="x"></div><div class="k"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>2PM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="k"></div><div class="x"></div>
-          <div>4PM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
+          <div class="d"></div><div class="d">周一</div><div class="d">周二</div><div class="d">周三</div><div class="d">周四</div><div class="d">周五</div><div class="d">周六</div>
+          <div>9:00</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
+          <div>11:00</div><div class="x"></div><div class="k"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
+          <div>14:00</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="k"></div><div class="x"></div>
+          <div>16:00</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
         </div>
       </div>
-      <div class="book small"><div class="tag after">AFTER</div>
-        <div class="book-head"><b>This week</b><span>Fully booked</span></div>
+      <div class="book small"><div class="tag after">之后</div>
+        <div class="book-head"><b>本周</b><span>全部约满</span></div>
         <div class="cal">
-          <div class="d"></div><div class="d">MON</div><div class="d">TUE</div><div class="d">WED</div><div class="d">THU</div><div class="d">FRI</div><div class="d">SAT</div>
-          <div>9AM</div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div><div class="k"></div><div class="k"></div>
-          <div>11AM</div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div>
-          <div>2PM</div><div class="x"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div>
-          <div>4PM</div><div class="k"></div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div><div class="k"></div>
+          <div class="d"></div><div class="d">周一</div><div class="d">周二</div><div class="d">周三</div><div class="d">周四</div><div class="d">周五</div><div class="d">周六</div>
+          <div>9:00</div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div><div class="k"></div><div class="k"></div>
+          <div>11:00</div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div>
+          <div>14:00</div><div class="x"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div>
+          <div>16:00</div><div class="k"></div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div><div class="k"></div>
         </div>
       </div>
     </div>
-    <div class="deal"><h3>2 weeks of patient enquiries, <em>free.</em></h3><p>We even pay the ad spend. No card, no contract.</p><div class="go">Claim 2 free weeks on WhatsApp <b>→</b></div></div>
+    <div class="deal"><h3>两周病人咨询，<em>完全免费。</em></h3><p>连广告费都由我们承担。不用信用卡，不签合约。</p><div class="go">WhatsApp 领取两周免费 <b>→</b></div></div>
   </div>
 </section>
 
@@ -179,19 +193,19 @@
   <div class="gridbg"></div><div class="slant"></div><div class="grain"></div><div class="frame"></div>
   <div class="box">
     <div class="head"><img src="../assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
-    <div class="eyebrow">For dental clinic owners</div>
-    <h1>Wake up to <em>bookings.</em></h1>
+    <div class="eyebrow">专为牙科诊所老板</div>
+    <h1>一觉醒来，<em>预约已到。</em></h1>
     <div class="fill">
       <div class="lock">
         <div class="time">8:02</div>
-        <div class="date">Saturday, 11 October</div>
-        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Mei Ling<span>now</span></div><p>Hi! I'd like to book a <b>braces consultation</b>, Saturday morning.</p></div></div>
-        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Arif<span>6m</span></div><p><b>Scaling &amp; polish</b> tomorrow evening, any slots?</p></div></div>
-        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Priya<span>14m</span></div><p>Can I come in for an <b>implant consult</b> this week?</p></div></div>
+        <div class="date">10月11日 星期六</div>
+        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Mei Ling<span>现在</span></div><p>你好！我想预约<b>牙套咨询</b>，星期六早上。</p></div></div>
+        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Arif<span>6分钟前</span></div><p>明天傍晚可以<b>洗牙</b>吗？还有位吗？</p></div></div>
+        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Priya<span>14分钟前</span></div><p>这周可以来做<b>种植牙咨询</b>吗？</p></div></div>
       </div>
     </div>
     
-    <div class="deal"><h3>2 weeks of patient enquiries, <em>free.</em></h3><p>We even pay the ad spend. No card, no contract.</p><div class="go">Claim 2 free weeks on WhatsApp <b>→</b></div></div>
+    <div class="deal"><h3>两周病人咨询，<em>完全免费。</em></h3><p>连广告费都由我们承担。不用信用卡，不签合约。</p><div class="go">WhatsApp 领取两周免费 <b>→</b></div></div>
   </div>
 </section>
 
@@ -200,17 +214,17 @@
   <div class="gridbg"></div><div class="slant"></div><div class="grain"></div><div class="frame"></div>
   <div class="box">
     <div class="head"><img src="../assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
-    <div class="eyebrow">For dental clinic owners</div>
+    <div class="eyebrow">专为牙科诊所老板</div>
     <div class="fill" style="gap:30px">
-      <div class="big">2 weeks<small>of patient enquiries.</small></div>
-      <div class="free">Free.<br>We even pay the ad spend.</div>
+      <div class="big">两周<small>病人咨询。</small></div>
+      <div class="free">免费。<br>广告费也由我们出。</div>
       <div class="lines">
-        <p id="yes"><b>Like the results?</b> Keep going.</p>
-        <p id="no"><b>Not for you?</b> Walk away.</p>
+        <p id="yes"><b>满意效果？</b>继续合作。</p>
+        <p id="no"><b>不适合？</b>随时停止。</p>
       </div>
     </div>
-    <div class="lines" id="terms" style="border:0;padding:0"><p><b>No card. No contract.</b> Just message us.</p></div>
-    <div class="foot"><div class="cta go-big">Claim 2 free weeks on WhatsApp <b>→</b></div></div>
+    <div class="lines" id="terms" style="border:0;padding:0"><p><b>不用信用卡，不签合约。</b>直接 WhatsApp 我们。</p></div>
+    <div class="foot"><div class="cta go-big">WhatsApp 领取两周免费 <b>→</b></div></div>
   </div>
 </section>
 

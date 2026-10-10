@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>4Skales static ads</title>
-<!-- Static Meta ads for the 4Skales dentist campaign. Open with ?c=<concept>&f=<916|45>;
-     tools/render-statics.mjs screenshots every concept in both formats. -->
-<style>
-  @font-face { font-family: Newsreader; font-weight: 300; src: url(../assets/fonts/Newsreader-300-normal.woff2); }
-  @font-face { font-family: Newsreader; font-weight: 300; font-style: italic; src: url(../assets/fonts/Newsreader-300-italic.woff2); }
-  @font-face { font-family: Jost; font-weight: 300; src: url(../assets/fonts/Jost-300-normal.woff2); }
-  @font-face { font-family: Jost; font-weight: 400; src: url(../assets/fonts/Jost-400-normal.woff2); }
-  @font-face { font-family: Jost; font-weight: 500; src: url(../assets/fonts/Jost-500-normal.woff2); }
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>4Skales · 2 weeks of patient enquiries, free</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+  @font-face { font-family: Newsreader; font-weight: 300; src: url(assets/fonts/Newsreader-300-normal.woff2); }
+  @font-face { font-family: Newsreader; font-weight: 300; font-style: italic; src: url(assets/fonts/Newsreader-300-italic.woff2); }
+  @font-face { font-family: Jost; font-weight: 300; src: url(assets/fonts/Jost-300-normal.woff2); }
+  @font-face { font-family: Jost; font-weight: 400; src: url(assets/fonts/Jost-400-normal.woff2); }
+  @font-face { font-family: Jost; font-weight: 500; src: url(assets/fonts/Jost-500-normal.woff2); }
   :root { --serif: Newsreader, Georgia, serif; --sans: Jost, Arial, sans-serif;
           --paper: #f3f0e9; --card: #fbfaf6; --ink: #1a1714; --ink-2: #4a443c; --muted: #6d665c;
           --bronze: #8a6a38; --champagne: #c9a96e; --sand: #e9e1d3; --hair: rgba(138,106,56,.35); }
@@ -113,111 +113,66 @@
   .f45 .deal p { font-size: 22px; }
   .f45 .deal .go { font-size: 21px; padding: 15px 22px; }
   .go-big { font-size: 30px; padding: 30px 44px; }
-</style>
-</head>
-<body>
 
-<!-- 1. hook: the near-empty week -->
-<section class="ad" id="hook">
+  /* Chinese: Noto Serif SC / Noto Sans SC behind the Latin faces, upright accents, tighter tracking */
+  @font-face { font-family: 'Noto Serif SC'; font-weight: 300; src: url(assets/fonts/NotoSerifSC-300-statics-subset.woff2); }
+  @font-face { font-family: 'Noto Sans SC'; font-weight: 400; src: url(assets/fonts/NotoSansSC-400-statics-subset.woff2); }
+  @font-face { font-family: 'Noto Sans SC'; font-weight: 500; src: url(assets/fonts/NotoSansSC-500-statics-subset.woff2); }
+  :root { --serif: Newsreader, 'Noto Serif SC', serif; --sans: Jost, 'Noto Sans SC', sans-serif; }
+  em { font-style: normal; }
+  h1 { font-weight: 300; letter-spacing: 0; line-height: 1.12; font-size: 88px; }
+  .f45 h1 { font-size: 80px; }
+  .eyebrow { letter-spacing: .24em; }
+  .free { font-style: normal; }
+  .big { letter-spacing: -.02em; }
+  .deal .go, .cta { letter-spacing: .1em; }
+  .tag { letter-spacing: .2em; }
+
+  html, body { width: 1080px; height: 1920px; overflow: hidden; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+  .clip { position: absolute; inset: 0; }
+    </style>
+  </head>
+  <body class="f916">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="7.5" data-width="1080" data-height="1920">
+      <section class="ad on clip" id="offer" data-start="0" data-duration="7.5" data-track-index="0">
   <div class="gridbg"></div><div class="slant"></div><div class="grain"></div><div class="frame"></div>
   <div class="box">
-    <div class="head"><img src="../assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
-    <div class="eyebrow">For dental clinic owners</div>
-    <h1><span class="lead">Is your clinic</span>struggling to get <em>dental bookings?</em></h1>
-    <div class="fill">
-      <div class="book">
-        <div class="book-head"><b>This week</b><span>1 booking</span></div>
-        <div class="cal">
-          <div class="d"></div><div class="d">MON</div><div class="d">TUE</div><div class="d">WED</div><div class="d">THU</div><div class="d">FRI</div><div class="d">SAT</div>
-          <div>9AM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>10AM</div><div class="x"></div><div class="x"></div><div class="k">Scaling</div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>11AM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>2PM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>4PM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-        </div>
-      </div>
-    </div>
-    <div class="deal"><h3>2 weeks of patient enquiries, <em>free.</em></h3><p>We even pay the ad spend. No card, no contract.</p><div class="go">Claim 2 free weeks on WhatsApp <b>→</b></div></div>
-  </div>
-</section>
-
-<!-- 2. before / after week -->
-<section class="ad" id="week">
-  <div class="gridbg"></div><div class="slant"></div><div class="grain"></div><div class="frame"></div>
-  <div class="box">
-    <div class="head"><img src="../assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
-    <div class="eyebrow">For dental clinic owners</div>
-    <h1>Turn empty slots into <em>booked ones.</em></h1>
-    <div class="fill" style="gap:38px">
-      <div class="book small"><div class="tag before">BEFORE</div>
-        <div class="book-head"><b>This week</b><span>2 bookings</span></div>
-        <div class="cal">
-          <div class="d"></div><div class="d">MON</div><div class="d">TUE</div><div class="d">WED</div><div class="d">THU</div><div class="d">FRI</div><div class="d">SAT</div>
-          <div>9AM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>11AM</div><div class="x"></div><div class="k"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-          <div>2PM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="k"></div><div class="x"></div>
-          <div>4PM</div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div><div class="x"></div>
-        </div>
-      </div>
-      <div class="book small"><div class="tag after">AFTER</div>
-        <div class="book-head"><b>This week</b><span>Fully booked</span></div>
-        <div class="cal">
-          <div class="d"></div><div class="d">MON</div><div class="d">TUE</div><div class="d">WED</div><div class="d">THU</div><div class="d">FRI</div><div class="d">SAT</div>
-          <div>9AM</div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div><div class="k"></div><div class="k"></div>
-          <div>11AM</div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div>
-          <div>2PM</div><div class="x"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div>
-          <div>4PM</div><div class="k"></div><div class="k"></div><div class="k"></div><div class="x"></div><div class="k"></div><div class="k"></div>
-        </div>
-      </div>
-    </div>
-    <div class="deal"><h3>2 weeks of patient enquiries, <em>free.</em></h3><p>We even pay the ad spend. No card, no contract.</p><div class="go">Claim 2 free weeks on WhatsApp <b>→</b></div></div>
-  </div>
-</section>
-
-<!-- 3. lock screen: enquiries arriving on WhatsApp -->
-<section class="ad" id="lock">
-  <div class="gridbg"></div><div class="slant"></div><div class="grain"></div><div class="frame"></div>
-  <div class="box">
-    <div class="head"><img src="../assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
-    <div class="eyebrow">For dental clinic owners</div>
-    <h1>Wake up to <em>bookings.</em></h1>
-    <div class="fill">
-      <div class="lock">
-        <div class="time">8:02</div>
-        <div class="date">Saturday, 11 October</div>
-        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Mei Ling<span>now</span></div><p>Hi! I'd like to book a <b>braces consultation</b>, Saturday morning.</p></div></div>
-        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Arif<span>6m</span></div><p><b>Scaling &amp; polish</b> tomorrow evening, any slots?</p></div></div>
-        <div class="note"><i></i><div class="t"><div class="top">WhatsApp · Priya<span>14m</span></div><p>Can I come in for an <b>implant consult</b> this week?</p></div></div>
-      </div>
-    </div>
-    
-    <div class="deal"><h3>2 weeks of patient enquiries, <em>free.</em></h3><p>We even pay the ad spend. No card, no contract.</p><div class="go">Claim 2 free weeks on WhatsApp <b>→</b></div></div>
-  </div>
-</section>
-
-<!-- 4. the offer -->
-<section class="ad" id="offer">
-  <div class="gridbg"></div><div class="slant"></div><div class="grain"></div><div class="frame"></div>
-  <div class="box">
-    <div class="head"><img src="../assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
-    <div class="eyebrow">For dental clinic owners</div>
+    <div class="head"><img src="assets/4skales-logo-ink.svg" alt="4Skales"><span>JB · KL</span></div>
+    <div class="eyebrow">专为牙科诊所老板</div>
     <div class="fill" style="gap:30px">
-      <div class="big">2 weeks<small>of patient enquiries.</small></div>
-      <div class="free">Free.<br>We even pay the ad spend.</div>
+      <div class="big">两周<small>病人咨询。</small></div>
+      <div class="free">免费。<br>广告费也由我们出。</div>
       <div class="lines">
-        <p id="yes"><b>Like the results?</b> Keep going.</p>
-        <p id="no"><b>Not for you?</b> Walk away.</p>
+        <p id="yes"><b>满意效果？</b>继续合作。</p>
+        <p id="no"><b>不适合？</b>随时停止。</p>
       </div>
     </div>
-    <div class="lines" id="terms" style="border:0;padding:0"><p><b>No card. No contract.</b> Just message us.</p></div>
-    <div class="foot"><div class="cta go-big">Claim 2 free weeks on WhatsApp <b>→</b></div></div>
+    <div class="lines" id="terms" style="border:0;padding:0"><p><b>不用信用卡，不签合约。</b>直接 WhatsApp 我们。</p></div>
+    <div class="foot"><div class="cta go-big">WhatsApp 领取两周免费 <b>→</b></div></div>
   </div>
 </section>
+      <audio id="music" src="assets/music-motion-offer.mp3" data-start="0" data-duration="7.5" data-volume="1" data-track-index="8"></audio>
+    </div>
+    <script>
+      const B = 60 / 92, DUR = 7.5, S = '#offer', DEAL = 6 * B;
+      const tl = gsap.timeline({ paused: true });
 
-<script>
-  const q = new URLSearchParams(location.search);
-  document.body.className = 'f' + (q.get('f') || '916');
-  document.getElementById(q.get('c') || 'hook').classList.add('on');
-</script>
-</body>
+      tl.fromTo(S + ' .gridbg', { y: 0 }, { y: -120, duration: DUR, ease: 'none' }, 0);
+      tl.fromTo(S + ' .head', { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
+      tl.fromTo(S + ' .eyebrow', { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }, 0.1);
+
+      tl.fromTo(S + ' .big', { opacity: 0, scale: 1.5, transformOrigin: '0% 60%' }, { opacity: 1, scale: 1, duration: 1.0, ease: 'expo.out' }, 0);
+      tl.fromTo(S + ' .big small', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 0.75);
+      tl.fromTo(S + ' .free', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 2 * B - 0.1);
+      tl.fromTo(S + ' #yes', { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 3 * B);
+      tl.fromTo(S + ' #no', { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 4 * B);
+      tl.fromTo(S + ' #terms', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 5 * B);
+      tl.fromTo(S + ' .cta', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 6 * B - 0.1);
+      tl.fromTo(S + ' .cta b', { x: 0 }, { x: 10, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 6 * B + 0.6);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
 </html>

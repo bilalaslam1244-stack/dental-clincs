@@ -5,19 +5,20 @@ layout, so the static PNG doubles as the video's poster frame.
   lock  : lock screen, WhatsApp enquiries drop in one by one
   week  : before week, then the after week fills slot by slot
   offer : 2 weeks free, line by line, then the CTA
-Writes motion-<name>-<916|45>.html. Music: tools/compose-music-motion.py.
+Writes motion-<name>-<916|45>.html, plus -ms / -zh versions from
+statics/statics-<ms|zh>.html (made by tools/build-statics-i18n.py) when they
+exist. Music: tools/compose-music-motion.py.
 """
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = (ROOT / "statics" / "statics.html").read_text()
-CSS = re.search(r"<style>(.*?)</style>", SRC, re.S).group(1).replace("../assets/", "assets/")
 FORMATS = {"916": 1920, "45": 1350}
+LANGS = {"en": "statics.html", "ms": "statics-ms.html", "zh": "statics-zh.html"}
 
 
-def section(cid):
-    return re.search(rf'<section class="ad" id="{cid}">(.*?)</section>', SRC, re.S).group(1).replace("../assets/", "assets/")
+def section(src, cid):
+    return re.search(rf'<section class="ad" id="{cid}">(.*?)</section>', src, re.S).group(1).replace("../assets/", "assets/")
 
 
 COMMON_JS = r"""
@@ -63,27 +64,26 @@ ADS = {
 }
 
 
-def body(cid):
-    html = section(cid)
-    if cid == "offer":  # ids for the line-by-line reveal
-        html = html.replace("<p><b>Like the results?</b>", '<p id="yes"><b>Like the results?</b>', 1)
-        html = html.replace("<p><b>Not for you?</b>", '<p id="no"><b>Not for you?</b>', 1)
-        html = html.replace('<div class="lines" style="border:0;padding:0">', '<div class="lines" id="terms" style="border:0;padding:0">', 1)
-    return html
-
-
 def build():
+  for lang, name in LANGS.items():
+    path = ROOT / "statics" / name
+    if not path.exists():
+        continue
+    src = path.read_text()
+    css = re.search(r"<style>(.*?)</style>", src, re.S).group(1).replace("../assets/", "assets/")
+    html_lang = re.search(r'<html lang="([^"]+)"', src).group(1)
+    suffix = "" if lang == "en" else f"-{lang}"
     for cid, a in ADS.items():
         for fmt, h in FORMATS.items():
-            deal_js = DEAL_JS if 'class="deal"' in section(cid) else ""
+            deal_js = DEAL_JS if 'class="deal"' in section(src, cid) else ""
             html = f"""<!doctype html>
-<html lang="en">
+<html lang="{html_lang}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height={h}" />
     <title>4Skales · {a['title']}</title>
     <script src="assets/gsap.min.js"></script>
-    <style>{CSS}
+    <style>{css}
   html, body {{ width: 1080px; height: {h}px; overflow: hidden; }}
   #root {{ position: relative; width: 1080px; height: {h}px; overflow: hidden; }}
   .clip {{ position: absolute; inset: 0; }}
@@ -91,7 +91,7 @@ def build():
   </head>
   <body class="f{fmt}">
     <div id="root" data-composition-id="main" data-start="0" data-duration="7.5" data-width="1080" data-height="{h}">
-      <section class="ad on clip" id="{cid}" data-start="0" data-duration="7.5" data-track-index="0">{body(cid)}</section>
+      <section class="ad on clip" id="{cid}" data-start="0" data-duration="7.5" data-track-index="0">{section(src, cid)}</section>
       <audio id="music" src="assets/music-motion-{cid}.mp3" data-start="0" data-duration="7.5" data-volume="1" data-track-index="8"></audio>
     </div>
     <script>
@@ -104,8 +104,8 @@ def build():
   </body>
 </html>
 """
-            (ROOT / f"motion-{cid}-{fmt}.html").write_text(html)
-            print("wrote", f"motion-{cid}-{fmt}.html")
+            (ROOT / f"motion-{cid}-{fmt}{suffix}.html").write_text(html)
+            print("wrote", f"motion-{cid}-{fmt}{suffix}.html")
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ Fixed-price clinic websites with WhatsApp booking, for Johor Bahru and Kuala Lum
   - Short cuts (7.5s, 92 BPM) for retargeting: ad1 Missed calls, ad2 Three-tap booking, ad3 The offer. Built by `tools/build-ads.py`.
   - Static ads (light theme, "For dental clinic owners" qualifier on each): hook (near-empty week), week (before/after calendar), lock (WhatsApp enquiries on a lock screen), offer (2 weeks free). Source `statics/statics.html`; `node tools/render-statics.mjs` writes PNGs to `renders/statics/` in 9:16 and 4:5. Each carries an offer band and a "Claim 2 free weeks on WhatsApp" button.
   - Motion ads (7.5s, 92 BPM): lock, week and offer, animated from the statics so the last frame matches the static exactly. `python3 tools/compose-music-motion.py` (music), `python3 tools/build-motion.py` (writes `motion-<name>-<916|45>.html`), render each with `npx hyperframes render`, then the static PNG is overlaid on frame 0 as the poster. Finished files in `renders/motion/`.
+  - Bahasa Malaysia and Chinese statics and motion ads: `python3 tools/build-statics-i18n.py` writes `statics/statics-ms.html` and `statics/statics-zh.html` (Chinese downloads Noto Serif SC / Noto Sans SC subsets as `*-statics-subset.woff2`); `render-statics.mjs` and `build-motion.py` then pick them up and output `-ms` / `-zh` files.
 
 ## Rebuilding the ads
 
