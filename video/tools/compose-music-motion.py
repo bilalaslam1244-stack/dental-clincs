@@ -6,6 +6,8 @@ offer band). Writes assets/music-motion-<name>.mp3.
 """
 import importlib.util
 import subprocess
+import sys
+import tempfile
 import wave
 from pathlib import Path
 import numpy as np
@@ -25,6 +27,8 @@ CUES = {
     "site":  dict(seed=15, whoosh=[1.5, 6], pings=[], ticks=[], hits=[3, 4, 5], swell=6),
     "steps": dict(seed=16, whoosh=[2, 3.25, 4.5, 6], pings=[], ticks=[], swell=6),
     "claim": dict(seed=17, whoosh=[5.5], pings=[1.5], ticks=[2.5, 3, 3.5, 4], swell=5.5, hit=0),
+    # Smile Arts patient ads (tools/build-smilearts-motion.mjs): headline, CTA, reply note
+    "smilearts": dict(seed=21, whoosh=[1, 3.5], pings=[4.25], ticks=[], swell=3.5),
 }
 
 
@@ -71,7 +75,7 @@ def build(name):
     mix /= np.max(np.abs(mix)) / 0.89
     right = np.roll(filt(mix, "low", 10000), 16)
     pcm = (np.stack([mix, right], axis=1) * 32767).astype(np.int16)
-    wav = f"/tmp/music-motion-{name}.wav"
+    wav = str(Path(tempfile.gettempdir()) / f"music-motion-{name}.wav")
     with wave.open(wav, "wb") as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav, "-af", "loudnorm=I=-15:TP=-1.0:LRA=9",
@@ -80,5 +84,5 @@ def build(name):
 
 
 if __name__ == "__main__":
-    for name in CUES:
+    for name in sys.argv[1:] or CUES:
         build(name)

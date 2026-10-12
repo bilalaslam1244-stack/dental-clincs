@@ -69,6 +69,15 @@ Read this first. It is the full context from the first (cloud) session, so a new
 - **Pitch deck** for Dr. Daren (16 slides, Smile Arts branding): https://claude.ai/artifact/CbqgzNLzNXbkWpshRR1NiF. **Meeting checklist**: https://claude.ai/code/artifact/e8b7dc17-53ee-4f7b-8623-47fc4f2e6adf.
 - 4Skales' own Meta results so far: Dentists campaign, Stories/Reels only, 3 messaging conversations at about ₹506 each. Countertop campaign shut down (low-quality leads).
 
+## Update 12 Oct 2026 (second session, local Windows machine)
+
+- **Kota Damansara goes first** (user's call), ahead of Kepong and Subang Perdana. Branch: No. 55-1, Jalan PJU 5/20, The Strand, Kota Damansara; WhatsApp on his site 014-365 0270; Instagram @smileartsdental_kd (posts mostly in Chinese, so ads are **EN + 中文**).
+- The user says they have access to the clinic's Meta Business Suite and has linked the clinic WhatsApp there, and wants to run from the clinic's own account (not 4Skales' Business Manager). The trial promise is still that 4Skales pays the ad spend: confirm whose card is billed before publishing.
+- Form: going with Click-to-WhatsApp + pre-filled message + welcome-message quick replies (no form in between), for the most enquiries.
+- Still open: daily budget, current KD enquiries/week, KKLIU, and a Meta connector (none connected yet; `claude-ads` plugin installed but it needs one).
+- Creatives built: `video/smilearts/kd-ads.html` (statics, `tools/render-smilearts.mjs`), `tools/build-smilearts-motion.mjs` (writes `video/sa-kd-*.html`, 7.5 s, music `assets/music-motion-smilearts.mp3`), copy in `video/smilearts/kd-ad-copy.md`. Photos (from his site and a frame of his Instagram intro reel) and renders are **git-ignored** because this repo is public; renders live locally in `video/renders/smilearts/`.
+- This machine: C: is full. Run npm/HyperFrames with `npm_config_cache`, `TEMP`/`TMP`, `HYPERFRAMES_FONT_CACHE_DIR` pointed under `F:\Claude-Files\SmileArts\.cache`, and `HYPERFRAMES_BROWSER_PATH` set to Playwright's `chrome-headless-shell.exe`.
+
 ## To do, in order
 
 1. **Check the setup**: confirm the Meta connector/plugins work, list the accessible ad accounts, Pages and Instagram accounts, and confirm Smile Arts' Page and both branch Instagrams are reachable through 4Skales. Report what is and isn't connected.

@@ -4,3 +4,7 @@ video/.hyperframes/
 video/renders/motion/raw-*.mp4
 video/renders/motion/work-*/
 video/renders/motion/.raw-*/
+# Smile Arts client photos and unapproved ads: kept out of this public repo until Dr. Daren approves
+video/smilearts/source/
+video/smilearts/*.jpg
+video/renders/smilearts/

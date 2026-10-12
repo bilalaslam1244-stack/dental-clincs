@@ -1,0 +1,30 @@
+// Screenshots the Smile Arts Kota Damansara ads (smilearts/kd-ads.html) as PNG:
+// 3 treatments x EN/ZH x 9:16 + 4:5, into renders/smilearts/.
+// Usage (from video/): PLAYWRIGHT=<path to playwright/index.mjs> [CHROME=<chrome.exe>] node tools/render-smilearts.mjs [concept...]
+import { mkdirSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+
+const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
+const CONCEPTS = process.argv.slice(2).length ? process.argv.slice(2) : ['braces', 'implants', 'veneers'];
+const FORMATS = { '916': [1080, 1920, '9x16'], '45': [1080, 1350, '4x5'] };
+const LANGS = ['en', 'zh'];
+mkdirSync('renders/smilearts', { recursive: true });
+
+const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME } : {});
+const tab = await browser.newPage();
+const page = pathToFileURL(resolve('smilearts', 'kd-ads.html')).href;
+for (const l of LANGS) {
+  for (const [f, [w, h, label]] of Object.entries(FORMATS)) {
+    await tab.setViewportSize({ width: w, height: h });
+    for (const c of CONCEPTS) {
+      await tab.goto(`${page}?c=${c}&f=${f}&l=${l}`);
+      await tab.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
+      await tab.waitForTimeout(150);
+      const out = `renders/smilearts/smilearts-kd-${c}-${l}-${label}.png`;
+      await tab.screenshot({ path: out });
+      console.log(out);
+    }
+  }
+}
+await browser.close();
