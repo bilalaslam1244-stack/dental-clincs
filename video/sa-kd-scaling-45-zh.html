@@ -140,7 +140,12 @@
   .visual.cut { overflow: visible; }
   .visual.cut::after { display: none; }
   .visual svg { display: block; }
-  /* treatment photo as a framed card (RM 399) */
+  /* treatment photo blended into the dark background (RM 399), like the implant render */
+  .visual.blend img { filter: brightness(.86) contrast(1.06) saturate(.88) sepia(.12); }
+  .visual.blend::after { background: linear-gradient(90deg, var(--solid) 0%, rgba(33,25,18,.75) 16%, transparent 50%),
+      linear-gradient(0deg, var(--solid) 0%, transparent 34%), linear-gradient(180deg, var(--solid) 0%, transparent 22%),
+      linear-gradient(270deg, rgba(33,25,18,.35) 0%, transparent 18%); }
+  /* treatment photo as a framed card */
   .visual.card { border-radius: 26px; border: 3px solid #c9a063; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
   .visual.card::after { background: linear-gradient(180deg, transparent 60%, rgba(20,14,10,.35) 100%); }
   .f45 .visual.card { border-radius: 18px; border-width: 2px; }
@@ -215,7 +220,7 @@
   
   <div class="top"><img id="logo" alt="Smile Arts Dental Clinic" src="smilearts/source/Site-Logo-White.png"><span id="branch">哥打白沙罗</span></div>
   <div class="head"><div class="eyebrow" id="eyebrow">洗牙 + 抛光 + 美白</div><h1 id="h1">牙齿发黄、有牙垢？<br><em>该洗牙了。</em></h1></div>
-  <div class="visual card" id="visual" style="right: 60px; top: 351px; width: 320px; height: 480px;"><img id="visimg" alt="" src="smilearts/source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg" style="object-position: 42% 40%;"></div>
+  <div class="visual blend" id="visual" style="right: 0px; top: 351px; width: 480px; height: 640px;"><img id="visimg" alt="" src="smilearts/source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg" style="object-position: 40% 35%;"></div>
   <div class="col" id="col" style="top: 351px;"><div><div class="price-label">配套价</div><div class="price"><small>RM</small>399</div></div><div class="list"><p>清除牙垢和污渍</p><p>牙龈更健康</p><p>牙齿更白</p><p>在诊所完成</p></div><div class="perks"><span>WhatsApp 咨询</span></div><div class="cta"><i><svg viewBox="0 0 24 24" fill="#f1dcaa"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm4.4 11.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"></path></svg></i>预约洗牙<b>→</b></div><p class="fine">效果因人而异。附带条款。</p></div>
   
   <div class="band"><div class="row">
