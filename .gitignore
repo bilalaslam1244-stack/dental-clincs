@@ -8,3 +8,6 @@ video/renders/motion/.raw-*/
 video/smilearts/source/
 video/smilearts/*.jpg
 video/renders/smilearts/
+
+# Claude Ads state (client profile, runs): private, not for this public repo
+.claude-ads/
