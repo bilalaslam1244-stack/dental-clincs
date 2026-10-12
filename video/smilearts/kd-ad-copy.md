@@ -2,7 +2,9 @@
 
 Click-to-WhatsApp campaign for Kota Damansara. Seven ads, each in EN, 中文 and Bahasa Malaysia, with 9:16 (Stories/Reels) and 4:5 (Feed) image and video versions:
 - **Treatment and clinic ads:** braces & Invisalign (portrait), implants (treatment-room photo), veneers (reception photo behind Dr. Daren), clinic (shopfront + inside photos, local recognition).
-- **Price ads (visuals from the clinic's own promo posters):** dental implant all-in RM 5,000, clear aligners RM 6,000–9,900, scaling + polishing + in-office whitening RM 399. These replicate the packages already published on smilearts.com.my.
+- **Price ads (visuals from the clinic's own promo posters):**
+  - Scaling + polishing + in-office whitening **RM 399**: **current.** Live as a pop-up on every page of smilearts.com.my (image `2026/05/scaling-pop-up-220926.jpeg`, uploaded Sept 2026; checked 12 Oct 2026).
+  - Dental implant all-in **RM 5,000** and clear aligners **RM 6,000–9,900**: **ON HOLD.** Taken from older pop-up images in the website's media library (`dental-implant-0718.jpeg`, July 2026; `smileart-promo-aligner.png`, May 2026) that no longer appear on any page. Do not run until Dr. Daren confirms the prices are current.
 
 Design follows the clinic's own posters (cream/espresso, gold, serif headlines), with Dr. Daren's studio portrait from the website and the WhatsApp number in a contact band.
 Files: `video/renders/smilearts/` (images) and `video/renders/smilearts/motion/` (videos). Source: `smilearts/kd-ads.html`.
@@ -93,7 +95,7 @@ Malaysian Dental Council check: no before-and-after photos, no testimonials, no 
 - Headline: The Strand，你身边的牙医
 - Pre-filled WhatsApp message: 你好 Smile Arts 哥打白沙罗，我想预约看牙。
 
-## Price ad: dental implant, all-in RM 5,000
+## Price ad: dental implant, all-in RM 5,000 (ON HOLD: not on the website now)
 
 **EN**
 - Primary text:
@@ -114,7 +116,7 @@ Malaysian Dental Council check: no before-and-after photos, no testimonials, no 
 - Headline: 种植牙全包 RM 5,000
 - Pre-filled WhatsApp message: 你好 Smile Arts 哥打白沙罗，我想了解 RM 5,000 种植牙配套。
 
-## Price ad: clear aligners, RM 6,000–9,900
+## Price ad: clear aligners, RM 6,000–9,900 (ON HOLD: not on the website now)
 
 **EN**
 - Primary text:
@@ -135,11 +137,11 @@ Malaysian Dental Council check: no before-and-after photos, no testimonials, no 
 - Headline: 隐形牙套 RM 6,000 起
 - Pre-filled WhatsApp message: 你好 Smile Arts 哥打白沙罗，我想了解隐形牙套配套。
 
-## Price ad: scaling, polishing + in-office whitening, RM 399
+## Price ad: scaling, polishing + in-office whitening, RM 399 (current on the website)
 
 **EN**
 - Primary text:
-  Scaling, polishing and in-office teeth whitening in one visit: RM 399 at Smile Arts Dental Kota Damansara.
+  Scaling, polishing and in-office teeth whitening: RM 399 at Smile Arts Dental Kota Damansara.
   📍 The Strand, Kota Damansara
   💬 Tap "Send message" to book on WhatsApp. Results vary from person to person. Terms apply.
 - Headline: Scaling + whitening, RM 399
@@ -148,13 +150,11 @@ Malaysian Dental Council check: no before-and-after photos, no testimonials, no 
 
 **中文**
 - Primary text:
-  洗牙、抛光加诊所牙齿美白，一次完成：Smile Arts Dental 哥打白沙罗 RM 399。
+  洗牙、抛光加诊所牙齿美白：Smile Arts Dental 哥打白沙罗 RM 399。
   📍 哥打白沙罗 The Strand
   💬 点击"发送消息"，WhatsApp 预约。效果因人而异。附带条款。
 - Headline: 洗牙 + 美白 RM 399
 - Pre-filled WhatsApp message: 你好 Smile Arts 哥打白沙罗，我想预约 RM 399 洗牙美白配套。
-
-*"In one visit" is an assumption: confirm with the clinic, or drop it.*
 
 ## Bahasa Malaysia (all seven ads)
 
@@ -212,10 +212,10 @@ Meta limits detailed targeting on health topics, so the creative and the locatio
 | Ad set | Ads | Location | Age | Notes |
 |---|---|---|---|---|
 | A. Treatments | braces, implants, veneers, clinic | 5 km around The Strand (Kota Damansara, Mutiara Damansara, Sunway Damansara, Damansara Perdana, Sg. Buloh edge) | 25–55 | Broad (Advantage+ audience), EN + 中文 ads in the same ad set; Meta serves each person the language they use |
-| B. Implant RM 5,000 | implant5000 | 10 km (people travel further for a big-ticket treatment) | 40–65+ | Broad. Add 中文-speaking audience if Chinese ads win the first 3 days |
-| C. Aligners RM 6,000–9,900 | aligner, braces | 8 km | 20–40 | Broad; optional suggestions: Invisalign, weddings/engaged (life event "Newly engaged") |
+| B. Implants (implant5000 only once its price is confirmed) | implants, implant5000 | 10 km (people travel further for a big-ticket treatment) | 40–65+ | Broad. Add 中文-speaking audience if Chinese ads win the first 3 days |
+| C. Braces & aligners (aligner ad only once its price is confirmed) | braces, aligner | 8 km | 20–40 | Broad; optional suggestions: Invisalign, weddings/engaged (life event "Newly engaged") |
 | D. Scaling + whitening RM 399 | scaling | 5 km | 22–50 | Cheapest enquiries; good for filling chairs fast and building a retargeting pool |
-| E. Retargeting (from Day 4) | implant5000, aligner | People who engaged with the Smile Arts KD Page/Instagram in the last 365 days, or watched 50% of a video ad | 25–65 | Small budget (RM 5–10/day) |
+| E. Retargeting (from Day 4) | scaling, plus implant5000/aligner if confirmed | People who engaged with the Smile Arts KD Page/Instagram in the last 365 days, or watched 50% of a video ad | 25–65 | Small budget (RM 5–10/day) |
 
 Budget split suggestion for a RM 30/day trial: A RM 8, B RM 8, C RM 7, D RM 7 (E added on Day 4 from the weakest set). Day 3: pause any ad with no messages after ~RM 40 spend and move budget to the winners.
 Placements: Advantage+ placements, with the 9:16 file for Stories/Reels and 4:5 for Feed in each ad (asset customisation).
@@ -239,3 +239,11 @@ Quick replies: 牙套 / 隐适美 · 种植牙 · 瓷贴片 · 洗牙美白
   中文: 已为你预约 {day} {time}，由 Dr. Daren 看诊。Smile Arts 哥打白沙罗 见！
 
 Each ad's pre-filled message names the branch and the treatment, so the receptionist can log ad enquiries (date, treatment, booked yes/no) for the Day 7 and Day 14 reports.
+
+## Fact check (12 Oct 2026, against smilearts.com.my)
+
+- Dr. Daren Ang: Doctor of Dental Surgery, USM, 2008 (so 18 years in practice in 2026; he also says 18 years in his Instagram intro video); certified Invisalign provider since 2016; Digital Smile Design training 2017. Source: /about/.
+- Porcelain/ceramic veneers planned with Digital Smile Design: /services-treatment/aesthetic-dentistry/.
+- Metal, ceramic and self-ligating braces; Invisalign and ClearCorrect: /services-treatment/braces/ and the Kota Damansara branch page.
+- Address No. 55-1, Jalan PJU 5/20, The Strand, Kota Damansara and WhatsApp 6014-3650270: homepage branch list.
+- "3D CBCT imaging" appears only on the old implant pop-up, so it was removed from the implants treatment ad.
