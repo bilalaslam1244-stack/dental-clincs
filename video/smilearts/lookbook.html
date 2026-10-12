@@ -172,7 +172,7 @@ const story = (c, l) => `<div class="phone"><div class="screen"><img src="${IMGS
 <section class="page dark">
   <div class="phead">
     <div><div class="kicker">03 · Three languages</div><h2>Every ad in English, <em><span style="white-space:nowrap">中文</span> and Bahasa Malaysia.</em></h2></div>
-    <p>Shown here as Instagram Stories, where most taps on dental ads come from. Meta shows each person the version in their own language, and each version opens WhatsApp with a message that names the ad, so your team knows exactly what the patient is asking about.</p>
+    <p>Every ad comes in all three languages; here are three of them as Instagram Stories, where most taps on dental ads come from. Meta shows each person the version in their own language, and the WhatsApp message names the ad, so your team knows what the patient is asking about.</p>
   </div>
   <div class="trio" id="trio"></div>
   <div class="foot"><img src="source/Site-Logo-White.png" alt=""><span>04</span></div>
@@ -202,7 +202,7 @@ const CAP = {
   braces: 'Thinking about straightening your teeth? Dr. Daren Ang, an Invisalign provider since 2016, checks your bite and explains your options…',
   implants: 'Missing a tooth? Dr. Daren Ang (DDS, USM; 18 years in practice) checks whether a dental implant suits you…',
   veneers: 'Chipped, stained or uneven front teeth? Ask Dr. Daren Ang about porcelain veneers, planned with Digital Smile Design…',
-  scaling: 'Scaling, polishing and in-office teeth whitening: RM 399 at Smile Arts Dental Kota Damansara. Tap Book now…',
+  scaling: 'Yellow stains or tartar that brushing won\'t shift? Scaling, polishing and in-office whitening: RM 399 at Smile Arts Dental…',
   implant5000: 'Missing a tooth? A dental implant at Smile Arts Dental Kota Damansara is all-in at RM 5,000. Instalments available. Tap Book now…',
   aligner: 'Straighten your teeth with clear aligners: packages from RM 6,000 to RM 9,900. Instalments available. Tap Book now…',
 };
@@ -210,8 +210,8 @@ const wrap = (html, lab) => `<div>${html}<div class="label">${lab}</div></div>`;
 document.getElementById('row2').innerHTML = ['braces', 'implants', 'veneers'].map(c => wrap(post(c, 'en', CAP[c]), { braces: 'Braces & Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers' }[c])).join('');
 document.getElementById('row3').innerHTML = [['scaling', 'Current offer · RM 399'], ['implant5000', 'Implant RM 5,000 <span>price to confirm</span>'], ['aligner', 'Aligners RM 6,000–9,900 <span>price to confirm</span>']]
   .map(([c, lab]) => wrap(post(c, 'en', CAP[c]), lab)).join('');
-document.getElementById('trio').innerHTML = [['en', 'English', ''], ['zh', 'Chinese', '中文'], ['ms', 'Malay', 'Bahasa Malaysia']]
-  .map(([l, a, b]) => wrap(story('scaling', l), a + (b ? `<span>${b}</span>` : ''))).join('');
+document.getElementById('trio').innerHTML = [['braces', 'en', 'English', 'Braces'], ['implant5000', 'zh', 'Chinese', '种植牙'], ['scaling', 'ms', 'Malay', 'Scaling RM 399']]
+  .map(([c, l, a, b]) => wrap(story(c, l), `${a}<span>${b}</span>`)).join('');
 document.getElementById('fan').innerHTML = [['implant5000', 'zh', 'left:146mm;top:42mm;transform:rotate(-7deg)'], ['braces', 'en', 'left:180mm;top:24mm;z-index:2'], ['scaling', 'ms', 'left:214mm;top:42mm;transform:rotate(7deg)']]
   .map(([c, l, st]) => `<div class="phone" style="${st}"><div class="screen"><img src="${IMGS}/smilearts-kd-${c}-${l}-9x16${EXT}" alt=""></div></div>`).join('');
 document.getElementById('wa-big').outerHTML = WA.replace('fill="#25d366"', 'fill="#231b15"');

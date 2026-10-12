@@ -148,6 +148,11 @@
   .visual svg { display: block; }
   .visual.cut img { object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 26px 34px rgba(20,14,10,.3)); }
   .narrow.L-offer .col { width: 540px; }
+  .offer-top .top span { color: var(--accent); }
+  .offer-top .col { width: auto; right: 70px; }
+  .offer-top .list { grid-template-columns: repeat(4, auto); justify-content: start; column-gap: 26px; }
+  .offer-top .list p { border-top: 0; padding: 8px 0 4px; }
+  .f45.offer-top .list { grid-template-columns: 1fr 1fr; }
   .visual::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(90deg, var(--solid) 0%, transparent 38%), linear-gradient(0deg, var(--solid) 0%, transparent 26%), linear-gradient(180deg, var(--solid) 0%, transparent 14%); }
 
@@ -227,7 +232,7 @@ const CFG = {
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
   implant5000: { theme: 'dark',  layout: 'offer', noface: true, img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
   aligner:     { theme: 'cream', layout: 'offer', noface: true, img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [40, 600, 340, 397], 45: [60, 140, 290, 339] } },
-  scaling:     { theme: 'dark',  layout: 'offer', icon: true, noface: true, narrow: true, box: { 916: [90, 640, 360, 360], 45: [80, 160, 270, 270] } },
+  scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, top: 'source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg', pos: '55% 35%', hero: { 916: 560, 45: 320 } },
 };
 const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
 // gold line icon for the RM 399 package (clean tooth with a sparkle), in the style of the clinic's poster icons
@@ -265,11 +270,11 @@ const T = {
       label: 'All-in price', price: '<small>RM</small>5,000',
       list: ['Implant fixture', 'Custom abutment', 'Ceramic crown', 'Dental X-ray & 3D CBCT'],
       fine: 'Includes assessment and treatment planning. Suitability confirmed at consultation. Terms apply.' },
-    aligner: { eyebrow: 'Clear aligners', h1: 'Straighter teeth, <em>without metal braces.</em>',
+    aligner: { eyebrow: 'Clear aligners', h1: 'Crooked teeth? <em>Straighten them without metal braces.</em>',
       label: 'Package from', price: '<small>RM</small>6,000', to: 'to RM 9,900',
       list: ['Consultation & X-ray', 'Digital intra-oral scan', 'Full set of aligners', '1 pair of retainers'],
       fine: 'Price depends on your case. Terms apply.' },
-    scaling: { eyebrow: 'Scaling + polishing + whitening', h1: 'Due for a clean? <em>All three in one package.</em>',
+    scaling: { eyebrow: 'Scaling + polishing + whitening', cta: 'Book your clean', h1: 'Stains or tartar build-up? <em>Time for a proper clean.</em>',
       label: 'Package price', price: '<small>RM</small>399',
       list: ['Removes tartar & stains', 'Healthier gums', 'Whiter teeth', 'Done at the clinic'],
       fine: 'Results vary from person to person. Terms apply.' },
@@ -294,7 +299,7 @@ const T = {
       label: '配套价', price: '<small>RM</small>6,000', to: '至 RM 9,900',
       list: ['咨询与X光', '数字口内扫描', '全套隐形牙套', '一副保持器'],
       fine: '价钱视个案而定。附带条款。' },
-    scaling: { eyebrow: '洗牙 + 抛光 + 美白', h1: '很久没洗牙了？<br><em>一个配套全包。</em>',
+    scaling: { eyebrow: '洗牙 + 抛光 + 美白', cta: '预约洗牙', h1: '牙齿发黄、有牙垢？<br><em>该洗牙了。</em>',
       label: '配套价', price: '<small>RM</small>399',
       list: ['清除牙垢和污渍', '牙龈更健康', '牙齿更白', '在诊所完成'],
       fine: '效果因人而异。附带条款。' },
@@ -315,11 +320,11 @@ const T = {
       label: 'Harga termasuk semua', price: '<small>RM</small>5,000',
       list: ['Fixture implan', 'Abutment khas', 'Crown seramik', 'X-ray & 3D CBCT'],
       fine: 'Termasuk penilaian dan perancangan rawatan. Kesesuaian disahkan semasa konsultasi. Tertakluk pada terma.' },
-    aligner: { eyebrow: 'Aligner lutsinar', h1: 'Gigi tersusun <em>tanpa braces besi.</em>',
+    aligner: { eyebrow: 'Aligner lutsinar', h1: 'Gigi tak tersusun? <em>Luruskan tanpa braces besi.</em>',
       label: 'Pakej dari', price: '<small>RM</small>6,000', to: 'hingga RM 9,900',
       list: ['Konsultasi & X-ray', 'Imbasan intra-oral digital', 'Set penuh aligner', '1 pasang retainer'],
       fine: 'Harga bergantung pada kes anda. Tertakluk pada terma.' },
-    scaling: { eyebrow: 'Scaling + polishing + pemutihan', h1: 'Dah lama tak scaling? <em>Tiga dalam satu pakej.</em>',
+    scaling: { eyebrow: 'Scaling + polishing + pemutihan', cta: 'Tempah scaling', h1: 'Gigi kuning & berkarang? <em>Masa untuk scaling.</em>',
       label: 'Harga pakej', price: '<small>RM</small>399',
       list: ['Buang karang & kesan kotoran', 'Gusi lebih sihat', 'Gigi lebih putih', 'Dibuat di klinik'],
       fine: 'Hasil berbeza mengikut individu. Tertakluk pada terma.' },
@@ -328,7 +333,7 @@ const T = {
 
 const t = T[l], s = t[c];
 document.getElementById('logo').src = cfg.theme === 'dark' || cfg.layout === 'phototop' ? 'source/Site-Logo-White.png' : 'source/Group1.png';
-const keep = { portrait: ['.arc', '.portrait'], photofull: ['.arc', '.portrait', '.bgphoto'], phototop: ['.hero'], visual: ['.visual'], offer: ['.visual'] }[cfg.layout];
+const keep = { portrait: ['.arc', '.portrait'], photofull: ['.arc', '.portrait', '.bgphoto'], phototop: ['.hero'], visual: ['.visual'], offer: cfg.top ? ['.hero'] : ['.visual'] }[cfg.layout];
 for (const sel of ['.arc', '.portrait', '.bgphoto', '.hero', '.visual']) if (!keep.includes(sel)) document.querySelector(sel).remove();
 if (cfg.layout === 'phototop') {
   const i = document.getElementById('heroimg'), h = cfg.hero[f];
@@ -338,20 +343,29 @@ if (cfg.layout === 'phototop') {
   if (document.querySelector('.tag')) document.querySelector('.tag').style.top = (h - (f === '45' ? 150 : 200)) + 'px';
 }
 if (cfg.layout === 'photofull') { const i = document.getElementById('bgimg'); i.src = cfg.img; i.style.objectPosition = cfg.pos; }
-if (cfg.layout === 'visual' || cfg.layout === 'offer') {
+if (cfg.layout === 'offer' && cfg.top) {
+  const i = document.getElementById('heroimg'), h = cfg.hero[f];
+  i.src = cfg.top; i.style.objectPosition = cfg.pos;
+  document.querySelector('.hero').style.height = h + 'px';
+  document.querySelector('.top').style.top = (h + (f === '45' ? 14 : 22)) + 'px';
+  document.querySelector('.head').style.top = (h + (f === '45' ? 104 : 118)) + 'px';
+  document.documentElement.classList.add('offer-top');
+}
+if ((cfg.layout === 'visual' || cfg.layout === 'offer') && !cfg.top) {
   const [r, t, w, h] = cfg.box[f], v = document.getElementById('visual');
   Object.assign(v.style, { right: r + 'px', top: t + 'px', width: w + 'px', height: h + 'px' });
   if (cfg.icon) v.innerHTML = TOOTH; else document.getElementById('visimg').src = cfg.img;
   v.classList.toggle('cut', !!cfg.cut || !!cfg.icon);
 }
-if (cfg.noface) document.querySelector('.tag .face').remove();
+if (cfg.noface && document.querySelector('.tag .face')) document.querySelector('.tag .face').remove();
+if (cfg.notag) document.querySelector('.tag').remove();
 
 if (cfg.narrow) document.documentElement.classList.add('narrow');
-for (const k of ['branch', 'creds', 'book', 'addr']) document.getElementById(k).innerHTML = t[k];
+for (const k of ['branch', 'creds', 'book', 'addr']) { const e = document.getElementById(k); if (e) e.innerHTML = t[k]; }
 for (const k of ['eyebrow', 'h1']) document.getElementById(k).innerHTML = s[k];
 const list = `<div class="list">${s.list.map(x => `<p>${x}</p>`).join('')}</div>`;
 const WA = '<svg viewBox="0 0 24 24" fill="#f1dcaa"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm4.4 11.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>';
-const cta = `<div class="cta"><i>${WA}</i>${t.cta}<b>→</b></div>`
+const cta = `<div class="cta"><i>${WA}</i>${s.cta || t.cta}<b>→</b></div>`
   .replace('<div class="cta">', `<div class="perks">${PERKS.map(k => `<span>${t[k]}</span>`).join('')}</div><div class="cta">`);
 document.getElementById('col').innerHTML = PRICE
   ? `<div><div class="price-label">${s.label}</div><div class="price">${s.price}</div>${s.to ? `<div class="price-to">${s.to}</div>` : ''}</div>${list}${cta}<p class="fine">${s.fine}</p>`
@@ -365,7 +379,7 @@ if (cfg.layout === 'offer') document.fonts.ready.then(() => {
   const head = document.querySelector('.head').getBoundingClientRect(), col = document.getElementById('col'), v = document.getElementById('visual');
   const gap = f === '45' ? 16 : 26;
   col.style.top = Math.ceil(head.bottom + gap) + 'px';
-  v.style.top = Math.max(cfg.box[f][1], Math.ceil(head.bottom + gap)) + 'px';
+  if (v && cfg.box) v.style.top = Math.max(cfg.box[f][1], Math.ceil(head.bottom + gap)) + 'px';
 });
 </script>
 </body>
