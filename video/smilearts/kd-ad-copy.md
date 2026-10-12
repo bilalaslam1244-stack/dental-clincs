@@ -1,8 +1,8 @@
 # Smile Arts Dental Kota Damansara: ad copy (trial)
 
-Click-to-WhatsApp campaign for Kota Damansara. Six ads, each in EN and 中文, with 9:16 (Stories/Reels) and 4:5 (Feed) image and video versions:
-- **Treatment ads (cream):** braces & Invisalign, implants, veneers.
-- **Price ads (espresso):** dental implant all-in RM 5,000, clear aligners RM 6,000–9,900, scaling + polishing + in-office whitening RM 399. These replicate the packages already published on smilearts.com.my.
+Click-to-WhatsApp campaign for Kota Damansara. Seven ads, each in EN and 中文, with 9:16 (Stories/Reels) and 4:5 (Feed) image and video versions:
+- **Treatment and clinic ads:** braces & Invisalign (portrait), implants (treatment-room photo), veneers (reception photo behind Dr. Daren), clinic (shopfront + inside photos, local recognition).
+- **Price ads (visuals from the clinic's own promo posters):** dental implant all-in RM 5,000, clear aligners RM 6,000–9,900, scaling + polishing + in-office whitening RM 399. These replicate the packages already published on smilearts.com.my.
 
 Design follows the clinic's own posters (cream/espresso, gold, serif headlines), with Dr. Daren's studio portrait from the website and the WhatsApp number in a contact band.
 Files: `video/renders/smilearts/` (images) and `video/renders/smilearts/motion/` (videos). Source: `smilearts/kd-ads.html`.
@@ -76,6 +76,23 @@ Malaysian Dental Council check: no before-and-after photos, no testimonials, no 
 - Description: Smile Arts Dental · 哥打白沙罗
 - Pre-filled WhatsApp message: 你好 Smile Arts 哥打白沙罗，我想了解瓷贴片。
 
+## Clinic ad: your dentist at The Strand (local recognition)
+
+**EN**
+- Primary text:
+  Looking for a dentist in Kota Damansara? Smile Arts Dental is at The Strand (No. 55-1, Jalan PJU 5/20), with braces and Invisalign, dental implants, porcelain veneers, and scaling and whitening under one roof. Led by Dr. Daren Ang (DDS, USM; 18 years in practice).
+  💬 Tap "Send message" to book on WhatsApp.
+- Headline: Your dentist at The Strand
+- Description: Smile Arts Dental · Kota Damansara
+- Pre-filled WhatsApp message: Hi Smile Arts Kota Damansara, I'd like to make an appointment.
+
+**中文**
+- Primary text:
+  在哥打白沙罗找牙医？Smile Arts Dental 就在 The Strand（No. 55-1, Jalan PJU 5/20），牙套与隐适美、种植牙、瓷贴片、洗牙与美白，一站完成。由 Dr. Daren Ang（理大牙科学士，18年临床经验）带领。
+  💬 点击"发送消息"，WhatsApp 预约。
+- Headline: The Strand，你身边的牙医
+- Pre-filled WhatsApp message: 你好 Smile Arts 哥打白沙罗，我想预约看牙。
+
 ## Price ad: dental implant, all-in RM 5,000
 
 **EN**
@@ -145,7 +162,7 @@ Meta limits detailed targeting on health topics, so the creative and the locatio
 
 | Ad set | Ads | Location | Age | Notes |
 |---|---|---|---|---|
-| A. Treatments | braces, implants, veneers | 5 km around The Strand (Kota Damansara, Mutiara Damansara, Sunway Damansara, Damansara Perdana, Sg. Buloh edge) | 25–55 | Broad (Advantage+ audience), EN + 中文 ads in the same ad set; Meta serves each person the language they use |
+| A. Treatments | braces, implants, veneers, clinic | 5 km around The Strand (Kota Damansara, Mutiara Damansara, Sunway Damansara, Damansara Perdana, Sg. Buloh edge) | 25–55 | Broad (Advantage+ audience), EN + 中文 ads in the same ad set; Meta serves each person the language they use |
 | B. Implant RM 5,000 | implant5000 | 10 km (people travel further for a big-ticket treatment) | 40–65+ | Broad. Add 中文-speaking audience if Chinese ads win the first 3 days |
 | C. Aligners RM 6,000–9,900 | aligner, braces | 8 km | 20–40 | Broad; optional suggestions: Invisalign, weddings/engaged (life event "Newly engaged") |
 | D. Scaling + whitening RM 399 | scaling | 5 km | 22–50 | Cheapest enquiries; good for filling chairs fast and building a retargeting pool |

@@ -8,11 +8,11 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
-const CONCEPTS = ['braces', 'implants', 'veneers', 'implant5000', 'aligner', 'scaling'];
+const CONCEPTS = ['braces', 'implants', 'veneers', 'clinic', 'implant5000', 'aligner', 'scaling'];
 const FORMATS = { '916': 1920, '45': 1350 };
 const LANGS = ['en', 'zh'];
 const TITLES = { braces: 'Braces or Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers',
-                 implant5000: 'Dental implant RM 5,000', aligner: 'Clear aligners from RM 6,000', scaling: 'Scaling and whitening RM 399' };
+                 clinic: 'Your dentist at The Strand', implant5000: 'Dental implant RM 5,000', aligner: 'Clear aligners from RM 6,000', scaling: 'Scaling and whitening RM 399' };
 
 const src = readFileSync('smilearts/kd-ads.html', 'utf8');
 const css = src.match(/<style>([\s\S]*?)<\/style>/)[1].replace(/\.\.\/assets\//g, 'assets/');
@@ -23,6 +23,11 @@ const JS = `
       tl.fromTo('.portrait', { opacity: 0, x: 80, scale: 1.04 }, { opacity: 1, x: 0, scale: 1, duration: 1.1, ease: 'expo.out' }, 0);
       tl.fromTo('.arc', { opacity: 0, scale: 0.85, rotation: -20 }, { opacity: 0.7, scale: 1, rotation: 0, duration: 1.4, ease: 'expo.out' }, 0.1);
       tl.fromTo('.band', { y: 120 }, { y: 0, duration: 0.7, ease: 'expo.out' }, 0);
+      tl.fromTo('.hero img', { scale: 1.12 }, { scale: 1, duration: DUR, ease: 'power1.out' }, 0);
+      tl.fromTo('.bgphoto img', { scale: 1.12 }, { scale: 1.03, duration: DUR, ease: 'power1.out' }, 0);
+      tl.fromTo('.visual', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 1.0, ease: 'expo.out' }, 0.2);
+      tl.fromTo('.visual img', { scale: 1.1 }, { scale: 1, duration: DUR, ease: 'power1.out' }, 0);
+      tl.fromTo('.strip figure', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out', stagger: 0.2 }, 4 * B);
       tl.fromTo('.top', { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.5 * B);
       tl.fromTo('.eyebrow', { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }, 0.75 * B);
       tl.fromTo('h1', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: 'expo.out' }, 1 * B);

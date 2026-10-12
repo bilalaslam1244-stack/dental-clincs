@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
-const CONCEPTS = process.argv.slice(2).length ? process.argv.slice(2) : ['braces', 'implants', 'veneers', 'implant5000', 'aligner', 'scaling'];
+const CONCEPTS = process.argv.slice(2).length ? process.argv.slice(2) : ['braces', 'implants', 'veneers', 'clinic', 'implant5000', 'aligner', 'scaling'];
 const FORMATS = { '916': [1080, 1920, '9x16'], '45': [1080, 1350, '4x5'] };
 const LANGS = ['en', 'zh'];
 mkdirSync('renders/smilearts', { recursive: true });
