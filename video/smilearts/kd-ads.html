@@ -143,6 +143,7 @@
   /* promo visual on the right, faded into the background (price ads) */
   .visual { position: absolute; overflow: hidden; }
   .visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .visual.cut { overflow: visible; }
   .visual.cut::after { display: none; }
   .visual.cut img { object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 26px 34px rgba(20,14,10,.3)); }
   .narrow.L-offer .col { width: 540px; }
@@ -224,7 +225,7 @@ const CFG = {
   implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 840, 45: 540 } },
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
   implant5000: { theme: 'dark',  layout: 'offer', img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
-  aligner:     { theme: 'cream', layout: 'offer', img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [80, 600, 380, 444], 45: [60, 140, 290, 339] } },
+  aligner:     { theme: 'cream', layout: 'offer', img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [40, 600, 340, 397], 45: [60, 140, 290, 339] } },
   scaling:     { theme: 'dark',  layout: 'offer', img: 'source/daren-cutout.png', cut: true, noface: true, narrow: true, box: { 916: [-150, 800, 661, 760], 45: [-150, 510, 557, 640] } },
 };
 const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
