@@ -146,6 +146,10 @@
   .visual.cut { overflow: visible; }
   .visual.cut::after { display: none; }
   .visual svg { display: block; }
+  /* treatment photo as a framed card (RM 399) */
+  .visual.card { border-radius: 26px; border: 3px solid #c9a063; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+  .visual.card::after { background: linear-gradient(180deg, transparent 60%, rgba(20,14,10,.35) 100%); }
+  .f45 .visual.card { border-radius: 18px; border-width: 2px; }
   .visual.cut img { object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 26px 34px rgba(20,14,10,.3)); }
   .narrow.L-offer .col { width: 540px; }
   .offer-top .top span { color: var(--accent); }
@@ -232,7 +236,8 @@ const CFG = {
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
   implant5000: { theme: 'dark',  layout: 'offer', noface: true, img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
   aligner:     { theme: 'cream', layout: 'offer', noface: true, img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [40, 600, 340, 397], 45: [60, 140, 290, 339] } },
-  scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, top: 'source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg', pos: '55% 35%', hero: { 916: 560, 45: 320 } },
+  scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, narrow: true, card: true, pos: '42% 40%',
+                 img: 'source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg', box: { 916: [70, 600, 400, 600], 45: [60, 140, 320, 480] } },
 };
 const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
 // gold line icon for the RM 399 package (clean tooth with a sparkle), in the style of the clinic's poster icons
@@ -356,6 +361,8 @@ if ((cfg.layout === 'visual' || cfg.layout === 'offer') && !cfg.top) {
   Object.assign(v.style, { right: r + 'px', top: t + 'px', width: w + 'px', height: h + 'px' });
   if (cfg.icon) v.innerHTML = TOOTH; else document.getElementById('visimg').src = cfg.img;
   v.classList.toggle('cut', !!cfg.cut || !!cfg.icon);
+  v.classList.toggle('card', !!cfg.card);
+  if (cfg.pos) document.getElementById('visimg').style.objectPosition = cfg.pos;
 }
 if (cfg.noface && document.querySelector('.tag .face')) document.querySelector('.tag .face').remove();
 if (cfg.notag) document.querySelector('.tag').remove();
