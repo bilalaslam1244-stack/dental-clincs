@@ -8,10 +8,11 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
-const CONCEPTS = ['braces', 'implants', 'veneers'];
+const CONCEPTS = ['braces', 'implants', 'veneers', 'implant5000', 'aligner', 'scaling'];
 const FORMATS = { '916': 1920, '45': 1350 };
 const LANGS = ['en', 'zh'];
-const TITLES = { braces: 'Braces or Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers' };
+const TITLES = { braces: 'Braces or Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers',
+                 implant5000: 'Dental implant RM 5,000', aligner: 'Clear aligners from RM 6,000', scaling: 'Scaling and whitening RM 399' };
 
 const src = readFileSync('smilearts/kd-ads.html', 'utf8');
 const css = src.match(/<style>([\s\S]*?)<\/style>/)[1].replace(/\.\.\/assets\//g, 'assets/');
@@ -19,19 +20,21 @@ const fix = html => html.replace(/src="source\//g, 'src="smilearts/source/');
 
 // beats at 92 BPM; cues match the "smilearts" entry in tools/compose-music-motion.py
 const JS = `
-      tl.fromTo('.photo img', { scale: 1.14 }, { scale: 1, duration: DUR, ease: 'power1.out' }, 0);
-      tl.fromTo('.photo', { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power1.out' }, 0);
-      tl.fromTo('.creds span', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out', stagger: 0.18 }, 0.5 * B);
-      tl.fromTo('.avatar', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.8)' }, 0.75 * B);
-      tl.fromTo('.head', { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.5 * B);
+      tl.fromTo('.portrait', { opacity: 0, x: 80, scale: 1.04 }, { opacity: 1, x: 0, scale: 1, duration: 1.1, ease: 'expo.out' }, 0);
+      tl.fromTo('.arc', { opacity: 0, scale: 0.85, rotation: -20 }, { opacity: 0.7, scale: 1, rotation: 0, duration: 1.4, ease: 'expo.out' }, 0.1);
+      tl.fromTo('.band', { y: 120 }, { y: 0, duration: 0.7, ease: 'expo.out' }, 0);
+      tl.fromTo('.top', { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.5 * B);
       tl.fromTo('.eyebrow', { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }, 0.75 * B);
       tl.fromTo('h1', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: 'expo.out' }, 1 * B);
       tl.fromTo('h1 em', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power1.out' }, 1.5 * B);
-      tl.fromTo('.sub', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 2.25 * B);
-      tl.fromTo('.cta', { opacity: 0, y: 60, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 3.5 * B - 0.1);
-      tl.fromTo('.note', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 4.25 * B);
-      tl.fromTo('.foot', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 4.5 * B);
-      tl.fromTo('.cta', { scale: 1 }, { scale: 1.045, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 5 * B);
+      tl.fromTo('.sub, .price-label', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 2.25 * B);
+      tl.fromTo('.price', { opacity: 0, scale: 1.25, transformOrigin: '0% 70%' }, { opacity: 1, scale: 1, duration: 0.8, ease: 'expo.out' }, 2.25 * B);
+      tl.fromTo('.price-to', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 2.75 * B);
+      tl.fromTo('.list p', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out', stagger: B / 3 }, 3 * B);
+      tl.fromTo('.fine', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 4.5 * B);
+      tl.fromTo('.tag', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 4.25 * B);
+      tl.fromTo('.band .row', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 3.5 * B);
+      tl.fromTo('.wa i', { scale: 1 }, { scale: 1.12, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 5 * B);
 `;
 
 const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME } : {});
@@ -42,13 +45,14 @@ for (const l of LANGS) {
     await tab.setViewportSize({ width: 1080, height: h });
     for (const c of CONCEPTS) {
       await tab.goto(`${page}?c=${c}&f=${f}&l=${l}`);
-      const ad = await tab.evaluate(() => {
+      await tab.evaluate(() => document.fonts.ready);
+      const [ad, cls] = await tab.evaluate(() => {
         const a = document.querySelector('.ad');
         a.querySelectorAll('[hidden]').forEach(e => e.remove());
-        return a.innerHTML;
+        return [a.innerHTML, document.documentElement.className];
       });
       const html = `<!doctype html>
-<html lang="${l}" class="f${f}">
+<html lang="${l}" class="${cls}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=${h}" />

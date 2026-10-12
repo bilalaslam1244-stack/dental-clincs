@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh" class="f916">
+<html lang="zh" class="f916 cream">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
@@ -10,69 +10,97 @@
   @font-face { font-family: Tajawal; font-weight: 500; src: url(assets/fonts/Tajawal-500-latin.woff2); }
   @font-face { font-family: Tajawal; font-weight: 700; src: url(assets/fonts/Tajawal-700-latin.woff2); }
   @font-face { font-family: Tajawal; font-weight: 800; src: url(assets/fonts/Tajawal-800-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500 600; src: url(assets/fonts/PlayfairDisplay-600-normal-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500; font-style: italic; src: url(assets/fonts/PlayfairDisplay-500-italic-latin.woff2); }
   @font-face { font-family: "Noto Sans SC"; font-weight: 500; src: url(assets/fonts/NotoSansSC-500-smilearts-subset.woff2); }
   @font-face { font-family: "Noto Sans SC"; font-weight: 700; src: url(assets/fonts/NotoSansSC-700-smilearts-subset.woff2); }
-  :root { --sans: Tajawal, "Noto Sans SC", Arial, sans-serif;
-          --taupe: #a89379; --deep: #6b5a45; --ink: #2b241d; --ink-2: #5a5045; --ivory: #faf7f2; --sand: #efe7dc;
-          --hair: rgba(168,147,121,.45); }
+  @font-face { font-family: "Noto Serif SC"; font-weight: 700; src: url(assets/fonts/NotoSerifSC-700-smilearts-subset.woff2); }
+  :root { --sans: Tajawal, "Noto Sans SC", Arial, sans-serif; --serif: Playfair, "Noto Serif SC", Georgia, serif;
+          --gold: linear-gradient(100deg, #9c7440 0%, #d9b77b 38%, #f1dcaa 52%, #c9a063 70%, #9c7440 100%);
+          --gold-ink: #94703f; --espresso: #221a14; }
   * { box-sizing: border-box; margin: 0; }
-  html, body { background: var(--ivory); }
-  .ad { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ivory); color: var(--ink); font-family: var(--sans); }
+  html, body { background: #f6f0e7; }
+  .ad { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: var(--sans);
+        --bg: #f6f0e7; --ink: #231b15; --ink-2: #5b4f44; --accent: var(--gold-ink); --hair: rgba(148,112,63,.38);
+        background: radial-gradient(120% 70% at 85% 30%, #fffaf2 0%, var(--bg) 55%, #efe6d8 100%); color: var(--ink); }
   .f45 .ad { height: 1350px; }
+  .dark .ad { --bg: #2a211a; --ink: #f6efe4; --ink-2: #cdbfae; --accent: #d9b77b; --hair: rgba(217,183,123,.35);
+              background: radial-gradient(110% 70% at 80% 35%, #3a2d22 0%, #261d16 50%, #17110d 100%); }
 
-  /* photo */
-  .photo { position: absolute; left: 0; right: 0; top: 0; height: 980px; overflow: hidden; }
-  .f45 .photo { height: 600px; }
-  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,36,29,.18) 0%, rgba(43,36,29,0) 24%, rgba(250,247,242,0) 70%, var(--ivory) 100%); }
-  .avatar { position: absolute; right: 70px; top: 720px; width: 230px; height: 230px; border-radius: 50%; overflow: hidden; border: 8px solid var(--ivory); box-shadow: 0 18px 40px rgba(43,36,29,.25); z-index: 2; }
-  .f45 .avatar { top: 380px; width: 190px; height: 190px; right: 60px; }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  /* gold arc behind the portrait, as on the clinic's own posters */
+  .arc { position: absolute; width: 900px; height: 900px; right: -380px; top: 560px; border-radius: 50%;
+         border: 3px solid transparent; background: var(--gold) border-box;
+         -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .7; }
+  .f45 .arc { width: 700px; height: 700px; top: 420px; right: -290px; }
+  .portrait { position: absolute; height: 960px; right: -200px; bottom: 316px; filter: drop-shadow(0 30px 40px rgba(20,14,10,.28)); }
+  .f45 .portrait { height: 740px; right: -160px; bottom: 170px; }
 
-  /* credentials over the photo */
-  .creds { position: absolute; left: 70px; top: 745px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; z-index: 2; }
-  .f45 .creds { top: 400px; gap: 10px; }
-  .creds span { background: rgba(250,247,242,.94); color: var(--ink); font: 500 30px/1 var(--sans); padding: 15px 22px 11px; border-radius: 999px; box-shadow: 0 8px 22px rgba(43,36,29,.14); }
-  .creds span b { font-weight: 800; color: var(--deep); }
-  .f45 .creds span { font-size: 26px; padding: 13px 20px 9px; }
+  .top { position: absolute; left: 70px; right: 70px; top: 250px; display: flex; justify-content: space-between; align-items: center; }
+  .f45 .top { top: 56px; }
+  .top img { height: 70px; }
+  .f45 .top img { height: 56px; }
+  .top span { font: 700 23px var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+  .f45 .top span { font-size: 20px; }
 
-  /* text */
-  .box { position: absolute; left: 70px; right: 70px; top: 960px; display: flex; flex-direction: column; gap: 24px; }
-  .f45 .box { top: 600px; gap: 18px; }
-  .head { display: flex; justify-content: space-between; align-items: center; }
-  .head img { height: 64px; }
-  .f45 .head img { height: 54px; }
-  .head span { font: 700 24px var(--sans); letter-spacing: .14em; color: var(--deep); text-transform: uppercase; }
-  .f45 .head span { font-size: 21px; }
-  .eyebrow { font: 700 26px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--taupe); }
-  h1 { font: 800 92px/1.02 var(--sans); letter-spacing: -.02em; color: var(--ink); }
-  .f45 h1 { font-size: 74px; }
-  h1 em { font-style: normal; color: var(--deep); }
-  .sub { font: 400 36px/1.32 var(--sans); color: var(--ink-2); }
-  .f45 .sub { font-size: 32px; }
-  .sub b { font-weight: 700; color: var(--ink); }
-  .rule { height: 2px; background: var(--hair); width: 120px; }
+  .head { position: absolute; left: 70px; right: 70px; top: 380px; display: flex; flex-direction: column; gap: 18px; }
+  .f45 .head { top: 150px; gap: 12px; }
+  .eyebrow { display: flex; align-items: center; gap: 18px; font: 700 25px var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+  .eyebrow::before { content: ""; width: 56px; height: 2px; background: var(--gold); }
+  .f45 .eyebrow { font-size: 21px; }
+  h1 { font: 600 94px/1.03 var(--serif); letter-spacing: -.01em; }
+  .f45 h1 { font-size: 72px; }
+  h1 em { font-style: italic; font-weight: 500; background: var(--gold); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 6px; }
+  .cream h1 em { background: none; color: var(--gold-ink); }
 
-  .cta { align-self: flex-start; display: inline-flex; align-items: center; gap: 22px; background: var(--deep); color: #fff; font: 700 36px/1 var(--sans); padding: 26px 40px 22px 26px; border-radius: 999px; box-shadow: 0 18px 36px rgba(107,90,69,.32); margin-top: 6px; }
-  .f45 .cta { font-size: 32px; padding: 22px 34px 18px 22px; }
-  .cta i { flex: none; width: 64px; height: 64px; border-radius: 50%; background: #25d366; display: grid; place-items: center; margin-top: -4px; }
-  .f45 .cta i { width: 56px; height: 56px; }
-  .cta svg { width: 60%; height: 60%; }
-  .note { font: 500 26px var(--sans); color: var(--ink-2); display: flex; align-items: center; gap: 12px; }
-  .note::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: #25d366; box-shadow: 0 0 0 6px rgba(37,211,102,.18); }
-  .f45 .note { font-size: 23px; }
+  /* left column beside the portrait */
+  .col { position: absolute; left: 70px; width: 470px; top: 760px; display: flex; flex-direction: column; gap: 26px; }
+  .f45 .col { top: 470px; width: 430px; gap: 18px; }
+  .sub { font: 400 38px/1.34 var(--sans); color: var(--ink-2); }
+  .f45 .sub { font-size: 29px; }
+  .price-label { font: 700 24px var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .price { font: 800 132px/.92 var(--sans); letter-spacing: -.03em; background: var(--gold); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; }
+  .price small { font-size: .42em; letter-spacing: 0; margin-right: 8px; }
+  .price-to { font: 700 40px var(--sans); color: var(--ink); margin-top: -8px; }
+  .f45 .price { font-size: 104px; }
+  .f45 .price-to { font-size: 32px; }
+  .list { display: flex; flex-direction: column; border-top: 1px solid var(--hair); }
+  .list p { display: flex; align-items: center; gap: 16px; font: 500 31px/1.2 var(--sans); padding: 17px 0 13px; border-bottom: 1px solid var(--hair); color: var(--ink); }
+  .list p::before { content: ""; flex: none; width: 22px; height: 12px; border-left: 3px solid var(--accent); border-bottom: 3px solid var(--accent); transform: rotate(-45deg) translateY(-4px); }
+  .f45 .list p { font-size: 24px; padding: 10px 0 8px; }
+  .fine { font: 400 22px/1.35 var(--sans); color: var(--ink-2); opacity: .9; }
+  .f45 .fine { font-size: 19px; }
 
-  .foot { border-top: 2px solid var(--hair); padding-top: 24px; margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
-  .f45 .foot { padding-top: 16px; margin-top: 4px; }
-  .creds.top { top: 300px; }
-  .f45 .creds.top { top: 36px; }
-  .foot b { font: 700 28px var(--sans); color: var(--ink); }
-  .foot span { font: 400 26px var(--sans); color: var(--ink-2); }
-  .f45 .foot b { font-size: 24px; }
-  .f45 .foot span { font-size: 23px; }
-  [lang="zh"] h1 { font-size: 84px; line-height: 1.18; letter-spacing: 0; }
-  .f45[lang="zh"] h1 { font-size: 70px; }
-  [lang="zh"] .eyebrow, [lang="zh"] .head span { letter-spacing: .08em; }
+  /* name tag on the portrait */
+  .tag { position: absolute; left: 70px; width: 470px; bottom: 410px; padding-left: 24px; border-left: 3px solid #c9a063; }
+  .f45 .tag { bottom: 236px; width: 430px; padding-left: 18px; }
+  .tag b { display: block; font: 500 italic 46px/1.1 var(--serif); color: var(--ink); }
+  .tag span { display: block; font: 500 25px/1.4 var(--sans); color: var(--ink-2); margin-top: 6px; }
+  .f45 .tag b { font-size: 34px; }
+  .f45 .tag span { font-size: 20px; margin-top: 2px; }
+
+  /* contact band, like the strip along the bottom of the clinic's posters */
+  .band { position: absolute; left: 0; right: 0; bottom: 0; height: 360px; background: linear-gradient(180deg, #2a211a, #17110d); color: #f6efe4; }
+  .band::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--gold); }
+  .f45 .band { height: 200px; }
+  .band .row { position: absolute; left: 70px; right: 70px; top: 48px; display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+  .f45 .band .row { top: 44px; }
+  .wa { display: flex; align-items: center; gap: 22px; }
+  .wa i { flex: none; width: 84px; height: 84px; border-radius: 50%; border: 2px solid #d9b77b; display: grid; place-items: center; }
+  .f45 .wa i { width: 72px; height: 72px; }
+  .wa svg { width: 44px; height: 44px; }
+  .wa small { display: block; font: 700 21px var(--sans); letter-spacing: .2em; text-transform: uppercase; color: #d9b77b; margin-bottom: 6px; }
+  .wa b { font: 800 50px/1 var(--sans); letter-spacing: .01em; }
+  .f45 .wa b { font-size: 42px; }
+  .where { text-align: right; border-left: 1px solid rgba(217,183,123,.4); padding-left: 30px; }
+  .where b { display: block; font: 500 italic 38px var(--serif); color: #f1dcaa; }
+  .where span { font: 500 26px var(--sans); color: #cdbfae; letter-spacing: .04em; }
+  .f45 .where b { font-size: 32px; }
+  .f45 .where span { font-size: 22px; }
+
+  [lang="zh"] h1 { font-size: 84px; line-height: 1.2; letter-spacing: .01em; }
+  .f45[lang="zh"] h1 { font-size: 66px; }
+  [lang="zh"] h1 em { font-style: normal; font-weight: 700; }
+  [lang="zh"] .eyebrow, [lang="zh"] .top span, [lang="zh"] .price-label, [lang="zh"] .wa small { letter-spacing: .1em; }
 
   html, body { width: 1080px; height: 1920px; overflow: hidden; }
   #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
@@ -82,18 +110,17 @@
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="7.5" data-width="1080" data-height="1920">
       <div class="ad clip" data-start="0" data-duration="7.5" data-track-index="0">
-  <div class="photo"><img id="photo" alt="" src="smilearts/source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg" style="object-position: 50% 50%;"></div>
-  <div class="avatar" id="avatar"><img src="smilearts/source/daren-avatar.jpg" alt=""></div>
-  <div class="creds" id="creds"><span><b>Dr. Daren Ang</b> · 理大牙科学士</span><span><b>18年</b>临床经验</span></div>
-  <div class="box">
-    <div class="head"><img src="smilearts/source/Group1.png" alt="Smile Arts Dental Clinic"><span id="branch">哥打白沙罗</span></div>
-    <div class="eyebrow" id="eyebrow">种植牙</div>
-    <h1 id="h1">缺了一颗牙？<br><em>看看种植牙适不适合你。</em></h1>
-    <p class="sub" id="sub">咨询时，Dr. Daren 会为你讲清楚步骤、疗程时间和费用。</p>
-    <div class="cta"><i><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.8.8-2.7-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"></path></svg></i><span id="cta">WhatsApp 预约咨询</span></div>
-    <div class="note" id="note">诊所营业时间内，通常15分钟内回复</div>
-    <div class="foot"><b id="addr1">Smile Arts Dental · 哥打白沙罗 The Strand</b><span id="addr2">No. 55-1, Jalan PJU 5/20, 47810 Petaling Jaya</span></div>
-  </div>
+  <div class="arc"></div>
+  <img class="portrait" src="smilearts/source/daren-cutout.png" alt="">
+  <div class="top"><img id="logo" alt="Smile Arts Dental Clinic" src="smilearts/source/Group1.png"><span id="branch">哥打白沙罗</span></div>
+  <div class="head"><div class="eyebrow" id="eyebrow">种植牙</div><h1 id="h1">缺了一颗牙？<br><em>看看种植牙适不适合你。</em></h1></div>
+  <div class="col" id="col"><p class="sub">决定之前，<br>先了解清楚整个过程。</p><div class="list"><p>评估是否适合</p><p>3D CBCT 扫描</p><p>疗程时间和费用先说清楚</p></div></div>
+  <div class="tag"><b>Dr. Daren Ang</b><span id="creds">理大牙科学士 · 18年临床经验</span></div>
+  <div class="band"><div class="row">
+    <div class="wa"><i><svg viewBox="0 0 24 24" fill="#d9b77b"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.8.8-2.7-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"></path></svg></i>
+      <div><small id="book">WhatsApp 预约</small><b>014-365 0270</b></div></div>
+    <div class="where"><b>The Strand</b><span id="addr">哥打白沙罗</span></div>
+  </div></div>
 </div>
       <audio id="music" src="assets/music-motion-smilearts.mp3" data-start="0" data-duration="7.5" data-volume="1" data-track-index="8"></audio>
     </div>
@@ -101,19 +128,21 @@
       const B = 60 / 92, DUR = 7.5;
       const tl = gsap.timeline({ paused: true });
 
-      tl.fromTo('.photo img', { scale: 1.14 }, { scale: 1, duration: DUR, ease: 'power1.out' }, 0);
-      tl.fromTo('.photo', { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power1.out' }, 0);
-      tl.fromTo('.creds span', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out', stagger: 0.18 }, 0.5 * B);
-      tl.fromTo('.avatar', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.8)' }, 0.75 * B);
-      tl.fromTo('.head', { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.5 * B);
+      tl.fromTo('.portrait', { opacity: 0, x: 80, scale: 1.04 }, { opacity: 1, x: 0, scale: 1, duration: 1.1, ease: 'expo.out' }, 0);
+      tl.fromTo('.arc', { opacity: 0, scale: 0.85, rotation: -20 }, { opacity: 0.7, scale: 1, rotation: 0, duration: 1.4, ease: 'expo.out' }, 0.1);
+      tl.fromTo('.band', { y: 120 }, { y: 0, duration: 0.7, ease: 'expo.out' }, 0);
+      tl.fromTo('.top', { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.5 * B);
       tl.fromTo('.eyebrow', { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }, 0.75 * B);
       tl.fromTo('h1', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: 'expo.out' }, 1 * B);
       tl.fromTo('h1 em', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power1.out' }, 1.5 * B);
-      tl.fromTo('.sub', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 2.25 * B);
-      tl.fromTo('.cta', { opacity: 0, y: 60, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 3.5 * B - 0.1);
-      tl.fromTo('.note', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 4.25 * B);
-      tl.fromTo('.foot', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 4.5 * B);
-      tl.fromTo('.cta', { scale: 1 }, { scale: 1.045, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 5 * B);
+      tl.fromTo('.sub, .price-label', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 2.25 * B);
+      tl.fromTo('.price', { opacity: 0, scale: 1.25, transformOrigin: '0% 70%' }, { opacity: 1, scale: 1, duration: 0.8, ease: 'expo.out' }, 2.25 * B);
+      tl.fromTo('.price-to', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 2.75 * B);
+      tl.fromTo('.list p', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out', stagger: B / 3 }, 3 * B);
+      tl.fromTo('.fine', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 4.5 * B);
+      tl.fromTo('.tag', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 4.25 * B);
+      tl.fromTo('.band .row', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 3.5 * B);
+      tl.fromTo('.wa i', { scale: 1 }, { scale: 1.12, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 5 * B);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;

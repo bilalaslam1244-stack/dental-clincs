@@ -1,12 +1,12 @@
 // Screenshots the Smile Arts Kota Damansara ads (smilearts/kd-ads.html) as PNG:
-// 3 treatments x EN/ZH x 9:16 + 4:5, into renders/smilearts/.
+// 3 treatment + 3 price ads x EN/ZH x 9:16 + 4:5, into renders/smilearts/.
 // Usage (from video/): PLAYWRIGHT=<path to playwright/index.mjs> [CHROME=<chrome.exe>] node tools/render-smilearts.mjs [concept...]
 import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
-const CONCEPTS = process.argv.slice(2).length ? process.argv.slice(2) : ['braces', 'implants', 'veneers'];
+const CONCEPTS = process.argv.slice(2).length ? process.argv.slice(2) : ['braces', 'implants', 'veneers', 'implant5000', 'aligner', 'scaling'];
 const FORMATS = { '916': [1080, 1920, '9x16'], '45': [1080, 1350, '4x5'] };
 const LANGS = ['en', 'zh'];
 mkdirSync('renders/smilearts', { recursive: true });
