@@ -1,6 +1,6 @@
 # Smile Arts Dental Kota Damansara: ad copy (trial)
 
-Click-to-WhatsApp campaign for Kota Damansara. Seven ads, each in EN and 中文, with 9:16 (Stories/Reels) and 4:5 (Feed) image and video versions:
+Click-to-WhatsApp campaign for Kota Damansara. Seven ads, each in EN, 中文 and Bahasa Malaysia, with 9:16 (Stories/Reels) and 4:5 (Feed) image and video versions:
 - **Treatment and clinic ads:** braces & Invisalign (portrait), implants (treatment-room photo), veneers (reception photo behind Dr. Daren), clinic (shopfront + inside photos, local recognition).
 - **Price ads (visuals from the clinic's own promo posters):** dental implant all-in RM 5,000, clear aligners RM 6,000–9,900, scaling + polishing + in-office whitening RM 399. These replicate the packages already published on smilearts.com.my.
 
@@ -155,6 +155,55 @@ Malaysian Dental Council check: no before-and-after photos, no testimonials, no 
 - Pre-filled WhatsApp message: 你好 Smile Arts 哥打白沙罗，我想预约 RM 399 洗牙美白配套。
 
 *"In one visit" is an assumption: confirm with the clinic, or drop it.*
+
+## Bahasa Malaysia (all seven ads)
+
+Each ad's on-image text is in `kd-ads.html` (language `ms`). Primary text, headline and pre-filled message per ad:
+
+**Braces & Invisalign**
+- Primary text: Nak luruskan gigi tapi tak pasti pilihan mana? Di Smile Arts Dental Kota Damansara, Dr. Daren Ang (DDS, USM; penyedia Invisalign sejak 2016) akan semak gigitan anda dan terangkan pilihan braces besi, seramik, self-ligating atau aligner Invisalign. Tempoh dan kos dijelaskan sebelum anda buat keputusan.
+  📍 The Strand, Kota Damansara · 💬 Tekan "Hantar mesej" untuk temujanji konsultasi di WhatsApp.
+- Headline: Braces atau Invisalign? Tanya Dr. Daren
+- Pre-filled: Hi Smile Arts Kota Damansara, saya nak tanya tentang braces / Invisalign.
+
+**Dental implants**
+- Primary text: Gigi hilang, atau tak selesa dengan gigi palsu? Semasa konsultasi di Smile Arts Dental Kota Damansara, Dr. Daren Ang (DDS, USM; 18 tahun pengalaman) akan semak sama ada implan gigi sesuai untuk anda, dan terangkan langkah, tempoh dan kosnya.
+  📍 The Strand, Kota Damansara · 💬 Tekan "Hantar mesej" untuk temujanji di WhatsApp.
+- Headline: Gigi hilang? Tanya tentang implan
+- Pre-filled: Hi Smile Arts Kota Damansara, saya nak tanya tentang implan gigi.
+
+**Porcelain veneers**
+- Primary text: Gigi depan sumbing, kekuningan atau tak sekata? Tanya Dr. Daren Ang di Smile Arts Dental Kota Damansara tentang venir porselin. Dr. Daren terlatih dalam Digital Smile Design, jadi anda boleh bincang bentuk dan warna gigi sebelum rawatan bermula.
+  📍 The Strand, Kota Damansara · 💬 Tekan "Hantar mesej" untuk temujanji di WhatsApp.
+- Headline: Tanya tentang venir porselin
+- Pre-filled: Hi Smile Arts Kota Damansara, saya nak tanya tentang venir.
+
+**Clinic: doktor gigi anda di The Strand**
+- Primary text: Cari doktor gigi di Kota Damansara? Smile Arts Dental ada di The Strand (No. 55-1, Jalan PJU 5/20): braces dan Invisalign, implan gigi, venir porselin, serta scaling dan pemutihan, semuanya di bawah satu bumbung. Diketuai Dr. Daren Ang (DDS, USM; 18 tahun pengalaman).
+  💬 Tekan "Hantar mesej" untuk temujanji di WhatsApp.
+- Headline: Doktor gigi anda di The Strand
+- Pre-filled: Hi Smile Arts Kota Damansara, saya nak buat temujanji.
+
+**Implan gigi, termasuk semua RM 5,000**
+- Primary text: Gigi hilang? Di Smile Arts Dental Kota Damansara, implan gigi termasuk semua pada RM 5,000: fixture implan, abutment khas, crown seramik, X-ray gigi dan pengimejan 3D CBCT, berserta penilaian dan perancangan rawatan. Dr. Daren Ang akan semak kesesuaian anda semasa konsultasi.
+  📍 The Strand, Kota Damansara · 💬 Tekan "Hantar mesej" untuk temujanji di WhatsApp. Tertakluk pada terma.
+- Headline: Implan gigi, termasuk semua RM 5,000
+- Pre-filled: Hi Smile Arts Kota Damansara, saya nak tanya tentang implan gigi RM 5,000.
+
+**Aligner lutsinar RM 6,000–9,900**
+- Primary text: Luruskan gigi dengan aligner lutsinar di Smile Arts Dental Kota Damansara. Pakej dari RM 6,000 hingga RM 9,900 mengikut kes anda, termasuk konsultasi, X-ray, imbasan intra-oral digital, set penuh aligner dan sepasang retainer. Dr. Daren Ang penyedia Invisalign sejak 2016.
+  📍 The Strand, Kota Damansara · 💬 Tekan "Hantar mesej" untuk temujanji di WhatsApp. Tertakluk pada terma.
+- Headline: Aligner lutsinar dari RM 6,000
+- Pre-filled: Hi Smile Arts Kota Damansara, saya nak tanya tentang pakej aligner.
+
+**Scaling, polishing + pemutihan RM 399**
+- Primary text: Scaling, polishing dan pemutihan gigi di klinik: RM 399 di Smile Arts Dental Kota Damansara.
+  📍 The Strand, Kota Damansara · 💬 Tekan "Hantar mesej" untuk temujanji di WhatsApp. Hasil berbeza mengikut individu. Tertakluk pada terma.
+- Headline: Scaling + pemutihan RM 399
+- Pre-filled: Hi Smile Arts Kota Damansara, saya nak tempah pakej scaling dan pemutihan RM 399.
+
+**WhatsApp welcome message (BM)**: Hi! Terima kasih kerana menghubungi Smile Arts Dental Kota Damansara 😊 Rawatan apa yang anda ingin tanya?
+Quick replies: Braces / Invisalign · Implan gigi · Venir porselin · Scaling & pemutihan
 
 ## Targeting (Kota Damansara, Click-to-WhatsApp, objective: Engagement → messaging conversations)
 
