@@ -140,6 +140,11 @@
   .visual.cut { overflow: visible; }
   .visual.cut::after { display: none; }
   .visual svg { display: block; }
+  /* photos that fade to transparent on every side, so no edge of the original picture shows */
+  .visual.soft::after { display: none; }
+  .visual.soft { -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 74%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 22%, #000 68%, transparent 100%);
+                 -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .visual.soft img { filter: brightness(.82) contrast(1.05) saturate(.9) sepia(.1); }
   /* treatment photo blended into the dark background (RM 399), like the implant render */
   .visual.blend img { filter: brightness(.86) contrast(1.06) saturate(.88) sepia(.12); }
   .visual.blend::after { background: linear-gradient(90deg, var(--solid) 0%, rgba(33,25,18,.75) 16%, transparent 50%),
@@ -220,7 +225,7 @@
   
   <div class="top"><img id="logo" alt="Smile Arts Dental Clinic" src="smilearts/source/Site-Logo-White.png"><span id="branch">Kota Damansara</span></div>
   <div class="head"><div class="eyebrow" id="eyebrow">Implan gigi</div><h1 id="h1">Gigi hilang? <em>Satu harga, semua termasuk.</em></h1></div>
-  <div class="visual" id="visual" style="right: 40px; top: 620px; width: 400px; height: 822px;"><img id="visimg" alt="" src="smilearts/source/v-implant-render.jpg"></div>
+  <div class="visual soft" id="visual" style="right: 40px; top: 620px; width: 400px; height: 822px;"><img id="visimg" alt="" src="smilearts/source/v-implant-render.jpg"></div>
   <div class="col" id="col" style="top: 614px;"><div><div class="price-label">Harga termasuk semua</div><div class="price"><small>RM</small>5,000</div></div><div class="list"><p>Fixture implan</p><p>Abutment khas</p><p>Crown seramik</p><p>X-ray &amp; 3D CBCT</p></div><div class="perks"><span>Boleh bayar ansuran</span><span>Konsultasi di WhatsApp</span></div><div class="cta"><i><svg viewBox="0 0 24 24" fill="#f1dcaa"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm4.4 11.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"></path></svg></i>Tempah sekarang<b>→</b></div><p class="fine">Termasuk penilaian dan perancangan rawatan. Kesesuaian disahkan semasa konsultasi. Tertakluk pada terma.</p></div>
   <div class="tag"><div><b>Dr. Daren Ang</b><span id="creds">DDS (USM) · 18 tahun pengalaman</span></div></div>
   <div class="band"><div class="row">

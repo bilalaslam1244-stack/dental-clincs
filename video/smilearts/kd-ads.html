@@ -146,6 +146,11 @@
   .visual.cut { overflow: visible; }
   .visual.cut::after { display: none; }
   .visual svg { display: block; }
+  /* photos that fade to transparent on every side, so no edge of the original picture shows */
+  .visual.soft::after { display: none; }
+  .visual.soft { -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 74%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 22%, #000 68%, transparent 100%);
+                 -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .visual.soft img { filter: brightness(.82) contrast(1.05) saturate(.9) sepia(.1); }
   /* treatment photo blended into the dark background (RM 399), like the implant render */
   .visual.blend img { filter: brightness(.86) contrast(1.06) saturate(.88) sepia(.12); }
   .visual.blend::after { background: linear-gradient(90deg, var(--solid) 0%, rgba(33,25,18,.75) 16%, transparent 50%),
@@ -239,9 +244,9 @@ const CFG = {
   braces:      { theme: 'cream', layout: 'portrait' },
   implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 840, 45: 540 } },
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
-  implant5000: { theme: 'dark',  layout: 'offer', noface: true, img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
+  implant5000: { theme: 'dark',  layout: 'offer', noface: true, soft: true, img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
   aligner:     { theme: 'cream', layout: 'offer', noface: true, img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [40, 600, 340, 397], 45: [60, 140, 290, 339] } },
-  scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, narrow: true, blend: true, pos: '40% 35%',
+  scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, narrow: true, soft: true, pos: '40% 35%',
                  img: 'source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg', box: { 916: [0, 560, 600, 880], 45: [0, 120, 480, 640] } },
 };
 const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
@@ -368,6 +373,7 @@ if ((cfg.layout === 'visual' || cfg.layout === 'offer') && !cfg.top) {
   v.classList.toggle('cut', !!cfg.cut || !!cfg.icon);
   v.classList.toggle('card', !!cfg.card);
   v.classList.toggle('blend', !!cfg.blend);
+  v.classList.toggle('soft', !!cfg.soft);
   if (cfg.pos) document.getElementById('visimg').style.objectPosition = cfg.pos;
 }
 if (cfg.noface && document.querySelector('.tag .face')) document.querySelector('.tag .face').remove();
