@@ -2,6 +2,7 @@
 
 Fixed-price clinic websites with WhatsApp booking, for Johor Bahru and Kuala Lumpur.
 
+- `docs/HANDOFF.md`: full context and to-do list for continuing the Smile Arts trial and 4Skales campaigns in a new session. Start here.
 - `docs/copy-deck.md`: ad scripts (EN/Manglish, Mandarin), agency site outline, deployment notes.
 - `demo-clinic/index.html`: demo clinic site (Lumen Dental, a fictional clinic) showing the package: three-tap WhatsApp reservation, fee ranges, live opening hours, parking, panels. Static, no build step.
 - `brand/`: 4Skales logo, traced to SVG (`4skales-logo.svg` uses currentColor) plus ink/ivory SVG and transparent PNG versions.
