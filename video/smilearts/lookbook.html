@@ -152,7 +152,7 @@ const story = (c, l) => `<div class="phone"><div class="screen"><img src="${IMGS
 <section class="page">
   <div class="phead">
     <div><div class="kicker">01 · Treatment ads</div><h2>Your expertise, <em>in the feed.</em></h2></div>
-    <p>Your three focus treatments: braces, implants and veneers. Each ad answers a question patients already ask, shows your credentials, and ends with <b>Book now</b>. One tap opens a WhatsApp chat with your clinic, with the treatment already named.</p>
+    <p>Your three focus treatments: braces, implants and veneers. Each ad answers a question patients already ask, shows your credentials, instalments and WhatsApp consultation, and ends with <b>Book now</b>, which opens a WhatsApp chat with your clinic.</p>
   </div>
   <div class="feedrow" id="row2"></div>
   <div class="foot"><img src="source/Group1.png" alt=""><span>02</span></div>
@@ -162,7 +162,7 @@ const story = (c, l) => `<div class="phone"><div class="screen"><img src="${IMGS
 <section class="page">
   <div class="phead">
     <div><div class="kicker">02 · Your packages</div><h2>Clear prices, <em>one tap to book.</em></h2></div>
-    <p>Ads with a clear price usually get the most taps. The prices below are the exact ones you've published on smilearts.com.my. RM 399 is your current offer; please confirm the implant and aligner packages are still running before we use them.</p>
+    <p>Ads with a clear price usually get the most taps. The prices are the exact ones you've published on smilearts.com.my; RM 399 is your current offer, so please confirm the implant and aligner packages are still running. Each ad also shows <b>instalments available</b> and <b>consultation via WhatsApp</b>.</p>
   </div>
   <div class="feedrow" id="row3"></div>
   <div class="foot"><img src="source/Group1.png" alt=""><span>03</span></div>
@@ -203,8 +203,8 @@ const CAP = {
   implants: 'Missing a tooth? Dr. Daren Ang (DDS, USM; 18 years in practice) checks whether a dental implant suits you…',
   veneers: 'Chipped, stained or uneven front teeth? Ask Dr. Daren Ang about porcelain veneers, planned with Digital Smile Design…',
   scaling: 'Scaling, polishing and in-office teeth whitening: RM 399 at Smile Arts Dental Kota Damansara. Tap Book now…',
-  implant5000: 'Missing a tooth? A dental implant at Smile Arts Dental Kota Damansara is all-in at RM 5,000. Tap Book now…',
-  aligner: 'Straighten your teeth with clear aligners: packages from RM 6,000 to RM 9,900, depending on your case. Tap Book now…',
+  implant5000: 'Missing a tooth? A dental implant at Smile Arts Dental Kota Damansara is all-in at RM 5,000. Instalments available. Tap Book now…',
+  aligner: 'Straighten your teeth with clear aligners: packages from RM 6,000 to RM 9,900. Instalments available. Tap Book now…',
 };
 const wrap = (html, lab) => `<div>${html}<div class="label">${lab}</div></div>`;
 document.getElementById('row2').innerHTML = ['braces', 'implants', 'veneers'].map(c => wrap(post(c, 'en', CAP[c]), { braces: 'Braces & Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers' }[c])).join('');

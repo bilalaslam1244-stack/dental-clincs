@@ -12,6 +12,14 @@ Files: `video/renders/smilearts/` (images) and `video/renders/smilearts/motion/`
 Malaysian Dental Council check: no before-and-after photos, no testimonials, no "best"/"cheapest". The price ads state the package price and what it includes, and leave out "only", "limited to first 30 patients" and the before/after photos used in the website pop-ups.
 **Dr. Daren must confirm (1) the prices and inclusions are current, (2) he is comfortable that the price ads are within MDC rules, and (3) whether a KKLIU approval number is needed. He approves every ad before it runs.**
 
+## Badges and lines on every ad
+
+- On-image badges: **Consultation via WhatsApp** / WhatsApp 咨询 / Konsultasi melalui WhatsApp (every ad) and **Instalments available** / 可分期付款 / Bayaran ansuran (every ad except the RM 399 package).
+- Add to the end of each primary text: "Instalments available. Consultation via WhatsApp." / "可分期付款，WhatsApp 咨询。" / "Bayaran ansuran tersedia. Konsultasi melalui WhatsApp." (RM 399 ad: consultation line only.)
+- Consultation: smilearts.com.my says "Free professional consultation available via WhatsApp communication". The ads say "consultation via WhatsApp" without "free" (MDC); add "free" only if Dr. Daren is comfortable with it.
+- **Instalments are not mentioned on smilearts.com.my. Dr. Daren must confirm instalment plans are offered (and on which treatments) before any ad runs.**
+- Aligner ad visual: the Smile Arts branded aligner case from his own aligner promotion artwork (replaces the close-up face).
+
 ## Braces & Invisalign
 
 **EN**
