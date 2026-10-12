@@ -38,8 +38,8 @@
          border: 3px solid transparent; background: var(--gold) border-box;
          -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .7; }
   .f45 .arc { width: 700px; height: 700px; top: 420px; right: -290px; }
-  .portrait { position: absolute; height: 960px; right: -200px; bottom: 316px; filter: drop-shadow(0 30px 40px rgba(20,14,10,.28)); }
-  .f45 .portrait { height: 740px; right: -160px; bottom: 170px; }
+  .portrait { position: absolute; height: 980px; right: 0; bottom: 300px; filter: drop-shadow(0 30px 40px rgba(20,14,10,.28)); }
+  .f45 .portrait { height: 760px; right: 10px; bottom: 160px; }
 
   .top { position: absolute; left: 70px; right: 70px; top: 250px; display: flex; justify-content: space-between; align-items: center; }
   .f45 .top { top: 56px; }
@@ -145,6 +145,7 @@
   .visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .visual.cut { overflow: visible; }
   .visual.cut::after { display: none; }
+  .visual svg { display: block; }
   .visual.cut img { object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 26px 34px rgba(20,14,10,.3)); }
   .narrow.L-offer .col { width: 540px; }
   .visual::after { content: ""; position: absolute; inset: 0;
@@ -203,12 +204,12 @@
   <div class="bgphoto"><img id="bgimg" alt=""></div>
   <div class="hero"><img id="heroimg" alt=""></div>
   <div class="arc"></div>
-  <img class="portrait" src="source/daren-cutout.png" alt="">
+  <img class="portrait" src="source/daren-cutout-beige.png" alt="">
   <div class="top"><img id="logo" alt="Smile Arts Dental Clinic"><span id="branch"></span></div>
   <div class="head"><div class="eyebrow" id="eyebrow"></div><h1 id="h1"></h1></div>
   <div class="visual" id="visual"><img id="visimg" alt=""></div>
   <div class="col" id="col"></div>
-  <div class="tag"><img class="face" src="source/daren-face.jpg" alt=""><div><b>Dr. Daren Ang</b><span id="creds"></span></div></div>
+  <div class="tag"><img class="face" src="source/daren-face-beige.jpg" alt=""><div><b>Dr. Daren Ang</b><span id="creds"></span></div></div>
   <div class="band"><div class="row">
     <div class="wa"><i><svg viewBox="0 0 24 24" fill="#d9b77b"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.8.8-2.7-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg></i>
       <div><small id="book"></small><b>014-365 0270</b></div></div>
@@ -224,11 +225,22 @@ const CFG = {
   braces:      { theme: 'cream', layout: 'portrait' },
   implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 840, 45: 540 } },
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
-  implant5000: { theme: 'dark',  layout: 'offer', img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
-  aligner:     { theme: 'cream', layout: 'offer', img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [40, 600, 340, 397], 45: [60, 140, 290, 339] } },
-  scaling:     { theme: 'dark',  layout: 'offer', img: 'source/daren-cutout.png', cut: true, noface: true, narrow: true, box: { 916: [-150, 800, 661, 760], 45: [-150, 510, 557, 640] } },
+  implant5000: { theme: 'dark',  layout: 'offer', noface: true, img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
+  aligner:     { theme: 'cream', layout: 'offer', noface: true, img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [40, 600, 340, 397], 45: [60, 140, 290, 339] } },
+  scaling:     { theme: 'dark',  layout: 'offer', icon: true, noface: true, narrow: true, box: { 916: [90, 640, 360, 360], 45: [80, 160, 270, 270] } },
 };
 const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
+// gold line icon for the RM 399 package (clean tooth with a sparkle), in the style of the clinic's poster icons
+const TOOTH = `<svg viewBox="0 0 200 200" width="100%" height="100%"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#9c7440"/><stop offset=".5" stop-color="#f1dcaa"/><stop offset="1" stop-color="#b8935a"/></linearGradient></defs>
+  <circle cx="100" cy="100" r="94" fill="rgba(217,183,123,.07)" stroke="url(#tg)" stroke-width="2"/>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="url(#tg)" stroke-width="1" opacity=".55"/>
+  <path d="M71 58C57 58 50 71 52 88c2 15 9 24 11 39 2 17 4 33 13 33 9 0 9-20 13-31 3-8 7-11 11-11s8 3 11 11c4 11 4 31 13 31 9 0 11-16 13-33 2-15 9-24 11-39 2-17-5-30-19-30-11 0-19 7-29 7s-18-7-29-7z"
+    fill="none" stroke="url(#tg)" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M66 80c3-8 9-11 16-10" fill="none" stroke="url(#tg)" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+  <path d="M150 34l4.5 11 11 4.5-11 4.5-4.5 11-4.5-11-11-4.5 11-4.5z" fill="url(#tg)"/>
+  <path d="M164 74l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z" fill="url(#tg)"/>
+  <path d="M42 44l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="url(#tg)"/></svg>`;
 // badges: consultation on every ad (smilearts.com.my: "professional consultation available via WhatsApp");
 // instalments on every ad except the RM 399 package (not on the website: Dr. Daren to confirm)
 const PERKS = c === 'scaling' ? ['consult'] : ['instal', 'consult'];
@@ -329,8 +341,8 @@ if (cfg.layout === 'photofull') { const i = document.getElementById('bgimg'); i.
 if (cfg.layout === 'visual' || cfg.layout === 'offer') {
   const [r, t, w, h] = cfg.box[f], v = document.getElementById('visual');
   Object.assign(v.style, { right: r + 'px', top: t + 'px', width: w + 'px', height: h + 'px' });
-  document.getElementById('visimg').src = cfg.img;
-  v.classList.toggle('cut', !!cfg.cut);
+  if (cfg.icon) v.innerHTML = TOOTH; else document.getElementById('visimg').src = cfg.img;
+  v.classList.toggle('cut', !!cfg.cut || !!cfg.icon);
 }
 if (cfg.noface) document.querySelector('.tag .face').remove();
 
