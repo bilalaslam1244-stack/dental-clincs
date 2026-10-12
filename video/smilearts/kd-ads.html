@@ -135,6 +135,20 @@
   .L-phototop .tag .face, .L-visual .tag .face, .L-offer .tag .face { display: block; flex: none; width: 104px; height: 104px; border-radius: 50%; border: 3px solid #c9a063; object-fit: cover; }
   .f45 .tag .face { width: 78px !important; height: 78px !important; }
 
+  /* full-bleed photo behind the whole ad (RM 399): only the ad's own edges, text side darkened */
+  .bgphoto.full { top: 1130px; bottom: 300px; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 42%); mask-image: linear-gradient(180deg, transparent 0%, #000 42%); }
+  .bgphoto.full::after { display: none; }
+  .f45 .bgphoto.full { -webkit-mask-image: none; mask-image: none; }
+  .f45 .bgphoto.full::after { display: block; }
+  .f45 .bgphoto.full { top: 0; bottom: 200px; }
+  .bgphoto.full img { filter: brightness(.9) saturate(.9) sepia(.1); transform: none; object-position: 50% 42% !important; }
+  .f45 .bgphoto.full img { object-position: 24% 30% !important; }
+  .bgphoto.full::after { background:
+      linear-gradient(90deg, rgba(26,19,14,.97) 0%, rgba(26,19,14,.93) 34%, rgba(26,19,14,.55) 56%, rgba(26,19,14,.08) 78%, rgba(26,19,14,0) 100%),
+      linear-gradient(180deg, rgba(26,19,14,.96) 0%, rgba(26,19,14,.82) 28%, rgba(26,19,14,.2) 46%, rgba(26,19,14,0) 56%, rgba(26,19,14,0) 82%, rgba(26,19,14,.9) 100%); }
+  .f45 .bgphoto.full::after { background:
+      linear-gradient(90deg, rgba(26,19,14,.97) 0%, rgba(26,19,14,.93) 36%, rgba(26,19,14,.5) 58%, rgba(26,19,14,.05) 80%, rgba(26,19,14,0) 100%),
+      linear-gradient(180deg, rgba(26,19,14,.95) 0%, rgba(26,19,14,.4) 26%, rgba(26,19,14,0) 42%, rgba(26,19,14,0) 82%, rgba(26,19,14,.9) 100%); }
   /* clinic photo behind the portrait (veneers: reception with the gold logo) */
   .bgphoto { position: absolute; inset: 0; overflow: hidden; }
   .bgphoto img { width: 100%; height: 100%; object-fit: cover; filter: blur(2px) saturate(.9); transform: scale(1.03); }
@@ -244,10 +258,10 @@ const CFG = {
   braces:      { theme: 'cream', layout: 'portrait' },
   implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 840, 45: 540 } },
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
-  implant5000: { theme: 'dark',  layout: 'offer', noface: true, soft: true, img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
+  implant5000: { theme: 'dark',  layout: 'offer', noface: true, img: 'source/v-implant-cut.png', cut: true, box: { 916: [80, 600, 290, 654], 45: [70, 130, 215, 485] } },
   aligner:     { theme: 'cream', layout: 'offer', noface: true, img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [40, 600, 340, 397], 45: [60, 140, 290, 339] } },
-  scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, narrow: true, soft: true, pos: '40% 35%',
-                 img: 'source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg', box: { 916: [0, 560, 600, 880], 45: [0, 120, 480, 640] } },
+  scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, narrow: true, full: true, pos: '24% 30%',
+                 img: 'source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg' },
 };
 const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
 // gold line icon for the RM 399 package (clean tooth with a sparkle), in the style of the clinic's poster icons
@@ -348,7 +362,7 @@ const T = {
 
 const t = T[l], s = t[c];
 document.getElementById('logo').src = cfg.theme === 'dark' || cfg.layout === 'phototop' ? 'source/Site-Logo-White.png' : 'source/Group1.png';
-const keep = { portrait: ['.arc', '.portrait'], photofull: ['.arc', '.portrait', '.bgphoto'], phototop: ['.hero'], visual: ['.visual'], offer: cfg.top ? ['.hero'] : ['.visual'] }[cfg.layout];
+const keep = { portrait: ['.arc', '.portrait'], photofull: ['.arc', '.portrait', '.bgphoto'], phototop: ['.hero'], visual: ['.visual'], offer: cfg.top ? ['.hero'] : cfg.full ? ['.bgphoto'] : ['.visual'] }[cfg.layout];
 for (const sel of ['.arc', '.portrait', '.bgphoto', '.hero', '.visual']) if (!keep.includes(sel)) document.querySelector(sel).remove();
 if (cfg.layout === 'phototop') {
   const i = document.getElementById('heroimg'), h = cfg.hero[f];
@@ -366,7 +380,11 @@ if (cfg.layout === 'offer' && cfg.top) {
   document.querySelector('.head').style.top = (h + (f === '45' ? 104 : 118)) + 'px';
   document.documentElement.classList.add('offer-top');
 }
-if ((cfg.layout === 'visual' || cfg.layout === 'offer') && !cfg.top) {
+if (cfg.full) {
+  const i = document.getElementById('bgimg'); i.src = cfg.img; i.style.objectPosition = cfg.pos;
+  document.querySelector('.bgphoto').classList.add('full');
+}
+if ((cfg.layout === 'visual' || cfg.layout === 'offer') && !cfg.top && !cfg.full) {
   const [r, t, w, h] = cfg.box[f], v = document.getElementById('visual');
   Object.assign(v.style, { right: r + 'px', top: t + 'px', width: w + 'px', height: h + 'px' });
   if (cfg.icon) v.innerHTML = TOOTH; else document.getElementById('visimg').src = cfg.img;
@@ -398,7 +416,7 @@ if (cfg.layout === 'offer') document.fonts.ready.then(() => {
   const head = document.querySelector('.head').getBoundingClientRect(), col = document.getElementById('col'), v = document.getElementById('visual');
   const gap = f === '45' ? 16 : 26;
   col.style.top = Math.ceil(head.bottom + gap) + 'px';
-  if (v && cfg.box) v.style.top = Math.max(cfg.box[f][1], Math.ceil(head.bottom + gap)) + 'px';
+  if (v && cfg.box && !cfg.full) v.style.top = Math.max(cfg.box[f][1], Math.ceil(head.bottom + gap)) + 'px';
 });
 </script>
 </body>
