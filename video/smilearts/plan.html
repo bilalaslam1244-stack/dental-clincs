@@ -73,6 +73,16 @@
   .ad dt { font: 700 6.8pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-top: 1.8mm; }
   .ad dd { margin: .5mm 0 0; color: var(--ink-2); line-height: 1.4; }
 
+  /* fill-in sheets */
+  .fill { width: 100%; border-collapse: collapse; font-size: 8.4pt; }
+  .fill th { font-size: 7pt; padding: 1.8mm 2.2mm; }
+  .fill td { padding: 1.55mm 2.2mm; line-height: 1.35; }
+  .fill td:first-child { width: 36mm; white-space: normal; }
+  .fill td.sec { background: #231b15; color: #e3c48d; font: 700 7pt Tajawal; letter-spacing: .18em; text-transform: uppercase; padding: 1.4mm 2.2mm; }
+  .fill td.v { color: var(--ink); font-weight: 500; }
+  .fill .zh { color: var(--ink); }
+  .tick { display: inline-block; width: 3mm; height: 3mm; border: .3mm solid var(--gold); margin-right: 1.5mm; vertical-align: -.4mm; }
+  .hint { font-size: 7.8pt; color: #8a7d6f; margin-top: 2mm; }
   /* timeline */
   .tl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: .3mm solid rgba(217,183,123,.35); }
   .tl div { padding: 4mm; border-right: .3mm solid rgba(217,183,123,.35); }
@@ -165,7 +175,7 @@ const I = n => `${IMGS}/smilearts-kd-${n}${EXT}`;
     <tr><td></td><td>Budget</td><td><b>Advantage campaign budget OFF</b>: set the budget on each ad set (RM 30 and RM 15)</td></tr>
     <tr><td>Both ad sets</td><td>Conversion location</td><td><b>Messaging apps → WhatsApp</b>, number <b>014-365 0270</b>; goal: maximise number of conversations</td></tr>
     <tr><td></td><td>Identity</td><td>Facebook Page: Smile Arts Dental KD · Instagram: @smileartsdental_kd</td></tr>
-    <tr><td></td><td>Location</td><td>Pin on No. 55-1, Jalan PJU 5/20, Kota Damansara → "People living in or recently in this location"</td></tr>
+    <tr><td></td><td>Audience</td><td>Full field-by-field values on the fill-in sheet, page 6</td></tr>
     <tr><td></td><td>Detailed targeting</td><td><b>None</b> (Advantage+ audience). Meta restricts health interests; the ads do the filtering</td></tr>
     <tr><td></td><td>Placements · schedule</td><td><b>Advantage+ placements</b> · start = agreed launch day, no end date (stopped on Day 14)</td></tr>
     <tr><td>Ad set 1 · Main</td><td>Name · budget</td><td><code>KD | Main EN+ZH | 8km</code> · <b>RM 30/day</b> · radius <b>8 km</b> · age <b>22–60</b> · Languages: <b>leave blank</b></td></tr>
@@ -180,9 +190,64 @@ const I = n => `${IMGS}/smilearts-kd-${n}${EXT}`;
   <div class="foot"><img src="source/Group1.png" alt=""><span>05</span></div>
 </section>
 
+<!-- 6 ad set fill-in sheet -->
+<section class="page">
+  <div class="kicker">06 · Fill-in sheet · ad sets</div>
+  <h2 style="margin-bottom:3mm">Every audience field, <em>filled in.</em></h2>
+  <table class="fill">
+    <tr><th>Field in Ads Manager</th><th>Ad set 1 · Main</th><th>Ad set 2 · 中文</th></tr>
+    <tr><td colspan="3" class="sec">Ad set name &amp; conversion</td></tr>
+    <tr><td>Ad set name</td><td class="v"><code>KD | Main EN+ZH | 8km</code></td><td class="v"><code>KD | 中文 | 10km</code></td></tr>
+    <tr><td>Conversion · goal</td><td class="v" colspan="2"><span class="tick"></span>Messaging apps → <b>WhatsApp</b> only (untick Messenger, Instagram Direct) · Performance goal: <b>Maximise number of conversations</b></td></tr>
+    <tr><td>Page · WhatsApp</td><td class="v" colspan="2"><span class="tick"></span>Smile Arts Dental KD · WhatsApp number <b>+60 14-365 0270</b> (must show as connected)</td></tr>
+    <tr><td colspan="3" class="sec">Budget &amp; schedule</td></tr>
+    <tr><td>Budget · schedule</td><td class="v">Daily <b>RM 30</b> · start launch day 9:00 am · no end date</td><td class="v">Daily <b>RM 15</b> · same schedule</td></tr>
+    <tr><td colspan="3" class="sec">Audience controls (hard limits: Meta never goes outside these)</td></tr>
+    <tr><td>Location</td><td class="v">Pin: <b>No. 55-1, Jalan PJU 5/20, Kota Damansara</b> · radius <b>8 km</b></td><td class="v">Same pin · radius <b>10 km</b></td></tr>
+    <tr><td>Location type</td><td class="v" colspan="2"><span class="tick"></span><b>People living in or recently in this location</b> (not "people travelling")</td></tr>
+    <tr><td>Minimum age</td><td class="v"><b>22</b></td><td class="v"><b>28</b></td></tr>
+    <tr><td>Languages</td><td class="v"><b>Leave blank</b> (everyone; the ad carries EN + 中文 versions)</td><td class="v"><b>Chinese (Simplified)</b> + <b>Chinese (Traditional)</b></td></tr>
+    <tr><td>Exclude</td><td class="v" colspan="2">None for now (no customer list yet). Later: exclude people who already messaged the Page in the last 30 days</td></tr>
+    <tr><td colspan="3" class="sec">Advantage+ audience (suggestions: Meta starts here, then widens if it finds people likely to chat)</td></tr>
+    <tr><td>Advantage+ audience</td><td class="v" colspan="2"><span class="tick"></span><b>On</b> · Age suggestion as below · Gender: all</td></tr>
+    <tr><td>Age suggestion</td><td class="v"><b>25–55</b></td><td class="v"><b>30–65</b></td></tr>
+    <tr><td>Interest suggestions</td><td class="v" colspan="2">Type each and add if offered: <b>Dentistry · Orthodontics · Dental braces · Clear aligners · Invisalign · Cosmetic dentistry · Teeth whitening · Dental implant</b>. Meta has removed many health-related interests, so add only the ones the search box shows.</td></tr>
+    <tr><td colspan="3" class="sec">Placements</td></tr>
+    <tr><td>Placements</td><td class="v" colspan="2"><span class="tick"></span><b>Advantage+ placements</b> (Facebook &amp; Instagram Feeds, Stories, Reels) · brand safety: default (Moderate)</td></tr>
+  </table>
+  <p class="hint">Audience controls are hard limits; Advantage+ suggestions are only a starting point. Don't add more limits than these: on a small budget, a narrow audience costs more per chat.</p>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>06</span></div>
+</section>
+
+<!-- 7 ad fill-in sheet -->
+<section class="page">
+  <div class="kicker">07 · Fill-in sheet · ads</div>
+  <h2 style="margin-bottom:3mm">Every ad field, <em>filled in.</em></h2>
+  <table class="fill">
+    <tr><th>Field in Ads Manager</th><th>Value (same for all 5 ads)</th></tr>
+    <tr><td>Identity</td><td class="v">Facebook Page: <b>Smile Arts Dental KD</b> · Instagram account: <b>@smileartsdental_kd</b></td></tr>
+    <tr><td>Ad setup · format</td><td class="v">Create ad · <b>Single image or video</b> · Multi-advertiser ads: <b>off</b></td></tr>
+    <tr><td>Media</td><td class="v">Video. <b>Feeds</b> → the <code>-4x5.mp4</code> · <b>Stories, Status &amp; Reels</b> → the <code>-9x16.mp4</code>. Turn off Meta's automatic edits to the video ("Advantage+ creative" enhancements: text, music, filters), so the design stays as made</td></tr>
+    <tr><td>Description</td><td class="v"><code>Smile Arts Dental · Kota Damansara</code> · 中文: <code>Smile Arts Dental · 哥打白沙罗</code></td></tr>
+    <tr><td>Call to action</td><td class="v"><b>Send WhatsApp message</b></td></tr>
+    <tr><td>Message template</td><td class="v">Create template → <b>Greeting</b> (EN or 中文, launch kit section 5) · <b>Customer actions: Frequently asked questions</b> → Braces / Invisalign · Dental implants · Porcelain veneers · Scaling &amp; whitening · <b>Pre-filled message</b> → per ad, below</td></tr>
+    <tr><td>Languages (Ad set 1 only)</td><td class="v">Add languages → default <b>English</b> → add <b>Chinese (Simplified)</b> → paste 中文 text and upload the <code>-zh-</code> videos</td></tr>
+  </table>
+  <table class="fill" style="margin-top:4mm">
+    <tr><th>Ad</th><th>Files</th><th>Headline</th><th>Pre-filled WhatsApp message</th></tr>
+    <tr><td>1 · Scaling RM 399<br><span style="font-weight:400;color:#8a7d6f">Main</span></td><td><code>scaling-en</code> + <code>scaling-zh</code></td><td class="v">Scaling + whitening, RM 399<br><span class="zh">洗牙 + 美白 RM 399</span></td><td>Hi Smile Arts Kota Damansara, I'd like to book the RM 399 scaling and whitening.<br><span class="zh">你好 Smile Arts 哥打白沙罗，我想预约 RM 399 洗牙美白配套。</span></td></tr>
+    <tr><td>2 · Braces<br><span style="font-weight:400;color:#8a7d6f">Main</span></td><td><code>braces-en</code> + <code>braces-zh</code></td><td class="v">Braces or Invisalign? Ask Dr. Daren<br><span class="zh">牙套还是隐适美？问问 Dr. Daren</span></td><td>Hi Smile Arts Kota Damansara, I'd like to ask about braces / Invisalign.<br><span class="zh">你好 Smile Arts 哥打白沙罗，我想了解牙套 / 隐适美。</span></td></tr>
+    <tr><td>3 · Implants<br><span style="font-weight:400;color:#8a7d6f">Main</span></td><td><code>implants-en</code> + <code>implants-zh</code></td><td class="v">Missing a tooth? Ask about implants<br><span class="zh">缺牙？了解种植牙</span></td><td>Hi Smile Arts Kota Damansara, I'd like to ask about dental implants.<br><span class="zh">你好 Smile Arts 哥打白沙罗，我想了解种植牙。</span></td></tr>
+    <tr><td>4 · 种植牙<br><span style="font-weight:400;color:#8a7d6f">中文</span></td><td><code>implants-zh</code></td><td class="v zh">缺牙？了解种植牙</td><td class="zh">你好 Smile Arts 哥打白沙罗，我想了解种植牙。</td></tr>
+    <tr><td>5 · 洗牙 RM 399<br><span style="font-weight:400;color:#8a7d6f">中文</span></td><td><code>scaling-zh</code></td><td class="v zh">洗牙 + 美白 RM 399</td><td class="zh">你好 Smile Arts 哥打白沙罗，我想预约 RM 399 洗牙美白配套。</td></tr>
+  </table>
+  <p class="hint">File names start with <code>smilearts-kd-</code> and end in <code>-4x5.mp4</code> / <code>-9x16.mp4</code>. Primary text for each ad is in the launch kit, section 4.</p>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>07</span></div>
+</section>
+
 <!-- 5 timeline -->
 <section class="page dark">
-  <div class="kicker">05 · The 14 days</div>
+  <div class="kicker">08 · The 14 days</div>
   <h2 style="color:#f6efe4">What happens <em>and when.</em></h2>
   <div class="tl">
     <div><b>Before launch</b><p>Dr. Daren approves the 5 ads; WhatsApp 014-365 0270 linked to the Page; front desk ready with English and 中文 quick replies and the one-line log.</p></div>
