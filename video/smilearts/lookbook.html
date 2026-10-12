@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Smile Arts Kota Damansara: ad lookbook</title>
+<!-- Visual lookbook for Dr. Daren: the strongest ads, each in English, 中文 and Bahasa Malaysia, in the clinic's
+     own look (cream/espresso, gold, Playfair + Tajawal). Printed to A4 landscape by tools/render-smilearts-deck.mjs
+     (DECK=lookbook). Images come from IMGS (high-quality JPEG copies of renders/smilearts). -->
+<style>
+  @font-face { font-family: Tajawal; font-weight: 400; src: url(../assets/fonts/Tajawal-400-latin.woff2); }
+  @font-face { font-family: Tajawal; font-weight: 500; src: url(../assets/fonts/Tajawal-500-latin.woff2); }
+  @font-face { font-family: Tajawal; font-weight: 700; src: url(../assets/fonts/Tajawal-700-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500 600; src: url(../assets/fonts/PlayfairDisplay-600-normal-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500; font-style: italic; src: url(../assets/fonts/PlayfairDisplay-500-italic-latin.woff2); }
+  @page { size: 297mm 210mm; margin: 0; }
+  :root { --ink: #231b15; --ink-2: #5b4f44; --gold: #94703f; --gold-l: #d9b77b; --cream: #f6f0e7; --hair: rgba(148,112,63,.35);
+          --goldgrad: linear-gradient(100deg, #9c7440 0%, #d9b77b 38%, #f1dcaa 52%, #c9a063 70%, #9c7440 100%); }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Tajawal, "Microsoft YaHei", Arial, sans-serif; color: var(--ink); background: #ccc; -webkit-print-color-adjust: exact; }
+  .page { width: 297mm; height: 210mm; position: relative; overflow: hidden; page-break-after: always;
+          background: radial-gradient(120% 90% at 85% 20%, #fffaf2 0%, var(--cream) 55%, #eee4d5 100%); }
+  .page.dark { background: radial-gradient(110% 90% at 78% 25%, #3a2d22 0%, #261d16 50%, #16100c 100%); color: #f6efe4; }
+  .page::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1.2mm; background: var(--goldgrad); }
+  .kicker { font: 700 8.5pt Tajawal; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 3mm; }
+  .kicker::before { content: ""; width: 9mm; height: .4mm; background: var(--goldgrad); }
+  .dark .kicker { color: var(--gold-l); }
+  h1, h2 { font-family: Playfair, Georgia, serif; font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+  p, dd { text-wrap: pretty; }
+  h1 em, h2 em { font-style: italic; font-weight: 500; color: var(--gold); }
+  .dark h1 em, .dark h2 em { background: var(--goldgrad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 1mm; }
+  p { font-size: 10.5pt; line-height: 1.55; color: var(--ink-2); }
+  .dark p { color: #d3c5b2; }
+  .foot { position: absolute; left: 16mm; right: 16mm; bottom: 7mm; display: flex; justify-content: space-between; align-items: center; font: 500 7.5pt Tajawal; letter-spacing: .14em; text-transform: uppercase; color: #9a8c7c; }
+  .foot img { height: 5mm; opacity: .9; }
+
+  /* phone frame */
+  .phone { position: relative; border-radius: 7mm; padding: 1.6mm; background: linear-gradient(145deg, #3b322b, #0f0c0a 60%, #2a231e);
+           box-shadow: 0 9mm 16mm rgba(30,20,12,.28), 0 2mm 4mm rgba(30,20,12,.18), inset 0 0 0 .3mm rgba(255,255,255,.12); }
+  .dark .phone { box-shadow: 0 10mm 18mm rgba(0,0,0,.55), inset 0 0 0 .3mm rgba(255,255,255,.14); }
+  .phone img { display: block; width: 100%; border-radius: 5.6mm; }
+  .phone::after { content: ""; position: absolute; top: 3.2mm; left: 50%; width: 9mm; height: 2.4mm; margin-left: -4.5mm; border-radius: 2mm; background: #0b0908; }
+
+  /* cover */
+  .cover { position: absolute; inset: 0; padding: 22mm 0 0 20mm; }
+  .cover .logo { height: 15mm; }
+  .cover .kicker { margin-top: 16mm; }
+  .cover h1 { font-size: 42pt; line-height: 1.04; margin-top: 4mm; width: 125mm; }
+  .cover p { width: 112mm; margin-top: 6mm; font-size: 11pt; }
+  .cover .meta { position: absolute; left: 20mm; bottom: 20mm; display: grid; grid-template-columns: auto auto; gap: 1.6mm 8mm; font-size: 9pt; color: #d3c5b2; border-top: .3mm solid rgba(217,183,123,.45); padding-top: 4mm; }
+  .cover .meta b { font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 7.5pt; color: var(--gold-l); }
+  .fan .phone { position: absolute; width: 62mm; }
+
+  /* concept spread: heading band, then the three languages large */
+  .spread { position: absolute; inset: 0; padding: 14mm 16mm 0; }
+  .shead { display: grid; grid-template-columns: 1.05fr 1fr; gap: 12mm; align-items: end; padding-bottom: 4mm; border-bottom: .3mm solid var(--hair); }
+  .dark .shead { border-color: rgba(217,183,123,.3); }
+  .shead h2 { font-size: 22pt; line-height: 1.08; margin-top: 2.5mm; }
+  .shead dl { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .shead dt { font: 700 7pt Tajawal; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+  .dark .shead dt { color: var(--gold-l); }
+  .shead dd { margin: 1.2mm 0 0; font-size: 8.8pt; line-height: 1.45; color: var(--ink-2); }
+  .dark .shead dd { color: #d3c5b2; }
+  .trio { display: grid; grid-template-columns: repeat(3, 69mm); justify-content: center; gap: 13mm; margin-top: 6mm; }
+  .trio figure { margin: 0; }
+  .trio figcaption { margin-top: 3mm; text-align: center; font: 700 7pt Tajawal; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+  .dark .trio figcaption { color: var(--gold-l); }
+  .trio figcaption span { font: 500 italic 9.5pt Playfair, serif; letter-spacing: 0; text-transform: none; color: var(--ink-2); margin-left: 2mm; }
+  .dark .trio figcaption span { color: #cdbfae; }
+
+  /* feed page */
+  .feed { position: absolute; inset: 0; padding: 17mm 16mm 0; }
+  .feed h2 { font-size: 24pt; margin: 3mm 0 6mm; }
+  .feedwrap { display: grid; grid-template-columns: 170mm 1fr; gap: 12mm; align-items: start; }
+  .grid6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm 6mm; }
+  .grid6 img { width: 100%; display: block; border-radius: 1.5mm; box-shadow: 0 3mm 7mm rgba(40,28,18,.2); }
+  .grid6 small { display: block; margin-top: 2mm; font: 700 7pt Tajawal; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+  .notes { display: flex; flex-direction: column; gap: 7mm; padding-top: 2mm; }
+  .notes div { border-top: .5mm solid var(--gold); padding-top: 3mm; }
+  .notes b { display: block; font: 600 13pt Playfair, serif; margin-bottom: 1.5mm; }
+
+  /* close */
+  .close { position: absolute; inset: 0; padding: 22mm 20mm 26mm; display: grid; grid-template-columns: 1fr 1fr; gap: 16mm; align-items: center; }
+  .close h2 { font-size: 30pt; line-height: 1.08; margin-top: 4mm; }
+  .steps { margin-top: 2mm; }
+  .steps div { display: grid; grid-template-columns: 16mm 1fr; padding: 4.2mm 0; border-bottom: .3mm solid rgba(217,183,123,.3); }
+  .steps b { font: 500 italic 15pt Playfair, serif; color: var(--gold-l); }
+  .steps strong { display: block; font-weight: 700; font-size: 10.5pt; color: #f6efe4; margin-bottom: .8mm; }
+  .steps span { font-size: 9.5pt; color: #d3c5b2; line-height: 1.45; }
+  .promise { margin-top: 8mm; padding: 5mm 6mm; border: .3mm solid rgba(217,183,123,.45); }
+  .promise b { display: block; font: 700 7.5pt Tajawal; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-l); margin-bottom: 1.5mm; }
+</style>
+</head>
+<body>
+<script>
+const IMGS = new URLSearchParams(location.search).get('imgs') || '../renders/smilearts';
+const EXT = IMGS.includes('lookbook') ? '.jpg' : '.png';
+</script>
+
+<!-- cover -->
+<section class="page dark">
+  <div class="cover">
+    <img class="logo" src="source/Site-Logo-White.png" alt="Smile Arts Dental Clinic">
+    <div class="kicker">Kota Damansara · Ad preview</div>
+    <h1>A first look at <em>your new ads.</em></h1>
+    <p>The Facebook and Instagram ads we propose for Smile Arts Dental Kota Damansara, in English, 中文 and Bahasa Malaysia. Built in your clinic's own look, with your portrait, your clinic and your current packages.</p>
+    <div class="meta"><b>Prepared for</b><span>Dr. Daren Ang</span><b>Prepared by</b><span>4Skales</span><b>Status</b><span>Draft for your review · October 2026</span></div>
+  </div>
+  <div class="fan">
+    <div class="phone" style="left:142mm;top:40mm;transform:rotate(-7deg)"><img data-src="implant5000-zh-9x16"></div>
+    <div class="phone" style="left:176mm;top:24mm;z-index:2"><img data-src="braces-en-9x16"></div>
+    <div class="phone" style="left:211mm;top:40mm;transform:rotate(7deg)"><img data-src="aligner-ms-9x16"></div>
+  </div>
+</section>
+
+<!-- spreads are generated from SPREADS below -->
+<div id="spreads"></div>
+
+<!-- feed formats -->
+<section class="page">
+  <div class="feed">
+    <div class="kicker">Formats</div>
+    <h2>The same ads, <em>sized for every placement.</em></h2>
+    <div class="feedwrap"><div class="grid6" id="grid6"></div>
+    <div class="notes">
+      <div><b>Stories &amp; Reels</b><p>Full-screen 9:16, shown on the previous pages. This is where most taps on dental ads come from.</p></div>
+      <div><b>Facebook &amp; Instagram feed</b><p>4:5 versions (above), so every ad fills the screen as people scroll.</p></div>
+      <div><b>7.5-second videos</b><p>Each ad also animates in with music. Meta usually shows video to more people for the same budget.</p></div>
+    </div></div>
+  </div>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>Smile Arts Dental · Kota Damansara</span></div>
+</section>
+
+<!-- close -->
+<section class="page dark">
+  <div class="close">
+    <div>
+      <div class="kicker">Next steps</div>
+      <h2>From your approval <em>to enquiries on WhatsApp.</em></h2>
+      <div class="promise"><b>Every ad, every language</b><p>Always shows: your qualifications, your clinic, your treatments and packages, and an invitation to book a consultation. Never shows: before-and-after photos, patient reviews, "free" treatment, or "best" and "cheapest" claims.</p></div>
+    </div>
+    <div class="steps">
+      <div><b>01</b><span><strong>You review</strong>Tell us which ads you like, anything to change, and confirm the package prices.</span></div>
+      <div><b>02</b><span><strong>We launch</strong>Ads go live in English, 中文 and Bahasa Malaysia around The Strand. Each one opens WhatsApp to 014-365 0270 with the treatment already named.</span></div>
+      <div><b>03</b><span><strong>Day 3 and Day 7</strong>We keep what brings enquiries, drop what doesn't, and send you a short update.</span></div>
+      <div><b>04</b><span><strong>Day 14</strong>A report and a 20-minute call: enquiries, cost per enquiry, bookings, and the strongest treatment.</span></div>
+    </div>
+  </div>
+  <div class="foot"><img src="source/Site-Logo-White.png" alt=""><span>Prepared by 4Skales for Smile Arts Dental</span></div>
+</section>
+
+<script>
+const SPREADS = [
+  { c: 'braces', dark: false, kicker: 'Braces & Invisalign', title: 'Braces or Invisalign? <em>Ask before you decide.</em>',
+    who: 'Adults around Kota Damansara thinking about straightening their teeth.',
+    why: 'A question people already ask themselves, answered by you: your face, your Invisalign experience, and what the consultation covers.' },
+  { c: 'veneers', dark: true, kicker: 'Porcelain veneers', title: 'Chipped, stained or <em>uneven front teeth?</em>',
+    who: 'People unhappy with the look of their front teeth.',
+    why: 'Set in your own reception, under the Smile Arts logo, with Digital Smile Design front and centre.' },
+  { c: 'clinic', dark: false, kicker: 'Your clinic', title: 'Your dentist <em>at The Strand.</em>',
+    who: 'Everyone living or working near The Strand.',
+    why: 'People recognise the shopfront they walk past. Shows the reception and treatment room, and every treatment under one roof.' },
+  { c: 'implant5000', dark: true, kicker: 'Package · dental implant', title: 'One implant. <em>One clear price.</em>',
+    who: 'Adults 40+ with a missing tooth, within about 10 km.',
+    why: 'Your all-in RM 5,000 package, with everything it includes spelled out. Clear prices are what most people look for first.' },
+  { c: 'aligner', dark: false, kicker: 'Package · clear aligners', title: 'Straighten your teeth, <em>discreetly.</em>',
+    who: 'Adults 20–40, including people preparing for weddings and work milestones.',
+    why: 'Your RM 6,000–9,900 aligner package and what comes with it, in a light, fresh look that stands out in the feed.' },
+  { c: 'scaling', dark: true, kicker: 'Package · scaling & whitening', title: 'Clean teeth. <em>A brighter smile.</em>',
+    who: 'Anyone nearby due for a clean.',
+    why: 'An easy first visit at RM 399, which brings new patients through the door and builds trust for bigger treatments.' },
+];
+const LANGS = [['en', 'English', 'English'], ['zh', '中文', 'Chinese'], ['ms', 'Bahasa Malaysia', 'Malay']];
+document.getElementById('spreads').outerHTML = SPREADS.map((s, k) => `
+<section class="page${s.dark ? ' dark' : ''}">
+  <div class="spread">
+    <div class="shead">
+      <div><div class="kicker">0${k + 1} · ${s.kicker}</div><h2>${s.title}</h2></div>
+      <dl><div><dt>Who sees it</dt><dd>${s.who}</dd></div><div><dt>Why it works</dt><dd>${s.why}</dd></div></dl>
+    </div>
+    <div class="trio">${LANGS.map(([l, name, en]) => `
+      <figure><div class="phone"><img data-src="${s.c}-${l}-9x16"></div><figcaption>${en}${name !== en ? `<span>${name}</span>` : ''}</figcaption></figure>`).join('')}
+    </div>
+  </div>
+  <div class="foot"><img src="source/${s.dark ? 'Site-Logo-White' : 'Group1'}.png" alt=""><span>${String(k + 2).padStart(2, '0')}</span></div>
+</section>`).join('');
+document.getElementById('grid6').innerHTML = [['braces', 'en'], ['veneers', 'zh'], ['clinic', 'ms'], ['implant5000', 'en'], ['aligner', 'zh'], ['scaling', 'ms']]
+  .map(([c, l]) => `<div><img data-src="${c}-${l}-4x5"><small>${c === 'implant5000' ? 'implant' : c} · ${l.toUpperCase()}</small></div>`).join('');
+document.querySelectorAll('img[data-src]').forEach(i => { i.src = `${IMGS}/smilearts-kd-${i.dataset.src}${EXT}`; });
+</script>
+</body>
+</html>
