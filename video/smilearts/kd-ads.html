@@ -143,6 +143,9 @@
   /* promo visual on the right, faded into the background (price ads) */
   .visual { position: absolute; overflow: hidden; }
   .visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .visual.cut::after { display: none; }
+  .visual.cut img { object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 26px 34px rgba(20,14,10,.3)); }
+  .narrow.L-offer .col { width: 540px; }
   .visual::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(90deg, var(--solid) 0%, transparent 38%), linear-gradient(0deg, var(--solid) 0%, transparent 26%), linear-gradient(180deg, var(--solid) 0%, transparent 14%); }
 
@@ -165,9 +168,9 @@
   .f45 .perks span::before { width: 9px; height: 9px; }
 
   /* offer layout (price ads): big price, package tag, checklist, Book now */
-  .L-offer .head { right: auto; width: 600px; }
+  .L-offer .head { right: 70px; width: auto; }
   .L-offer h1 { font-size: 80px; }
-  .f45.L-offer .head { width: 520px; }
+
   .f45.L-offer h1 { font-size: 62px; }
   .L-offer .col { width: 600px; top: 690px; gap: 18px; }
   .L-offer .tag { bottom: 384px; }
@@ -221,8 +224,8 @@ const CFG = {
   implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 840, 45: 540 } },
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
   implant5000: { theme: 'dark',  layout: 'offer', img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
-  aligner:     { theme: 'cream', layout: 'offer', img: 'source/v-aligner-case.jpg', box: { 916: [50, 600, 400, 487], 45: [40, 140, 320, 390] } },
-  scaling:     { theme: 'dark',  layout: 'offer', img: 'source/v-smile-woman.jpg', box: { 916: [0, 620, 560, 641], 45: [0, 130, 460, 527] } },
+  aligner:     { theme: 'cream', layout: 'offer', img: 'source/v-aligner-case-cut.png', cut: true, box: { 916: [80, 600, 380, 444], 45: [60, 140, 290, 339] } },
+  scaling:     { theme: 'dark',  layout: 'offer', img: 'source/daren-cutout.png', cut: true, noface: true, narrow: true, box: { 916: [-150, 800, 661, 760], 45: [-150, 510, 557, 640] } },
 };
 const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
 // badges: consultation on every ad (smilearts.com.my: "professional consultation available via WhatsApp");
@@ -245,17 +248,17 @@ const T = {
     veneers: { eyebrow: 'Porcelain veneers', h1: 'Chipped, stained or <em>uneven front teeth?</em>',
       sub: 'Ask about porcelain veneers, planned with Digital Smile Design.',
       list: ['Shape and shade planned digitally', 'Your options explained', 'Cost up front'] },
-    implant5000: { eyebrow: 'Dental implant', h1: 'One implant. <em>One clear price.</em>',
+    implant5000: { eyebrow: 'Dental implant', h1: 'Missing a tooth? <em>One all-in price.</em>',
       label: 'All-in price', price: '<small>RM</small>5,000',
       list: ['Implant fixture', 'Custom abutment', 'Ceramic crown', 'Dental X-ray & 3D CBCT'],
       fine: 'Includes assessment and treatment planning. Suitability confirmed at consultation. Terms apply.' },
-    aligner: { eyebrow: 'Clear aligners', h1: 'Straighten your teeth, <em>discreetly.</em>',
+    aligner: { eyebrow: 'Clear aligners', h1: 'Straighter teeth, <em>without metal braces.</em>',
       label: 'Package from', price: '<small>RM</small>6,000', to: 'to RM 9,900',
       list: ['Consultation & X-ray', 'Digital intra-oral scan', 'Full set of aligners', '1 pair of retainers'],
       fine: 'Price depends on your case. Terms apply.' },
-    scaling: { eyebrow: 'Scaling + polishing + whitening', h1: 'Clean teeth, <em>brighter smile.</em>',
+    scaling: { eyebrow: 'Scaling + polishing + whitening', h1: 'Due for a clean? <em>All three in one package.</em>',
       label: 'Package price', price: '<small>RM</small>399',
-      list: ['Removes tartar & stains', 'Healthier gums', 'Whiter, brighter smile', 'In-office whitening'],
+      list: ['Removes tartar & stains', 'Healthier gums', 'Whiter teeth', 'Done at the clinic'],
       fine: 'Results vary from person to person. Terms apply.' },
   },
   zh: {
@@ -263,49 +266,49 @@ const T = {
     addr: '哥打白沙罗',
     braces: { eyebrow: '牙套 · 隐适美', h1: '传统牙套还是隐适美？<br><em>先问清楚再决定。</em>',
       sub: '金属、陶瓷、自锁牙套，<br>或隐形牙套。',
-      list: ['咬合与排列检查', '为你讲解各种选择', '疗程时间和费用先说清楚'] },
+      list: ['检查咬合和排列', '医生讲解各种选择', '疗程和费用先讲清楚'] },
     implants: { eyebrow: '种植牙', h1: '缺了一颗牙？<br><em>看看种植牙适不适合你。</em>',
       sub: '决定之前，先了解清楚。',
-      list: ['评估是否适合', '每个步骤讲解清楚', '疗程时间和费用先说清楚'] },
+      list: ['评估是否适合种植', '每个步骤讲解清楚', '疗程和费用先讲清楚'] },
     veneers: { eyebrow: '瓷贴片', h1: '门牙缺角、发黄<br><em>或不整齐？</em>',
       sub: '了解瓷贴片，<br>以数字微笑设计规划。',
-      list: ['数字规划牙齿形状与颜色', '为你讲解各种选择', '费用先说清楚'] },
-    implant5000: { eyebrow: '种植牙', h1: '一颗种植牙，<br><em>一个清楚的价钱。</em>',
+      list: ['用数字设计规划形状和颜色', '医生讲解各种选择', '费用先讲清楚'] },
+    implant5000: { eyebrow: '种植牙', h1: '缺了一颗牙？<br><em>种植牙全包价。</em>',
       label: '全包价', price: '<small>RM</small>5,000',
       list: ['种植体', '定制基台', '陶瓷牙冠', '牙科X光与3D CBCT'],
       fine: '包括评估与治疗规划。是否适合需经咨询确认。附带条款。' },
-    aligner: { eyebrow: '隐形牙套', h1: '低调地<br><em>把牙齿排整齐。</em>',
+    aligner: { eyebrow: '隐形牙套', h1: '想把牙齿排整齐，<br><em>又不想戴铁牙套？</em>',
       label: '配套价', price: '<small>RM</small>6,000', to: '至 RM 9,900',
       list: ['咨询与X光', '数字口内扫描', '全套隐形牙套', '一副保持器'],
       fine: '价钱视个案而定。附带条款。' },
-    scaling: { eyebrow: '洗牙 + 抛光 + 美白', h1: '牙齿干净，<br><em>笑容更亮。</em>',
+    scaling: { eyebrow: '洗牙 + 抛光 + 美白', h1: '很久没洗牙了？<br><em>一个配套全包。</em>',
       label: '配套价', price: '<small>RM</small>399',
-      list: ['去除牙垢与污渍', '牙龈更健康', '牙齿更白更亮', '诊所专业美白'],
+      list: ['清除牙垢和污渍', '牙龈更健康', '牙齿更白', '在诊所完成'],
       fine: '效果因人而异。附带条款。' },
   },
   ms: {
-    branch: 'Kota Damansara', cta: 'Tempah sekarang', consult: 'Konsultasi melalui WhatsApp', instal: 'Bayaran ansuran', creds: 'DDS (USM) · 18 tahun pengalaman', book: 'WhatsApp',
+    branch: 'Kota Damansara', cta: 'Tempah sekarang', consult: 'Konsultasi di WhatsApp', instal: 'Boleh bayar ansuran', creds: 'DDS (USM) · 18 tahun pengalaman', book: 'WhatsApp',
     addr: 'Kota Damansara',
-    braces: { eyebrow: 'Braces & Invisalign', h1: 'Braces atau Invisalign? <em>Tanya dulu.</em>',
+    braces: { eyebrow: 'Braces & Invisalign', h1: 'Braces atau Invisalign? <em>Tanya doktor dulu.</em>',
       sub: 'Braces besi, seramik atau <span style="white-space:nowrap">self-ligating</span>, atau aligner lutsinar.',
-      list: ['Semakan gigitan & susunan gigi', 'Pilihan anda diterangkan', 'Tempoh & kos dijelaskan awal'] },
+      list: ['Semak gigitan & susunan gigi', 'Doktor terangkan pilihan anda', 'Tempoh & kos diberitahu awal'] },
     implants: { eyebrow: 'Implan gigi', h1: 'Gigi hilang? <em>Tanya tentang implan.</em>',
       sub: 'Ketahui prosesnya sebelum anda buat keputusan.',
-      list: ['Semakan kesesuaian', 'Setiap langkah diterangkan', 'Tempoh & kos dijelaskan awal'] },
+      list: ['Semak sama ada sesuai', 'Setiap langkah diterangkan', 'Tempoh & kos diberitahu awal'] },
     veneers: { eyebrow: 'Venir porselin', h1: 'Gigi depan <em>sumbing atau kuning?</em>',
       sub: 'Tanya tentang venir porselin, dirancang dengan Digital Smile Design.',
-      list: ['Bentuk & warna dirancang secara digital', 'Pilihan anda diterangkan', 'Kos dijelaskan awal'] },
-    implant5000: { eyebrow: 'Implan gigi', h1: 'Satu implan. <em>Harga yang jelas.</em>',
+      list: ['Bentuk & warna dirancang secara digital', 'Doktor terangkan pilihan anda', 'Kos diberitahu awal'] },
+    implant5000: { eyebrow: 'Implan gigi', h1: 'Gigi hilang? <em>Satu harga, semua termasuk.</em>',
       label: 'Harga termasuk semua', price: '<small>RM</small>5,000',
       list: ['Fixture implan', 'Abutment khas', 'Crown seramik', 'X-ray & 3D CBCT'],
       fine: 'Termasuk penilaian dan perancangan rawatan. Kesesuaian disahkan semasa konsultasi. Tertakluk pada terma.' },
-    aligner: { eyebrow: 'Aligner lutsinar', h1: 'Luruskan gigi anda, <em>tanpa ketara.</em>',
+    aligner: { eyebrow: 'Aligner lutsinar', h1: 'Gigi tersusun <em>tanpa braces besi.</em>',
       label: 'Pakej dari', price: '<small>RM</small>6,000', to: 'hingga RM 9,900',
       list: ['Konsultasi & X-ray', 'Imbasan intra-oral digital', 'Set penuh aligner', '1 pasang retainer'],
       fine: 'Harga bergantung pada kes anda. Tertakluk pada terma.' },
-    scaling: { eyebrow: 'Scaling + polishing + pemutihan', h1: 'Gigi bersih. <em>Senyuman cerah.</em>',
+    scaling: { eyebrow: 'Scaling + polishing + pemutihan', h1: 'Dah lama tak scaling? <em>Tiga dalam satu pakej.</em>',
       label: 'Harga pakej', price: '<small>RM</small>399',
-      list: ['Buang karang & kesan kotoran', 'Gusi lebih sihat', 'Senyuman lebih putih', 'Pemutihan di klinik'],
+      list: ['Buang karang & kesan kotoran', 'Gusi lebih sihat', 'Gigi lebih putih', 'Dibuat di klinik'],
       fine: 'Hasil berbeza mengikut individu. Tertakluk pada terma.' },
   },
 };
@@ -326,7 +329,11 @@ if (cfg.layout === 'visual' || cfg.layout === 'offer') {
   const [r, t, w, h] = cfg.box[f], v = document.getElementById('visual');
   Object.assign(v.style, { right: r + 'px', top: t + 'px', width: w + 'px', height: h + 'px' });
   document.getElementById('visimg').src = cfg.img;
+  v.classList.toggle('cut', !!cfg.cut);
 }
+if (cfg.noface) document.querySelector('.tag .face').remove();
+
+if (cfg.narrow) document.documentElement.classList.add('narrow');
 for (const k of ['branch', 'creds', 'book', 'addr']) document.getElementById(k).innerHTML = t[k];
 for (const k of ['eyebrow', 'h1']) document.getElementById(k).innerHTML = s[k];
 const list = `<div class="list">${s.list.map(x => `<p>${x}</p>`).join('')}</div>`;
@@ -340,6 +347,13 @@ if (cfg.layout === 'phototop') {
   const col = document.getElementById('col');
   document.querySelector('.head').appendChild(col);
 }
+// offer layout: the price block starts right under the headline, however many lines it takes
+if (cfg.layout === 'offer') document.fonts.ready.then(() => {
+  const head = document.querySelector('.head').getBoundingClientRect(), col = document.getElementById('col'), v = document.getElementById('visual');
+  const gap = f === '45' ? 16 : 26;
+  col.style.top = Math.ceil(head.bottom + gap) + 'px';
+  v.style.top = Math.max(cfg.box[f][1], Math.ceil(head.bottom + gap)) + 'px';
+});
 </script>
 </body>
 </html>

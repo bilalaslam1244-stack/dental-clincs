@@ -137,6 +137,9 @@
   /* promo visual on the right, faded into the background (price ads) */
   .visual { position: absolute; overflow: hidden; }
   .visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .visual.cut::after { display: none; }
+  .visual.cut img { object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 26px 34px rgba(20,14,10,.3)); }
+  .narrow.L-offer .col { width: 540px; }
   .visual::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(90deg, var(--solid) 0%, transparent 38%), linear-gradient(0deg, var(--solid) 0%, transparent 26%), linear-gradient(180deg, var(--solid) 0%, transparent 14%); }
 
@@ -159,9 +162,9 @@
   .f45 .perks span::before { width: 9px; height: 9px; }
 
   /* offer layout (price ads): big price, package tag, checklist, Book now */
-  .L-offer .head { right: auto; width: 600px; }
+  .L-offer .head { right: 70px; width: auto; }
   .L-offer h1 { font-size: 80px; }
-  .f45.L-offer .head { width: 520px; }
+
   .f45.L-offer h1 { font-size: 62px; }
   .L-offer .col { width: 600px; top: 690px; gap: 18px; }
   .L-offer .tag { bottom: 384px; }

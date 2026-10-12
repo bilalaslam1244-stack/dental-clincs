@@ -18,7 +18,8 @@ Malaysian Dental Council check: no before-and-after photos, no testimonials, no 
 - Add to the end of each primary text: "Instalments available. Consultation via WhatsApp." / "可分期付款，WhatsApp 咨询。" / "Bayaran ansuran tersedia. Konsultasi melalui WhatsApp." (RM 399 ad: consultation line only.)
 - Consultation: smilearts.com.my says "Free professional consultation available via WhatsApp communication". The ads say "consultation via WhatsApp" without "free" (MDC); add "free" only if Dr. Daren is comfortable with it.
 - **Instalments are not mentioned on smilearts.com.my. Dr. Daren must confirm instalment plans are offered (and on which treatments) before any ad runs.**
-- Aligner ad visual: the Smile Arts branded aligner case from his own aligner promotion artwork (replaces the close-up face).
+- Visuals: no stock faces. Aligner ad shows the Smile Arts branded aligner case (cut out from his own promotion artwork); the RM 399 ad shows Dr. Daren's studio portrait.
+- On-image headlines (v7): implant "Missing a tooth? One all-in price." / 缺了一颗牙？种植牙全包价。 / Gigi hilang? Satu harga, semua termasuk. · aligner "Straighter teeth, without metal braces." / 想把牙齿排整齐，又不想戴铁牙套？ / Gigi tersusun tanpa braces besi. · RM 399 "Due for a clean? All three in one package." / 很久没洗牙了？一个配套全包。 / Dah lama tak scaling? Tiga dalam satu pakej.
 
 ## Braces & Invisalign
 
@@ -121,7 +122,7 @@ Malaysian Dental Council check: no before-and-after photos, no testimonials, no 
 
 **中文**
 - Primary text:
-  想低调地把牙齿排整齐？Smile Arts Dental 哥打白沙罗 隐形牙套配套 RM 6,000 至 RM 9,900（视个案而定），包括咨询、X光、数字口内扫描、全套隐形牙套和一副保持器。
+  想把牙齿排整齐，又不想戴铁牙套？Smile Arts Dental 哥打白沙罗 隐形牙套配套 RM 6,000 至 RM 9,900（视个案而定），包括咨询、X光、数字口内扫描、全套隐形牙套和一副保持器。
   Dr. Daren Ang 自2016年起为 Invisalign 认证医生。
   📍 哥打白沙罗
   💬 点击"发送消息"，WhatsApp 预约咨询。附带条款。
