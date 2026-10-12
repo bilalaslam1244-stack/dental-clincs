@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Smile Arts Kota Damansara: launch plan</title>
+<!-- Launch plan for the 2-week trial: which ads to boost first, budget, Ads Manager settings, which file goes where.
+     A4 landscape, printed by tools/render-smilearts-deck.mjs (DECK=plan). Images from IMGS (JPEG copies of renders/smilearts). -->
+<style>
+  @font-face { font-family: Tajawal; font-weight: 400; src: url(../assets/fonts/Tajawal-400-latin.woff2); }
+  @font-face { font-family: Tajawal; font-weight: 500; src: url(../assets/fonts/Tajawal-500-latin.woff2); }
+  @font-face { font-family: Tajawal; font-weight: 700; src: url(../assets/fonts/Tajawal-700-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500 600; src: url(../assets/fonts/PlayfairDisplay-600-normal-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500; font-style: italic; src: url(../assets/fonts/PlayfairDisplay-500-italic-latin.woff2); }
+  @page { size: 297mm 210mm; margin: 0; }
+  :root { --ink: #231b15; --ink-2: #5b4f44; --gold: #94703f; --gold-l: #d9b77b; --cream: #f6f0e7; --hair: rgba(148,112,63,.32);
+          --goldgrad: linear-gradient(100deg, #9c7440 0%, #d9b77b 38%, #f1dcaa 52%, #c9a063 70%, #9c7440 100%); }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Tajawal, "Microsoft YaHei", Arial, sans-serif; color: var(--ink); background: #ccc; -webkit-print-color-adjust: exact; }
+  .page { width: 297mm; height: 210mm; position: relative; overflow: hidden; page-break-after: always; padding: 14mm 16mm 0;
+          background: radial-gradient(120% 90% at 85% 20%, #fffaf2 0%, var(--cream) 55%, #eee4d5 100%); }
+  .page.dark { background: radial-gradient(110% 90% at 78% 25%, #3a2d22 0%, #261d16 50%, #16100c 100%); color: #f6efe4; }
+  .page::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1.2mm; background: var(--goldgrad); }
+  .kicker { font: 700 8.5pt Tajawal; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 3mm; }
+  .kicker::before { content: ""; width: 9mm; height: .4mm; background: var(--goldgrad); }
+  .dark .kicker { color: var(--gold-l); }
+  h1, h2 { font-family: Playfair, Georgia, serif; font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+  h1 em, h2 em { font-style: italic; font-weight: 500; color: var(--gold); }
+  .dark h1 em, .dark h2 em { color: #e3c48d; }
+  h2 { font-size: 21pt; line-height: 1.12; margin: 2.5mm 0 5mm; }
+  p, li { font-size: 9.8pt; line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
+  .dark p, .dark li { color: #d3c5b2; }
+  b { color: var(--ink); } .dark b { color: #f6efe4; }
+  .foot { position: absolute; left: 16mm; right: 16mm; bottom: 7mm; display: flex; justify-content: space-between; align-items: center; font: 500 7.5pt Tajawal; letter-spacing: .14em; text-transform: uppercase; color: #9a8c7c; }
+  .foot img { height: 5mm; }
+  .dark .foot { color: #a89379; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9.3pt; }
+  th { text-align: left; font: 700 7.5pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); padding: 2.2mm 2.5mm; border-bottom: .5mm solid var(--gold); }
+  td { padding: 2.4mm 2.5mm; border-bottom: .3mm solid var(--hair); color: var(--ink-2); vertical-align: top; line-height: 1.4; }
+  td:first-child { color: var(--ink); font-weight: 700; white-space: nowrap; }
+  code { font: 500 8.6pt Consolas, monospace; background: rgba(148,112,63,.12); padding: .3mm 1.2mm; border-radius: 1mm; color: var(--ink); }
+
+  /* cover */
+  .cover h1 { font-size: 40pt; line-height: 1.05; margin-top: 4mm; width: 170mm; }
+  .cover .logo { height: 14mm; margin-top: 8mm; display: block; }
+  .cover .foot img { height: 5mm; }
+  .cover .kicker { margin-top: 12mm; }
+  .cover p { width: 130mm; margin-top: 6mm; font-size: 11pt; }
+  .stats { position: absolute; left: 16mm; right: 16mm; bottom: 22mm; display: grid; grid-template-columns: repeat(5, 1fr); border-top: .3mm solid rgba(217,183,123,.45); }
+  .stats div { padding: 5mm 4mm 0 0; }
+  .stats b { display: block; font: 600 26pt/1 Playfair, serif; color: #e3c48d; }
+  .stats span { font: 700 7.5pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: #cdbfae; }
+
+  /* why */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12mm; }
+  .card { background: rgba(255,255,255,.55); border: .3mm solid var(--hair); padding: 5mm 6mm; }
+  .card h3 { font: 600 13pt Playfair, serif; margin-bottom: 2mm; }
+  .card.bad h3 { color: #8a3b30; }
+  .card.good { background: #231b15; border-color: #231b15; }
+  .card.good h3 { color: #e3c48d; } .card.good p, .card.good li { color: #d3c5b2; } .card.good b { color: #f6efe4; }
+  ul { padding-left: 4.5mm; } li { margin: 1.2mm 0; }
+  .note { margin-top: 6mm; font-size: 8.5pt; color: #8a7d6f; }
+
+  /* ads page */
+  .ads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; }
+  .ad { display: grid; grid-template-columns: 32mm 1fr; gap: 4mm; align-items: start; }
+  .thumbs { display: flex; flex-direction: column; gap: 2mm; }
+  .thumbs img { width: 100%; border-radius: 1.5mm; box-shadow: 0 2mm 5mm rgba(40,28,18,.25); display: block; }
+  .ad h3 { font: 600 12.5pt/1.15 Playfair, serif; margin: 1mm 0 1.5mm; }
+  .tag { display: inline-block; font: 700 7pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); border: .3mm solid var(--gold); padding: .8mm 2mm .5mm; }
+  .ad p { font-size: 8.6pt; line-height: 1.45; }
+  .ad dl { margin-top: 2mm; font-size: 8.2pt; }
+  .ad dt { font: 700 6.8pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-top: 1.8mm; }
+  .ad dd { margin: .5mm 0 0; color: var(--ink-2); line-height: 1.4; }
+
+  /* timeline */
+  .tl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: .3mm solid rgba(217,183,123,.35); }
+  .tl div { padding: 4mm; border-right: .3mm solid rgba(217,183,123,.35); }
+  .tl div:last-child { border-right: 0; }
+  .tl b { display: block; font: 600 13pt Playfair, serif; color: #e3c48d; margin-bottom: 1.5mm; }
+  .rules { margin-top: 7mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7mm; }
+  .rules div { border-top: .5mm solid #c9a063; padding-top: 3mm; }
+  .rules h3 { font: 600 12pt Playfair, serif; color: #f6efe4; margin-bottom: 1.5mm; }
+</style>
+</head>
+<body>
+<script>
+const IMGS = new URLSearchParams(location.search).get('imgs') || '../renders/smilearts';
+const EXT = IMGS.includes('lookbook') ? '.jpg' : '.png';
+const I = n => `${IMGS}/smilearts-kd-${n}${EXT}`;
+</script>
+
+<!-- 1 cover -->
+<section class="page dark cover">
+  <img class="logo" src="source/Site-Logo-White.png" alt="Smile Arts Dental Clinic">
+  <div class="kicker">Kota Damansara · Launch plan</div>
+  <h1 class="cover-h">Start small, <em>then scale what brings bookings.</em></h1>
+  <p>Which ads to boost first, how much to spend, and exactly how to set them up in Meta Ads Manager for the 2-week trial.</p>
+  <div class="stats">
+    <div><b>1</b><span>Campaign</span></div>
+    <div><b>1</b><span>Ad set</span></div>
+    <div><b>3</b><span>Ads to start</span></div>
+    <div><b>RM 40</b><span>Per day (min. RM 30)</span></div>
+    <div><b>14</b><span>Days · ~RM 560</span></div>
+  </div>
+  <div class="foot"><img src="source/Site-Logo-White.png" alt=""><span>Prepared by 4Skales · October 2026</span></div>
+</section>
+
+<!-- 2 why -->
+<section class="page">
+  <div class="kicker">01 · Why only three ads</div>
+  <h2>A small budget works best <em>when it isn't spread thin.</em></h2>
+  <div class="two">
+    <div class="card bad">
+      <h3>What not to do: all 6 ads in 4 ad sets</h3>
+      <ul>
+        <li>RM 30 a day split four ways is about <b>RM 7 per ad set</b>, which buys only a handful of conversations a day across the whole campaign.</li>
+        <li>Each ad set needs its own data to learn who books. Spread this thin, none of them gets enough, and Meta keeps guessing.</li>
+        <li>After 3 days you'd have too few chats per ad to tell what works.</li>
+      </ul>
+    </div>
+    <div class="card good">
+      <h3>What we do: 1 ad set, 3 ads, one budget</h3>
+      <ul>
+        <li><b>One ad set</b> around the clinic: all the budget feeds one learning pool, and Meta shifts spend to whichever ad gets the most chats.</li>
+        <li><b>Three ads</b> covering a quick win and two of Dr. Daren's focus treatments: enough to compare, few enough to fund properly.</li>
+        <li><b>RM 40 a day</b> (RM 30 minimum) for 14 days, about <b>RM 560</b> in total.</li>
+        <li>On Day 3 we cut what isn't working; in week 2 we swap in a new ad.</li>
+      </ul>
+    </div>
+  </div>
+  <table style="margin-top:8mm">
+    <tr><th>Daily budget</th><th>14-day total</th><th>What to run</th></tr>
+    <tr><td>RM 30</td><td>RM 420</td><td>The 3 starter ads below. The minimum we'd recommend.</td></tr>
+    <tr><td>RM 40 (recommended)</td><td>RM 560</td><td>The 3 starter ads; more conversations to judge them by on Day 3.</td></tr>
+    <tr><td>RM 60</td><td>RM 840</td><td>The 3 starter ads, then add the RM 5,000 implant ad in week 2 (once the price is confirmed).</td></tr>
+  </table>
+  <p class="note">Cost per WhatsApp conversation varies by area, season and creative, so we judge it on real numbers from Day 3, not on estimates.</p>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>02</span></div>
+</section>
+
+<!-- 3 the three ads -->
+<section class="page">
+  <div class="kicker">02 · The three ads to start with</div>
+  <h2>A quick win, plus two <em>of Dr. Daren's focus treatments.</em></h2>
+  <div class="ads" id="ads"></div>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>03</span></div>
+</section>
+
+<!-- 4 settings -->
+<section class="page">
+  <div class="kicker">03 · Set-up in Meta Ads Manager</div>
+  <h2>Exactly what to choose, <em>screen by screen.</em></h2>
+  <table>
+    <tr><th>Screen</th><th>Setting</th><th>Choose</th></tr>
+    <tr><td>Campaign</td><td>Objective</td><td><b>Engagement</b>. Name: <code>SA-KD | WhatsApp | Trial Oct 2026</code></td></tr>
+    <tr><td></td><td>Budget</td><td><b>Advantage campaign budget on, RM 40 daily</b> (one ad set, so it's the same as an ad set budget)</td></tr>
+    <tr><td>Ad set</td><td>Conversion location</td><td><b>Messaging apps → WhatsApp</b>, number <b>014-365 0270</b>; goal: maximise number of conversations</td></tr>
+    <tr><td></td><td>Identity</td><td>Facebook Page: Smile Arts Dental KD · Instagram: @smileartsdental_kd</td></tr>
+    <tr><td></td><td>Location</td><td>Pin on No. 55-1, Jalan PJU 5/20, Kota Damansara → <b>8 km radius</b> → "People living in or recently in this location"</td></tr>
+    <tr><td></td><td>Age · gender</td><td><b>22–60</b>, all genders</td></tr>
+    <tr><td></td><td>Detailed targeting</td><td><b>None</b> (Advantage+ audience). Meta restricts health interests; the ads do the filtering</td></tr>
+    <tr><td></td><td>Languages</td><td>Leave blank (each ad carries English, Chinese and Malay versions)</td></tr>
+    <tr><td></td><td>Placements</td><td><b>Advantage+ placements</b></td></tr>
+    <tr><td></td><td>Schedule</td><td>Start date = agreed launch day; no end date (we stop it manually on Day 14)</td></tr>
+    <tr><td>Each ad</td><td>Format</td><td><b>Single image or video → video</b></td></tr>
+    <tr><td></td><td>Media</td><td><b>Feeds:</b> the <code>4x5</code> MP4 · <b>Stories &amp; Reels:</b> the <code>9x16</code> MP4 (Meta asks per placement group)</td></tr>
+    <tr><td></td><td>Languages</td><td>"Add languages": English as default, then Chinese (Simplified) and Malay, each with its own 4x5 + 9x16 files and text</td></tr>
+    <tr><td></td><td>Text</td><td>Primary text, headline and description from the launch kit, section 4</td></tr>
+    <tr><td></td><td>Call to action</td><td><b>Send WhatsApp message</b></td></tr>
+    <tr><td></td><td>Message template</td><td>Greeting + 4 quick-reply buttons + the ad's pre-filled message (launch kit, section 5)</td></tr>
+  </table>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>04</span></div>
+</section>
+
+<!-- 5 timeline -->
+<section class="page dark">
+  <div class="kicker">04 · The 14 days</div>
+  <h2 style="color:#f6efe4">What happens <em>and when.</em></h2>
+  <div class="tl">
+    <div><b>Before launch</b><p>Dr. Daren approves the 3 ads; WhatsApp 014-365 0270 linked to the Page; front desk ready with quick replies and the one-line log.</p></div>
+    <div><b>Day 1</b><p>Campaign goes live. Don't edit anything for 72 hours; every edit restarts Meta's learning.</p></div>
+    <div><b>Day 3</b><p>Check conversations per ad. Pause any ad with <strong style="color:#f6efe4">0 chats after about RM 40</strong> spent on it. Keep the rest.</p></div>
+    <div><b>Day 7–8</b><p>WhatsApp update to Dr. Daren. Swap the weakest ad for the next one in line (see below).</p></div>
+    <div><b>Day 14</b><p>Report: chats, bookings, cost per booking, best ad. 20-minute call and monthly plan.</p></div>
+  </div>
+  <div class="rules">
+    <div><h3>Next ads in line for week 2</h3><p>1. <b>Implant RM 5,000</b> (once Dr. Daren confirms the price). 2. <b>Porcelain veneers</b>. 3. <b>Clear aligners RM 6,000</b> (once confirmed).</p></div>
+    <div><h3>If one ad clearly wins</h3><p>Leave the budget where it is and let Meta give it more spend. Raise the daily budget by at most 20% at a time, never every day.</p></div>
+    <div><h3>What we measure</h3><p>WhatsApp conversations started from the ads, and how many became booked consultations (from the front desk's log). Bookings matter more than clicks.</p></div>
+  </div>
+  <div class="foot"><img src="source/Site-Logo-White.png" alt=""><span>Prepared by 4Skales for Smile Arts Dental</span></div>
+</section>
+
+<script>
+const ADS = [
+  { c: 'scaling', tag: 'Ad 1 · Quick win', title: 'Scaling + whitening, RM 399',
+    why: 'His live website offer, a low price and an easy yes. Brings new patients through the door fastest, and gives Meta conversations to learn from early.',
+    headline: 'Scaling + whitening, RM 399', msg: 'Hi Smile Arts Kota Damansara, I\'d like to book the RM 399 scaling and whitening.' },
+  { c: 'braces', tag: 'Ad 2 · Focus treatment', title: 'Braces or Invisalign?',
+    why: 'High-value treatment Dr. Daren wants more of, led by his portrait and Invisalign credentials. No price needed, so no confirmation is waiting on it.',
+    headline: 'Braces or Invisalign? Ask Dr. Daren', msg: 'Hi Smile Arts Kota Damansara, I\'d like to ask about braces / Invisalign.' },
+  { c: 'implants', tag: 'Ad 3 · Focus treatment', title: 'Missing a tooth?',
+    why: 'The highest-value treatment, aimed at people already thinking about it. Uses the treatment-room photo and invites a consultation.',
+    headline: 'Missing a tooth? Ask about implants', msg: 'Hi Smile Arts Kota Damansara, I\'d like to ask about dental implants.' },
+];
+document.getElementById('ads').innerHTML = ADS.map(a => `
+  <div class="ad">
+    <div class="thumbs"><img src="${I(a.c + '-en-9x16')}" alt=""><img src="${I(a.c + '-en-4x5')}" alt=""></div>
+    <div>
+      <span class="tag">${a.tag}</span>
+      <h3>${a.title}</h3>
+      <p>${a.why}</p>
+      <dl>
+        <dt>Stories &amp; Reels file</dt><dd><code>smilearts-kd-${a.c}-en-9x16.mp4</code> (+ zh, ms)</dd>
+        <dt>Feeds file</dt><dd><code>smilearts-kd-${a.c}-en-4x5.mp4</code> (+ zh, ms)</dd>
+        <dt>Headline</dt><dd>${a.headline}</dd>
+        <dt>Pre-filled WhatsApp message</dt><dd>${a.msg}</dd>
+      </dl>
+    </div>
+  </div>`).join('');
+</script>
+</body>
+</html>

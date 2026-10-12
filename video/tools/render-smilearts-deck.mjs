@@ -1,17 +1,17 @@
-// Prints a Smile Arts KD document to PDF, A4 landscape: smilearts/preview-deck.html (default) or, with
-// DECK=lookbook, smilearts/lookbook.html (the visual ad lookbook for Dr. Daren).
+// Prints a Smile Arts KD document to PDF, A4 landscape: smilearts/preview-deck.html (default), or with
+// DECK=lookbook smilearts/lookbook.html (ad preview for Dr. Daren), or DECK=plan smilearts/plan.html (launch plan).
 // IMGS points at a folder of JPEG copies of renders/smilearts (keeps the PDF small); without it the PNGs are used.
 // Usage (from video/): PLAYWRIGHT=<path to playwright/index.mjs> [CHROME=<chrome.exe>] [DECK=lookbook] [IMGS=<dir>] node tools/render-smilearts-deck.mjs <out.pdf>
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
-const deck = process.env.DECK === 'lookbook' ? 'lookbook' : 'preview-deck';
+const deck = ['lookbook', 'plan'].includes(process.env.DECK) ? process.env.DECK : 'preview-deck';
 const out = process.argv[2] || `renders/smilearts/smilearts-kd-${deck}.pdf`;
 const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME } : {});
 const tab = await browser.newPage();
 let url = pathToFileURL(resolve('smilearts', `${deck}.html`)).href;
-if (process.env.IMGS) url += `?${deck === 'lookbook' ? 'imgs' : 'thumbs'}=` + encodeURIComponent(pathToFileURL(resolve(process.env.IMGS)).href);
+if (process.env.IMGS) url += `?${deck === 'preview-deck' ? 'thumbs' : 'imgs'}=` + encodeURIComponent(pathToFileURL(resolve(process.env.IMGS)).href);
 await tab.goto(url);
 await tab.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
 await tab.pdf({ path: out, preferCSSPageSize: true, printBackground: true });
