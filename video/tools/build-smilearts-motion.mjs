@@ -10,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
 const CONCEPTS = ['braces', 'implants', 'veneers', 'clinic', 'implant5000', 'aligner', 'scaling'];
 const FORMATS = { '916': 1920, '45': 1350 };
-const LANGS = ['en', 'zh'];
+const LANGS = process.env.LANGS ? process.env.LANGS.split(',') : ['en', 'zh', 'ms'];
 const TITLES = { braces: 'Braces or Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers',
                  clinic: 'Your dentist at The Strand', implant5000: 'Dental implant RM 5,000', aligner: 'Clear aligners from RM 6,000', scaling: 'Scaling and whitening RM 399' };
 

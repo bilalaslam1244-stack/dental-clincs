@@ -5,7 +5,7 @@
 <title>Smile Arts Kota Damansara ads</title>
 <!-- Patient-facing Meta ads for Smile Arts Dental Kota Damansara (free 2-week trial), in the clinic's own
      poster style: cream or espresso, gold accents, serif headlines, Dr. Daren's studio portrait.
-     Open with ?c=<concept>&f=<916|45>&l=<en|zh>; tools/render-smilearts.mjs screenshots every combination.
+     Open with ?c=<concept>&f=<916|45>&l=<en|zh|ms>; tools/render-smilearts.mjs screenshots every combination.
      Each concept has its own layout so the set doesn't look samey in the feed (see CFG below):
      braces (portrait), implants (treatment-room photo on top), veneers (reception photo behind the portrait),
      clinic (shopfront: local recognition), and price ads implant5000, aligner, scaling with visuals cropped from
@@ -146,6 +146,8 @@
   .visual::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(90deg, var(--solid) 0%, transparent 38%), linear-gradient(0deg, var(--solid) 0%, transparent 26%), linear-gradient(180deg, var(--solid) 0%, transparent 14%); }
 
+  [lang="ms"] h1 { font-size: 88px; }
+  .f45[lang="ms"] h1 { font-size: 68px; }
   [lang="zh"] h1 { font-size: 84px; line-height: 1.2; letter-spacing: .01em; }
   .f45[lang="zh"] h1 { font-size: 66px; }
   [lang="zh"] h1 em { font-style: normal; font-weight: 700; }
@@ -245,6 +247,34 @@ const T = {
       label: '配套价', price: '<small>RM</small>399',
       list: ['洗牙与抛光', '诊所牙齿美白'],
       fine: '效果因人而异。附带条款。' },
+  },
+  ms: {
+    branch: 'Kota Damansara', strip: ['Kaunter pendaftaran', 'Bilik rawatan'], creds: 'DDS (USM) · 18 tahun pengalaman', book: 'WhatsApp untuk temujanji',
+    addr: 'Kota Damansara',
+    braces: { eyebrow: 'Braces & Invisalign', h1: 'Braces atau Invisalign? <em>Tanya dulu.</em>',
+      sub: 'Braces besi, seramik atau <span style="white-space:nowrap">self-ligating</span>, atau aligner lutsinar.',
+      list: ['Semakan gigitan & susunan gigi', 'Pilihan anda diterangkan', 'Tempoh & kos dijelaskan awal'] },
+    implants: { eyebrow: 'Implan gigi', h1: 'Gigi hilang? <em>Tanya tentang implan.</em>',
+      sub: 'Ketahui prosesnya sebelum anda buat keputusan.',
+      list: ['Semakan kesesuaian', 'Pengimejan 3D CBCT', 'Tempoh & kos dijelaskan awal'] },
+    veneers: { eyebrow: 'Venir porselin', h1: 'Gigi depan <em>sumbing atau kuning?</em>',
+      sub: 'Tanya tentang venir porselin, dirancang dengan Digital Smile Design.',
+      list: ['Bentuk & warna dirancang secara digital', 'Pilihan anda diterangkan', 'Kos dijelaskan awal'] },
+    clinic: { eyebrow: 'Smile Arts Dental · Kota Damansara', h1: 'Doktor gigi anda di <em>The Strand.</em>',
+      sub: 'Dr. Daren Ang dan pasukan, semua rawatan di bawah satu bumbung.',
+      list: ['Braces & Invisalign', 'Implan gigi', 'Venir porselin', 'Scaling & pemutihan'] },
+    implant5000: { eyebrow: 'Implan gigi', h1: 'Satu implan. <em>Harga yang jelas.</em>',
+      label: 'Termasuk semua', price: '<small>RM</small>5,000',
+      list: ['Fixture implan', 'Abutment khas', 'Crown seramik', 'X-ray & 3D CBCT'],
+      fine: 'Termasuk penilaian dan perancangan rawatan. Kesesuaian disahkan semasa konsultasi. Tertakluk pada terma.' },
+    aligner: { eyebrow: 'Aligner lutsinar', h1: 'Luruskan gigi anda, <em>tanpa ketara.</em>',
+      label: 'Pakej dari', price: '<small>RM</small>6,000', to: 'hingga RM 9,900',
+      list: ['Konsultasi & X-ray', 'Imbasan intra-oral digital', 'Set penuh aligner', '1 pasang retainer'],
+      fine: 'Harga bergantung pada kes anda. Tertakluk pada terma.' },
+    scaling: { eyebrow: 'Scaling, polishing & pemutihan', h1: 'Gigi bersih. <em>Senyuman cerah.</em>',
+      label: 'Pakej', price: '<small>RM</small>399',
+      list: ['Scaling & polishing', 'Pemutihan gigi di klinik'],
+      fine: 'Hasil berbeza mengikut individu. Tertakluk pada terma.' },
   },
 };
 

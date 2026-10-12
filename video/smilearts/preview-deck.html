@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Smile Arts Kota Damansara: ad preview</title>
+<!-- Short PDF for Dr. Daren showing what the 2-week trial will run. Printed to A4 landscape by
+     tools/render-smilearts-deck.mjs; thumbnails are read from THUMBS (renders/smilearts as JPEG). -->
+<style>
+  @font-face { font-family: Tajawal; font-weight: 400; src: url(../assets/fonts/Tajawal-400-latin.woff2); }
+  @font-face { font-family: Tajawal; font-weight: 500; src: url(../assets/fonts/Tajawal-500-latin.woff2); }
+  @font-face { font-family: Tajawal; font-weight: 700; src: url(../assets/fonts/Tajawal-700-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500 600; src: url(../assets/fonts/PlayfairDisplay-600-normal-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500; font-style: italic; src: url(../assets/fonts/PlayfairDisplay-500-italic-latin.woff2); }
+  @page { size: 297mm 210mm; margin: 0; }
+  :root { --ink: #231b15; --ink-2: #5b4f44; --gold: #94703f; --cream: #f6f0e7; --esp: #221a14; --hair: rgba(148,112,63,.35); }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Tajawal, Arial, sans-serif; color: var(--ink); background: #ddd; }
+  .page { width: 297mm; height: 210mm; position: relative; overflow: hidden; background: var(--cream); padding: 16mm 18mm 14mm; page-break-after: always; display: flex; flex-direction: column; }
+  .page.dark { background: radial-gradient(110% 80% at 80% 30%, #3a2d22, #1c1510); color: #f6efe4; }
+  .kicker { font: 700 9pt Tajawal; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 10px; }
+  .kicker::before { content: ""; width: 26px; height: 1.5px; background: var(--gold); }
+  .dark .kicker { color: #d9b77b; } .dark .kicker::before { background: #d9b77b; }
+  h1 { font: 600 30pt/1.08 Playfair, Georgia, serif; margin-top: 6px; }
+  h1 em, h2 em { font-style: italic; font-weight: 500; color: var(--gold); }
+  .dark h1 em { color: #e3c48d; }
+  h2 { font: 600 22pt/1.1 Playfair, Georgia, serif; margin: 4px 0 6mm; }
+  p, li { font-size: 11pt; line-height: 1.45; color: var(--ink-2); }
+  .dark p { color: #d7cab8; }
+  .foot { position: absolute; left: 18mm; right: 18mm; bottom: 7mm; display: flex; justify-content: space-between; font-size: 8pt; color: #8a7d6f; letter-spacing: .05em; }
+  .dark .foot { color: #a89379; }
+
+  /* cover */
+  .cover { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12mm; align-items: center; height: 100%; }
+  .cover img.logo { height: 16mm; margin-bottom: 10mm; }
+  .cover h1 { font-size: 40pt; }
+  .cover .meta { margin-top: 8mm; border-top: 1px solid rgba(217,183,123,.4); padding-top: 5mm; display: grid; grid-template-columns: auto 1fr; gap: 2mm 8mm; font-size: 10.5pt; color: #d7cab8; }
+  .cover .meta b { color: #e3c48d; font-weight: 500; }
+  .fan { position: relative; height: 165mm; }
+  .fan img { position: absolute; height: 150mm; border-radius: 3mm; box-shadow: 0 10mm 20mm rgba(0,0,0,.45); }
+
+  /* how it works */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm; margin-top: 4mm; }
+  .step { border-top: 2px solid var(--gold); padding-top: 4mm; }
+  .step b { display: block; font: 600 15pt Playfair, serif; margin-bottom: 2mm; }
+  .step span { font: 700 9pt Tajawal; letter-spacing: .18em; color: var(--gold); }
+  .timeline { margin-top: 9mm; display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--hair); }
+  .timeline div { padding: 4mm; border-right: 1px solid var(--hair); }
+  .timeline div:last-child { border-right: 0; }
+  .timeline b { display: block; font: 600 13pt Playfair, serif; color: var(--gold); }
+  .timeline p { font-size: 10pt; margin-top: 1mm; }
+  .note { margin-top: auto; background: var(--esp); color: #f6efe4; padding: 5mm 7mm; display: flex; gap: 10mm; font-size: 10.5pt; }
+  .note b { color: #e3c48d; font-weight: 500; }
+
+  /* ad grids */
+  .ads { display: grid; gap: 5mm; flex: 1; min-height: 0; }
+  .ad { display: flex; flex-direction: column; gap: 2.5mm; min-height: 0; }
+  .ad img { width: 100%; border-radius: 2mm; box-shadow: 0 3mm 7mm rgba(40,28,18,.22); display: block; }
+  .ad b { font: 600 11.5pt Playfair, serif; }
+  .ad small { font-size: 9pt; color: var(--ink-2); line-height: 1.35; }
+  .dark .ad small { color: #cdbfae; }
+  .four { grid-template-columns: repeat(4, 1fr); }
+  .three { grid-template-columns: repeat(3, 1fr) 1.1fr; }
+  .side { display: flex; flex-direction: column; gap: 4mm; justify-content: center; }
+  .side p { font-size: 10.5pt; }
+  .pill { display: inline-block; font: 700 8.5pt Tajawal; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 1.5mm 3mm 1mm; }
+  .dark .pill { color: #e3c48d; border-color: #e3c48d; }
+
+  /* languages */
+  .langs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4mm; }
+  .langs figure { margin: 0; }
+  .langs figcaption { font: 700 9pt Tajawal; letter-spacing: .14em; color: var(--gold); margin-top: 2mm; text-transform: uppercase; }
+  .formats { margin-top: 6mm; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6mm; }
+  .formats div { border-top: 2px solid var(--gold); padding-top: 3mm; }
+  .formats b { font: 600 13pt Playfair, serif; display: block; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 10.5pt; margin-top: 2mm; }
+  th { text-align: left; font: 700 8.5pt Tajawal; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); padding: 2.5mm 3mm; border-bottom: 1.5px solid var(--gold); }
+  td { padding: 3mm; border-bottom: 1px solid var(--hair); color: var(--ink-2); vertical-align: top; }
+  td:first-child { color: var(--ink); font-weight: 700; }
+
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 10mm; margin-top: 2mm; }
+  .checks div { display: flex; gap: 4mm; padding: 3mm 0; border-bottom: 1px solid var(--hair); }
+  .checks i { flex: none; width: 5mm; height: 5mm; border: 1.5px solid var(--gold); margin-top: 1mm; }
+  .checks b { display: block; font-size: 11pt; color: var(--ink); }
+  .checks span { font-size: 9.5pt; color: var(--ink-2); line-height: 1.4; }
+  .rules { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; background: #ece3d5; padding: 5mm 7mm; font-size: 10pt; }
+  .rules b { display: block; font: 700 8.5pt Tajawal; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1mm; }
+</style>
+</head>
+<body>
+<script>const THUMBS = new URLSearchParams(location.search).get('thumbs') || '../renders/smilearts'; const T = n => `${THUMBS}/smilearts-kd-${n}`;</script>
+
+<!-- 1 cover -->
+<section class="page dark">
+  <div class="cover">
+    <div>
+      <img class="logo" src="source/Site-Logo-White.png" alt="Smile Arts Dental Clinic">
+      <div class="kicker">Kota Damansara · 2-week trial</div>
+      <h1>The ads we'll run to bring you <em>more patient enquiries.</em></h1>
+      <p style="margin-top:6mm;max-width:120mm">A preview of the Facebook and Instagram ads for Smile Arts Dental Kota Damansara: what patients will see, who will see them, and what we need from you before we go live.</p>
+      <div class="meta"><b>Prepared for</b><span>Dr. Daren Ang, Smile Arts Dental</span><b>Prepared by</b><span>4Skales (Fourskales Sdn. Bhd.)</span><b>Date</b><span>12 October 2026 · draft for your approval</span></div>
+    </div>
+    <div class="fan">
+      <img data-src="implant5000-en-9x16" style="left:0;top:14mm;transform:rotate(-6deg)">
+      <img data-src="veneers-zh-9x16" style="left:36mm;top:6mm;transform:rotate(1deg)">
+      <img data-src="braces-en-9x16" style="left:72mm;top:12mm;transform:rotate(6deg)">
+    </div>
+  </div>
+  <div class="foot"><span>Smile Arts Dental · Kota Damansara</span><span>Draft · not yet live</span></div>
+</section>
+
+<!-- 2 how it works -->
+<section class="page">
+  <div class="kicker">How the trial works</div>
+  <h2>One tap from the ad <em>to your front desk's WhatsApp.</em></h2>
+  <div class="steps">
+    <div class="step"><span>01</span><b>The ad</b><p>Shown on Facebook and Instagram to adults living or working around The Strand, in English, 中文 and Bahasa Malaysia.</p></div>
+    <div class="step"><span>02</span><b>One tap</b><p>"Send message" opens WhatsApp to 014-365 0270 with a message already typed, e.g. "Hi Smile Arts Kota Damansara, I'd like to ask about implants".</p></div>
+    <div class="step"><span>03</span><b>Your reply</b><p>Your front desk answers as usual (we supply ready replies in all three languages) and books the consultation.</p></div>
+    <div class="step"><span>04</span><b>We track it</b><p>Each enquiry names the treatment, so a one-line log (date, treatment, booked yes/no) shows exactly what the ads bring in.</p></div>
+  </div>
+  <div class="timeline">
+    <div><b>Set-up</b><p>You approve the ads; we link WhatsApp and submit the ads to Meta.</p></div>
+    <div><b>Day 1</b><p>Ads go live.</p></div>
+    <div><b>Day 3</b><p>We pause weak ads and move budget to the ones bringing enquiries.</p></div>
+    <div><b>Day 7</b><p>Short WhatsApp update to you: enquiries so far.</p></div>
+    <div><b>Day 14</b><p>Report and a 20-minute call: enquiries, cost per enquiry, bookings, best treatment.</p></div>
+  </div>
+  <div class="note"><span><b>Your cost for the trial:</b> none. 4Skales covers the ad spend for the 2 weeks.</span><span><b>Nothing runs</b> until you approve every ad.</span></div>
+  <div class="foot"><span>Smile Arts Dental · Kota Damansara</span><span>2</span></div>
+</section>
+
+<!-- 3 treatment + clinic ads -->
+<section class="page">
+  <div class="kicker">The ads · treatments and the clinic</div>
+  <h2>Four ads that start a conversation <em>about a real concern.</em></h2>
+  <div class="ads four">
+    <div class="ad"><img data-src="braces-en-9x16"><b>Braces or Invisalign?</b><small>For adults weighing up braces vs clear aligners. Features you and your Invisalign experience.</small></div>
+    <div class="ad"><img data-src="implants-en-9x16"><b>Missing a tooth?</b><small>Implant enquiries, shown in your treatment room.</small></div>
+    <div class="ad"><img data-src="veneers-en-9x16"><b>Chipped, stained or uneven?</b><small>Veneers and Digital Smile Design, with your reception behind you.</small></div>
+    <div class="ad"><img data-src="clinic-en-9x16"><b>Your dentist at The Strand</b><small>Local recognition: people who pass your shopfront see it's you.</small></div>
+  </div>
+  <div class="foot"><span>Shown in Stories/Reels size (9:16). Each also comes in Feed size (4:5) and as a 7.5-second video.</span><span>3</span></div>
+</section>
+
+<!-- 4 price ads -->
+<section class="page dark">
+  <div class="kicker">The ads · your packages</div>
+  <h2 style="color:#f6efe4">Your current packages, <em style="color:#e3c48d">stated clearly.</em></h2>
+  <div class="ads three">
+    <div class="ad"><img data-src="implant5000-en-9x16"><b>Implant, all-in RM 5,000</b><small>Fixture, abutment, ceramic crown, X-ray and 3D CBCT.</small></div>
+    <div class="ad"><img data-src="aligner-en-9x16"><b>Clear aligners RM 6,000–9,900</b><small>Consultation, X-ray, scan, aligners, 1 pair of retainers.</small></div>
+    <div class="ad"><img data-src="scaling-en-9x16"><b>Scaling + whitening RM 399</b><small>Scaling, polishing and in-office whitening.</small></div>
+    <div class="side">
+      <span class="pill">Please check</span>
+      <p>These prices and inclusions are taken from the promotions on smilearts.com.my. Please confirm they're current.</p>
+      <p>We kept them factual: no "only", no "limited to the first 30 patients", no before-and-after photos, and "terms apply" on each, to stay within the Malaysian Dental Council's advertising rules. Whether to run price ads at all is your call.</p>
+      <p>Price ads usually get the most taps, so we'd test them against the treatment ads and keep whichever brings more bookings.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Visuals taken from your own promotion artwork</span><span>4</span></div>
+</section>
+
+<!-- 5 languages and formats -->
+<section class="page">
+  <div class="kicker">Three languages · three formats</div>
+  <h2>Every ad in English, 中文 <em>and Bahasa Malaysia.</em></h2>
+  <div class="langs">
+    <figure><img class="lt" data-src="braces-en-4x5" style="width:100%"><figcaption>English</figcaption></figure>
+    <figure><img class="lt" data-src="braces-zh-4x5" style="width:100%"><figcaption>中文 Chinese</figcaption></figure>
+    <figure><img class="lt" data-src="braces-ms-4x5" style="width:100%"><figcaption>Bahasa Malaysia</figcaption></figure>
+    <figure><img class="lt" data-src="implant5000-en-4x5" style="width:100%"><figcaption>English</figcaption></figure>
+    <figure><img class="lt" data-src="implant5000-zh-4x5" style="width:100%"><figcaption>中文 Chinese</figcaption></figure>
+    <figure><img class="lt" data-src="implant5000-ms-4x5" style="width:100%"><figcaption>Bahasa Malaysia</figcaption></figure>
+  </div>
+  <div class="formats">
+    <div><b>Stories &amp; Reels (9:16)</b><p>Full-screen on phones, where most of the taps come from.</p></div>
+    <div><b>Feed (4:5)</b><p>The Facebook and Instagram home feeds (shown above).</p></div>
+    <div><b>7.5-second videos</b><p>Each ad also animates in with music; Meta tends to show videos to more people for the same budget.</p></div>
+  </div>
+  <div class="foot"><span>Meta shows each person the language they use on Facebook/Instagram</span><span>5</span></div>
+</section>
+
+<!-- 6 targeting -->
+<section class="page">
+  <div class="kicker">Who sees the ads</div>
+  <h2>People near The Strand, <em>matched to each treatment.</em></h2>
+  <table>
+    <tr><th>Ad group</th><th>Ads</th><th>Area</th><th>Ages</th><th>Why</th></tr>
+    <tr><td>Treatments &amp; clinic</td><td>Braces, implants, veneers, "your dentist at The Strand"</td><td>~5 km: Kota Damansara, Mutiara Damansara, Sunway Damansara, Damansara Perdana</td><td>25–55</td><td>Local patients looking for a nearby dentist</td></tr>
+    <tr><td>Implant RM 5,000</td><td>Implant price ad</td><td>~10 km</td><td>40–65+</td><td>People travel further for a big treatment</td></tr>
+    <tr><td>Clear aligners</td><td>Aligner price ad, braces ad</td><td>~8 km</td><td>20–40</td><td>Younger adults, weddings and work</td></tr>
+    <tr><td>Scaling + whitening</td><td>RM 399 ad</td><td>~5 km</td><td>22–50</td><td>Fills the chair quickly; good first visit</td></tr>
+    <tr><td>Reminder (from Day 4)</td><td>Implant and aligner ads</td><td>People who engaged with your Page/Instagram or watched the videos</td><td>25–65</td><td>A second nudge to people already interested</td></tr>
+  </table>
+  <p style="margin-top:6mm">Meta limits health-related interest targeting, so the ads do most of the filtering themselves: each headline speaks to one concern, and the area and age keep them local and relevant. We check results on Day 3 and move the budget to whatever brings enquiries.</p>
+  <div class="foot"><span>Smile Arts Dental · Kota Damansara</span><span>6</span></div>
+</section>
+
+<!-- 7 approvals -->
+<section class="page">
+  <div class="kicker">Before we go live</div>
+  <h2>What we need <em>from you.</em></h2>
+  <div class="checks">
+    <div><i></i><span><b>Approve the ads</b>All seven, in English, 中文 and Bahasa Malaysia. Tell us anything to change.</span></div>
+    <div><i></i><span><b>Confirm the packages</b>Implant RM 5,000 all-in, aligners RM 6,000–9,900, scaling + whitening RM 399: still current, inclusions correct?</span></div>
+    <div><i></i><span><b>Confirm your details</b>DDS (USM), 18 years in practice, Invisalign provider since 2016, Digital Smile Design.</span></div>
+    <div><i></i><span><b>KKLIU</b>Do your current ads carry a KKLIU (Medicine Advertisements Board) number? If so, we'll get approval before launch.</span></div>
+    <div><i></i><span><b>WhatsApp</b>014-365 0270 linked to the Kota Damansara Facebook Page and Instagram (Meta sends a one-time code to that phone).</span></div>
+    <div><i></i><span><b>Consultation fee</b>So the front desk's ready replies can quote it.</span></div>
+    <div><i></i><span><b>Front desk</b>Keep a one-line log of ad enquiries: date, treatment, booked yes/no.</span></div>
+    <div><i></i><span><b>Optional: a short video of you</b>15–20 seconds on your phone ("Hi, I'm Dr. Daren…"). Real faces usually get the most taps.</span></div>
+  </div>
+  <div class="rules">
+    <div><b>What the ads never show</b>Before-and-after photos, patient reviews, discounts or "free" treatment, "best" or "cheapest" claims.</div>
+    <div><b>What they do show</b>Your qualifications, your team and clinic, the treatments and packages you offer, and an invitation to book a consultation.</div>
+  </div>
+  <div class="foot"><span>Questions: reply on WhatsApp to 4Skales</span><span>7</span></div>
+</section>
+
+<script>
+document.querySelectorAll('img[data-src]').forEach(i => { i.src = T(i.dataset.src) + (THUMBS.endsWith('pdfthumbs') ? '.jpg' : '.png'); });
+</script>
+</body>
+</html>
