@@ -6,7 +6,8 @@
 <!-- Short ad preview for Dr. Daren (sent on WhatsApp): the ads as patients will see them on Instagram, with the
      "Send WhatsApp message" button, in the clinic's own look. 5 pages, A4 landscape, printed by
      tools/render-smilearts-deck.mjs (DECK=lookbook). Images come from IMGS (full-resolution JPEG copies of
-     renders/smilearts). Only prices currently live on smilearts.com.my appear here (scaling + whitening RM 399). -->
+     renders/smilearts). Prices are only those published on smilearts.com.my: RM 399 (live) and the implant and
+     aligner packages from earlier pop-ups, labelled "price to confirm". No The Strand / front-desk content. -->
 <style>
   @font-face { font-family: Tajawal; font-weight: 400; src: url(../assets/fonts/Tajawal-400-latin.woff2); }
   @font-face { font-family: Tajawal; font-weight: 500; src: url(../assets/fonts/Tajawal-500-latin.woff2); }
@@ -141,7 +142,7 @@ const story = (c, l) => `<div class="phone"><div class="screen"><img src="${IMGS
     <img class="logo" src="source/Site-Logo-White.png" alt="Smile Arts Dental Clinic">
     <div class="kicker">Kota Damansara · Ad preview</div>
     <h1>A first look at <em>your new ads.</em></h1>
-    <p>The Facebook and Instagram ads we plan to run for Smile Arts Dental Kota Damansara, in English, 中文 and Bahasa Malaysia. Every ad opens a WhatsApp chat with your front desk in one tap.</p>
+    <p>The Facebook and Instagram ads we plan to run for Smile Arts Dental Kota Damansara, in English, 中文 and Bahasa Malaysia. Every ad ends in one clear step: <b style="color:#f1dcaa">Book now</b>, straight into a WhatsApp chat with your clinic.</p>
   </div>
   <div class="meta"><b>Prepared for</b><span>Dr. Daren Ang</span><b>Prepared by</b><span>4Skales</span><b>Status</b><span>Draft for your review · October 2026</span></div>
   <div class="fan" id="fan"></div>
@@ -151,7 +152,7 @@ const story = (c, l) => `<div class="phone"><div class="screen"><img src="${IMGS
 <section class="page">
   <div class="phead">
     <div><div class="kicker">01 · Treatment ads</div><h2>Your expertise, <em>in the feed.</em></h2></div>
-    <p>Each ad answers a question patients already ask, with your portrait, your clinic and your credentials. One tap on <b>Send WhatsApp message</b> opens a chat with your front desk, with the treatment already named.</p>
+    <p>Your three focus treatments: braces, implants and veneers. Each ad answers a question patients already ask, shows your credentials, and ends with <b>Book now</b>. One tap opens a WhatsApp chat with your clinic, with the treatment already named.</p>
   </div>
   <div class="feedrow" id="row2"></div>
   <div class="foot"><img src="source/Group1.png" alt=""><span>02</span></div>
@@ -160,10 +161,10 @@ const story = (c, l) => `<div class="phone"><div class="screen"><img src="${IMGS
 <!-- 3 clinic + current offer -->
 <section class="page">
   <div class="phead">
-    <div><div class="kicker">02 · Your clinic and current offer</div><h2>Local recognition <em>and a clear first step.</em></h2></div>
-    <p>The clinic ad shows the shopfront people walk past at The Strand. The offer ad uses your RM 399 scaling, polishing and in-office whitening package, exactly as it appears on smilearts.com.my today.</p>
+    <div><div class="kicker">02 · Your packages</div><h2>Clear prices, <em>one tap to book.</em></h2></div>
+    <p>Ads with a clear price usually get the most taps. The prices below are the exact ones you've published on smilearts.com.my. RM 399 is your current offer; please confirm the implant and aligner packages are still running before we use them.</p>
   </div>
-  <div class="feedrow" id="row3" style="grid-template-columns: repeat(2, 70mm) 78mm"></div>
+  <div class="feedrow" id="row3"></div>
   <div class="foot"><img src="source/Group1.png" alt=""><span>03</span></div>
 </section>
 
@@ -171,7 +172,7 @@ const story = (c, l) => `<div class="phone"><div class="screen"><img src="${IMGS
 <section class="page dark">
   <div class="phead">
     <div><div class="kicker">03 · Three languages</div><h2>Every ad in English, <em><span style="white-space:nowrap">中文</span> and Bahasa Malaysia.</em></h2></div>
-    <p>Shown here as Instagram Stories, where most taps on dental ads come from. Meta shows each person the version in the language they use, and every version has its own WhatsApp message so your front desk knows which ad it came from.</p>
+    <p>Shown here as Instagram Stories, where most taps on dental ads come from. Meta shows each person the version in their own language, and each version opens WhatsApp with a message that names the ad, so your team knows exactly what the patient is asking about.</p>
   </div>
   <div class="trio" id="trio"></div>
   <div class="foot"><img src="source/Site-Logo-White.png" alt=""><span>04</span></div>
@@ -187,9 +188,9 @@ const story = (c, l) => `<div class="phone"><div class="screen"><img src="${IMGS
       <div class="reply"><span id="wa-big"></span><div><b>Happy with the direction?</b><span>Reply on WhatsApp with any changes, and we'll prepare everything for launch.</span></div></div>
     </div>
     <div class="steps">
-      <div><b>01</b><span><strong>Patients see the ads</strong>Adults living and working around The Strand, Kota Damansara, on Facebook and Instagram.</span></div>
-      <div><b>02</b><span><strong>One tap opens WhatsApp</strong>A chat with 014-365 0270 opens with a message already typed, e.g. "Hi Smile Arts Kota Damansara, I'd like to ask about braces".</span></div>
-      <div><b>03</b><span><strong>Your front desk books them</strong>We provide ready replies in all three languages.</span></div>
+      <div><b>01</b><span><strong>Patients see the ads</strong>Adults living and working around Kota Damansara, on Facebook and Instagram.</span></div>
+      <div><b>02</b><span><strong>They tap Book now</strong>A WhatsApp chat with 014-365 0270 opens with a message already typed, e.g. "Hi Smile Arts Kota Damansara, I'd like to book the RM 399 scaling and whitening".</span></div>
+      <div><b>03</b><span><strong>Your team confirms the booking</strong>We provide ready WhatsApp replies in all three languages.</span></div>
       <div><b>04</b><span><strong>We report back</strong>An update on Day 7, and a report on Day 14: enquiries, bookings and the strongest treatment.</span></div>
     </div>
   </div>
@@ -201,18 +202,17 @@ const CAP = {
   braces: 'Thinking about straightening your teeth? Dr. Daren Ang, an Invisalign provider since 2016, checks your bite and explains your options…',
   implants: 'Missing a tooth? Dr. Daren Ang (DDS, USM; 18 years in practice) checks whether a dental implant suits you…',
   veneers: 'Chipped, stained or uneven front teeth? Ask Dr. Daren Ang about porcelain veneers, planned with Digital Smile Design…',
-  clinic: 'Looking for a dentist in Kota Damansara? Smile Arts Dental is at The Strand, with every treatment under one roof…',
-  scaling: 'Scaling, polishing and in-office teeth whitening: RM 399 at Smile Arts Dental Kota Damansara, The Strand…',
+  scaling: 'Scaling, polishing and in-office teeth whitening: RM 399 at Smile Arts Dental Kota Damansara. Tap Book now…',
+  implant5000: 'Missing a tooth? A dental implant at Smile Arts Dental Kota Damansara is all-in at RM 5,000. Tap Book now…',
+  aligner: 'Straighten your teeth with clear aligners: packages from RM 6,000 to RM 9,900, depending on your case. Tap Book now…',
 };
 const wrap = (html, lab) => `<div>${html}<div class="label">${lab}</div></div>`;
 document.getElementById('row2').innerHTML = ['braces', 'implants', 'veneers'].map(c => wrap(post(c, 'en', CAP[c]), { braces: 'Braces & Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers' }[c])).join('');
-document.getElementById('row3').innerHTML = wrap(post('clinic', 'en', CAP.clinic), 'Your dentist at The Strand') + wrap(post('scaling', 'en', CAP.scaling), 'Current offer · RM 399') + `
-  <div class="side"><span class="pill">Also ready</span><h3>Ads for your implant and clear aligner packages.</h3>
-  <p>We've prepared ads in the same style for your all-in implant and clear aligner packages. Those offers aren't on your website right now, so we'll only run them if you confirm the current prices.</p>
-  <div class="box"><p>Each ad also runs in full-screen Stories and Reels size and as a 7.5-second video.</p></div></div>`;
+document.getElementById('row3').innerHTML = [['scaling', 'Current offer · RM 399'], ['implant5000', 'Implant RM 5,000 <span>price to confirm</span>'], ['aligner', 'Aligners RM 6,000–9,900 <span>price to confirm</span>']]
+  .map(([c, lab]) => wrap(post(c, 'en', CAP[c]), lab)).join('');
 document.getElementById('trio').innerHTML = [['en', 'English', ''], ['zh', 'Chinese', '中文'], ['ms', 'Malay', 'Bahasa Malaysia']]
-  .map(([l, a, b]) => wrap(story('braces', l), a + (b ? `<span>${b}</span>` : ''))).join('');
-document.getElementById('fan').innerHTML = [['scaling', 'zh', 'left:146mm;top:42mm;transform:rotate(-7deg)'], ['braces', 'en', 'left:180mm;top:24mm;z-index:2'], ['veneers', 'ms', 'left:214mm;top:42mm;transform:rotate(7deg)']]
+  .map(([l, a, b]) => wrap(story('scaling', l), a + (b ? `<span>${b}</span>` : ''))).join('');
+document.getElementById('fan').innerHTML = [['implant5000', 'zh', 'left:146mm;top:42mm;transform:rotate(-7deg)'], ['braces', 'en', 'left:180mm;top:24mm;z-index:2'], ['scaling', 'ms', 'left:214mm;top:42mm;transform:rotate(7deg)']]
   .map(([c, l, st]) => `<div class="phone" style="${st}"><div class="screen"><img src="${IMGS}/smilearts-kd-${c}-${l}-9x16${EXT}" alt=""></div></div>`).join('');
 document.getElementById('wa-big').outerHTML = WA.replace('fill="#25d366"', 'fill="#231b15"');
 </script>

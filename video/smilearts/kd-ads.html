@@ -8,8 +8,8 @@
      Open with ?c=<concept>&f=<916|45>&l=<en|zh|ms>; tools/render-smilearts.mjs screenshots every combination.
      Each concept has its own layout so the set doesn't look samey in the feed (see CFG below):
      braces (portrait), implants (treatment-room photo on top), veneers (reception photo behind the portrait),
-     clinic (shopfront: local recognition), and price ads implant5000, aligner, scaling with visuals cropped from
-     the clinic's own promo posters. The price ads replicate the packages on smilearts.com.my without "only", scarcity or before/after (MDC); Dr. Daren
+     and price ads implant5000, aligner, scaling (offer layout) with visuals cropped from the clinic's own promo
+     posters. Every ad carries a "Book now" button. The price ads replicate the packages on smilearts.com.my without "only", scarcity or before/after (MDC); Dr. Daren
      confirms the prices and that each ad is within MDC rules before anything runs. -->
 <style>
   @font-face { font-family: Tajawal; font-weight: 400; src: url(../assets/fonts/Tajawal-400-latin.woff2); }
@@ -53,7 +53,7 @@
   .eyebrow { display: flex; align-items: center; gap: 18px; font: 700 25px var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
   .eyebrow::before { content: ""; width: 56px; height: 2px; background: var(--gold); }
   .f45 .eyebrow { font-size: 21px; }
-  h1 { font: 600 94px/1.03 var(--serif); letter-spacing: -.01em; }
+  h1 { font: 600 94px/1.03 var(--serif); letter-spacing: -.01em; text-wrap: balance; }
   .f45 h1 { font-size: 72px; }
   h1 em { font-style: italic; font-weight: 500; background: var(--gold); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 6px; }
   .cream h1 em { background: none; color: var(--gold-ink); }
@@ -127,12 +127,12 @@
   .f45 .strip figcaption { font-size: 18px; }
   .L-phototop .list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 44px; border-top: 0; }
   .L-phototop .list p { border-top: 1px solid var(--hair); border-bottom: 0; }
-  .L-phototop .tag, .L-visual .tag { display: flex; align-items: center; gap: 20px; border-left: 0; padding-left: 0; width: auto; }
+  .L-phototop .tag, .L-visual .tag, .L-offer .tag { display: flex; align-items: center; gap: 20px; border-left: 0; padding-left: 0; width: auto; }
   .L-phototop .tag { bottom: auto; top: 800px; padding: 14px 28px 14px 14px; background: rgba(20,14,10,.6); border-left: 3px solid #c9a063; }
   .f45.L-phototop .tag { top: 410px; padding: 10px 20px 10px 10px; }
   .L-phototop .tag b { color: #f6efe4; }
   .L-phototop .tag span { color: #e3d3b9; }
-  .L-phototop .tag .face, .L-visual .tag .face { display: block; flex: none; width: 104px; height: 104px; border-radius: 50%; border: 3px solid #c9a063; object-fit: cover; }
+  .L-phototop .tag .face, .L-visual .tag .face, .L-offer .tag .face { display: block; flex: none; width: 104px; height: 104px; border-radius: 50%; border: 3px solid #c9a063; object-fit: cover; }
   .f45 .tag .face { width: 78px !important; height: 78px !important; }
 
   /* clinic photo behind the portrait (veneers: reception with the gold logo) */
@@ -146,10 +146,40 @@
   .visual::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(90deg, var(--solid) 0%, transparent 38%), linear-gradient(0deg, var(--solid) 0%, transparent 26%), linear-gradient(180deg, var(--solid) 0%, transparent 14%); }
 
+  /* "Book now" button inside every ad (Meta adds its own "Send WhatsApp message" button too) */
+  .cta { align-self: flex-start; display: inline-flex; align-items: center; gap: 22px; padding: 22px 44px 20px 22px; border-radius: 999px;
+         background: var(--gold); color: #1d1610; font: 800 42px/1 var(--sans); letter-spacing: .01em; box-shadow: 0 16px 34px rgba(60,40,15,.35); white-space: nowrap; }
+  .cta i { flex: none; width: 72px; height: 72px; border-radius: 50%; background: #1d1610; display: grid; place-items: center; }
+  .cta i svg { width: 36px; height: 36px; }
+  .cta b { font-weight: 800; font-size: 40px; margin-left: 2px; }
+  .f45 .cta { font-size: 29px; padding: 14px 28px 12px 14px; gap: 16px; }
+  .f45 .cta i { width: 52px; height: 52px; }
+  .f45 .cta i svg { width: 30px; height: 30px; }
+
+  /* offer layout (price ads): big price, package tag, checklist, Book now */
+  .L-offer .head { right: auto; width: 600px; }
+  .L-offer h1 { font-size: 80px; }
+  .f45.L-offer .head { width: 520px; }
+  .f45.L-offer h1 { font-size: 62px; }
+  .L-offer .col { width: 600px; top: 760px; gap: 24px; }
+  .f45.L-offer .col { width: 540px; top: 380px; gap: 16px; }
+  .L-offer .price-label { align-self: flex-start; display: inline-block; padding: 9px 18px 6px; border: 2px solid var(--accent); margin-bottom: 10px; }
+  .L-offer .price { font-size: 190px; line-height: .86; }
+  .f45.L-offer .price { font-size: 140px; }
+  .L-offer .list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; border-top: 0; }
+  .L-offer .list p { font-size: 27px; border-top: 1px solid var(--hair); border-bottom: 0; }
+  .f45.L-offer .list p { font-size: 22px; }
+  .L-offer .cta { font-size: 40px; padding: 22px 44px 20px 22px; }
+  .f45.L-offer .cta { font-size: 30px; padding: 14px 30px 12px 14px; }
+  .L-offer .tag, .L-portrait .tag, .L-photofull .tag { }
+
   [lang="ms"] h1 { font-size: 88px; }
   .f45[lang="ms"] h1 { font-size: 68px; }
   [lang="zh"] h1 { font-size: 84px; line-height: 1.2; letter-spacing: .01em; }
   .f45[lang="zh"] h1 { font-size: 66px; }
+  .L-offer[lang="zh"] h1 { font-size: 68px; }
+  .L-offer[lang="ms"] h1 { font-size: 74px; }
+  .f45.L-offer[lang="zh"] h1, .f45.L-offer[lang="ms"] h1 { font-size: 58px; }
   [lang="zh"] h1 em { font-style: normal; font-weight: 700; }
   [lang="zh"] .eyebrow, [lang="zh"] .top span, [lang="zh"] .price-label, [lang="zh"] .wa small { letter-spacing: .1em; }
 </style>
@@ -168,7 +198,7 @@
   <div class="band"><div class="row">
     <div class="wa"><i><svg viewBox="0 0 24 24" fill="#d9b77b"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.8.8-2.7-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg></i>
       <div><small id="book"></small><b>014-365 0270</b></div></div>
-    <div class="where"><b>The Strand</b><span id="addr"></span></div>
+    <div class="where"><b id="addr"></b><span>Smile Arts Dental</span></div>
   </div></div>
 </div>
 <script>
@@ -178,13 +208,11 @@ const c = q.get('c') || 'braces', f = q.get('f') || '916', l = q.get('l') || 'en
 // the upscale of the small promo crops under ~1.6x
 const CFG = {
   braces:      { theme: 'cream', layout: 'portrait' },
-  implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 940, 45: 560 } },
+  implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 840, 45: 540 } },
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
-  clinic:      { theme: 'cream', layout: 'phototop', img: 'source/v-shopfront.jpg', pos: '50% 40%', hero: { 916: 620, 45: 430 },
-                 bare: true, strip: ['source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg'] },
-  implant5000: { theme: 'dark',  layout: 'visual', img: 'source/v-implant-render.jpg', box: { 916: [40, 660, 430, 884], 45: [30, 400, 310, 637] } },
-  aligner:     { theme: 'cream', layout: 'visual', img: 'source/v-aligner-woman.jpg', box: { 916: [0, 690, 660, 567], 45: [0, 380, 580, 498] } },
-  scaling:     { theme: 'dark',  layout: 'visual', img: 'source/v-smile-woman.jpg', box: { 916: [0, 690, 600, 687], 45: [0, 370, 480, 550] } },
+  implant5000: { theme: 'dark',  layout: 'offer', img: 'source/v-implant-render.jpg', box: { 916: [40, 620, 400, 822], 45: [30, 150, 290, 595] } },
+  aligner:     { theme: 'cream', layout: 'offer', img: 'source/v-aligner-woman.jpg', box: { 916: [0, 660, 520, 447], 45: [0, 150, 540, 464] } },
+  scaling:     { theme: 'dark',  layout: 'offer', img: 'source/v-smile-woman.jpg', box: { 916: [0, 620, 560, 641], 45: [0, 130, 460, 527] } },
 };
 const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
 const cfg = CFG[c];
@@ -193,7 +221,7 @@ document.documentElement.lang = l;
 
 const T = {
   en: {
-    branch: 'Kota Damansara', strip: ['Reception', 'Treatment room'], creds: 'DDS (USM) · 18 years in practice', book: 'WhatsApp to book',
+    branch: 'Kota Damansara', cta: 'Book now', creds: 'DDS (USM) · 18 years in practice', book: 'WhatsApp',
     addr: 'Kota Damansara',
     braces: { eyebrow: 'Braces & Invisalign', h1: 'Braces or Invisalign? <em>Ask before you decide.</em>',
       sub: 'Metal, ceramic or <span style="white-space:nowrap">self-ligating</span> braces, or clear aligners.',
@@ -204,24 +232,21 @@ const T = {
     veneers: { eyebrow: 'Porcelain veneers', h1: 'Chipped, stained or <em>uneven front teeth?</em>',
       sub: 'Ask about porcelain veneers, planned with Digital Smile Design.',
       list: ['Shape and shade planned digitally', 'Your options explained', 'Cost up front'] },
-    clinic: { eyebrow: 'Smile Arts Dental · Kota Damansara', h1: 'Your dentist at <em>The Strand.</em>',
-      sub: 'Dr. Daren Ang and team, with every treatment under one roof.',
-      list: ['Braces & Invisalign', 'Dental implants', 'Porcelain veneers', 'Scaling & whitening'] },
     implant5000: { eyebrow: 'Dental implant', h1: 'One implant. <em>One clear price.</em>',
-      label: 'All-in', price: '<small>RM</small>5,000',
+      label: 'All-in price', price: '<small>RM</small>5,000',
       list: ['Implant fixture', 'Custom abutment', 'Ceramic crown', 'Dental X-ray & 3D CBCT'],
       fine: 'Includes assessment and treatment planning. Suitability confirmed at consultation. Terms apply.' },
     aligner: { eyebrow: 'Clear aligners', h1: 'Straighten your teeth, <em>discreetly.</em>',
       label: 'Package from', price: '<small>RM</small>6,000', to: 'to RM 9,900',
       list: ['Consultation & X-ray', 'Digital intra-oral scan', 'Full set of aligners', '1 pair of retainers'],
       fine: 'Price depends on your case. Terms apply.' },
-    scaling: { eyebrow: 'Scaling, polishing & whitening', h1: 'Clean teeth. <em>A brighter smile.</em>',
-      label: 'Package', price: '<small>RM</small>399',
-      list: ['Scaling & polishing', 'In-office teeth whitening'],
+    scaling: { eyebrow: 'Scaling + polishing + whitening', h1: 'Clean teeth, <em>brighter smile.</em>',
+      label: 'Package price', price: '<small>RM</small>399',
+      list: ['Removes tartar & stains', 'Healthier gums', 'Whiter, brighter smile', 'In-office whitening'],
       fine: 'Results vary from person to person. Terms apply.' },
   },
   zh: {
-    branch: '哥打白沙罗', strip: ['接待处', '诊疗室'], creds: '理大牙科学士 · 18年临床经验', book: 'WhatsApp 预约',
+    branch: '哥打白沙罗', cta: '立即预约', creds: '理大牙科学士 · 18年临床经验', book: 'WhatsApp',
     addr: '哥打白沙罗',
     braces: { eyebrow: '牙套 · 隐适美', h1: '传统牙套还是隐适美？<br><em>先问清楚再决定。</em>',
       sub: '金属、陶瓷、自锁牙套，<br>或隐形牙套。',
@@ -232,24 +257,21 @@ const T = {
     veneers: { eyebrow: '瓷贴片', h1: '门牙缺角、发黄<br><em>或不整齐？</em>',
       sub: '了解瓷贴片，<br>以数字微笑设计规划。',
       list: ['数字规划牙齿形状与颜色', '为你讲解各种选择', '费用先说清楚'] },
-    clinic: { eyebrow: 'Smile Arts Dental · 哥打白沙罗', h1: 'The Strand<br><em>你身边的牙医。</em>',
-      sub: 'Dr. Daren Ang 与牙医团队，各项治疗一站完成。',
-      list: ['牙套 · 隐适美', '种植牙', '瓷贴片', '洗牙与美白'] },
     implant5000: { eyebrow: '种植牙', h1: '一颗种植牙，<br><em>一个清楚的价钱。</em>',
-      label: '全包', price: '<small>RM</small>5,000',
+      label: '全包价', price: '<small>RM</small>5,000',
       list: ['种植体', '定制基台', '陶瓷牙冠', '牙科X光与3D CBCT'],
       fine: '包括评估与治疗规划。是否适合需经咨询确认。附带条款。' },
     aligner: { eyebrow: '隐形牙套', h1: '低调地<br><em>把牙齿排整齐。</em>',
       label: '配套价', price: '<small>RM</small>6,000', to: '至 RM 9,900',
       list: ['咨询与X光', '数字口内扫描', '全套隐形牙套', '一副保持器'],
       fine: '价钱视个案而定。附带条款。' },
-    scaling: { eyebrow: '洗牙 · 抛光 · 美白', h1: '牙齿干净，<br><em>笑容更亮。</em>',
+    scaling: { eyebrow: '洗牙 + 抛光 + 美白', h1: '牙齿干净，<br><em>笑容更亮。</em>',
       label: '配套价', price: '<small>RM</small>399',
-      list: ['洗牙与抛光', '诊所牙齿美白'],
+      list: ['去除牙垢与污渍', '牙龈更健康', '牙齿更白更亮', '诊所专业美白'],
       fine: '效果因人而异。附带条款。' },
   },
   ms: {
-    branch: 'Kota Damansara', strip: ['Kaunter pendaftaran', 'Bilik rawatan'], creds: 'DDS (USM) · 18 tahun pengalaman', book: 'WhatsApp untuk temujanji',
+    branch: 'Kota Damansara', cta: 'Tempah sekarang', creds: 'DDS (USM) · 18 tahun pengalaman', book: 'WhatsApp',
     addr: 'Kota Damansara',
     braces: { eyebrow: 'Braces & Invisalign', h1: 'Braces atau Invisalign? <em>Tanya dulu.</em>',
       sub: 'Braces besi, seramik atau <span style="white-space:nowrap">self-ligating</span>, atau aligner lutsinar.',
@@ -260,27 +282,24 @@ const T = {
     veneers: { eyebrow: 'Venir porselin', h1: 'Gigi depan <em>sumbing atau kuning?</em>',
       sub: 'Tanya tentang venir porselin, dirancang dengan Digital Smile Design.',
       list: ['Bentuk & warna dirancang secara digital', 'Pilihan anda diterangkan', 'Kos dijelaskan awal'] },
-    clinic: { eyebrow: 'Smile Arts Dental · Kota Damansara', h1: 'Doktor gigi anda di <em>The Strand.</em>',
-      sub: 'Dr. Daren Ang dan pasukan, semua rawatan di bawah satu bumbung.',
-      list: ['Braces & Invisalign', 'Implan gigi', 'Venir porselin', 'Scaling & pemutihan'] },
     implant5000: { eyebrow: 'Implan gigi', h1: 'Satu implan. <em>Harga yang jelas.</em>',
-      label: 'Termasuk semua', price: '<small>RM</small>5,000',
+      label: 'Harga termasuk semua', price: '<small>RM</small>5,000',
       list: ['Fixture implan', 'Abutment khas', 'Crown seramik', 'X-ray & 3D CBCT'],
       fine: 'Termasuk penilaian dan perancangan rawatan. Kesesuaian disahkan semasa konsultasi. Tertakluk pada terma.' },
     aligner: { eyebrow: 'Aligner lutsinar', h1: 'Luruskan gigi anda, <em>tanpa ketara.</em>',
       label: 'Pakej dari', price: '<small>RM</small>6,000', to: 'hingga RM 9,900',
       list: ['Konsultasi & X-ray', 'Imbasan intra-oral digital', 'Set penuh aligner', '1 pasang retainer'],
       fine: 'Harga bergantung pada kes anda. Tertakluk pada terma.' },
-    scaling: { eyebrow: 'Scaling, polishing & pemutihan', h1: 'Gigi bersih. <em>Senyuman cerah.</em>',
-      label: 'Pakej', price: '<small>RM</small>399',
-      list: ['Scaling & polishing', 'Pemutihan gigi di klinik'],
+    scaling: { eyebrow: 'Scaling + polishing + pemutihan', h1: 'Gigi bersih. <em>Senyuman cerah.</em>',
+      label: 'Harga pakej', price: '<small>RM</small>399',
+      list: ['Buang karang & kesan kotoran', 'Gusi lebih sihat', 'Senyuman lebih putih', 'Pemutihan di klinik'],
       fine: 'Hasil berbeza mengikut individu. Tertakluk pada terma.' },
   },
 };
 
 const t = T[l], s = t[c];
 document.getElementById('logo').src = cfg.theme === 'dark' || cfg.layout === 'phototop' ? 'source/Site-Logo-White.png' : 'source/Group1.png';
-const keep = { portrait: ['.arc', '.portrait'], photofull: ['.arc', '.portrait', '.bgphoto'], phototop: ['.hero'], visual: ['.visual'] }[cfg.layout];
+const keep = { portrait: ['.arc', '.portrait'], photofull: ['.arc', '.portrait', '.bgphoto'], phototop: ['.hero'], visual: ['.visual'], offer: ['.visual'] }[cfg.layout];
 for (const sel of ['.arc', '.portrait', '.bgphoto', '.hero', '.visual']) if (!keep.includes(sel)) document.querySelector(sel).remove();
 if (cfg.layout === 'phototop') {
   const i = document.getElementById('heroimg'), h = cfg.hero[f];
@@ -290,7 +309,7 @@ if (cfg.layout === 'phototop') {
   if (document.querySelector('.tag')) document.querySelector('.tag').style.top = (h - (f === '45' ? 150 : 200)) + 'px';
 }
 if (cfg.layout === 'photofull') { const i = document.getElementById('bgimg'); i.src = cfg.img; i.style.objectPosition = cfg.pos; }
-if (cfg.layout === 'visual') {
+if (cfg.layout === 'visual' || cfg.layout === 'offer') {
   const [r, t, w, h] = cfg.box[f], v = document.getElementById('visual');
   Object.assign(v.style, { right: r + 'px', top: t + 'px', width: w + 'px', height: h + 'px' });
   document.getElementById('visimg').src = cfg.img;
@@ -298,15 +317,14 @@ if (cfg.layout === 'visual') {
 for (const k of ['branch', 'creds', 'book', 'addr']) document.getElementById(k).innerHTML = t[k];
 for (const k of ['eyebrow', 'h1']) document.getElementById(k).innerHTML = s[k];
 const list = `<div class="list">${s.list.map(x => `<p>${x}</p>`).join('')}</div>`;
+const WA = '<svg viewBox="0 0 24 24" fill="#f1dcaa"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm4.4 11.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>';
+const cta = `<div class="cta"><i>${WA}</i>${t.cta}<b>→</b></div>`;
 document.getElementById('col').innerHTML = PRICE
-  ? `<div><div class="price-label">${s.label}</div><div class="price">${s.price}</div>${s.to ? `<div class="price-to">${s.to}</div>` : ''}</div>${list}<p class="fine">${s.fine}</p>`
-  : `<p class="sub">${s.sub}</p>${list}`;
-if (cfg.bare) { document.querySelector('.top').remove(); document.querySelector('.tag').remove(); }
+  ? `<div><div class="price-label">${s.label}</div><div class="price">${s.price}</div>${s.to ? `<div class="price-to">${s.to}</div>` : ''}</div>${list}${cta}<p class="fine">${s.fine}</p>`
+  : `<p class="sub">${s.sub}</p>${list}${cta}`;
 if (cfg.layout === 'phototop') {
   const col = document.getElementById('col');
   document.querySelector('.head').appendChild(col);
-  if (cfg.strip) col.insertAdjacentHTML('beforeend', `<div class="strip">${cfg.strip.map((src, k) =>
-    `<figure><img src="${src}" alt=""><figcaption>${t.strip[k]}</figcaption></figure>`).join('')}</div>`);
 }
 </script>
 </body>

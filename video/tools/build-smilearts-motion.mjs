@@ -8,11 +8,11 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
-const CONCEPTS = ['braces', 'implants', 'veneers', 'clinic', 'implant5000', 'aligner', 'scaling'];
+const CONCEPTS = ['braces', 'implants', 'veneers', 'implant5000', 'aligner', 'scaling'];
 const FORMATS = { '916': 1920, '45': 1350 };
 const LANGS = process.env.LANGS ? process.env.LANGS.split(',') : ['en', 'zh', 'ms'];
 const TITLES = { braces: 'Braces or Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers',
-                 clinic: 'Your dentist at The Strand', implant5000: 'Dental implant RM 5,000', aligner: 'Clear aligners from RM 6,000', scaling: 'Scaling and whitening RM 399' };
+                 implant5000: 'Dental implant RM 5,000', aligner: 'Clear aligners from RM 6,000', scaling: 'Scaling and whitening RM 399' };
 
 const src = readFileSync('smilearts/kd-ads.html', 'utf8');
 const css = src.match(/<style>([\s\S]*?)<\/style>/)[1].replace(/\.\.\/assets\//g, 'assets/');
@@ -39,7 +39,9 @@ const JS = `
       tl.fromTo('.fine', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 4.5 * B);
       tl.fromTo('.tag', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 4.25 * B);
       tl.fromTo('.band .row', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 3.5 * B);
-      tl.fromTo('.wa i', { scale: 1 }, { scale: 1.12, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 5 * B);
+      tl.fromTo('.cta', { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(1.8)' }, 4 * B);
+      tl.fromTo('.cta', { scale: 1 }, { scale: 1.06, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut', transformOrigin: '30% 50%' }, 5 * B);
+      tl.fromTo('.cta b', { x: 0 }, { x: 10, duration: B / 2, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 5 * B);
 `;
 
 const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME } : {});
