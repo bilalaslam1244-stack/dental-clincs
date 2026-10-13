@@ -211,6 +211,14 @@
   .L-offer .tag { bottom: 384px; }
   .f45.L-offer .tag { bottom: 222px; }
   .f45.L-offer .col { width: 540px; top: 380px; gap: 16px; }
+  /* urgency ribbon (?u=<date key>): only for a real, dated package confirmed by Dr. Daren */
+  .urgent { align-self: flex-start; display: inline-flex; align-items: center; gap: 14px; padding: 15px 24px 13px 18px; margin-bottom: 8px;
+            background: var(--gold); color: #1d1610; font: 800 31px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 0 100%); padding-right: 40px; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+  .urgent svg { width: 34px; height: 34px; flex: none; }
+  .f45 .urgent { font-size: 23px; padding: 10px 36px 8px 13px; gap: 11px; }
+  .f45 .urgent svg { width: 26px; height: 26px; }
+  [lang="zh"] .urgent { letter-spacing: .06em; }
   .L-offer .price-label { align-self: flex-start; display: inline-block; padding: 9px 18px 6px; border: 2px solid var(--accent); margin-bottom: 10px; }
   .L-offer .price { font-size: 164px; line-height: .86; }
   .f45.L-offer .price { font-size: 140px; }
@@ -369,6 +377,13 @@ const T = {
 };
 
 const t = T[l], s = t[c];
+const URGENT = { '31oct': { en: 'Limited-time package · until 31 Oct', zh: '限时配套 · 至10月31日', ms: 'Pakej masa terhad · hingga 31 Okt' } };
+const u = q.get('u');
+if (u && URGENT[u] && PRICE) {
+  const el = document.createElement('div'); el.className = 'urgent';
+  el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#1d1610" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>' + URGENT[u][l];
+  document.querySelector('.head').prepend(el);
+}
 t.branch = t.addr = BRANCH[b][l];
 document.getElementById('wanum').textContent = BRANCH[b].num;
 document.getElementById('logo').src = cfg.theme === 'dark' || cfg.layout === 'phototop' ? 'source/Site-Logo-White.png' : 'source/Group1.png';
