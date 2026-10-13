@@ -180,8 +180,8 @@ const I = n => `${IMGS}/smilearts-kd-${n}${EXT}`;
     <tr><td></td><td>Placements · schedule</td><td><b>Advantage+ placements</b> · start = agreed launch day, no end date (stopped on Day 14)</td></tr>
     <tr><td>Ad set 1 · Main</td><td>Name · budget</td><td><code>KD | Main EN+ZH | 8km</code> · <b>RM 30/day</b> · radius <b>8 km</b> · age <b>22–60</b> · Languages: <b>leave blank</b></td></tr>
     <tr><td>Ad set 2 · 中文</td><td>Name · budget</td><td><code>KD | 中文 | 10km</code> · <b>RM 15/day</b> · radius <b>10 km</b> · age <b>30–65</b> · Languages: <b>Chinese (Simplified) + Chinese (Traditional)</b></td></tr>
-    <tr><td>Each ad</td><td>Format</td><td><b>Single image or video → video</b></td></tr>
-    <tr><td></td><td>Media</td><td><b>Feeds:</b> the <code>4x5</code> MP4 · <b>Stories &amp; Reels:</b> the <code>9x16</code> MP4 (Meta asks per placement group)</td></tr>
+    <tr><td>Each ad</td><td>Format</td><td><b>Single image or video → image</b></td></tr>
+    <tr><td></td><td>Media</td><td><b>Feeds:</b> the <code>4x5</code> PNG · <b>Stories &amp; Reels:</b> the <code>9x16</code> PNG if the Crop step lets you swap it in</td></tr>
     <tr><td></td><td>Languages</td><td><b>Ad set 1:</b> "Add languages" → English default + Chinese (Simplified), each with its own files and text · <b>Ad set 2:</b> Chinese files and text only, no extra languages</td></tr>
     <tr><td></td><td>Text</td><td>Primary text, headline and pre-filled message from the launch kit, section 4 (EN and 中文)</td></tr>
     <tr><td></td><td>Call to action</td><td><b>Send WhatsApp message</b></td></tr>
@@ -227,11 +227,11 @@ const I = n => `${IMGS}/smilearts-kd-${n}${EXT}`;
     <tr><th>Field in Ads Manager</th><th>Value (same for all 5 ads)</th></tr>
     <tr><td>Identity</td><td class="v">Facebook Page: <b>Smile Arts Dental KD</b> · Instagram account: <b>@smileartsdental_kd</b></td></tr>
     <tr><td>Ad setup · format</td><td class="v">Create ad · <b>Single image or video</b> · Multi-advertiser ads: <b>off</b></td></tr>
-    <tr><td>Media</td><td class="v">Video. <b>Feeds</b> → the <code>-4x5.mp4</code> · <b>Stories, Status &amp; Reels</b> → the <code>-9x16.mp4</code>. Turn off Meta's automatic edits to the video ("Advantage+ creative" enhancements: text, music, filters), so the design stays as made</td></tr>
+    <tr><td>Media</td><td class="v">Image. Upload the <code>-4x5.png</code> (Feeds). On <b>Crop</b>, swap in the <code>-9x16.png</code> for Stories/Reels if offered; otherwise keep 4:5 uncropped. Turn off Meta's automatic edits ("Creative generation" / "Enhancements": text, backgrounds, filters), so the design stays as made</td></tr>
     <tr><td>Description</td><td class="v"><code>Smile Arts Dental · Kota Damansara</code> · 中文: <code>Smile Arts Dental · 哥打白沙罗</code></td></tr>
     <tr><td>Call to action</td><td class="v"><b>Send WhatsApp message</b></td></tr>
     <tr><td>Message template</td><td class="v">Create template → <b>Greeting</b> (EN or 中文, launch kit section 5) · <b>Customer actions: Frequently asked questions</b> → Braces / Invisalign · Dental implants · Porcelain veneers · Scaling &amp; whitening · <b>Pre-filled message</b> → per ad, below</td></tr>
-    <tr><td>Languages (Ad set 1 only)</td><td class="v">Add languages → default <b>English</b> → add <b>Chinese (Simplified)</b> → paste 中文 text and upload the <code>-zh-</code> videos</td></tr>
+    <tr><td>Languages (Ad set 1 only)</td><td class="v">Add languages → default <b>English</b> → add <b>Chinese (Simplified)</b> → paste 中文 text and upload the <code>-zh-</code> images</td></tr>
   </table>
   <table class="fill" style="margin-top:4mm">
     <tr><th>Ad</th><th>Files</th><th>Headline</th><th>Pre-filled WhatsApp message</th></tr>
@@ -241,7 +241,7 @@ const I = n => `${IMGS}/smilearts-kd-${n}${EXT}`;
     <tr><td>4 · 种植牙<br><span style="font-weight:400;color:#8a7d6f">中文</span></td><td><code>implants-zh</code></td><td class="v zh">缺牙？了解种植牙</td><td class="zh">你好 Smile Arts 哥打白沙罗，我想了解种植牙。</td></tr>
     <tr><td>5 · 洗牙 RM 399<br><span style="font-weight:400;color:#8a7d6f">中文</span></td><td><code>scaling-zh</code></td><td class="v zh">洗牙 + 美白 RM 399</td><td class="zh">你好 Smile Arts 哥打白沙罗，我想预约 RM 399 洗牙美白配套。</td></tr>
   </table>
-  <p class="hint">File names start with <code>smilearts-kd-</code> and end in <code>-4x5.mp4</code> / <code>-9x16.mp4</code>. Primary text for each ad is in the launch kit, section 4.</p>
+  <p class="hint">File names start with <code>smilearts-kd-</code> and end in <code>-4x5.png</code> / <code>-9x16.png</code>. Primary text for each ad is in the launch kit, section 4.</p>
   <div class="foot"><img src="source/Group1.png" alt=""><span>07</span></div>
 </section>
 
@@ -292,8 +292,8 @@ const card = a => `
       <h3>${a.title}</h3>
       <p>${a.why}</p>
       <dl>
-        <dt>Stories &amp; Reels file</dt><dd><code>smilearts-kd-${a.c}-${a.l || 'en'}-9x16.mp4</code>${a.l ? '' : ' (+ the -zh- file for the Chinese version)'}</dd>
-        <dt>Feeds file</dt><dd><code>smilearts-kd-${a.c}-${a.l || 'en'}-4x5.mp4</code>${a.l ? '' : ' (+ -zh-)'}</dd>
+        <dt>Stories &amp; Reels file</dt><dd><code>smilearts-kd-${a.c}-${a.l || 'en'}-9x16.png</code>${a.l ? '' : ' (+ the -zh- file for the Chinese version)'}</dd>
+        <dt>Feeds file</dt><dd><code>smilearts-kd-${a.c}-${a.l || 'en'}-4x5.png</code>${a.l ? '' : ' (+ -zh-)'}</dd>
         <dt>Headline</dt><dd>${a.headline}</dd>
         <dt>Pre-filled WhatsApp message</dt><dd>${a.msg}</dd>
       </dl>

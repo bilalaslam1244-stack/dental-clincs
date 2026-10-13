@@ -162,8 +162,8 @@ const I = n => `${IMGS}/smilearts-kp-${n}${EXT}`;
   <table class="fill">
     <tr><th>Field in Ads Manager</th><th>Value (all ads)</th></tr>
     <tr><td>Identity · format</td><td class="v">Smile Arts Dental Kepong · @smileartsdental_kepong · <b>Single image or video</b></td></tr>
-    <tr><td>Media</td><td class="v">Upload the <code>-4x5.mp4</code>. On <b>Crop</b>, swap in the <code>-9x16.mp4</code> for Stories/Reels if offered; otherwise keep 4:5 uncropped. Turn <b>off</b> Creative generation and Enhancements</td></tr>
-    <tr><td>Translation</td><td class="v">Add <b>Chinese (Simplified)</b> → paste the 中文 text → upload the <code>-zh-</code> videos</td></tr>
+    <tr><td>Media</td><td class="v">Upload the <code>-4x5.png</code>. On <b>Crop</b>, swap in the <code>-9x16.png</code> for Stories/Reels if offered; otherwise keep 4:5 uncropped. Turn <b>off</b> Creative generation and Enhancements</td></tr>
+    <tr><td>Translation</td><td class="v">Add <b>Chinese (Simplified)</b> → paste the 中文 text → upload the <code>-zh-</code> images</td></tr>
     <tr><td>Description · CTA</td><td class="v"><code>Smile Arts Dental · Kepong</code> / <code>Smile Arts Dental · 甲洞</code> · <b>Send WhatsApp message</b></td></tr>
     <tr><td>Welcome form</td><td class="v">Greeting: <i>Hi! 👋 Thanks for contacting Smile Arts Dental Kepong about [treatment]. Tap to book an appointment below:</i> · title <b>Book a consultation</b> / <b>预约咨询</b> · fields <b>Full name · Phone number · Date picker</b> / <b>全名 · 电话号码 · 选择日期</b> · thank-you <i>Thanks for submitting the form. We'll contact you soon.</i> / <i>感谢你填写表格，我们会尽快联系你。</i></td></tr>
   </table>
@@ -214,8 +214,8 @@ document.getElementById('ads').innerHTML = ADS.map(a => `
       <h3>${a.title}</h3>
       <p>${a.why}</p>
       <dl>
-        <dt>Stories &amp; Reels file</dt><dd><code>smilearts-kp-${a.c}-en-9x16.mp4</code> (+ <code>-zh-</code>)</dd>
-        <dt>Feeds file</dt><dd><code>smilearts-kp-${a.c}-en-4x5.mp4</code> (+ <code>-zh-</code>)</dd>
+        <dt>Stories &amp; Reels file</dt><dd><code>smilearts-kp-${a.c}-en-9x16.png</code> (+ <code>-zh-</code>)</dd>
+        <dt>Feeds file</dt><dd><code>smilearts-kp-${a.c}-en-4x5.png</code> (+ <code>-zh-</code>)</dd>
       </dl>
     </div>
   </div>`).join('');
