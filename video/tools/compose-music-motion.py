@@ -6,6 +6,7 @@ offer band). Writes assets/music-motion-<name>.mp3.
 """
 import importlib.util
 import subprocess
+import os
 import sys
 import tempfile
 import wave
@@ -15,7 +16,7 @@ import numpy as np
 spec = importlib.util.spec_from_file_location("cm", Path(__file__).with_name("compose-music.py"))
 cm = importlib.util.module_from_spec(spec); spec.loader.exec_module(cm)
 SR, B, tax, filt, hz, place = cm.SR, cm.B, cm.tax, cm.filt, cm.hz, cm.place
-BAR, DUR = B * 4, 7.5
+BAR, DUR = B * 4, float(os.environ.get('DUR', '7.5'))  # DUR=12 for the 12 s promo cut
 PROG = [(45, [57, 60, 64, 67]), (41, [53, 57, 60, 64]), (48, [55, 60, 64, 67]), (43, [55, 59, 62, 67])]
 
 # cue times in beats (B = 0.652 s), matching tools/build-motion.py
@@ -29,6 +30,9 @@ CUES = {
     "claim": dict(seed=17, whoosh=[5.5], pings=[1.5], ticks=[2.5, 3, 3.5, 4], swell=5.5, hit=0),
     # Smile Arts patient ads (tools/build-smilearts-motion.mjs): headline, CTA, reply note
     "smilearts": dict(seed=21, whoosh=[1, 3.5], pings=[4.25], ticks=[], swell=3.5),
+    # 12 s promo cut (tools/build-smilearts-promo.mjs, run with DUR=12): word slams, carry, price count, checklist, button taps
+    "promo": dict(seed=31, whoosh=[3, 12], pings=[4.5, 13.5, 14.5], ticks=[0.25, 1, 1.75, 6.6, 7, 7.4, 9, 9.5, 10, 10.5],
+                  hits=[8], swell=12, hit=0),
 }
 
 
