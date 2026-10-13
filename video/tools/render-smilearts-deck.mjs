@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
-const deck = ['lookbook', 'plan'].includes(process.env.DECK) ? process.env.DECK : 'preview-deck';
+const deck = ['lookbook', 'plan', 'kp-plan'].includes(process.env.DECK) ? process.env.DECK : 'preview-deck';
 const out = process.argv[2] || `renders/smilearts/smilearts-kd-${deck}.pdf`;
 const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME } : {});
 const tab = await browser.newPage();

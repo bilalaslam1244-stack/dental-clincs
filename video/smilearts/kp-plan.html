@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Smile Arts Kepong: launch plan</title>
+<!-- Kepong launch plan (same styles as plan.html): ads to test, budget, Ads Manager fill-in sheets.
+     A4 landscape, printed by tools/render-smilearts-deck.mjs (DECK=plan). Images from IMGS (JPEG copies of renders/smilearts). -->
+<style>
+  @font-face { font-family: Tajawal; font-weight: 400; src: url(../assets/fonts/Tajawal-400-latin.woff2); }
+  @font-face { font-family: Tajawal; font-weight: 500; src: url(../assets/fonts/Tajawal-500-latin.woff2); }
+  @font-face { font-family: Tajawal; font-weight: 700; src: url(../assets/fonts/Tajawal-700-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500 600; src: url(../assets/fonts/PlayfairDisplay-600-normal-latin.woff2); }
+  @font-face { font-family: Playfair; font-weight: 500; font-style: italic; src: url(../assets/fonts/PlayfairDisplay-500-italic-latin.woff2); }
+  @page { size: 297mm 210mm; margin: 0; }
+  :root { --ink: #231b15; --ink-2: #5b4f44; --gold: #94703f; --gold-l: #d9b77b; --cream: #f6f0e7; --hair: rgba(148,112,63,.32);
+          --goldgrad: linear-gradient(100deg, #9c7440 0%, #d9b77b 38%, #f1dcaa 52%, #c9a063 70%, #9c7440 100%); }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Tajawal, "Microsoft YaHei", Arial, sans-serif; color: var(--ink); background: #ccc; -webkit-print-color-adjust: exact; }
+  .page { width: 297mm; height: 210mm; position: relative; overflow: hidden; page-break-after: always; padding: 14mm 16mm 0;
+          background: radial-gradient(120% 90% at 85% 20%, #fffaf2 0%, var(--cream) 55%, #eee4d5 100%); }
+  .page.dark { background: radial-gradient(110% 90% at 78% 25%, #3a2d22 0%, #261d16 50%, #16100c 100%); color: #f6efe4; }
+  .page::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1.2mm; background: var(--goldgrad); }
+  .kicker { font: 700 8.5pt Tajawal; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 3mm; }
+  .kicker::before { content: ""; width: 9mm; height: .4mm; background: var(--goldgrad); }
+  .dark .kicker { color: var(--gold-l); }
+  h1, h2 { font-family: Playfair, Georgia, serif; font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+  h1 em, h2 em { font-style: italic; font-weight: 500; color: var(--gold); }
+  .dark h1 em, .dark h2 em { color: #e3c48d; }
+  h2 { font-size: 21pt; line-height: 1.12; margin: 2.5mm 0 5mm; }
+  p, li { font-size: 9.8pt; line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
+  .dark p, .dark li { color: #d3c5b2; }
+  b { color: var(--ink); } .dark b { color: #f6efe4; }
+  .foot { position: absolute; left: 16mm; right: 16mm; bottom: 7mm; display: flex; justify-content: space-between; align-items: center; font: 500 7.5pt Tajawal; letter-spacing: .14em; text-transform: uppercase; color: #9a8c7c; }
+  .foot img { height: 5mm; }
+  .dark .foot { color: #a89379; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9.3pt; }
+  th { text-align: left; font: 700 7.5pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); padding: 2.2mm 2.5mm; border-bottom: .5mm solid var(--gold); }
+  td { padding: 1.9mm 2.5mm; border-bottom: .3mm solid var(--hair); color: var(--ink-2); vertical-align: top; line-height: 1.4; }
+  td:first-child { color: var(--ink); font-weight: 700; white-space: nowrap; }
+  code { font: 500 8.6pt Consolas, monospace; background: rgba(148,112,63,.12); padding: .3mm 1.2mm; border-radius: 1mm; color: var(--ink); }
+
+  /* cover */
+  .cover h1 { font-size: 40pt; line-height: 1.05; margin-top: 4mm; width: 170mm; }
+  .cover .logo { height: 14mm; margin-top: 8mm; display: block; }
+  .cover .foot img { height: 5mm; }
+  .cover .kicker { margin-top: 12mm; }
+  .cover p { width: 130mm; margin-top: 6mm; font-size: 11pt; }
+  .stats { position: absolute; left: 16mm; right: 16mm; bottom: 22mm; display: grid; grid-template-columns: repeat(5, 1fr); border-top: .3mm solid rgba(217,183,123,.45); }
+  .stats div { padding: 5mm 4mm 0 0; }
+  .stats b { display: block; font: 600 26pt/1 Playfair, serif; color: #e3c48d; }
+  .stats span { font: 700 7.5pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: #cdbfae; }
+
+  /* why */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12mm; }
+  .card { background: rgba(255,255,255,.55); border: .3mm solid var(--hair); padding: 5mm 6mm; }
+  .card h3 { font: 600 13pt Playfair, serif; margin-bottom: 2mm; }
+  .card.bad h3 { color: #8a3b30; }
+  .card.good { background: #231b15; border-color: #231b15; }
+  .card.good h3 { color: #e3c48d; } .card.good p, .card.good li { color: #d3c5b2; } .card.good b { color: #f6efe4; }
+  ul { padding-left: 4.5mm; } li { margin: 1.2mm 0; }
+  .note { margin-top: 6mm; font-size: 8.5pt; color: #8a7d6f; }
+
+  /* ads page */
+  .ads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; }
+  .ad { display: grid; grid-template-columns: 32mm 1fr; gap: 4mm; align-items: start; }
+  .thumbs { display: flex; flex-direction: column; gap: 2mm; }
+  .thumbs img { width: 100%; border-radius: 1.5mm; box-shadow: 0 2mm 5mm rgba(40,28,18,.25); display: block; }
+  .ad h3 { font: 600 12.5pt/1.15 Playfair, serif; margin: 1mm 0 1.5mm; }
+  .tag { display: inline-block; font: 700 7pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); border: .3mm solid var(--gold); padding: .8mm 2mm .5mm; }
+  .ad p { font-size: 8.6pt; line-height: 1.45; }
+  .ad dl { margin-top: 2mm; font-size: 8.2pt; }
+  .ad dt { font: 700 6.8pt Tajawal; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-top: 1.8mm; }
+  .ad dd { margin: .5mm 0 0; color: var(--ink-2); line-height: 1.4; }
+
+  /* fill-in sheets */
+  .fill { width: 100%; border-collapse: collapse; font-size: 8.4pt; }
+  .fill th { font-size: 7pt; padding: 1.8mm 2.2mm; }
+  .fill td { padding: 1.55mm 2.2mm; line-height: 1.35; }
+  .fill td:first-child { width: 36mm; white-space: normal; }
+  .fill td.sec { background: #231b15; color: #e3c48d; font: 700 7pt Tajawal; letter-spacing: .18em; text-transform: uppercase; padding: 1.4mm 2.2mm; }
+  .fill td.v { color: var(--ink); font-weight: 500; }
+  .fill .zh { color: var(--ink); }
+  .tick { display: inline-block; width: 3mm; height: 3mm; border: .3mm solid var(--gold); margin-right: 1.5mm; vertical-align: -.4mm; }
+  .hint { font-size: 7.8pt; color: #8a7d6f; margin-top: 2mm; }
+  /* timeline */
+  .tl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: .3mm solid rgba(217,183,123,.35); }
+  .tl div { padding: 4mm; border-right: .3mm solid rgba(217,183,123,.35); }
+  .tl div:last-child { border-right: 0; }
+  .tl b { display: block; font: 600 13pt Playfair, serif; color: #e3c48d; margin-bottom: 1.5mm; }
+  .rules { margin-top: 7mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7mm; }
+  .rules div { border-top: .5mm solid #c9a063; padding-top: 3mm; }
+  .rules h3 { font: 600 12pt Playfair, serif; color: #f6efe4; margin-bottom: 1.5mm; }
+</style>
+</head>
+<body>
+<script>
+const IMGS = new URLSearchParams(location.search).get('imgs') || '../renders/smilearts';
+const EXT = IMGS.includes('lookbook') ? '.jpg' : '.png';
+const I = n => `${IMGS}/smilearts-kp-${n}${EXT}`;
+</script>
+
+<!-- 1 cover -->
+<section class="page dark cover">
+  <img class="logo" src="source/Site-Logo-White.png" alt="Smile Arts Dental Clinic">
+  <div class="kicker">Kepong · Launch plan</div>
+  <h1>Test the ads <em>Kota Damansara isn't running.</em></h1>
+  <p>Veneers, implants and clear aligners for Smile Arts Kepong, in English and Chinese: what to run, how much to spend, and every field to fill in Meta Ads Manager.</p>
+  <div class="stats">
+    <div><b>1</b><span>Ad set · EN + 中文</span></div>
+    <div><b>3</b><span>Ads to start</span></div>
+    <div><b>RM 30</b><span>Per day</span></div>
+    <div><b>~RM 420</b><span>For 14 days</span></div>
+    <div><b>Day 3</b><span>First check</span></div>
+  </div>
+  <div class="foot"><img src="source/Site-Logo-White.png" alt=""><span>Prepared by 4Skales · October 2026</span></div>
+</section>
+
+<!-- 2 ads -->
+<section class="page">
+  <div class="kicker">01 · The ads to test</div>
+  <h2>Three treatments <em>not yet tested at Kota Damansara.</em></h2>
+  <div class="ads" id="ads"></div>
+  <div class="card" style="margin-top:5mm;display:grid;grid-template-columns:16mm 1fr;gap:5mm;align-items:center;padding:3mm 5mm">
+    <img id="alt" style="width:100%;border-radius:1.5mm;box-shadow:0 2mm 5mm rgba(40,28,18,.25)" alt="">
+    <div><h3>Backup · Scaling + whitening RM 399</h3>
+    <p>The implant and aligner prices come from Dr. Daren's earlier website promotions. If he hasn't confirmed one of them, run this ad in its place: RM 399 is live on his website today. Same goes for "Instalments available": remove it from the text if it isn't confirmed.</p></div>
+  </div>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>02</span></div>
+</section>
+
+<!-- 3 ad set fill-in -->
+<section class="page">
+  <div class="kicker">02 · Fill-in sheet · campaign &amp; ad set</div>
+  <h2 style="margin-bottom:3mm">Every audience field, <em>filled in.</em></h2>
+  <table class="fill">
+    <tr><th>Field in Ads Manager</th><th>Value</th></tr>
+    <tr><td colspan="2" class="sec">Campaign</td></tr>
+    <tr><td>Name · objective</td><td class="v"><code>SA-KP | WhatsApp | Trial Oct 2026</code> · <b>Engagement</b> · Advantage campaign budget <b>off</b></td></tr>
+    <tr><td colspan="2" class="sec">Ad set name &amp; conversion</td></tr>
+    <tr><td>Ad set name</td><td class="v"><code>KP | Main EN+ZH | 5mi</code></td></tr>
+    <tr><td>Conversion · goal</td><td class="v"><span class="tick"></span>Messaging apps → <b>WhatsApp</b> only · Performance goal: <b>Maximise number of conversations</b></td></tr>
+    <tr><td>Page · WhatsApp</td><td class="v"><span class="tick"></span>Smile Arts Dental Kepong · @smileartsdental_kepong · WhatsApp <b>+60 11-6427 5645</b> (must show as connected)</td></tr>
+    <tr><td>Budget · schedule</td><td class="v">Daily <b>RM 30</b> · start launch day 9:00 am · no end date (stopped on Day 14)</td></tr>
+    <tr><td colspan="2" class="sec">Audience controls (hard limits)</td></tr>
+    <tr><td>Location</td><td class="v">Pin: <b>23-G, Jalan Metro Perdana Barat 1, Taman Usahawan Kepong, 52100 Kuala Lumpur</b> · radius <b>5 miles</b></td></tr>
+    <tr><td>Location type</td><td class="v"><span class="tick"></span><b>People living in or recently in this location</b></td></tr>
+    <tr><td>Minimum age · languages</td><td class="v"><b>22</b> · Languages: <b>leave blank</b> (each ad carries English + 中文)</td></tr>
+    <tr><td colspan="2" class="sec">Advantage+ audience (suggestions)</td></tr>
+    <tr><td>Advantage+ audience</td><td class="v"><span class="tick"></span><b>On</b> · age suggestion <b>25–55</b> · gender: all</td></tr>
+    <tr><td>Interest suggestions</td><td class="v">Add if the search box offers them: <b>Dentistry · Orthodontics · Dental braces · Clear aligners · Invisalign · Cosmetic dentistry · Teeth whitening · Dental implant</b></td></tr>
+    <tr><td colspan="2" class="sec">Placements</td></tr>
+    <tr><td>Placements</td><td class="v"><span class="tick"></span><b>Advantage+ placements</b> · brand safety: default</td></tr>
+  </table>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>03</span></div>
+</section>
+
+<!-- 4 ad fill-in -->
+<section class="page">
+  <div class="kicker">03 · Fill-in sheet · ads</div>
+  <h2 style="margin-bottom:3mm">Every ad field, <em>filled in.</em></h2>
+  <table class="fill">
+    <tr><th>Field in Ads Manager</th><th>Value (all ads)</th></tr>
+    <tr><td>Identity · format</td><td class="v">Smile Arts Dental Kepong · @smileartsdental_kepong · <b>Single image or video</b></td></tr>
+    <tr><td>Media</td><td class="v">Upload the <code>-4x5.mp4</code>. On <b>Crop</b>, swap in the <code>-9x16.mp4</code> for Stories/Reels if offered; otherwise keep 4:5 uncropped. Turn <b>off</b> Creative generation and Enhancements</td></tr>
+    <tr><td>Translation</td><td class="v">Add <b>Chinese (Simplified)</b> → paste the 中文 text → upload the <code>-zh-</code> videos</td></tr>
+    <tr><td>Description · CTA</td><td class="v"><code>Smile Arts Dental · Kepong</code> / <code>Smile Arts Dental · 甲洞</code> · <b>Send WhatsApp message</b></td></tr>
+    <tr><td>Welcome form</td><td class="v">Greeting: <i>Hi! 👋 Thanks for contacting Smile Arts Dental Kepong about [treatment]. Tap to book an appointment below:</i> · title <b>Book a consultation</b> / <b>预约咨询</b> · fields <b>Full name · Phone number · Date picker</b> / <b>全名 · 电话号码 · 选择日期</b> · thank-you <i>Thanks for submitting the form. We'll contact you soon.</i> / <i>感谢你填写表格，我们会尽快联系你。</i></td></tr>
+  </table>
+  <table class="fill" style="margin-top:4mm">
+    <tr><th>Ad</th><th>Files</th><th>Headline</th><th>Pre-filled WhatsApp message</th></tr>
+    <tr><td>1 · Veneers</td><td><code>veneers-en</code> + <code>veneers-zh</code></td><td class="v">Ask about porcelain veneers<br><span class="zh">了解瓷贴片</span></td><td>Hi Smile Arts Kepong, I'd like to ask about veneers.<br><span class="zh">你好 Smile Arts 甲洞，我想了解瓷贴片。</span></td></tr>
+    <tr><td>2 · Implant RM 5,000</td><td><code>implant5000-en</code> + <code>-zh</code></td><td class="v">Dental implant, all-in RM 5,000<br><span class="zh">种植牙全包 RM 5,000</span></td><td>Hi Smile Arts Kepong, I'd like to ask about the RM 5,000 dental implant.<br><span class="zh">你好 Smile Arts 甲洞，我想了解 RM 5,000 种植牙配套。</span></td></tr>
+    <tr><td>3 · Aligners RM 6,000</td><td><code>aligner-en</code> + <code>-zh</code></td><td class="v">Clear aligners from RM 6,000<br><span class="zh">隐形牙套 RM 6,000 起</span></td><td>Hi Smile Arts Kepong, I'd like to ask about the clear aligner package.<br><span class="zh">你好 Smile Arts 甲洞，我想了解隐形牙套配套。</span></td></tr>
+    <tr><td>Backup · RM 399</td><td><code>scaling-en</code> + <code>-zh</code></td><td class="v">Scaling + whitening, RM 399<br><span class="zh">洗牙 + 美白 RM 399</span></td><td>Hi Smile Arts Kepong, I'd like to book the RM 399 scaling and whitening.<br><span class="zh">你好 Smile Arts 甲洞，我想预约 RM 399 洗牙美白配套。</span></td></tr>
+  </table>
+  <p class="hint">File names start with <code>smilearts-kp-</code>. Primary text for each ad (EN and 中文) is in the Kepong launch kit, section 4.</p>
+  <div class="foot"><img src="source/Group1.png" alt=""><span>04</span></div>
+</section>
+
+<!-- 5 timeline -->
+<section class="page dark">
+  <div class="kicker">04 · The 14 days</div>
+  <h2 style="color:#f6efe4">What happens <em>and when.</em></h2>
+  <div class="tl">
+    <div><b>Before launch</b><p>Dr. Daren approves the ads and confirms prices; WhatsApp 011-6427 5645 linked to the Kepong Page; front desk ready with replies and the one-line log.</p></div>
+    <div><b>Day 1</b><p>Ads go live. Don't edit anything for 72 hours; every edit restarts Meta's learning.</p></div>
+    <div><b>Day 3</b><p>Pause any ad with <strong style="color:#f6efe4">0 chats after about RM 40</strong>. Check Frequency: fine under 2.</p></div>
+    <div><b>Day 7–8</b><p>Update to Dr. Daren. Swap the weakest ad for the backup (RM 399) or the best Kota Damansara ad.</p></div>
+    <div><b>Day 14</b><p>Report: chats, bookings, cost per booking, best ad at Kepong. Plan the paid month.</p></div>
+  </div>
+  <div class="rules">
+    <div><h3>Total spend, both branches</h3><p>Kota Damansara RM 60/day + Kepong RM 30/day = <b>RM 90/day</b>, about RM 1,260 over 14 days.</p></div>
+    <div><h3>Compare like with like</h3><p>Compare Kepong's ads with each other. Kepong and Kota Damansara are different areas with different people, so their numbers aren't a head-to-head test.</p></div>
+    <div><h3>What we measure</h3><p>WhatsApp chats from the ads and how many became booked consultations, from the Kepong front desk's one-line log.</p></div>
+  </div>
+  <div class="foot"><img src="source/Site-Logo-White.png" alt=""><span>Prepared by 4Skales for Smile Arts Dental</span></div>
+</section>
+
+<script>
+const ADS = [
+  { c: 'veneers', tag: 'Ad 1 · Focus treatment', title: 'Chipped, stained or uneven?',
+    why: 'One of Dr. Daren\'s three focus treatments, led by his portrait and Digital Smile Design. Not yet tested anywhere.' },
+  { c: 'implant5000', tag: 'Ad 2 · Price offer', title: 'Implant, all-in RM 5,000',
+    why: 'A clear price on his highest-value treatment, with the cut-out implant render. Only once the price is confirmed.' },
+  { c: 'aligner', tag: 'Ad 3 · Price offer', title: 'Clear aligners from RM 6,000',
+    why: 'For adults who want straighter teeth without metal braces, with the branded aligner case. Only once the price is confirmed.' },
+];
+document.getElementById('ads').innerHTML = ADS.map(a => `
+  <div class="ad">
+    <div class="thumbs"><img src="${I(a.c + '-en-9x16')}" alt=""><img src="${I(a.c + '-zh-4x5')}" alt=""></div>
+    <div>
+      <span class="tag">${a.tag}</span>
+      <h3>${a.title}</h3>
+      <p>${a.why}</p>
+      <dl>
+        <dt>Stories &amp; Reels file</dt><dd><code>smilearts-kp-${a.c}-en-9x16.mp4</code> (+ <code>-zh-</code>)</dd>
+        <dt>Feeds file</dt><dd><code>smilearts-kp-${a.c}-en-4x5.mp4</code> (+ <code>-zh-</code>)</dd>
+      </dl>
+    </div>
+  </div>`).join('');
+document.getElementById('alt').src = I('scaling-en-9x16');
+</script>
+</body>
+</html>
