@@ -2,6 +2,7 @@
 // Loads each concept/format/language in Chromium, takes the finished layout, and writes a
 // HyperFrames composition sa-kd-<concept>-<916|45>-<lang>.html that animates into exactly that
 // layout, so the static PNG doubles as the poster frame. Music: tools/compose-music-motion.py smilearts.
+// BRANCH=kd (default) or kp (Kepong) picks the branch label, WhatsApp number and file prefix.
 // Usage (from video/): PLAYWRIGHT=<path to playwright/index.mjs> [CHROME=<chrome.exe>] node tools/build-smilearts-motion.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -10,6 +11,7 @@ import { pathToFileURL } from 'node:url';
 const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process.env.PLAYWRIGHT).href : 'playwright');
 const CONCEPTS = ['braces', 'implants', 'veneers', 'implant5000', 'aligner', 'scaling'];
 const FORMATS = { '916': 1920, '45': 1350 };
+const BR = process.env.BRANCH || 'kd';
 const LANGS = process.env.LANGS ? process.env.LANGS.split(',') : ['en', 'zh', 'ms'];
 const TITLES = { braces: 'Braces or Invisalign', implants: 'Dental implants', veneers: 'Porcelain veneers',
                  implant5000: 'Dental implant RM 5,000', aligner: 'Clear aligners from RM 6,000', scaling: 'Scaling and whitening RM 399' };
@@ -51,7 +53,7 @@ for (const l of LANGS) {
   for (const [f, h] of Object.entries(FORMATS)) {
     await tab.setViewportSize({ width: 1080, height: h });
     for (const c of CONCEPTS) {
-      await tab.goto(`${page}?c=${c}&f=${f}&l=${l}`);
+      await tab.goto(`${page}?c=${c}&f=${f}&l=${l}&b=${BR}`);
       await tab.evaluate(() => document.fonts.ready);
       const [ad, cls] = await tab.evaluate(() => {
         const a = document.querySelector('.ad');
@@ -86,7 +88,7 @@ ${JS}
   </body>
 </html>
 `;
-      const out = `sa-kd-${c}-${f}-${l}.html`;
+      const out = `sa-${BR}-${c}-${f}-${l}.html`;
       writeFileSync(out, html);
       console.log('wrote', out);
     }
