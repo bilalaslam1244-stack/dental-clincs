@@ -272,6 +272,10 @@ const BRANCH = {
 // the upscale of the small promo crops under ~1.6x
 const CFG = {
   braces:      { theme: 'cream', layout: 'portrait' },
+  // free consultation (worth RM 159, confirmed by Dr. Daren 15 Oct 2026; portrait approved): leads into the qualifying form
+  // chips, gaps & stains (cosmetic): compliant take on the operator's idea, no before/after, no rating
+  smile:       { theme: 'cream', layout: 'offer', narrow: true, notag: true, cut: true, img: 'source/daren-cutout-beige.png', box: { 916: [-60, 760, 520, 890], 45: [-40, 300, 420, 720] } },
+  consult:     { theme: 'dark', layout: 'offer', narrow: true, notag: true, cut: true, img: 'source/daren-cutout-beige.png', box: { 916: [-60, 760, 520, 890], 45: [-40, 300, 420, 720] } },
   implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 840, 45: 540 } },
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
   implant5000: { theme: 'dark',  layout: 'offer', noface: true, img: 'source/v-implant-cut.png', cut: true, box: { 916: [80, 600, 290, 654], 45: [70, 130, 215, 485] } },
@@ -279,7 +283,7 @@ const CFG = {
   scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, narrow: true, full: true, pos: '24% 30%',
                  img: 'source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg' },
 };
-const PRICE = ['implant5000', 'aligner', 'scaling'].includes(c);
+const PRICE = ['implant5000', 'aligner', 'scaling', 'consult', 'smile'].includes(c);
 // gold line icon for the RM 399 package (clean tooth with a sparkle), in the style of the clinic's poster icons
 const TOOTH = `<svg viewBox="0 0 200 200" width="100%" height="100%"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
   <stop offset="0" stop-color="#9c7440"/><stop offset=".5" stop-color="#f1dcaa"/><stop offset="1" stop-color="#b8935a"/></linearGradient></defs>
@@ -293,7 +297,7 @@ const TOOTH = `<svg viewBox="0 0 200 200" width="100%" height="100%"><defs><line
   <path d="M42 44l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="url(#tg)"/></svg>`;
 // badges: consultation on every ad (smilearts.com.my: "professional consultation available via WhatsApp");
 // instalments on every ad except the RM 399 package (not on the website: Dr. Daren to confirm)
-const PERKS = c === 'scaling' ? ['consult'] : ['instal', 'consult'];
+const PERKS = (c === 'consult' || c === 'smile') ? [] : c === 'scaling' ? ['consult'] : ['instal', 'consult'];
 // Kepong has no clinic photo of its own here, so the veneers ad uses the portrait layout instead of the KD reception
 if (b === 'kp' || b === 'both') CFG.veneers = { theme: 'dark', layout: 'portrait' };
 const cfg = CFG[c];
@@ -325,6 +329,14 @@ const T = {
       label: 'Package price', price: '<small>RM</small>399',
       list: ['Removes tartar & stains', 'Healthier gums', 'Whiter teeth', 'Done at the clinic'],
       fine: 'Results vary from person to person. Terms apply.' },
+    consult: { eyebrow: 'Free consultation · Dr. Daren Ang', cta: 'Check if you qualify', h1: 'Not sure what your smile needs? <em>Ask Dr. Daren first.</em>',
+      label: 'Consultation', price: 'FREE', to: 'worth RM 159',
+      list: ['Full dental check', 'Smile & bite assessment', 'Braces, implant or veneer options', 'Clear quote, no obligation'],
+      fine: 'Limited slots. Fill in a short form to qualify. Terms apply.' },
+    smile: { eyebrow: 'Veneers · bonding · whitening', cta: 'Claim my free consult', h1: 'Chips, gaps or stains? <em>Let\'s fix your smile.</em>',
+      label: 'Consultation', price: 'FREE', to: 'worth RM 159',
+      list: ['Chipped or worn teeth', 'Gaps between teeth', 'Stains & discolouration', 'Planned with Digital Smile Design'],
+      fine: 'Limited slots this month. Results vary. Terms apply.' },
   },
   zh: {
     branch: '哥打白沙罗', cta: '立即预约', consult: 'WhatsApp 咨询', instal: '可分期付款', creds: '理大牙科学士 · 18年临床经验', book: 'WhatsApp',
@@ -350,6 +362,14 @@ const T = {
       label: '配套价', price: '<small>RM</small>399',
       list: ['清除牙垢和污渍', '牙龈更健康', '牙齿更白', '在诊所完成'],
       fine: '效果因人而异。附带条款。' },
+    consult: { eyebrow: '免费咨询 · Dr. Daren Ang', cta: '看看你是否符合资格', h1: '不确定牙齿该怎么处理？<br><em>先问问 Dr. Daren。</em>',
+      label: '咨询', price: '免费', to: '价值 RM 159',
+      list: ['全面牙齿检查', '笑容与咬合评估', '牙套、种植牙或瓷贴片方案', '清楚报价，没有压力'],
+      fine: '名额有限。填写简短表格即可申请。附带条款。' },
+    smile: { eyebrow: '瓷贴片 · 树脂修补 · 美白', cta: '领取免费咨询', h1: '牙齿缺角、有缝、发黄？<br><em>让我们帮你改善。</em>',
+      label: '咨询', price: '免费', to: '价值 RM 159',
+      list: ['牙齿缺角或磨损', '牙缝', '牙齿发黄、染色', '以数字微笑设计规划'],
+      fine: '本月名额有限。效果因人而异。附带条款。' },
   },
   ms: {
     branch: 'Kota Damansara', cta: 'Tempah sekarang', consult: 'Konsultasi di WhatsApp', instal: 'Boleh bayar ansuran', creds: 'DDS (USM) · 18 tahun pengalaman', book: 'WhatsApp',
@@ -375,11 +395,19 @@ const T = {
       label: 'Harga pakej', price: '<small>RM</small>399',
       list: ['Buang karang & kesan kotoran', 'Gusi lebih sihat', 'Gigi lebih putih', 'Dibuat di klinik'],
       fine: 'Hasil berbeza mengikut individu. Tertakluk pada terma.' },
+    consult: { eyebrow: 'Konsultasi percuma · Dr. Daren Ang', cta: 'Semak kelayakan', h1: 'Tak pasti apa gigi anda perlukan? <em>Tanya Dr. Daren dulu.</em>',
+      label: 'Konsultasi', price: 'PERCUMA', to: 'bernilai RM 159',
+      list: ['Pemeriksaan gigi penuh', 'Penilaian senyuman & gigitan', 'Pilihan braces, implan atau venir', 'Sebut harga jelas, tanpa paksaan'],
+      fine: 'Slot terhad. Isi borang ringkas untuk layak. Tertakluk pada terma.' },
+    smile: { eyebrow: 'Venir · tampalan · pemutihan', cta: 'Tuntut konsultasi percuma', h1: 'Gigi sumbing, jarang atau kuning? <em>Kami boleh bantu.</em>',
+      label: 'Konsultasi', price: 'PERCUMA', to: 'bernilai RM 159',
+      list: ['Gigi sumbing atau haus', 'Gigi jarang', 'Kesan kotoran & perubahan warna', 'Dirancang dengan Digital Smile Design'],
+      fine: 'Slot terhad bulan ini. Hasil berbeza. Tertakluk pada terma.' },
   },
 };
 
 const t = T[l], s = t[c];
-const URGENT = { '31oct': { en: 'Limited-time package · until 31 Oct', zh: '限时配套 · 至10月31日', ms: 'Pakej masa terhad · hingga 31 Okt' } };
+const URGENT = { slots: { en: 'Limited slots this month', zh: '名额有限 · 本月', ms: 'Slot terhad bulan ini' }, '31oct': { en: 'Limited-time package · until 31 Oct', zh: '限时配套 · 至10月31日', ms: 'Pakej masa terhad · hingga 31 Okt' } };
 const u = q.get('u');
 if (u && URGENT[u] && PRICE) {
   const el = document.createElement('div'); el.className = 'urgent';
