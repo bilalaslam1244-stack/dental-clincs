@@ -176,6 +176,11 @@
   .f45 .visual.card { border-radius: 18px; border-width: 2px; }
   .visual.cut img { object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 26px 34px rgba(20,14,10,.3)); }
   .narrow.L-offer .col { width: 540px; }
+  .pl.L-offer .list { grid-template-columns: 1fr; width: 560px; }
+  .f45.pl.L-offer .list { width: 520px; }
+  .pl.L-offer .list p { padding: 10px 0 7px; }
+  .f916.pl .bgphoto.full { top: 1290px; }
+  .pl .fine { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
   .offer-top .top span { color: var(--accent); }
   .offer-top .col { width: auto; right: 70px; }
   .offer-top .list { grid-template-columns: repeat(4, auto); justify-content: start; column-gap: 26px; }
@@ -275,6 +280,11 @@ const CFG = {
   // free consultation (worth RM 159, confirmed by Dr. Daren 15 Oct 2026; portrait approved): leads into the qualifying form
   // chips, gaps & stains (cosmetic): compliant take on the operator's idea, no before/after, no rating
   smile:       { theme: 'cream', layout: 'offer', narrow: true, notag: true, cut: true, img: 'source/daren-cutout-beige.png', box: { 916: [-60, 760, 520, 890], 45: [-40, 300, 420, 720] } },
+  // "from" price ads built from Dr. Daren's KD price list (photographed 15 Oct 2026); no promo, no portrait
+  braces7k:    { theme: 'dark',  layout: 'offer', notag: true, full: true, pos: '50% 45%', img: 'source/v-braces-crop.jpg' },
+  veneers400:  { theme: 'dark',  layout: 'offer', notag: true, full: true, pos: '30% 30%', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg' },
+  whiten400:   { theme: 'cream', layout: 'offer', notag: true, narrow: true, cut: true, img: 'source/v-whitening-cut.png', box: { 916: [50, 640, 420, 393], 45: [40, 150, 330, 309] } },
+  implant6k:   { theme: 'dark',  layout: 'offer', notag: true, cut: true, img: 'source/v-implant-cut.png', box: { 916: [80, 600, 290, 654], 45: [70, 130, 215, 485] } },
   consult:     { theme: 'dark', layout: 'offer', narrow: true, notag: true, cut: true, img: 'source/daren-cutout-beige.png', box: { 916: [-60, 760, 520, 890], 45: [-40, 300, 420, 720] } },
   implants:    { theme: 'cream', layout: 'phototop', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg', pos: '50% 60%', hero: { 916: 840, 45: 540 } },
   veneers:     { theme: 'dark',  layout: 'photofull', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg', pos: '30% 30%' },
@@ -283,7 +293,7 @@ const CFG = {
   scaling:     { theme: 'dark',  layout: 'offer', noface: true, notag: true, narrow: true, full: true, pos: '24% 30%',
                  img: 'source/site/male-dentist-nurse-examining-asian-patient-s-teeth-clinic-scaled.jpg' },
 };
-const PRICE = ['implant5000', 'aligner', 'scaling', 'consult', 'smile'].includes(c);
+const PRICE = ['implant5000', 'aligner', 'scaling', 'consult', 'smile', 'braces7k', 'veneers400', 'whiten400', 'implant6k'].includes(c);
 // gold line icon for the RM 399 package (clean tooth with a sparkle), in the style of the clinic's poster icons
 const TOOTH = `<svg viewBox="0 0 200 200" width="100%" height="100%"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
   <stop offset="0" stop-color="#9c7440"/><stop offset=".5" stop-color="#f1dcaa"/><stop offset="1" stop-color="#b8935a"/></linearGradient></defs>
@@ -297,16 +307,17 @@ const TOOTH = `<svg viewBox="0 0 200 200" width="100%" height="100%"><defs><line
   <path d="M42 44l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="url(#tg)"/></svg>`;
 // badges: consultation on every ad (smilearts.com.my: "professional consultation available via WhatsApp");
 // instalments on every ad except the RM 399 package (not on the website: Dr. Daren to confirm)
-const PERKS = (c === 'consult' || c === 'smile') ? [] : c === 'scaling' ? ['consult'] : ['instal', 'consult'];
+const PERKS = ['consult', 'smile'].includes(c) ? [] : ['braces7k', 'veneers400', 'whiten400', 'implant6k'].includes(c) ? ['waconsult'] : c === 'scaling' ? ['waconsult'] : ['instal', 'waconsult'];
 // Kepong has no clinic photo of its own here, so the veneers ad uses the portrait layout instead of the KD reception
 if (b === 'kp' || b === 'both') CFG.veneers = { theme: 'dark', layout: 'portrait' };
 const cfg = CFG[c];
-document.documentElement.className = `f${f} ${cfg.theme} L-${cfg.layout}`;
+const PL = ['braces7k', 'veneers400', 'whiten400', 'implant6k'].includes(c);
+document.documentElement.className = `f${f} ${cfg.theme} L-${cfg.layout}${PL ? ' pl' : ''}`;
 document.documentElement.lang = l;
 
 const T = {
   en: {
-    branch: 'Kota Damansara', cta: 'Book now', consult: 'Consultation via WhatsApp', instal: 'Instalments available', creds: 'DDS (USM) · 18 years in practice', book: 'WhatsApp',
+    branch: 'Kota Damansara', cta: 'Book now', waconsult: 'Consultation via WhatsApp', instal: 'Instalments available', creds: 'DDS (USM) · 18 years in practice', book: 'WhatsApp',
     addr: 'Kota Damansara',
     braces: { eyebrow: 'Braces & Invisalign', h1: 'Braces or Invisalign? <em>Ask before you decide.</em>',
       sub: 'Metal, ceramic or <span style="white-space:nowrap">self-ligating</span> braces, or clear aligners.',
@@ -329,6 +340,22 @@ const T = {
       label: 'Package price', price: '<small>RM</small>399',
       list: ['Removes tartar & stains', 'Healthier gums', 'Whiter teeth', 'Done at the clinic'],
       fine: 'Results vary from person to person. Terms apply.' },
+    braces7k: { eyebrow: 'Braces · clear pricing', cta: 'Book a braces consult', h1: 'Straighter teeth, <em>clear prices.</em>',
+      label: 'Braces from', price: '<small>RM</small>7,000',
+      list: ['Metal · RM 7,000', 'Ceramic · RM 7,500', 'Self-ligating · from RM 7,500', 'Damon · from RM 8,000'],
+      fine: 'Final price confirmed at consultation, depending on your case.' },
+    veneers400: { eyebrow: 'Veneers · per tooth', cta: 'Ask about veneers', h1: 'Natural-looking veneers, <em>planned around your face.</em>',
+      label: 'Veneers from', price: '<small>RM</small>400', to: 'per tooth',
+      list: ['Composite (componeer) · RM 400', 'Ceramic · RM 1,600–1,800', 'Digital Smile Design · RM 500'],
+      fine: 'Prices per tooth. Your plan is confirmed at consultation.' },
+    whiten400: { eyebrow: 'Teeth whitening', cta: 'Book whitening', h1: 'A brighter smile, <em>done at the clinic.</em>',
+      label: 'Whitening from', price: '<small>RM</small>400',
+      list: ['In-office · Blanc One · RM 400', 'In-office · Everbrite · RM 1,200', 'Home kit + custom tray · RM 800'],
+      fine: 'Results vary from person to person.' },
+    implant6k: { eyebrow: 'Dental implant', cta: 'Ask about implants', h1: 'Missing a tooth? <em>Implant + crown.</em>',
+      label: 'Implant + crown from', price: '<small>RM</small>6,000',
+      list: ['Korean implant + crown · RM 6,000', 'Swiss implant + crown · RM 8,500', 'Assessment & treatment plan'],
+      fine: 'Bone graft or extra steps quoted separately if needed.' },
     consult: { eyebrow: 'Free consultation · Dr. Daren Ang', cta: 'Check if you qualify', h1: 'Not sure what your smile needs? <em>Ask Dr. Daren first.</em>',
       label: 'Consultation', price: 'FREE', to: 'worth RM 159',
       list: ['Full dental check', 'Smile & bite assessment', 'Braces, implant or veneer options', 'Clear quote, no obligation'],
@@ -339,7 +366,7 @@ const T = {
       fine: 'Limited slots this month. Results vary. Terms apply.' },
   },
   zh: {
-    branch: '哥打白沙罗', cta: '立即预约', consult: 'WhatsApp 咨询', instal: '可分期付款', creds: '理大牙科学士 · 18年临床经验', book: 'WhatsApp',
+    branch: '哥打白沙罗', cta: '立即预约', waconsult: 'WhatsApp 咨询', instal: '可分期付款', creds: '理大牙科学士 · 18年临床经验', book: 'WhatsApp',
     addr: '哥打白沙罗',
     braces: { eyebrow: '牙套 · 隐适美', h1: '传统牙套还是隐适美？<br><em>先问清楚再决定。</em>',
       sub: '金属、陶瓷、自锁牙套，<br>或隐形牙套。',
@@ -362,6 +389,22 @@ const T = {
       label: '配套价', price: '<small>RM</small>399',
       list: ['清除牙垢和污渍', '牙龈更健康', '牙齿更白', '在诊所完成'],
       fine: '效果因人而异。附带条款。' },
+    braces7k: { eyebrow: '牙套 · 价格透明', cta: '预约牙套咨询', h1: '牙齿整齐，<br><em>价格清楚。</em>',
+      label: '牙套', price: '<small>RM</small>7,000', to: '起',
+      list: ['金属牙套 · RM 7,000', '陶瓷牙套 · RM 7,500', '自锁牙套 · RM 7,500 起', 'Damon · RM 8,000 起'],
+      fine: '最终价格视个案而定，咨询后确认。' },
+    veneers400: { eyebrow: '瓷贴片 · 每颗', cta: '了解瓷贴片', h1: '自然好看的贴片，<br><em>按你的脸型设计。</em>',
+      label: '贴片', price: '<small>RM</small>400', to: '每颗起',
+      list: ['树脂贴片 · RM 400', '陶瓷贴片 · RM 1,600–1,800', '数字微笑设计 · RM 500'],
+      fine: '价格以每颗计算，方案在咨询时确认。' },
+    whiten400: { eyebrow: '牙齿美白', cta: '预约美白', h1: '笑容更亮，<br><em>在诊所完成。</em>',
+      label: '美白', price: '<small>RM</small>400', to: '起',
+      list: ['诊所美白 · Blanc One · RM 400', '诊所美白 · Everbrite · RM 1,200', '居家美白套装 · 定制牙托 · RM 800'],
+      fine: '效果因人而异。' },
+    implant6k: { eyebrow: '种植牙', cta: '了解种植牙', h1: '缺了一颗牙？<br><em>种植体 + 牙冠。</em>',
+      label: '种植牙 + 牙冠', price: '<small>RM</small>6,000', to: '起',
+      list: ['韩国种植体 + 牙冠 · RM 6,000', '瑞士种植体 + 牙冠 · RM 8,500', '评估与治疗规划'],
+      fine: '如需植骨等额外步骤，另行报价。' },
     consult: { eyebrow: '免费咨询 · Dr. Daren Ang', cta: '看看你是否符合资格', h1: '不确定牙齿该怎么处理？<br><em>先问问 Dr. Daren。</em>',
       label: '咨询', price: '免费', to: '价值 RM 159',
       list: ['全面牙齿检查', '笑容与咬合评估', '牙套、种植牙或瓷贴片方案', '清楚报价，没有压力'],
@@ -372,7 +415,7 @@ const T = {
       fine: '本月名额有限。效果因人而异。附带条款。' },
   },
   ms: {
-    branch: 'Kota Damansara', cta: 'Tempah sekarang', consult: 'Konsultasi di WhatsApp', instal: 'Boleh bayar ansuran', creds: 'DDS (USM) · 18 tahun pengalaman', book: 'WhatsApp',
+    branch: 'Kota Damansara', cta: 'Tempah sekarang', waconsult: 'Konsultasi di WhatsApp', instal: 'Boleh bayar ansuran', creds: 'DDS (USM) · 18 tahun pengalaman', book: 'WhatsApp',
     addr: 'Kota Damansara',
     braces: { eyebrow: 'Braces & Invisalign', h1: 'Braces atau Invisalign? <em>Tanya doktor dulu.</em>',
       sub: 'Braces besi, seramik atau <span style="white-space:nowrap">self-ligating</span>, atau aligner lutsinar.',
@@ -395,6 +438,22 @@ const T = {
       label: 'Harga pakej', price: '<small>RM</small>399',
       list: ['Buang karang & kesan kotoran', 'Gusi lebih sihat', 'Gigi lebih putih', 'Dibuat di klinik'],
       fine: 'Hasil berbeza mengikut individu. Tertakluk pada terma.' },
+    braces7k: { eyebrow: 'Braces · harga jelas', cta: 'Tempah konsultasi braces', h1: 'Gigi tersusun, <em>harga jelas.</em>',
+      label: 'Braces dari', price: '<small>RM</small>7,000',
+      list: ['Besi · RM 7,000', 'Seramik · RM 7,500', 'Self-ligating · dari RM 7,500', 'Damon · dari RM 8,000'],
+      fine: 'Harga akhir disahkan semasa konsultasi, mengikut kes anda.' },
+    veneers400: { eyebrow: 'Venir · setiap gigi', cta: 'Tanya tentang venir', h1: 'Venir yang nampak semula jadi, <em>dirancang ikut wajah anda.</em>',
+      label: 'Venir dari', price: '<small>RM</small>400', to: 'setiap gigi',
+      list: ['Komposit (componeer) · RM 400', 'Seramik · RM 1,600–1,800', 'Digital Smile Design · RM 500'],
+      fine: 'Harga setiap gigi. Pelan anda disahkan semasa konsultasi.' },
+    whiten400: { eyebrow: 'Pemutihan gigi', cta: 'Tempah pemutihan', h1: 'Senyuman lebih cerah, <em>dibuat di klinik.</em>',
+      label: 'Pemutihan dari', price: '<small>RM</small>400',
+      list: ['Di klinik · Blanc One · RM 400', 'Di klinik · Everbrite · RM 1,200', 'Kit rumah + tray khas · RM 800'],
+      fine: 'Hasil berbeza mengikut individu.' },
+    implant6k: { eyebrow: 'Implan gigi', cta: 'Tanya tentang implan', h1: 'Gigi hilang? <em>Implan + crown.</em>',
+      label: 'Implan + crown dari', price: '<small>RM</small>6,000',
+      list: ['Implan Korea + crown · RM 6,000', 'Implan Switzerland + crown · RM 8,500', 'Penilaian & pelan rawatan'],
+      fine: 'Graf tulang atau langkah tambahan dicaj berasingan jika perlu.' },
     consult: { eyebrow: 'Konsultasi percuma · Dr. Daren Ang', cta: 'Semak kelayakan', h1: 'Tak pasti apa gigi anda perlukan? <em>Tanya Dr. Daren dulu.</em>',
       label: 'Konsultasi', price: 'PERCUMA', to: 'bernilai RM 159',
       list: ['Pemeriksaan gigi penuh', 'Penilaian senyuman & gigitan', 'Pilihan braces, implan atau venir', 'Sebut harga jelas, tanpa paksaan'],
