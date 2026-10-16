@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
 
 html = (ROOT / "smilearts" / "kd-ads.html").read_text(encoding="utf-8")
-zh = html[html.index("  zh: {"):html.index("const u = q.get('u')")]
+zh = html[html.index("  zh: {"):html.index("const CONSULT_FROM")]
 chars = "".join(sorted(set(ch for ch in re.sub(r"<[^>]+>", "", zh) if ord(ch) > 0x2E80)))
 print(len(chars), "characters")
 for family, stem, weight in [("Noto Sans SC", "NotoSansSC", 500), ("Noto Sans SC", "NotoSansSC", 700), ("Noto Serif SC", "NotoSerifSC", 700)]:

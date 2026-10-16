@@ -10,7 +10,8 @@ const { chromium } = await import(process.env.PLAYWRIGHT ? pathToFileURL(process
 const CONCEPTS = process.argv.slice(2).length ? process.argv.slice(2) : ['braces', 'implants', 'veneers', 'implant5000', 'aligner', 'scaling'];
 const FORMATS = { '916': [1080, 1920, '9x16'], '45': [1080, 1350, '4x5'] };
 const BR = process.env.BRANCH || 'kd';
-const U = process.env.URGENT || '';  // e.g. 31oct: adds the dated urgency ribbon, files get a -urgent suffix
+const U = process.env.URGENT || '';
+const V = process.env.V2 ? '2' : '';  // V2=1: booking-focused price-list ads, files get a -v2 suffix  // e.g. 31oct: adds the dated urgency ribbon, files get a -urgent suffix
 const LANGS = process.env.LANGS ? process.env.LANGS.split(',') : ['en', 'zh', 'ms'];
 mkdirSync('renders/smilearts', { recursive: true });
 
@@ -21,10 +22,10 @@ for (const l of LANGS) {
   for (const [f, [w, h, label]] of Object.entries(FORMATS)) {
     await tab.setViewportSize({ width: w, height: h });
     for (const c of CONCEPTS) {
-      await tab.goto(`${page}?c=${c}&f=${f}&l=${l}&b=${BR}${U ? '&u=' + U : ''}`);
+      await tab.goto(`${page}?c=${c}&f=${f}&l=${l}&b=${BR}${U ? '&u=' + U : ''}${V ? '&v=2' : ''}`);
       await tab.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
       await tab.waitForTimeout(150);
-      const out = `renders/smilearts/smilearts-${BR}-${c}${U ? '-urgent' : ''}-${l}-${label}.png`;
+      const out = `renders/smilearts/smilearts-${BR}-${c}${U ? '-urgent' : ''}${V ? '-v2' : ''}-${l}-${label}.png`;
       await tab.screenshot({ path: out });
       console.log(out);
     }

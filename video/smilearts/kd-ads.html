@@ -177,6 +177,17 @@
   .visual.cut img { object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 26px 34px rgba(20,14,10,.3)); }
   .narrow.L-offer .col { width: 540px; }
   .pl.L-offer .list { grid-template-columns: 1fr; width: 560px; }
+  /* v2: "how to book" strip, full width just above the WhatsApp band */
+  .steps { position: absolute; left: 0; right: 0; bottom: 360px; z-index: 6; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+           padding: 26px 50px 24px; background: rgba(23,17,13,.92); border-top: 2px solid rgba(217,183,123,.55); }
+  .f45 .steps { bottom: 200px; padding: 18px 44px 16px; }
+  .steps span { display: flex; align-items: center; gap: 14px; font: 700 25px/1.2 var(--sans); color: #f6efe4; padding-right: 10px; }
+  .steps span + span { border-left: 1px solid rgba(217,183,123,.35); padding-left: 20px; }
+  .steps b { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--gold); color: #1d1610; display: grid; place-items: center; font: 800 23px/1 var(--sans); }
+  .f45 .steps span { font-size: 20px; gap: 10px; }
+  .f45 .steps b { width: 36px; height: 36px; font-size: 18px; }
+  .steps i { display: none; }
+  .v2 .col { width: auto !important; right: 70px; }
   .f45.pl.L-offer .list { width: 520px; }
   .pl.L-offer .list p { padding: 10px 0 7px; }
   .f916.pl .bgphoto.full { top: 1290px; }
@@ -281,7 +292,7 @@ const CFG = {
   // chips, gaps & stains (cosmetic): compliant take on the operator's idea, no before/after, no rating
   smile:       { theme: 'cream', layout: 'offer', narrow: true, notag: true, cut: true, img: 'source/daren-cutout-beige.png', box: { 916: [-60, 760, 520, 890], 45: [-40, 300, 420, 720] } },
   // "from" price ads built from Dr. Daren's KD price list (photographed 15 Oct 2026); no promo, no portrait
-  braces7k:    { theme: 'dark',  layout: 'offer', notag: true, full: true, pos: '50% 45%', img: 'source/v-braces-crop.jpg' },
+  braces7k:    { theme: 'dark',  layout: 'offer', notag: true, full: true, pos: '50% 55%', img: 'source/WhatsApp-Image-2024-10-21-at-10.45.50-1.jpeg' },
   veneers400:  { theme: 'dark',  layout: 'offer', notag: true, full: true, pos: '30% 30%', img: 'source/bb9c0ade-4621-4961-8bdc-443c4c369d86.jpeg' },
   whiten400:   { theme: 'cream', layout: 'offer', notag: true, narrow: true, cut: true, img: 'source/v-whitening-cut.png', box: { 916: [50, 640, 420, 393], 45: [40, 150, 330, 309] } },
   implant6k:   { theme: 'dark',  layout: 'offer', notag: true, cut: true, img: 'source/v-implant-cut.png', box: { 916: [80, 600, 290, 654], 45: [70, 130, 215, 485] } },
@@ -466,6 +477,26 @@ const T = {
 };
 
 const t = T[l], s = t[c];
+const V2 = q.get('v') === '2' && PL;
+const V2COPY = {
+  en: { cta: 'Book a consultation', steps: ['WhatsApp us', 'Consult Dr. Daren', 'Get your plan & quote'], from: 'from RM ',
+    braces7k: 'Crooked teeth or gaps? <em>Straighten them with braces.</em>', veneers400: 'Chipped, stained or uneven? <em>Veneers can fix that.</em>',
+    whiten400: 'Yellow teeth in photos? <em>Get a brighter smile.</em>', implant6k: 'Missing a tooth? <em>Get it replaced.</em>' },
+  zh: { cta: '预约咨询', steps: ['WhatsApp 联系我们', 'Dr. Daren 咨询', '获得方案与报价'], from: 'RM ', fromSuffix: ' 起',
+    braces7k: '牙齿不整齐、有牙缝？<br><em>用牙套改善。</em>', veneers400: '门牙缺角、发黄？<br><em>贴片帮你改善。</em>',
+    whiten400: '拍照牙齿发黄？<br><em>让笑容更亮。</em>', implant6k: '缺了一颗牙？<br><em>用种植牙补回来。</em>' },
+  ms: { cta: 'Tempah konsultasi', steps: ['WhatsApp kami', 'Konsultasi Dr. Daren', 'Dapatkan pelan & harga'], from: 'dari RM ',
+    braces7k: 'Gigi tak tersusun? <em>Luruskan dengan braces.</em>', veneers400: 'Gigi sumbing atau kuning? <em>Venir boleh bantu.</em>',
+    whiten400: 'Gigi kuning dalam gambar? <em>Senyuman lebih cerah.</em>', implant6k: 'Gigi hilang? <em>Gantikan dengan implan.</em>' },
+};
+// consultation prices from the price list: simple RM 40–80, complex (implant / orthodontic) RM 50–100
+const CONSULT_FROM = { braces7k: 50, implant6k: 50, veneers400: 40, whiten400: 40 };
+if (V2) {
+  const v = V2COPY[l];
+  s.h1 = v[c]; s.cta = v.cta;
+  s.steps = v.steps.map((x, i) => i === 1 ? `${x} · ${v.from}${CONSULT_FROM[c]}${v.fromSuffix || ''}` : x);
+  document.documentElement.classList.add('v2');
+}
 const URGENT = { slots: { en: 'Limited slots this month', zh: '名额有限 · 本月', ms: 'Slot terhad bulan ini' }, '31oct': { en: 'Limited-time package · until 31 Oct', zh: '限时配套 · 至10月31日', ms: 'Pakej masa terhad · hingga 31 Okt' } };
 const u = q.get('u');
 if (u && URGENT[u] && PRICE) {
@@ -517,7 +548,9 @@ for (const k of ['eyebrow', 'h1']) document.getElementById(k).innerHTML = s[k];
 const list = `<div class="list">${s.list.map(x => `<p>${x}</p>`).join('')}</div>`;
 const WA = '<svg viewBox="0 0 24 24" fill="#f1dcaa"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm4.4 11.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>';
 const cta = `<div class="cta"><i>${WA}</i>${s.cta || t.cta}<b>→</b></div>`
-  .replace('<div class="cta">', `<div class="perks">${PERKS.map(k => `<span>${t[k]}</span>`).join('')}</div><div class="cta">`);
+  .replace('<div class="cta">', (s.steps
+    ? `<div class="steps">${s.steps.map((x, i) => `<span><b>${i + 1}</b>${x}</span>`).join('<i></i>')}</div>`
+    : `<div class="perks">${PERKS.map(k => `<span>${t[k]}</span>`).join('')}</div>`) + '<div class="cta">');
 document.getElementById('col').innerHTML = PRICE
   ? `<div><div class="price-label">${s.label}</div><div class="price">${s.price}</div>${s.to ? `<div class="price-to">${s.to}</div>` : ''}</div>${list}${cta}<p class="fine">${s.fine}</p>`
   : `<p class="sub">${s.sub}</p>${list}${cta}`;
@@ -526,6 +559,7 @@ if (cfg.layout === 'phototop') {
   document.querySelector('.head').appendChild(col);
 }
 // offer layout: the price block starts right under the headline, however many lines it takes
+if (s.steps) { const st = document.querySelector('.col .steps'); if (st) document.querySelector('.ad').appendChild(st); }
 if (cfg.layout === 'offer') document.fonts.ready.then(() => {
   const head = document.querySelector('.head').getBoundingClientRect(), col = document.getElementById('col'), v = document.getElementById('visual');
   const gap = f === '45' ? 16 : 26;
